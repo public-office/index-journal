@@ -88,6 +88,7 @@ h1 {
 }
 p {
   padding-left: 0.5rem;
+  line-height: 1.2;
 }
 h2 {
   font-size: 2.5vw;
@@ -138,4 +139,19 @@ section.call {
   top: 0;
   padding: 8rem 0;
   background: white;
+}
+
+@media (max-width: 670px) {
+  p, h1, h3, header a {
+    font-size: 1rem;
+  }
+  header h1 {
+    flex: 2;
+  }
+  p, h3 {
+    max-width: 90%;
+  }
+  figure {
+    background-size: 40vh;
+  }
 }
