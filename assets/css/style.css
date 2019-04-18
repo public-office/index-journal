@@ -107,17 +107,19 @@ main h1 {
   -webkit-column-count: 1;
   margin-bottom: 0.5em;
 }
-
-figure {
-  max-width: 480px;
-  position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
+main:hover h1 {
+  z-index: 4;
 }
 
-figure:hover {
-  z-index: 1;
+figure {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 3;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  pointer-events: none;
 }
 
 figure img {
