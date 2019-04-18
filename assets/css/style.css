@@ -126,6 +126,7 @@ section.spacer {
   height: 100vh;
 }
 section.initial {
+  position: -webkit-sticky;
   position: sticky;
   top: 0; height: 100vh;
   left: 0; width: 100vw;
