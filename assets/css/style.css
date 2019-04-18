@@ -117,6 +117,14 @@ figure {
   background-repeat: no-repeat;
   background-attachment: fixed;
   pointer-events: none;
+  transform: translateZ(0);
+}
+
+@media (max-width: 640px) {
+  figure {
+    z-index: 5;
+    background-attachment: initial;
+  }
 }
 
 section {
