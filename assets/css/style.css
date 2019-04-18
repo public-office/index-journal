@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'KPLSynt';
+  src: url('../fonts/KPLSyntTrial-Headline.woff');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'KPLSynt';
+  src: url('../fonts/KPLSyntTrial-Regular.woff');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'KPLSynt';
+  src: url('../fonts/KPLSyntTrial-Italic.woff');
+  font-style: italic;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +22,7 @@
 }
 
 body {
-  font-family: 'KPLSyntTrial-Regular', serif;
+  font-family: 'KPLSynt', serif;
 }
 
 header {
@@ -53,9 +69,9 @@ p a {
   line-height: 1.1;
 }
 h3 {
-  font-family: 'KPLSyntTrial-Headline', serif;
+  font-family: 'KPLSynt', serif;
   text-align: center;
-  font-weight: 200;
+  font-weight: 300;
 }
 p:hover span {
   display: block !important;
@@ -64,7 +80,8 @@ a:hover {
   color: #ccc;
 }
 h1 {
-  font-family: 'KPLSyntTrial-Headline', serif;
+  font-family: 'KPLSynt', serif;
+  font-weight: 300;
   font-size: 1.6rem;
   text-transform: none;
   -webkit-font-smoothing: antialiased;
@@ -81,8 +98,6 @@ main h1 {
   line-height: 0.85;
   text-align: center;
   text-transform: uppercase;
-  position: relative;
-  z-index: 2;
   -webkit-column-count: 1;
   width: 100%;
   max-width: 90vw;
@@ -108,20 +123,23 @@ figure img {
 }
 
 section {
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+section.spacer {
+  height: 100vh;
 }
 section.initial {
   position: sticky;
-  top: 0;
-  display: flex;
-  flex-direction: column;
+  top: 0; height: 100vh;
+  left: 0; width: 100vw;
+  padding-top: 2rem;
   align-items: center;
   justify-content: center;
-  padding-top: 2rem;
 }
 section.call {
-  position: sticky;
+  position: relative;
   top: 0;
-  background: white;
   padding: 8rem 0;
+  background: white;
 }
