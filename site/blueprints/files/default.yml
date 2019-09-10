@@ -1,0 +1,9 @@
+fields:
+  caption:
+    label: Caption
+    type: text
+    width: 1/2
+  alt_text:
+    label: Alt text
+    type: text
+    width: 1/2
