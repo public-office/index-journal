@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 USER=root
-HOST=178.128.122.112
-WEBROOT=/var/www/nextwave
+HOST=public-office.info
+WEBROOT=/var/www/index-journal.org
 
 ssh $USER@$HOST /bin/bash <<EOF
   cd $WEBROOT
