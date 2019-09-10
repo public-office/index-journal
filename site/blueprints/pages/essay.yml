@@ -1,0 +1,19 @@
+title: Essay
+preset: page
+pages: false
+fields:
+  subtitle:
+    label: Subtitle
+    type: text
+    width: 1/2
+  author:
+    label: Author
+    type: text
+    width: 1/2
+  abstract:
+    label: Text
+    type: textarea
+  text:
+    label: Text
+    type: textarea
+    size: large

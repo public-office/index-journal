@@ -1,0 +1,13 @@
+title: Issues
+sections:
+  drafts:
+    headline: Drafts
+    type: pages
+    status: draft
+    templates: issue
+
+  published:
+    headline: Published Issues
+    type: pages
+    status: listed
+    templates: issue

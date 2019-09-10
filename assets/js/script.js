@@ -10,3 +10,12 @@ window.addEventListener('scroll', function() {
 
   $initial.style.transform = 'translateY('+(0-d)+'px)'
 })
+
+$(document).ready(function () {
+  $('.initial').on('click', function() {
+    $('.pane').addClass('open');
+  })
+  $('.pane-close').on('click', function() {
+    $('.pane').removeClass('open');
+  })
+});
