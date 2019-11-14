@@ -96,6 +96,13 @@ header {
   margin: 0 auto;
   padding-top: 6.6em;
 }
+@media (max-width: 670px) {
+  .text-block {
+    max-width: 100%;
+    margin: 0 auto;
+    padding-top: 6.6em;
+  }
+}
 [data-template="home"] {
   padding-top: 6.6em;
   max-width: 58%;
@@ -162,7 +169,7 @@ p:hover span {
   display: block !important;
 }
 p {
-  padding-left: 0.5rem;
+  /* padding-left: 0.5rem; */
   line-height: 1.2;
 }
 h2 {
