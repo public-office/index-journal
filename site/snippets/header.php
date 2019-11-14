@@ -21,5 +21,5 @@
   <body>
     <? snippet('pane') ?>
     <header>
-      <h1><a href="<?= $site->url() ?>">INDEX JOURNAL</a>, <span>Issue No. 1 IDENTITY</span></h1><nav><a href="<?= $site->url() ?>/about">About</a></nav>
+      <h1><a href="<?= $site->url() ?>">INDEX JOURNAL</a>, <span>Issue No. 2 LAW</span></h1><nav><a href="<?= $site->url() ?>/about">About</a></nav>
     </header>

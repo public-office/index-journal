@@ -1,12 +1,12 @@
 <div class="pane">
   <span class="pane-close">Close</span>
   <header>
-    <h1><a href=".">INDEX JOURNAL</a>, <span>Issue No. 1 IDENTITY</span></h1>
+    <h1><a href=".">INDEX JOURNAL</a>, <span>Issue No. 2 LAW</span></h1>
   </header>
   <div class="pane-inner">
     <figure>
-      <img src="assets/images/Giambattista_Tiepolo_The_Banquet_of_Cleopatra.jpg" alt="Giambattista Tiepolo – The Banquet of Cleopatra">
-      <figcaption>Giambattista Tiepolo, <em>The banquet of Cleopatra</em> (1743–44); oil on canvas, 250.3 × 357.0 cm. <a target="_blank" href="https://www.ngv.vic.gov.au/explore/collection/work/4409/">National Gallery of Victoria, Melbourne</a>.</figcaption>
+      <img src="assets/images/03.jpg" style="max-width: 60%; margin: 0 auto;" alt="Giambattista Tiepolo – The Banquet of Cleopatra">
+      <figcaption> Ludwig Hirschfeld-Mack, ‘Desolation (Internment Camp, Orange NSW, 1941)’ <br>woodcut, printed in black ink on thin ivory wove paper, 21.6 x 13.5 cm; Art Gallery of NSW.</figcaption>
     </figure>
   </div>
 </div>
