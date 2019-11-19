@@ -11,9 +11,15 @@ fields:
     type: text
     width: 1/2
   abstract:
-    label: Text
+    label: Abstract
     type: textarea
   text:
     label: Text
     type: textarea
     size: large
+  bibilography:
+    label: Bibliography
+    type: textarea
+  bios:
+    label: Bio/s
+    type: textarea

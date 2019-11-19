@@ -7,8 +7,8 @@
       </h1>
     </section>
     <div class="text-block">
-      <span class="title"><?= $page->title() ?></span><span class="subtitle"><?= $page->subtitle()->kti() ?></span>
-      <p class="abstract"><?= $page->abstract() ?></p>
+      <span class="subtitle"><?= $page->subtitle()->kti() ?></span>
+      <p class="abstract">ABSTRACT: <?= $page->abstract()->kti() ?></p>
       <?= $page->text()->kirbytext() ?>
     </div>
 
