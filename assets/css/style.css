@@ -1,25 +1,33 @@
 @font-face {
   font-family: 'KPLSynt';
   src: url('../fonts/KPLSyntTrial-Headline.woff');
-  font-weight: 300;
+  font-weight: 400;
 }
+@font-face {
+  font-family: 'KPLSynt';
+  src: url('../fonts/KPLSynt-Regular.woff');
+  font-weight: 300;
+  font-style: normal;
+}
+/* @font-face {
+ font-family: 'KPLSynt';
+ src: url('../fonts/DinamoSynt-Regular.woff');
+ font-weight: 300;
+ font-style: normal;
+} */
 @font-face {
   font-family: 'KPLSynt';
   src: url('../fonts/KPLSynt-Italic.woff');
   font-weight: 300;
   font-style: italic;
 }
-@font-face {
-  font-family: 'KPLSynt';
-  src: url('../fonts/DinamoSynt-Regular.woff');
-  font-weight: 400;
-  font-style: normal;
-}
+
+/*
 @font-face {
   font-family: 'KPLSynt';
   src: url('../fonts/DinamoSynt-Oblique.woff');
   font-style: italic;
-}
+} */
 
 * {
   margin: 0;
@@ -29,10 +37,18 @@
   -webkit-font-smoothing: antialiased;
 }
 
+html {
+  font-size: 1vw;
+}
+
 body {
   font-family: 'KPLSynt', serif;
-  font-style: 400;
+  font-style: 300;
   line-height: 1;
+}
+em, i {
+  font-style: italic;
+  font-style: 300;
 }
 .pane {
   width: 100vw;
@@ -98,6 +114,19 @@ header {
   padding-top: 6.6em;
 }
 @media (max-width: 670px) {
+  html {
+    font-size: 18px;
+  }
+  dl {
+    margin-bottom: 1.1em;
+  }
+  .people {
+    flex-direction: column !important;
+  }
+  .call p:last-of-type {
+    max-width: 100% !important;
+    font-size: 0.65rem !important;
+  }
   .text-block {
     max-width: 100%;
     margin: 0 auto;
@@ -278,7 +307,7 @@ header h1 {
 dl {
   font-size: 1.9rem;
   line-height: 1.1;
-  margin: 1em 2em;
+  /* margin: 1em 2em; */
 }
 dt {
   text-transform: uppercase;
@@ -315,7 +344,7 @@ figure.wipe {
   top: 0; left: 0;
   width: 100%; height: 100%;
   z-index: 3;
-  background-size: 55vh;
+  background-size: 52vh;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -323,7 +352,26 @@ figure.wipe {
   transform: translateZ(0);
 }
 .initial:hover {
-  cursor: pointer;
+  /* cursor: pointer; */
+}
+
+hr {
+  display: none;
+}
+
+.people {
+  max-width: 80%;
+  margin-top: 2em;
+  margin-left: 4em;
+  display: flex;
+  flex-direction: row;
+}
+.people dl:first-of-type {
+  margin-right: 2em;
+}
+
+dl {
+  break-inside: avoid;
 }
 
 body.about main {
@@ -397,7 +445,7 @@ section.call {
     max-width: 90%;
   }
   figure.wipe {
-    background-size: 40vh;
+    background-size: 30vh;
   }
   .pane-inner figure {
     max-width: 58%;
