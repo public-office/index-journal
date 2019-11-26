@@ -1,0 +1,9 @@
+title: About
+preset: page
+fields:
+  text:
+    label: Text
+    type: textarea
+  people:
+    labvel: People
+    type: textarea

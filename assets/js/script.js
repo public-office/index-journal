@@ -12,10 +12,10 @@ window.addEventListener('scroll', function() {
 })
 
 $(document).ready(function () {
-  $('.initial').on('click', function() {
-    $('.pane').addClass('open');
-  })
-  $('.pane-close').on('click', function() {
-    $('.pane').removeClass('open');
-  })
+  // $('.initial').on('click', function() {
+  //   $('.pane').addClass('open');
+  // })
+  // $('.pane-close').on('click', function() {
+  //   $('.pane').removeClass('open');
+  // })
 });
