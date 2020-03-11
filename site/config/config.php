@@ -3,7 +3,7 @@ function output_pdf($page) {
   if($page->template() == 'essay'):
     $pdf_name = $page->slug().'.pdf';
     $outfile = $page->contentFileDirectory().'/'.$pdf_name;
-    $url = $page->url();
+    $url = $page->previewUrl();
 
     exec('google-chrome --headless --print-to-pdf="'.$outfile.'" '.$url. ' > /dev/null 2>/dev/null &');
   endif;
