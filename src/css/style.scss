@@ -574,6 +574,9 @@ header {
   }
   .text-block {
     padding-bottom: 0;
+    p {
+      max-width: 70% !important;
+    }
     .title {
       font-size: var(--font-body);
     }

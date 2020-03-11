@@ -506,6 +506,8 @@ header h1 {
 
 [data-template="issue"] .text-block {
   padding-bottom: 0; }
+  [data-template="issue"] .text-block p {
+    max-width: 70% !important; }
   [data-template="issue"] .text-block .title {
     font-size: var(--font-body); }
 
