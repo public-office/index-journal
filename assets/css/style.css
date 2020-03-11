@@ -587,10 +587,14 @@ figure {
   margin-left: 2em;
   text-indent: 0; }
 
-.inline-footnotes .inline-footnote__num {
-  display: block;
-  margin-left: 2em;
-  text-indent: 0; }
+.inline-footnotes .inline-footnote {
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto; }
+  .inline-footnotes .inline-footnote__num {
+    display: block;
+    margin-left: 2em;
+    text-indent: 0; }
 
 .inline-footnotes__container {
   font-size: var(--font-small);
