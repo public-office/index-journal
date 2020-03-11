@@ -1,0 +1,83 @@
+
+
+@media print {
+
+  @page {
+    margin: 1.5cm 0.5cm;
+  }
+
+  body {
+    margin: 0 !important;
+    color: black !important;
+    background-color: white;
+  }
+  .inline-footnotes__container, header, .abstract-trigger {
+    display: none !important;
+  }
+  .abstract-content {
+    display: block !important;
+    margin-left: 4.5em !important;
+  }
+
+  main h1 {
+    font-size: 3.5rem !important;
+  }
+
+  h2 {
+    font-size: 18px !important;
+    max-width: 55%;
+    margin: 1em auto;
+  }
+  .abstract, .abstract-content p {
+    font-size: 12px !important;
+    max-width: 100%;
+  }
+  .abstract-content {
+    width: 100%;
+    max-width: 100%;
+    display: none !important;
+  }
+  .title-block {
+    background: white !important;
+  }
+  .text-block {
+    padding-top: 3em !important;
+    margin-top: 8px;
+    break-before: always;
+    .subtitle {
+      font-size: 24px;
+      max-width: 80%;
+      margin: 0 auto;
+      margin-bottom: 2em;
+    }
+  }
+
+  .footnotes ol li {
+    font-size: 10px !important;
+  }
+
+  sup {
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  figure {
+    margin: 3em auto !important;
+    display: none !important;
+  }
+
+  .footnotes {
+    break-before: always;
+    column-gap: 1cm;
+  }
+  blockquote {
+    margin-left: 6em !important;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  p:last-of-type {
+    margin-bottom: 4em;
+  }
+
+
+}

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Index Journal</title>
     <?= css('assets/css/style.css?v='.sha1_file('assets/css/style.css')) ?>
+    <?= css('assets/css/print.css?v='.sha1_file('assets/css/print.css')) ?>
     <?= js('assets/js/jquery.min.js') ?>
     <?= js('assets/js/script.js?v='.sha1_file('assets/js/script.js')) ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,8 +19,7 @@
       gtag('config', 'UA-139982363-1');
     </script>
   </head>
-  <body>
-    <? snippet('pane') ?>
+  <body data-display="<?= $page->template() ?>">
     <header>
-      <h1><a href="<?= $site->url() ?>">INDEX JOURNAL</a>, <span>Issue No. 2 LAW</span></h1><nav><a href="<?= $site->url() ?>/about">About</a></nav>
+      <h1><a href="<?= $site->url() ?>">INDEX JOURNAL</a>, <nav><?foreach(page('issues')->children()->visible()->flip() as $issue): ?><span class="issue"><span><a href="<?= $issue->url() ?>">Issue No.</span> <?= $issue->num() ?> <span class="title"><?= $issue->title() ?></span></a></span><? endforeach ?></span></nav></h1><nav> <a href="<?= $site->url() ?>/about">ABOUT</a> <a class="hide" href="<?= $site->url() ?>/archive">ARCHIVE</a></nav>
     </header>
