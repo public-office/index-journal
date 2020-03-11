@@ -1,6 +1,28 @@
 title: Issue
 sections:
 
+  builder:
+    headline: Builder
+    type: fields
+    fields:
+      cfp_builder:
+        label: Intro builder
+        type: structure
+        fields:
+          message:
+            label: Main message
+            type: textarea
+          wipe_img:
+            label: Wipe image
+            type: files
+            limit: 1
+          wipe_img_caption:
+            label: Wipe image caption
+            type: text
+          secondary_text:
+            label: Secondary text
+            type: textarea
+
   issue_type:
     headline: Type
     type: fields

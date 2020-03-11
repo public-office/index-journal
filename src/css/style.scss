@@ -273,9 +273,9 @@ main h1 {
   font-size: var(--font-body);
   display: block;
   margin-top: 2em;
-  position: absolute;
-  bottom:0.5em;
-  left: 0.5em;
+  // position: absolute;
+  // bottom:0.5em;
+  // left: 0.5em;
   // .doi {
   //   &:after {
   //     content: ', ';
@@ -314,7 +314,7 @@ main h1 {
   font-size: var(--font-mid);
   text-align: center;
   line-height: 1.05;
-  display: block;
+  // display: block;
 }
 
 .text-block {
@@ -553,11 +553,13 @@ header {
   .title-block {
     background: white;
     padding-top: 8em;
+    // max-width: 100%;
+    // margin: 0 auto;
     @media (max-width: 670px) {
       padding-top: 4em;
     }
     h1 {
-      font-size: var(--font-mid);
+      font-size: var(--font-body);
       position: static !important;
       top:inherit;
       left: 0;
@@ -566,11 +568,20 @@ header {
         font-size: 1.05rem;
       }
     }
+    ul {
+      margin-left: 0;
+    }
+  }
+  .text-block {
+    padding-bottom: 0;
+    .title {
+      font-size: var(--font-body);
+    }
   }
   .issue-items {
     margin-bottom: 4em;
     ul {
-      font-size: var(--font-mid);
+      font-size: var(--font-body);
       @media (max-width: 670px) {
         font-size: 1.05rem;
       }
