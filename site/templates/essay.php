@@ -7,9 +7,15 @@
       </h1>
     </section>
     <div class="text-block">
-      <span class="subtitle"><?= $page->subtitle()->kti() ?></span>
-      <p class="abstract">ABSTRACT: <?= $page->abstract()->kti() ?></p>
-      <?= $page->text()->kirbytext() ?>
+      <span class="subtitle"><?= smartypants($page->subtitle()->kti()) ?></span>
+      <div class="abstract">
+        <p class="abstract-trigger">(see Abstract)</p>
+        <div class="abstract-content">
+          <p class="abstract">ABSTRACT: <?= smartypants($page->abstract()->kti()) ?></p>
+        </div>
+      </div>
+
+      <?= smartypants($page->text()->kirbytext()) ?>
     </div>
 
   </main>

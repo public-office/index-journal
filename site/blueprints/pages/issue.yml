@@ -1,5 +1,18 @@
 title: Issue
 sections:
+
+  issue_type:
+    headline: Type
+    type: fields
+    fields:
+      issue_type:
+        label: Issue type
+        type: radio
+        columns: 2
+        options:
+          archive: Archive
+          current: Current
+
   drafts:
     headline: Drafts
     type: pages
