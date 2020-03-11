@@ -243,10 +243,7 @@ main h1 {
 .essay-extra {
   font-size: var(--font-body);
   display: block;
-  margin-top: 2em;
-  position: absolute;
-  bottom: 0.5em;
-  left: 0.5em; }
+  margin-top: 2em; }
   .essay-extra .pdf:before {
     content: ', '; }
 
@@ -274,8 +271,7 @@ main h1 {
 .text-block .subtitle {
   font-size: var(--font-mid);
   text-align: center;
-  line-height: 1.05;
-  display: block; }
+  line-height: 1.05; }
 
 .text-block {
   padding: 6.6em 4em; }
@@ -496,7 +492,7 @@ header h1 {
     [data-template="issue"] .title-block {
       padding-top: 4em; } }
   [data-template="issue"] .title-block h1 {
-    font-size: var(--font-mid);
+    font-size: var(--font-body);
     position: static !important;
     top: inherit;
     left: 0;
@@ -505,11 +501,18 @@ header h1 {
     @media (max-width: 670px) {
       [data-template="issue"] .title-block h1 {
         font-size: 1.05rem; } }
+  [data-template="issue"] .title-block ul {
+    margin-left: 0; }
+
+[data-template="issue"] .text-block {
+  padding-bottom: 0; }
+  [data-template="issue"] .text-block .title {
+    font-size: var(--font-body); }
 
 [data-template="issue"] .issue-items {
   margin-bottom: 4em; }
   [data-template="issue"] .issue-items ul {
-    font-size: var(--font-mid); }
+    font-size: var(--font-body); }
     @media (max-width: 670px) {
       [data-template="issue"] .issue-items ul {
         font-size: 1.05rem; } }
