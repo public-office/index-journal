@@ -674,6 +674,7 @@ figure {
 .inline-footnotes {
 
   .inline-footnote {
+    hyphens: auto;
 
     &__num {
       display: block;
