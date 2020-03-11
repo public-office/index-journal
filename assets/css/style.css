@@ -38,6 +38,10 @@ html {
   @media (max-width: 670px) {
     html {
       font-size: 18px; } }
+  @media (max-width: 670px) {
+    html {
+      --font-mid: 1.4rem;
+      --font-body: 1rem; } }
 
 body {
   font-family: 'KPLSynt', serif;
@@ -145,6 +149,9 @@ header {
 p, h3 {
   font-size: 1.8rem;
   font-weight: 400; }
+  @media (max-width: 960px) {
+    p, h3 {
+      font-size: 2.1rem; } }
 
 p, h1, h2, figcaption, .footnotes {
   font-family: 'DinSynt'; }
@@ -157,6 +164,9 @@ sup {
   line-height: 1; }
   sup + sup {
     margin-left: -0.25em; }
+  @media (max-width: 670px) {
+    sup {
+      font-size: 0.5rem; } }
 
 nav {
   font-size: var(--font-body);
@@ -191,6 +201,9 @@ p a {
 
 p:hover span {
   display: block !important; }
+  @media (max-width: 960px) {
+    p:hover span {
+      display: none !important; } }
 
 h2 {
   font-size: 2.5vw;
@@ -208,6 +221,10 @@ h3 {
 blockquote {
   margin: 2.2em 4em 2.2em 12em;
   max-width: 620px !important; }
+  @media (max-width: 670px) {
+    blockquote {
+      margin: 1em 0 1em 3em;
+      max-width: 100%; } }
 
 main h1 {
   font-size: 9.25vw;
@@ -258,11 +275,20 @@ main h1 {
   .text-block h2 {
     text-indent: 3em; }
   .text-block p, .text-block p + p, .text-block h2, .text-block h3 {
-    max-width: 860px; }
+    max-width: 72%; }
+    @media (max-width: 960px) {
+      .text-block p, .text-block p + p, .text-block h2, .text-block h3 {
+        max-width: 85%; } }
+    @media (max-width: 670px) {
+      .text-block p, .text-block p + p, .text-block h2, .text-block h3 {
+        max-width: 95%; } }
   .text-block .subtitle {
-    max-width: 820px;
+    max-width: 70%;
     margin: 0 auto;
     margin-bottom: 2em; }
+    @media (max-width: 670px) {
+      .text-block .subtitle {
+        max-width: 85%; } }
   .text-block p + p {
     text-indent: 3em;
     margin: 0; }
@@ -270,6 +296,9 @@ main h1 {
     display: table;
     max-width: 680px;
     margin: 6em auto; }
+    @media (max-width: 960px) {
+      .text-block figure {
+        max-width: 85%; } }
     .text-block figure:hover img {
       -webkit-filter: grayscale(0);
               filter: grayscale(0); }
@@ -288,7 +317,9 @@ main h1 {
     .text-block {
       max-width: 100%;
       margin: 0 auto;
-      padding-top: 6.6em; } }
+      padding-top: 4em;
+      padding-left: 1em;
+      padding-right: 1em; } }
 
 .footnotes {
   margin: 2.2em 0;
@@ -306,6 +337,9 @@ main h1 {
     -webkit-column-break-inside: avoid;
        -moz-column-break-inside: avoid;
             break-inside: avoid; }
+    @media (max-width: 960px) {
+      .footnotes ol li p {
+        font-size: 0.4rem; } }
 
 [data-template="about"] .text-block {
   padding-bottom: 8em; }
@@ -334,6 +368,9 @@ ul {
   list-style: none;
   margin-left: 4rem;
   margin-top: 1em; }
+  @media (max-width: 670px) {
+    ul {
+      margin-left: 1em; } }
   ul li {
     font-size: 1.8rem;
     line-height: 1.1;
@@ -414,6 +451,9 @@ header h1 {
   display: flex;
   -webkit-box-align: start;
           align-items: flex-start; }
+  @media (max-width: 670px) {
+    header h1 {
+      width: 80vw; } }
   header h1 nav {
     height: 1.2em;
     overflow-y: hidden;
@@ -439,6 +479,9 @@ header h1 {
 [data-template="issue"] .title-block {
   background: white;
   padding-top: 8em; }
+  @media (max-width: 670px) {
+    [data-template="issue"] .title-block {
+      padding-top: 4em; } }
   [data-template="issue"] .title-block h1 {
     font-size: var(--font-mid);
     position: static !important;
@@ -446,13 +489,22 @@ header h1 {
     left: 0;
     -webkit-transform: none;
             transform: none; }
+    @media (max-width: 670px) {
+      [data-template="issue"] .title-block h1 {
+        font-size: 1.05rem; } }
 
 [data-template="issue"] .issue-items {
   margin-bottom: 4em; }
   [data-template="issue"] .issue-items ul {
     font-size: var(--font-mid); }
+    @media (max-width: 670px) {
+      [data-template="issue"] .issue-items ul {
+        font-size: 1.05rem; } }
     [data-template="issue"] .issue-items ul li {
       font-size: inherit; }
+      @media (max-width: 670px) {
+        [data-template="issue"] .issue-items ul li {
+          line-height: 1.3; } }
       [data-template="issue"] .issue-items ul li a {
         text-transform: none; }
 
@@ -526,6 +578,9 @@ figure {
   top: 0;
   left: 75vw;
   padding-right: 1em; }
+  @media (max-width: 960px) {
+    .inline-footnotes__container {
+      display: none !important; } }
 
 blockquote .inline-footnotes__container {
   left: calc(75vw - 14em); }
@@ -553,13 +608,13 @@ p span {
   header h1 {
     -webkit-box-flex: 1.5;
             flex: 1.5;
-    line-height: 1.2; }
+    line-height: 1.2;
+    -webkit-box-flex: 8;
+            flex: 8; }
   header nav {
     -webkit-box-flex: 1;
             flex: 1;
-    margin-top: -0.5rem; }
-  header h1 span {
-    display: block; }
+    width: auto; }
   p, h3 {
     max-width: 90%; }
   figure.wipe {
