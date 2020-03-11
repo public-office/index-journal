@@ -251,6 +251,9 @@ blockquote {
     margin: 1em 0 1em 3em;
     max-width: 100%;
   }
+  p {
+    max-width: 100% !important;
+  }
 }
 main h1 {
   font-size: 9.25vw;
@@ -263,6 +266,22 @@ main h1 {
   max-width: 90vw;
   &:not(:last-of-type) {
     margin-bottom: 0.5em;
+  }
+}
+
+.essay-extra {
+  font-size: 1.6rem;
+  display: block;
+  margin-top: 2em;
+  // .doi {
+  //   &:after {
+  //     content: ', ';
+  //   }
+  // }
+  .pdf {
+    &:before {
+      content: ', ';
+    }
   }
 }
 
@@ -608,8 +627,17 @@ figure {
     margin-top: 1em;
     margin-left: 5.5em;
     max-width: 70%;
+    @media (max-width: 670px) {
+      margin-left: 0;
+      max-width: 100%;
+      padding-right: 1em;
+    }
     p {
+      max-width: 100%;
       font-size: 1.4rem;
+      @media (max-width: 670px) {
+        font-size: 0.8rem;
+      }
       & + p {
         text-indent: 0 !important;
       }
@@ -738,6 +766,12 @@ p span {
     right: 0.5rem;
     text-align: left;
   }
+}
+
+h2:last-of-type {
+  margin-top: 4em;
+  max-width: 100%;
+  break-before: always;
 }
 
 @import './print.scss';
