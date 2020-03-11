@@ -13,14 +13,8 @@ sections:
           archive: Archive
           current: Current
 
-  drafts:
-    headline: Drafts
-    type: pages
-    status: draft
-    templates: essay
-
   published:
-    headline: Published Essays
+    headline: Essays
     type: pages
-    status: listed
+    status: all
     templates: essay
