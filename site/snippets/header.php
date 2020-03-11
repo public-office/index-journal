@@ -21,5 +21,5 @@
   </head>
   <body data-display="<?= $page->template() ?>">
     <header>
-      <h1><a href="<?= $site->url() ?>">INDEX JOURNAL</a>, <nav><?foreach(page('issues')->children()->visible()->flip() as $issue): ?><span class="issue"><span><a href="<?= $issue->url() ?>">Issue No.</span> <?= $issue->num() ?> <span class="title"><?= $issue->title() ?></span></a></span><? endforeach ?></span></nav></h1><nav> <a href="<?= $site->url() ?>/about">ABOUT</a> <a class="hide" href="<?= $site->url() ?>/archive">ARCHIVE</a></nav>
+      <h1><a href="<?= $site->url() ?>">INDEX JOURNAL</a>, <nav><?foreach(page('issues')->children()->listed()->flip() as $issue): ?><span class="issue"><span><a href="<?= $issue->url() ?>">Issue No.</span> <?= $issue->num() ?> <span class="title"><?= $issue->title() ?></span></a></span><? endforeach ?></span></nav></h1><nav> <a href="<?= $site->url() ?>/about">ABOUT</a> <a class="hide" href="<?= $site->url() ?>/archive">ARCHIVE</a></nav>
     </header>
