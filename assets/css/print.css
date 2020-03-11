@@ -1,6 +1,12 @@
 @media print {
   @page {
     margin: 1.5cm 2cm; }
+  thead {
+    display: table-header-group; }
+  thead th {
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    color: red !important; }
   body {
     margin: 0 !important;
     color: black !important;
@@ -42,7 +48,8 @@
     font-size: 11px;
     line-height: 1; }
   figure {
-    margin: 3em auto !important; }
+    margin: 3em auto !important;
+    display: none !important; }
   .footnotes {
     -webkit-column-break-before: always;
        -moz-column-break-before: always;
