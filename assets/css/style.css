@@ -341,7 +341,8 @@ main h1 {
           column-count: 2;
   -webkit-column-gap: 60px;
      -moz-column-gap: 60px;
-          column-gap: 60px; }
+          column-gap: 60px;
+  display: none; }
   .footnotes hr {
     display: none; }
   .footnotes ol li p {
@@ -670,7 +671,8 @@ h2:last-of-type {
   max-width: 100%;
   -webkit-column-break-before: always;
      -moz-column-break-before: always;
-          break-before: always; }
+          break-before: always;
+  display: none; }
 
 @media print {
   @page {

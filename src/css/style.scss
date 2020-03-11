@@ -391,6 +391,7 @@ main h1 {
   margin-left: 1.5em;
   column-count: 2;
   column-gap: 60px;
+  display: none;
   hr {
     display: none;
   }
@@ -778,6 +779,7 @@ h2:last-of-type {
   margin-top: 4em;
   max-width: 100%;
   break-before: always;
+  display: none;
 }
 
 @import './print.scss';
