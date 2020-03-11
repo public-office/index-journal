@@ -4,6 +4,7 @@
     <section class="title-block">
       <h1><span class="title"><?= $page->title() ?></span><br>
         by <span class="author"><?= $page->author() ?></span>
+        <span class="essay-extra">(<? if($page->doi()->isNotEmpty()): ?><span class="doi">DOI: <a href="https://doi.org/<?= $page->doi() ?>"><?= $page->doi() ?></span></a><? endif ?><? if($page->hasDocuments()): ?><a href="<?= $page->documents()->first()->url() ?>"><span class="pdf">PDF</span></a><? endif ?>)</span>
       </h1>
     </section>
     <div class="text-block">

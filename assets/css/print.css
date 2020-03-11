@@ -1,6 +1,6 @@
 @media print {
   @page {
-    margin: 1.5cm 0.5cm; }
+    margin: 1.5cm 2cm; }
   body {
     margin: 0 !important;
     color: black !important;
@@ -11,7 +11,7 @@
     display: block !important;
     margin-left: 4.5em !important; }
   main h1 {
-    font-size: 3.5rem !important; }
+    font-size: 3rem !important; }
   h2 {
     font-size: 18px !important;
     max-width: 55%;
@@ -42,8 +42,7 @@
     font-size: 11px;
     line-height: 1; }
   figure {
-    margin: 3em auto !important;
-    display: none !important; }
+    margin: 3em auto !important; }
   .footnotes {
     -webkit-column-break-before: always;
        -moz-column-break-before: always;
@@ -56,6 +55,10 @@
     margin-top: 1em;
     margin-bottom: 1em; }
   p:last-of-type {
-    margin-bottom: 4em; } }
+    margin-bottom: 4em; }
+  h2:last-of-type {
+    -webkit-column-break-before: always !important;
+       -moz-column-break-before: always !important;
+            break-before: always !important; } }
 
 /*# sourceMappingURL=print.css.map */

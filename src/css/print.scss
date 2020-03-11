@@ -3,7 +3,7 @@
 @media print {
 
   @page {
-    margin: 1.5cm 0.5cm;
+    margin: 1.5cm 2cm;
   }
 
   body {
@@ -20,7 +20,7 @@
   }
 
   main h1 {
-    font-size: 3.5rem !important;
+    font-size: 3rem !important;
   }
 
   h2 {
@@ -63,7 +63,7 @@
 
   figure {
     margin: 3em auto !important;
-    display: none !important;
+    // display: none !important;
   }
 
   .footnotes {
@@ -77,6 +77,10 @@
   }
   p:last-of-type {
     margin-bottom: 4em;
+  }
+
+  h2:last-of-type {
+    break-before: always !important;
   }
 
 

@@ -225,6 +225,8 @@ blockquote {
     blockquote {
       margin: 1em 0 1em 3em;
       max-width: 100%; } }
+  blockquote p {
+    max-width: 100% !important; }
 
 main h1 {
   font-size: 9.25vw;
@@ -237,6 +239,13 @@ main h1 {
   max-width: 90vw; }
   main h1:not(:last-of-type) {
     margin-bottom: 0.5em; }
+
+.essay-extra {
+  font-size: 1.6rem;
+  display: block;
+  margin-top: 2em; }
+  .essay-extra .pdf:before {
+    content: ', '; }
 
 .title-block {
   background: #f7f7f7;
@@ -548,8 +557,17 @@ figure {
   margin-left: 5.5em;
   max-width: 70%;
   display: none; }
+  @media (max-width: 670px) {
+    .abstract .abstract-content {
+      margin-left: 0;
+      max-width: 100%;
+      padding-right: 1em; } }
   .abstract .abstract-content p {
+    max-width: 100%;
     font-size: 1.4rem; }
+    @media (max-width: 670px) {
+      .abstract .abstract-content p {
+        font-size: 0.8rem; } }
     .abstract .abstract-content p + p {
       text-indent: 0 !important; }
 
@@ -644,9 +662,16 @@ p span {
     right: 0.5rem;
     text-align: left; } }
 
+h2:last-of-type {
+  margin-top: 4em;
+  max-width: 100%;
+  -webkit-column-break-before: always;
+     -moz-column-break-before: always;
+          break-before: always; }
+
 @media print {
   @page {
-    margin: 1.5cm 0.5cm; }
+    margin: 1.5cm 2cm; }
   body {
     margin: 0 !important;
     color: black !important;
@@ -657,7 +682,7 @@ p span {
     display: block !important;
     margin-left: 4.5em !important; }
   main h1 {
-    font-size: 3.5rem !important; }
+    font-size: 3rem !important; }
   h2 {
     font-size: 18px !important;
     max-width: 55%;
@@ -688,8 +713,7 @@ p span {
     font-size: 11px;
     line-height: 1; }
   figure {
-    margin: 3em auto !important;
-    display: none !important; }
+    margin: 3em auto !important; }
   .footnotes {
     -webkit-column-break-before: always;
        -moz-column-break-before: always;
@@ -702,6 +726,10 @@ p span {
     margin-top: 1em;
     margin-bottom: 1em; }
   p:last-of-type {
-    margin-bottom: 4em; } }
+    margin-bottom: 4em; }
+  h2:last-of-type {
+    -webkit-column-break-before: always !important;
+       -moz-column-break-before: always !important;
+            break-before: always !important; } }
 
 /*# sourceMappingURL=style.css.map */
