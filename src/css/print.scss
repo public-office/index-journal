@@ -73,11 +73,14 @@
   figure {
     margin: 3em auto !important;
     break-inside: avoid;
-    max-width: 11cm;
-    width: 11cm;
+    max-width: 10.5cm;
+    width: 10.5cm;
   }
   figcaption, .figure-num {
-    font-size: 10px;
+    font-size: 9px;
+  }
+  figcaption {
+    margin-top: 6px;
   }
 
   .footnotes {

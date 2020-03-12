@@ -901,10 +901,12 @@ h2:last-of-type {
     -webkit-column-break-inside: avoid;
        -moz-column-break-inside: avoid;
             break-inside: avoid;
-    max-width: 11cm;
-    width: 11cm; }
+    max-width: 10.5cm;
+    width: 10.5cm; }
   figcaption, .figure-num {
-    font-size: 10px; }
+    font-size: 9px; }
+  figcaption {
+    margin-top: 6px; }
   .footnotes {
     -webkit-column-break-before: always;
        -moz-column-break-before: always;
