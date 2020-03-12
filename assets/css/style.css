@@ -901,7 +901,7 @@ h2:last-of-type {
     -webkit-column-break-inside: avoid;
        -moz-column-break-inside: avoid;
             break-inside: avoid;
-    max-width: 420px; }
+    max-width: 10cm; }
   .footnotes {
     -webkit-column-break-before: always;
        -moz-column-break-before: always;
