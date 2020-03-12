@@ -106,7 +106,7 @@ em, i {
 figcaption {
   font-size: 1rem;
   margin-top: 1rem;
-  text-align: center;
+  text-align: left;
   line-height: 1.1;
   a {
     text-transform: none;
@@ -119,8 +119,11 @@ header {
   flex-direction: row;
   justify-content: space-between;
   position: fixed;
-  width: calc(100vw - 2rem);
-  left: 1rem; top: 1rem;
+  width: calc(100vw);
+  left: 0; top: 0;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0px 11px 16px 0px rgba(255,255,255,1);
   z-index: 200;
 
   h1, a {
@@ -132,6 +135,13 @@ header {
     font-size: var(--font-body);
     text-transform: none;
     /* -webkit-font-smoothing: antialiased; */
+  }
+}
+
+[data-display="essay"] {
+  header {
+    background: transparent;
+    box-shadow: none;
   }
 }
 
@@ -256,7 +266,7 @@ blockquote {
   }
 }
 main h1 {
-  font-size: 9.25vw;
+  font-size: 8vw;
   font-weight: 300;
   line-height: 0.85;
   text-align: center;
@@ -273,23 +283,22 @@ main h1 {
   font-size: var(--font-body);
   display: block;
   margin-top: 2em;
-  // position: absolute;
-  // bottom:0.5em;
-  // left: 0.5em;
-  // .doi {
-  //   &:after {
-  //     content: ', ';
-  //   }
-  // }
-  .pdf {
-    &:before {
-      content: ', ';
+  span {
+    a {
+      &:hover {
+        border-bottom: 1px solid;
+      }
+    }
+    &:nth-of-type(2) {
+      &:before {
+        content: ', ';
+      }
     }
   }
 }
 
 .title-block {
-  background: #f7f7f7;
+  background: cadetblue;
   padding-bottom: 4em;
   height: 100vh;
   position: relative;
@@ -309,6 +318,11 @@ main h1 {
   text-transform: uppercase;
   font-weight: 300;
 }
+.title {
+  display: block;
+  margin-bottom: 0.5em;
+  line-height: 1;
+}
 .text-block .title,
 .text-block .subtitle {
   font-size: var(--font-mid);
@@ -317,16 +331,22 @@ main h1 {
   // display: block;
 }
 
+.subtitle, .author {
+  margin: 0 auto;
+  display: block;
+  line-height: 1;
+  @media (max-width: 670px) {
+    max-width: 85%;
+  }
+}
+
 .text-block {
   padding: 6.6em 4em;
 
   .title {
     margin-bottom: 0.5em;
   }
-  .subtitle {
-    max-width: 100%;
-    margin: 0 0 1.5em 0;
-  }
+
   h2 {
     text-indent: 3em;
   }
@@ -337,14 +357,6 @@ main h1 {
     }
     @media(max-width: 670px) {
       max-width: 95%;
-    }
-  }
-  .subtitle {
-    max-width: 70%;
-    margin: 0 auto;
-    margin-bottom: 2em;
-    @media (max-width: 670px) {
-      max-width: 85%;
     }
   }
   p + p {
@@ -373,7 +385,7 @@ main h1 {
     figcaption {
       display: table-caption;
       caption-side: bottom;
-      text-align: center;
+      text-align: left;
       line-height: 1.2;
     }
   }
@@ -524,9 +536,6 @@ header {
       flex: none;
       text-align: left;
       transition: height ease-in-out 0.5s;
-      // &:before {
-      //   content: ', ';
-      // }
       &.hover {
         height: auto;
       }
@@ -540,6 +549,10 @@ header {
         a {
           text-transform: none !important;
           border-bottom: 0 !important;
+          .title {
+            display: inline-block;
+            margin-bottom: 0;
+          }
         }
         &:hover {
           border-bottom: 1px solid !important;
@@ -549,7 +562,7 @@ header {
   }
 }
 
-[data-template="issue"] {
+[data-template="issue"], [data-display="home"] {
   .title-block {
     background: white;
     padding-top: 8em;
@@ -559,6 +572,9 @@ header {
       padding-top: 4em;
     }
     h1 {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
       font-size: var(--font-body);
       position: static !important;
       top:inherit;
@@ -570,6 +586,9 @@ header {
     }
     ul {
       margin-left: 0;
+      li {
+        line-height: 1.2;
+      }
     }
   }
   .text-block {
@@ -609,16 +628,16 @@ header {
 }
 
 figure {
+  position: relative;
   &:hover {
     cursor: pointer;
   }
-  position: relative;
+
   &.expand {
     background: black;
     position: fixed;
     display: flex;
     align-items: center;
-    justify-content: space-around;
     top: 0; left: 0; right: 0; bottom: 0;
     width: 100vw;
     height: 100vh;
@@ -627,6 +646,8 @@ figure {
     z-index: 210;
     img {
       padding: 4em 0;
+      margin: 0 auto;
+      filter: grayscale(0);
     }
     .figure-close {
       display: block;
@@ -634,28 +655,50 @@ figure {
   }
 }
 
-.abstract {
-  .abstract-trigger {
-    &:hover {
-      cursor: pointer;
-    }
-  }
-  .abstract-content {
-    font-family: 'DinSynt';
+.figure-num {
+  display: block;
+  text-align: center;
+  padding-bottom: 1em;
+}
 
+.abstract-block {
+
+
+  .abstract-content {
+    position: relative;
+    font-family: 'DinSynt';
     padding-right: 4em;
     margin-bottom: 3.3em;
     margin-top: 1em;
     margin-left: 5.5em;
-    max-width: 70%;
+    max-width: 55%;
+    .shadow {
+      box-shadow: inset 0px -20px 20px 0px rgba(255, 255, 255, 1);
+      height: 6.5em;
+      width: 100%;
+      z-index: 100;
+      position:absolute;
+      pointer-events: none;
+    }
+    &:hover {
+      cursor: pointer;
+    }
     @media (max-width: 670px) {
       margin-left: 0;
       max-width: 100%;
       padding-right: 1em;
     }
+    .abstract {
+      &.hidden {
+        max-height: 6.5em;
+        overflow: hidden;
+        z-index: 0;
+      }
+    }
     p {
       max-width: 100%;
       font-size: 1.4rem;
+
       @media (max-width: 670px) {
         font-size: 0.8rem;
       }
@@ -663,8 +706,49 @@ figure {
         text-indent: 0 !important;
       }
     }
+  }
+}
 
-    display: none;
+[data-display="issue"] {
+  .text-block {
+    padding-bottom: 0;
+  }
+  .title-block {
+    background: white;
+    max-width: 72%;
+    margin: 0 auto;
+    h1 {
+      position: relative;
+    }
+    &-issue {
+      font-size: var(--font-body);
+      text-align: center;
+      margin-top: 4em;
+
+      .title {
+        font-size: var(--font-body);
+        display: inline;
+      }
+    }
+  }
+  .issue-items {
+    ul {
+      margin-left: 0;
+      li {
+        text-indent: -2em;
+        margin-left: 2em;
+        a {
+          text-transform: none !important;
+          br {
+            display: none;
+          }
+        }
+      }
+    }
+    .title {
+      font-size: var(--font-body);
+      display: inline;
+    }
   }
 }
 
@@ -679,6 +763,12 @@ figure {
   }
 }
 
+.inline-footnote {
+  // hyphens: auto;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
 .inline-footnote__num {
   display: block;
   margin-left: 2em;
@@ -689,6 +779,8 @@ figure {
 
   .inline-footnote {
     hyphens: auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 
     &__num {
       display: block;
@@ -710,9 +802,26 @@ figure {
     }
   }
 }
-blockquote .inline-footnotes__container {
-  left: calc(75vw - 14em);
+blockquote {
+  .inline-footnotes__container {
+    left: calc(75vw - 14em);
+  }
+  blockquote {
+    .inline-footnotes__container {
+      left: calc(62vw - 14em);
+    }
+  }
 }
+
+blockquote {
+  & + blockquote {
+    margin-top: -2em;
+    p {
+      text-indent: 2em;
+    }
+  }
+}
+
 
 p span {
   display: block !important;

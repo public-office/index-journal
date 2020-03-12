@@ -1,6 +1,6 @@
 <? snippet('header') ?>
 
-  <main data-template="<?= $page->template() ?>">
+  <main>
     <? $sections = $page->cfp_builder()->toStructure() ?>
     <? foreach($sections as $section): ?>
       <section class="initial">
@@ -15,7 +15,7 @@
           <?= $section->secondary_text()->kirbytext() ?>
 
           <section class="title-block">
-            <h1>Issue No.<?= $page->num() ?> <span class="title"><?= $page->title() ?></span></h1>
+            <span class="title-block-issue">Issue No.<?= $page->num() ?> <span class="title"><?= $page->title() ?></span></span>
             <div class="issue-items">
               <ul>
                 <? if($page->hasChildren()): ?>
