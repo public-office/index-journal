@@ -6,6 +6,12 @@
       <div class="people">
         <?= $page->people()->kirbytext() ?>
       </div>
+      <div class="colophon">
+        <?= $page->colophon()->kirbytext() ?>
+      </div>
+      <div class="acknowledgement">
+        <?= $page->acknowledgement()->kirbytext() ?>
+      </div>
     </div>
   </main>
 </body>

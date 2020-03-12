@@ -252,6 +252,12 @@ main h1 {
   main h1:not(:last-of-type) {
     margin-bottom: 0.5em; }
 
+.colophon, .acknowledgement {
+  margin-top: 2.21em; }
+
+.colophon {
+  margin-top: 4.4em; }
+
 .essay-extra {
   font-size: var(--font-body);
   display: block;
