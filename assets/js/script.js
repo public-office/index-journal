@@ -17,7 +17,6 @@ $(document).ready(function () {
   )
 
   $(window).on('scroll', function() {
-    // console.log(window.scrollY)
     if(window.scrollY > (window.innerHeight - 60)){
       $('header').addClass('scrolled')
     } else {
