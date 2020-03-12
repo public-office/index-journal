@@ -5,5 +5,11 @@ fields:
     label: Text
     type: textarea
   people:
-    labvel: People
+    label: People
+    type: textarea
+  colophon:
+    label: Colophon
+    type: textarea
+  acknowledgement:
+    label: Acknowledgement
     type: textarea

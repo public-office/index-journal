@@ -284,6 +284,13 @@ main h1 {
   }
 }
 
+.colophon, .acknowledgement {
+  margin-top: 2.21em;
+}
+.colophon {
+  margin-top: 4.4em;
+}
+
 .essay-extra {
   font-size: var(--font-body);
   display: block;
