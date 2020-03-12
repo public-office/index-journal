@@ -52,10 +52,10 @@
     -webkit-column-break-inside: avoid;
        -moz-column-break-inside: avoid;
             break-inside: avoid;
-    max-width: 12cm;
-    width: 12cm; }
+    max-width: 11cm;
+    width: 11cm; }
   figcaption, .figure-num {
-    font-size: 9px; }
+    font-size: 10px; }
   .footnotes {
     -webkit-column-break-before: always;
        -moz-column-break-before: always;
