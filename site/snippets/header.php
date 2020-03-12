@@ -19,6 +19,6 @@
     </script>
   </head>
   <body data-display="<?= $page->template() ?>">
-    <header>
+    <header <? if($page->template() == 'essay'): ?>style="background-color: rgb(<?= $page->parent()->issue_color() ?>); box-shadow: 0px 11px 16px 0px rgba(<?= $page->parent()->issue_color() ?>,1);"<? endif ?>>
       <h1><a href="<?= $site->url() ?>">INDEX JOURNAL</a>, <nav><?foreach(page('issues')->children()->listed()->flip() as $issue): ?><span class="issue"><span><a href="<?= $issue->url() ?>">Issue No.</span> <?= $issue->num() ?> <span class="title"><?= $issue->title() ?></span></a></span><? endforeach ?></span></nav></h1><nav> <a href="<?= $site->url() ?>/about">ABOUT</a> <a class="hide" href="<?= $site->url() ?>/archive">ARCHIVE</a></nav>
     </header>

@@ -15,10 +15,25 @@ $(document).ready(function () {
     function(){ $(this).addClass('hover') },
     function(){ $(this).removeClass('hover') }
   )
-  // $('figure').append($('<span class="figure-close">&times;</span>'))
+
+  $(window).on('scroll', function() {
+    // console.log(window.scrollY)
+    if(window.scrollY > (window.innerHeight - 60)){
+      $('header').addClass('scrolled')
+    } else {
+      $('header').removeClass('scrolled')
+    }
+  })
 
   $('figure').on('click', function() {
     $(this).toggleClass('expand');
+  })
+
+  $('.initial').on('click', function() {
+    $('.issue-overlay').css({opacity: 0, display: 'flex'}).fadeTo('slow', 1);
+  })
+  $('.issue-overlay-close').on('click', function() {
+    $('.issue-overlay').fadeOut();
   })
 
   $('.abstract.hidden').on('click', function() {

@@ -125,6 +125,11 @@ header {
   background: white;
   box-shadow: 0px 11px 16px 0px rgba(255,255,255,1);
   z-index: 200;
+  transition: background 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+  &.scrolled {
+    background: white !important;
+    box-shadow: 0px 11px 16px 0px rgba(255,255,255,1) !important;
+  }
 
   h1, a {
     // flex: 1;
@@ -298,7 +303,6 @@ main h1 {
 }
 
 .title-block {
-  background: cadetblue;
   padding-bottom: 4em;
   height: 100vh;
   position: relative;
@@ -400,18 +404,22 @@ main h1 {
 
 .footnotes {
   margin: 2.2em 0;
-  margin-left: 1.5em;
-  column-count: 2;
-  column-gap: 60px;
+  margin-left: 1em;
+  margin-top: 4em;
+  column-count: 1;
+  max-width: 85%;
   display: none;
+  @media(max-width: 670px) {
+    display: block;
+  }
   hr {
     display: none;
   }
-  ol li p {
+  ol li {
     font-size: 1.1rem;
     break-inside: avoid;
     @media(max-width: 960px) {
-      font-size: 0.4rem;
+      font-size: 0.6rem;
     }
   }
 }
@@ -511,6 +519,9 @@ section.initial {
   left: 0; width: 100vw;
   align-items: center;
   justify-content: center;
+  &:hover {
+    cursor: pointer;
+  }
 }
 section.call {
   position: relative;
@@ -661,6 +672,77 @@ figure {
   padding-bottom: 1em;
 }
 
+.text-bibliography {
+  text-indent: -1.5em;
+  margin-left: 0;
+  max-width: 72%;
+  column-count: 3;
+  column-gap: 40px;
+  // &:before {
+  //   content: 'Bibliography';
+  //   font-size: var(--font-small);
+  // }
+  ul {
+    margin-left: 0;
+    margin-top: 0;
+    margin-right: 4px;
+    li {
+      font-family: 'DinSynt';
+      font-size: var(--font-small);
+      break-inside: avoid;
+      &:first-of-type {
+        text-transform: none;
+      }
+    }
+  }
+}
+
+.text-bios {
+  margin-top: 1.1em;
+  margin-left: 5.5em;
+  max-width: 50%;
+  margin-bottom: 4.4em;
+  p {
+    position: relative;
+    font-family: 'DinSynt';
+    font-size: 1.4rem;
+    padding-right: 4em;
+    max-width: 100%;
+    a {
+      border-bottom: 1px solid;
+    }
+    & + p {
+      text-indent: 0;
+      margin-top: 1em;
+    }
+  }
+}
+
+.issue-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  display: none;
+  &-close {
+    position: fixed;
+    top: 0.5em; right: 1em;
+    font-size: var(--font-body);
+    font-family: 'DinSynt';
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  img {
+    max-height: 74vh;
+  }
+}
+
 .abstract-block {
 
 
@@ -703,7 +785,7 @@ figure {
         font-size: 0.8rem;
       }
       & + p {
-        text-indent: 0 !important;
+        // text-indent: 0 !important;
       }
     }
   }
@@ -718,6 +800,9 @@ figure {
     max-width: 72%;
     margin: 0 auto;
     padding-top: 0 !important;
+    @media (max-width: 670px) {
+      max-width: 100%;
+    }
     h1 {
       position: relative;
     }

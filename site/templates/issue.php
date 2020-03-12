@@ -30,7 +30,10 @@
         </section>
       </div>
     <? endforeach ?>
-
   </main>
+  <div class="issue-overlay">
+    <span class="issue-overlay-close">(close)</span>
+    <img src="<?= $page->issue_image()->toFile()->url() ?>" alt="">
+  </div>
 </body>
 </html>
