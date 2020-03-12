@@ -626,7 +626,8 @@ figure {
 [data-display="issue"] .title-block, [data-display="home"] .title-block {
   background: white;
   max-width: 72%;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding-top: 0; }
   [data-display="issue"] .title-block h1, [data-display="home"] .title-block h1 {
     position: relative; }
   [data-display="issue"] .title-block-issue, [data-display="home"] .title-block-issue {
