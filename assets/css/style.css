@@ -914,6 +914,9 @@ h2:last-of-type {
   h2:last-of-type {
     -webkit-column-break-before: always !important;
        -moz-column-break-before: always !important;
-            break-before: always !important; } }
+            break-before: always !important; }
+  .text-block figure img {
+    -webkit-filter: none !important;
+            filter: none !important; } }
 
 /*# sourceMappingURL=style.css.map */
