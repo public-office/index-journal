@@ -48,8 +48,7 @@
     font-size: 11px;
     line-height: 1; }
   figure {
-    margin: 3em auto !important;
-    display: none !important; }
+    margin: 3em auto !important; }
   .footnotes {
     -webkit-column-break-before: always;
        -moz-column-break-before: always;

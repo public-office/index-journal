@@ -21,9 +21,14 @@ $(document).ready(function () {
     $(this).toggleClass('expand');
   })
 
-  $('.abstract-trigger').on('click', function() {
+  $('.abstract.hidden').on('click', function() {
     console.log('clicked toggle')
-    $('.abstract-content').slideToggle();
+    $('.abstract').toggleClass('hidden');
+    $('.shadow').toggle();
+  })
+
+  $('.text-block figure').each(function(number) {
+    $(this).prepend('<span class="figure-num">FIG. '+(number+1)+'</span>')
   })
 
   $('.footnotes li').each(function() {
