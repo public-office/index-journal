@@ -539,6 +539,9 @@ header h1 {
   padding-bottom: 0; }
   [data-template="issue"] .text-block p, [data-display="home"] .text-block p {
     max-width: 70% !important; }
+    @media (max-width: 670px) {
+      [data-template="issue"] .text-block p, [data-display="home"] .text-block p {
+        max-width: 100% !important; } }
   [data-template="issue"] .text-block .title, [data-display="home"] .text-block .title {
     font-size: var(--font-body); }
 

@@ -606,6 +606,9 @@ header {
     padding-bottom: 0;
     p {
       max-width: 70% !important;
+      @media (max-width: 670px) {
+        max-width: 100% !important;
+      }
     }
     .title {
       font-size: var(--font-body);
