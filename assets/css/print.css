@@ -16,8 +16,6 @@
   .abstract-content {
     display: block !important;
     margin-left: 4.5em !important; }
-  main h1 {
-    font-size: 3rem !important; }
   h2 {
     font-size: 18px !important;
     max-width: 55%;
@@ -47,12 +45,17 @@
   sup {
     font-size: 11px;
     line-height: 1; }
+  main h1 {
+    font-size: 42px; }
   figure {
     margin: 3em auto !important;
     -webkit-column-break-inside: avoid;
        -moz-column-break-inside: avoid;
             break-inside: avoid;
-    max-width: 10cm; }
+    max-width: 12cm;
+    width: 12cm; }
+  figcaption, .figure-num {
+    font-size: 9px; }
   .footnotes {
     -webkit-column-break-before: always;
        -moz-column-break-before: always;
