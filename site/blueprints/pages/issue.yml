@@ -23,6 +23,18 @@ sections:
             label: Secondary text
             type: textarea
 
+  issue_cover:
+    headline: Issue cover image
+    type: fields
+    fields:
+      issue_image:
+        label: Issue image (full)
+        type: files
+        width: 1/2
+      issue_color:
+        label: Issue color
+        type: text
+        width: 1/2
   issue_type:
     headline: Type
     type: fields
