@@ -727,7 +727,7 @@ figure {
 
       .title {
         font-size: var(--font-body);
-        display: inline;
+        display: inline !important;
       }
     }
   }

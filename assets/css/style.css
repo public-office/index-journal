@@ -635,7 +635,7 @@ figure {
     margin-top: 4em; }
     [data-display="issue"] .title-block-issue .title, [data-display="home"] .title-block-issue .title {
       font-size: var(--font-body);
-      display: inline; }
+      display: inline !important; }
 
 [data-display="issue"] .issue-items ul, [data-display="home"] .issue-items ul {
   margin-left: 0; }

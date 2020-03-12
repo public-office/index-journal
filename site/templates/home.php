@@ -16,11 +16,11 @@
           <?= $section->secondary_text()->kirbytext() ?>
 
           <section class="title-block">
-            <h1>Issue No.<?= $home->num() ?> <span class="title"><?= $home->title() ?></span></h1>
+            <span class="title-block-issue">Issue No.<?= $page->num() ?> <span class="title"><?= $page->title() ?></span></span>
             <div class="issue-items">
               <ul>
-                <? if($home->hasChildren()): ?>
-                  <? foreach($home->children()->listed() as $article): ?>
+                <? if($page->hasChildren()): ?>
+                  <? foreach($page->children()->listed() as $article): ?>
                     <li><a href="<?= $article->url() ?>"><span class="title"><?= $article->title() ?></span> by <?= $article->author() ?></a></li>
                   <? endforeach ?>
                 <? endif ?>
