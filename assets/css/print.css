@@ -52,7 +52,7 @@
     -webkit-column-break-inside: avoid;
        -moz-column-break-inside: avoid;
             break-inside: avoid;
-    max-width: 480px; }
+    max-width: 420px; }
   .footnotes {
     -webkit-column-break-before: always;
        -moz-column-break-before: always;
