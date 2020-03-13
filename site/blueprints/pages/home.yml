@@ -19,6 +19,6 @@ fields:
       secondary_text:
         label: Secondary text
         type: textarea
-      option:
-        label: Show/hide
-        type: toggle
+  show_hide:
+    label: Show/hide
+    type: toggle
