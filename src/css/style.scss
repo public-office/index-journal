@@ -537,11 +537,16 @@ section.initial {
 section.call {
   position: relative;
   top: 0;
-  /* padding: 8rem 0; */
   justify-content: center;
   align-items: center;
   background: white;
   height: 100vh;
+
+  p {
+    a {
+      border-bottom: 1px solid;
+    }
+  }
 }
 
 header {
