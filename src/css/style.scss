@@ -745,12 +745,18 @@ figure {
     top: 0.5em; right: 1em;
     font-size: var(--font-body);
     font-family: 'DinSynt';
+    @media (max-width: 670px) {
+      top: 1em;
+    }
     &:hover {
       cursor: pointer;
     }
   }
   img {
     max-height: 74vh;
+    @media (max-width: 670px) {
+      max-height: 35vh;
+    }
   }
 }
 

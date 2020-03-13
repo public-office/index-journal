@@ -666,10 +666,16 @@ figure {
     right: 1em;
     font-size: var(--font-body);
     font-family: 'DinSynt'; }
+    @media (max-width: 670px) {
+      .issue-overlay-close {
+        top: 1em; } }
     .issue-overlay-close:hover {
       cursor: pointer; }
   .issue-overlay img {
     max-height: 74vh; }
+    @media (max-width: 670px) {
+      .issue-overlay img {
+        max-height: 35vh; } }
 
 .abstract-block .abstract-content {
   position: relative;
