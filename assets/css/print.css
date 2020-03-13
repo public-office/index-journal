@@ -40,6 +40,9 @@
       max-width: 80%;
       margin: 0 auto;
       margin-bottom: 2em; }
+  .text-bibliography {
+    margin-left: 1em;
+    overflow: visible; }
   .footnotes ol li, .text-bibliography ul li {
     font-size: 10px !important; }
   .text-bibliography {
