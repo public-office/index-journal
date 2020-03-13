@@ -32,6 +32,7 @@
 
 html {
   font-size: 1.1vw;
+  -webkit-appearance: none;
   @media (max-width: 670px) {
     font-size: 18px;
   }
