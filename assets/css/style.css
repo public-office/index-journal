@@ -253,7 +253,7 @@ main h1 {
     margin-bottom: 0.5em; }
 
 .colophon, .acknowledgement {
-  margin-top: 2.21em; }
+  margin-top: 2.2em; }
 
 .colophon {
   margin-top: 4.4em; }
@@ -318,7 +318,7 @@ main h1 {
         max-width: 85%; } }
     @media (max-width: 670px) {
       .text-block p, .text-block p + p, .text-block h2, .text-block h3 {
-        max-width: 95%; } }
+        max-width: 100%; } }
   .text-block p + p {
     text-indent: 3em;
     margin: 0; }
@@ -328,7 +328,8 @@ main h1 {
     margin: 6em auto; }
     @media (max-width: 960px) {
       .text-block figure {
-        max-width: 85%; } }
+        max-width: 100%;
+        pointer-events: none; } }
     .text-block figure:hover img {
       -webkit-filter: grayscale(0);
               filter: grayscale(0); }
@@ -611,7 +612,9 @@ figure {
           column-count: 3;
   -webkit-column-gap: 40px;
      -moz-column-gap: 40px;
-          column-gap: 40px; }
+          column-gap: 40px;
+  overflow-wrap: break-word;
+  word-wrap: break-word; }
   .text-bibliography ul {
     margin-left: 0;
     margin-top: 0;
@@ -816,10 +819,14 @@ p span {
     -webkit-box-flex: 1;
             flex: 1;
     width: auto; }
+  header h1 nav {
+    display: block; }
+    header h1 nav .title {
+      display: none !important; }
   p, h3 {
     max-width: 90%; }
   figure.wipe {
-    background-size: 30vh; }
+    background-size: 32vh; }
   .pane-inner figure {
     max-width: 58%;
     margin-top: 1rem; }
@@ -839,11 +846,13 @@ p span {
   figcaption {
     font-size: 0.6rem;
     line-height: 1.2;
-    position: fixed;
+    margin-top: 0.75em;
     bottom: 1rem;
     left: 1rem;
     right: 0.5rem;
-    text-align: left; } }
+    text-align: left; }
+  .figure-num {
+    font-size: 0.6rem; } }
 
 h2:last-of-type {
   margin-top: 4em;
@@ -852,6 +861,10 @@ h2:last-of-type {
      -moz-column-break-before: always;
           break-before: always;
   display: none; }
+
+@media (max-width: 480px) {
+  .hide-mobile {
+    display: none; } }
 
 @media print {
   @page {
