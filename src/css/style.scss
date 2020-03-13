@@ -948,8 +948,23 @@ p span {
   }
 }
 @media (max-width: 670px) {
-  p, h1, h3, header h1, header a, ul li, .pane-close, dd, dt , dl {
+  p, h1, h3, header h1, header a, ul li, .pane-close, dd, dt , dl, .text-bios p {
     font-size: 1rem;
+  }
+  .text-bios {
+    margin-left: 0;
+    max-width: 100%;
+    p {
+      padding-right: 0;
+    }
+  }
+  .text-bibliography {
+    column-count: 1;
+    max-width: 100%;
+    margin-left: 1.25em;
+    ul li {
+      font-size: 0.6rem;
+    }
   }
   figcaption {
     font-size: 0.7rem;
