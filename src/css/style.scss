@@ -285,7 +285,7 @@ main h1 {
 }
 
 .colophon, .acknowledgement {
-  margin-top: 2.21em;
+  margin-top: 2.2em;
 }
 .colophon {
   margin-top: 4.4em;
@@ -367,7 +367,7 @@ main h1 {
       max-width: 85%;
     }
     @media(max-width: 670px) {
-      max-width: 95%;
+      max-width: 100%;
     }
   }
   p + p {
@@ -379,7 +379,8 @@ main h1 {
     max-width: 680px;
     margin: 6em auto;
     @media(max-width: 960px) {
-      max-width: 85%;
+      max-width: 100%;
+      pointer-events: none;
     }
     &:hover img {
       filter: grayscale(0);
@@ -554,6 +555,7 @@ header {
       flex: none;
       text-align: left;
       transition: height ease-in-out 0.5s;
+
       &.hover {
         height: auto;
       }
@@ -688,10 +690,9 @@ figure {
   max-width: 72%;
   column-count: 3;
   column-gap: 40px;
-  // &:before {
-  //   content: 'Bibliography';
-  //   font-size: var(--font-small);
-  // }
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
   ul {
     margin-left: 0;
     margin-top: 0;
@@ -955,12 +956,21 @@ p span {
   header nav {
     flex: 1;
     width: auto;
+    @media (max-width: 670px) {
+      // display: none;
+    }
+  }
+  header h1 nav {
+    display: block;
+    .title {
+      display: none !important;
+    }
   }
   p, h3 {
     max-width: 90%;
   }
   figure.wipe {
-    background-size: 30vh;
+    background-size: 32vh;
   }
   .pane-inner figure {
     max-width: 58%;
@@ -987,11 +997,14 @@ p span {
   figcaption {
     font-size: 0.6rem;
     line-height: 1.2;
-    position: fixed;
+    margin-top: 0.75em;
     bottom: 1rem;
     left: 1rem;
     right: 0.5rem;
     text-align: left;
+  }
+  .figure-num {
+    font-size: 0.6rem;
   }
 }
 
@@ -1000,6 +1013,12 @@ h2:last-of-type {
   max-width: 100%;
   break-before: always;
   display: none;
+}
+
+.hide-mobile {
+  @media (max-width: 480px) {
+    display: none;
+  }
 }
 
 @import './print.scss';
