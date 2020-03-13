@@ -30,6 +30,7 @@
 
 html {
   font-size: 1.1vw;
+  -webkit-appearance: none;
   --font-body: 1.8rem;
   --font-mid: 2.8rem;
   --font-icon: 7rem;
