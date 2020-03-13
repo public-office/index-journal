@@ -418,6 +418,8 @@ main h1 {
   column-count: 1;
   max-width: 85%;
   display: none;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
   @media(max-width: 670px) {
     display: block;
   }
@@ -920,6 +922,9 @@ blockquote {
 blockquote {
   & + blockquote {
     margin-top: -2em;
+    @media(max-width: 670px) {
+      margin-top: 0;
+    }
     p {
       text-indent: 2em;
     }

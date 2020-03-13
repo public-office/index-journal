@@ -361,7 +361,9 @@ main h1 {
      -moz-column-count: 1;
           column-count: 1;
   max-width: 85%;
-  display: none; }
+  display: none;
+  overflow-wrap: break-word;
+  word-wrap: break-word; }
   @media (max-width: 670px) {
     .footnotes {
       display: block; } }
@@ -793,6 +795,9 @@ blockquote blockquote .inline-footnotes__container {
 
 blockquote + blockquote {
   margin-top: -2em; }
+  @media (max-width: 670px) {
+    blockquote + blockquote {
+      margin-top: 0; } }
   blockquote + blockquote p {
     text-indent: 2em; }
 
