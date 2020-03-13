@@ -61,14 +61,12 @@
   .text-bibliography {
     margin-left: 1em;
     overflow: visible;
+    column-count: 3;
+    max-width: 100%;
   }
 
   .footnotes ol li, .text-bibliography ul li {
     font-size: 10px !important;
-  }
-
-  .text-bibliography {
-    max-width: 100%;
   }
 
   .pdf {

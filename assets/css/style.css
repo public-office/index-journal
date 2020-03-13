@@ -936,11 +936,13 @@ h2:last-of-type {
       margin-bottom: 2em; }
   .text-bibliography {
     margin-left: 1em;
-    overflow: visible; }
+    overflow: visible;
+    -webkit-column-count: 3;
+       -moz-column-count: 3;
+            column-count: 3;
+    max-width: 100%; }
   .footnotes ol li, .text-bibliography ul li {
     font-size: 10px !important; }
-  .text-bibliography {
-    max-width: 100%; }
   .pdf {
     display: none; }
   sup {
