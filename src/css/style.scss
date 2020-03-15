@@ -1041,10 +1041,14 @@ p span {
 }
 
 h2:last-of-type {
-  margin-top: 4em;
-  max-width: 100%;
-  break-before: always;
-  display: none;
+  // margin-top: 4em;
+  // max-width: 100%;
+  // break-before: always;
+  // display: none;
+}
+
+h2 + h3 {
+  margin-top: -1.1em;
 }
 
 .hide-mobile {
