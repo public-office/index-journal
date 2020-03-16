@@ -1,24 +1,11 @@
 @font-face {
-  font-family: 'KPLSynt';
-  src: url("../fonts/KPLSyntTrial-Headline.woff");
-  font-weight: 400; }
-
-@font-face {
-  font-family: 'KPLSynt';
-  src: url("../fonts/KPLSynt-Regular.woff");
-  font-weight: 300;
+  font-family: 'DinSynt';
+  src: url("../fonts/DinamoSynt-Regular.woff");
   font-style: normal; }
 
 @font-face {
   font-family: 'DinSynt';
-  src: url("../fonts/DinamoSynt-Regular.woff");
-  font-weight: 300;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'KPLSynt';
-  src: url("../fonts/KPLSynt-Italic.woff");
-  font-weight: 300;
+  src: url("../fonts/DinamoSynt-Oblique.woff");
   font-style: italic; }
 
 * {
@@ -45,8 +32,7 @@ html {
       --font-body: 1rem; } }
 
 body {
-  font-family: 'KPLSynt', serif;
-  font-style: 300;
+  font-family: 'DinSynt', serif;
   line-height: 1.15; }
   body .about main {
     margin-top: 6rem;
@@ -126,7 +112,7 @@ header {
     background: white !important;
     box-shadow: 0px 11px 16px 0px white !important; }
   header h1 {
-    font-family: 'KPLSynt', serif;
+    font-family: 'DinSynt', serif;
     font-weight: 400;
     font-size: var(--font-body);
     text-transform: none;
@@ -189,6 +175,8 @@ nav {
           justify-content: flex-end;
   text-transform: uppercase;
   text-align: right; }
+  nav a {
+    font-family: 'DinSynt'; }
 
 a {
   color: black;
@@ -227,7 +215,7 @@ h2 {
   text-indent: 0 !important; }
 
 h3 {
-  /* font-family: 'KPLSynt', serif; */
+  /* font-family: 'DinSynt', serif; */
   text-align: center;
   font-weight: 300; }
 
@@ -273,7 +261,7 @@ main h1 {
   height: 100vh;
   position: relative; }
   .title-block h1 {
-    font-family: 'KPLSynt', serif;
+    font-family: 'DinSynt', serif;
     font-weight: 400;
     margin: 0 auto;
     text-transform: none;
