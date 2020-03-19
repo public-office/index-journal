@@ -270,6 +270,9 @@ main h1 {
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%); }
+    @media (max-height: 860px) {
+      .title-block h1 {
+        font-size: 7vw; } }
 
 .title, .author {
   text-transform: uppercase;
