@@ -161,8 +161,6 @@ h3 + p, p + h3 {
 sup {
   font-size: 0.8rem;
   line-height: 1; }
-  sup + sup {
-    margin-left: -0.25em; }
   @media (max-width: 670px) {
     sup {
       font-size: 0.5rem; } }
@@ -249,11 +247,18 @@ main h1 {
 
 .essay-extra {
   font-size: var(--font-body);
+  padding: 0.5em;
+  padding-top: 4em; }
+
+.pdf {
+  font-size: var(--font-body);
   display: block;
-  margin-top: 2em; }
-  .essay-extra span a:hover {
+  position: absolute;
+  top: 1em;
+  left: 2.25em; }
+  .pdf span a:hover {
     border-bottom: 1px solid; }
-  .essay-extra span:nth-of-type(2):before {
+  .pdf span:nth-of-type(2):before {
     content: ', '; }
 
 .title-block {
@@ -298,7 +303,8 @@ main h1 {
       max-width: 85%; } }
 
 .text-block {
-  padding: 6.6em 4em; }
+  padding: 6.6em 4em;
+  position: relative; }
   .text-block .title {
     margin-bottom: 0.5em; }
   .text-block h2 {
@@ -632,7 +638,6 @@ figure {
     position: relative;
     font-family: 'DinSynt';
     font-size: 1.4rem;
-    padding-right: 4em;
     max-width: 100%; }
     .text-bios p a {
       border-bottom: 1px solid; }
@@ -675,7 +680,6 @@ figure {
 .abstract-block .abstract-content {
   position: relative;
   font-family: 'DinSynt';
-  padding-right: 4em;
   margin-bottom: 3.3em;
   margin-top: 1em;
   margin-left: 5.5em;
@@ -750,6 +754,12 @@ figure {
 .inline-footnote {
   overflow-wrap: break-word;
   word-wrap: break-word; }
+  .inline-footnote p {
+    font-size: var(--font-small);
+    max-width: 100%;
+    text-indent: 0; }
+    .inline-footnote p + p {
+      text-indent: 0; }
 
 .inline-footnote__num {
   display: block;

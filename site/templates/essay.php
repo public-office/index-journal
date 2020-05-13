@@ -8,7 +8,7 @@
       </h1>
     </section>
     <div class="text-block">
-
+      <? if($page->slug() != 'introduction'): ?><? if($page->hasDocuments()): ?><span class="pdf">(<a href="<?= $page->documents()->first()->url() ?>" target="_blank">PDF</a>)</span><? endif ?></span><? endif ?>
       <? if($page->abstract()->isNotEmpty()): ?>
         <div class="abstract-block">
           <div class="abstract-content">
@@ -25,10 +25,8 @@
       <div class="text-bibliography">
           <?= smartypants($page->bibilography()->kirbytext()) ?>
       </div>
-
-      <? if($page->slug() != 'introduction'): ?><span class="essay-extra">(<? if($page->doi()->isNotEmpty()): ?><span class="doi">DOI: <a href="https://doi.org/<?= $page->doi() ?>"><?= $page->doi() ?></span></a><? endif ?><? if($page->hasDocuments()): ?><span class="pdf"><a href="<?= $page->documents()->first()->url() ?>" target="_blank">PDF</a></span><? endif ?>)</span><? endif ?>
     </div>
-
+    <? if($page->slug() != 'introduction'): ?><span class="essay-extra">(<? if($page->doi()->isNotEmpty()): ?><span class="doi"><a href="<?= $page->doi() ?>"><?= $page->doi() ?></a>)</span><? endif ?><? endif ?>
   </main>
 </body>
 </html>
