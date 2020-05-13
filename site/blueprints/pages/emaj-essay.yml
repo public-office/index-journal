@@ -1,0 +1,22 @@
+title: EMAJ Essay
+preset: page
+pages: false
+files: true
+fields:
+  subtitle:
+    label: Subtitle
+    type: text
+  author:
+    label: Author
+    type: text
+    width: 1/2
+  doi:
+    label: DOI
+    type: text
+    width: 1/2
+  abstract:
+    label: Abstract
+    type: textarea
+  bios:
+    label: Bio/s
+    type: textarea

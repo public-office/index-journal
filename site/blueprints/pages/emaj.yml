@@ -1,0 +1,7 @@
+title: Issues
+sections:
+  published:
+    headline: Issues
+    type: pages
+    status: all
+    templates: emaj-issue

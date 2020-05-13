@@ -1,0 +1,7 @@
+title: EMAJ Issue
+sections:
+  published:
+    headline: Essays
+    type: pages
+    status: all
+    templates: emaj-essay
