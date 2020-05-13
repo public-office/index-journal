@@ -47,7 +47,7 @@ $(document).ready(function () {
 
   $('.footnotes li').each(function() {
     var n = $(this).index() + 1
-    var fnhtml = $(this).text()
+    var fnhtml = $(this).html()
     var $fn = $(this).html(fnhtml)
     var $ref = $('a[href="#'+$fn.attr('id')+'"]')
 
