@@ -384,16 +384,22 @@ main h1 {
     font-size: var(--font-body);
     margin: 6em auto 4em;
     max-width: 55%; }
+    @media (max-width: 670px) {
+      [data-template="emaj-essay"] h1 {
+        max-width: 85%; } }
   [data-template="emaj-essay"] .title-block {
     height: auto; }
-  [data-template="emaj-essay"] .abstract-content {
-    max-width: 65%; }
   [data-template="emaj-essay"] .title {
     margin: 0; }
   [data-template="emaj-essay"] .shadow {
     display: none !important; }
   [data-template="emaj-essay"] .abstract-content {
+    max-width: 65% !important;
     margin-bottom: 1em !important; }
+    @media (max-width: 670px) {
+      [data-template="emaj-essay"] .abstract-content {
+        max-width: 100% !important;
+        padding-right: 0 !important; } }
     @media (max-width: 670px) {
       [data-template="emaj-essay"] .abstract-content p {
         font-size: 1rem !important; } }
