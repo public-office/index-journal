@@ -5,7 +5,7 @@
       <?= $page->intro()->kirbytext() ?>
     </div>
     <ul>
-      <? foreach(page('emaj')->children() as $issue): ?>
+      <? foreach(page('emaj')->children()->listed() as $issue): ?>
         <div class="issue-items">
           <li><?= $issue->title() ?>
             <ul>
