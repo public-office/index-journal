@@ -42,14 +42,6 @@ body {
 .hide {
   display: none; }
 
-img {
-  opacity: 0;
-  -webkit-transition: opacity 0.35s ease-in;
-  transition: opacity 0.35s ease-in; }
-
-img.loaded {
-  opacity: 1; }
-
 em, i {
   font-style: italic;
   font-style: 300; }
@@ -953,6 +945,14 @@ h2 + h3 {
 @media (max-width: 480px) {
   .hide-mobile {
     display: none; } }
+
+figure {
+  opacity: 0;
+  -webkit-transition: opacity 0.35s ease-in;
+  transition: opacity 0.35s ease-in; }
+
+figure.loaded {
+  opacity: 1; }
 
 @media print {
   @page {
