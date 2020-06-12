@@ -458,10 +458,16 @@ main h1 {
   .abstract {
     &-content {
       margin-bottom: 1em !important;
+      p {
+        @media (max-width: 670px) {
+          font-size: 1rem !important;
+        }
+      }
     }
     &.hidden {
       max-height: 100% !important;
     }
+
   }
   .text-block {
     padding-top: 0;
@@ -469,6 +475,10 @@ main h1 {
   .text-bios {
     margin-left: 12em;
     max-width: 45%;
+    @media (max-width: 670px) {
+      margin-left: 4em;
+      max-width: 100%;
+    }
     em {
       font-style: normal;
     }
@@ -485,6 +495,9 @@ main h1 {
 [data-template="emaj"] {
   margin: 6.6em auto;
   max-width: 55%;
+  @media (max-width: 670px) {
+    max-width: 100%;
+  }
   .authors {
     text-transform: none;
   }
@@ -492,6 +505,9 @@ main h1 {
     margin: 1em;
 
     p {
+      @media (max-width: 670px) {
+        max-width: 100%;
+      }
       & + p {
         text-indent: 2em;
         margin-top: 0;
@@ -1074,10 +1090,10 @@ p span {
   header h1 {
     flex: 1.5;
     line-height: 1.2;
-    flex: 8;
+    flex: 6;
   }
   header nav {
-    flex: 1;
+    flex: 4;
     width: auto;
     @media (max-width: 670px) {
       // display: none;
