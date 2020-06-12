@@ -48,6 +48,14 @@ body {
   display: none;
 }
 
+img {
+  opacity: 0;
+  transition: opacity 0.35s ease-in;
+}
+img.loaded {
+  opacity: 1;
+}
+
 em, i {
   font-style: italic;
   font-style: 300;
@@ -320,7 +328,7 @@ main h1 {
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     @media(max-height: 860px) {
-      font-size: 7vw;
+      font-size: 6.7vw;
     }
   }
 }
@@ -437,6 +445,89 @@ main h1 {
 
 [data-template="about"] .text-block {
   padding-bottom: 8em;
+}
+
+[data-template="emaj-essay"] {
+  margin-top: 6.6em;
+  h1 {
+    font-size: var(--font-body);
+    margin: 6em auto 4em;
+    max-width: 55%;
+  }
+  .title-block {
+    height: auto;
+  }
+  .title {
+    margin: 0;
+  }
+  .shadow {
+    display: none;
+  }
+  .abstract {
+    &-content {
+      margin-bottom: 1em !important;
+    }
+    &.hidden {
+      max-height: 100% !important;
+    }
+  }
+  .text-block {
+    padding-top: 0;
+  }
+  .text-bios {
+    margin-left: 12em;
+    max-width: 45%;
+    em {
+      font-style: normal;
+    }
+  }
+  .pdf {
+    display: inline;
+    position: static;
+    &:before {
+      content: ', ';
+    }
+  }
+}
+
+[data-template="emaj"] {
+  margin: 6.6em auto;
+  max-width: 55%;
+  .authors {
+    text-transform: none;
+  }
+  .introduction {
+    margin: 1em;
+
+    p {
+      & + p {
+        text-indent: 2em;
+        margin-top: 0;
+      }
+    }
+    hr {
+      display: block;
+      border: 0;
+      height: 1em;
+      break-after: always;
+    }
+  }
+  ul {
+    margin-left: 1em;
+    li {
+      text-align: center;
+      ul {
+        margin: 1em 0;
+        // display: none;
+        li {
+          text-align: left;
+          text-indent: -2em;
+          margin-left: 2em;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
 }
 
 

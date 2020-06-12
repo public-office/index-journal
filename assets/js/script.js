@@ -10,7 +10,20 @@ window.addEventListener('scroll', function() {
   if($initial) $initial.style.transform = 'translateY('+(0-d)+'px)'
 })
 
+function loadImages() {
+  $('img, figure').imagesLoaded({ background: true })
+  .progress( function( instance, image ) {
+    console.log()
+    $(image.element || image.img).addClass('loaded');
+  })
+}
+
 $(document).ready(function () {
+  loadImages()
+  setTimeout(function() {
+    $('body').addClass('ready');
+  }, 1000);
+
   $('header h1 nav').hover(
     function(){ $(this).addClass('hover') },
     function(){ $(this).removeClass('hover') }
