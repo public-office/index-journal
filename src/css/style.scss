@@ -445,12 +445,12 @@ main h1 {
     font-size: var(--font-body);
     margin: 6em auto 4em;
     max-width: 55%;
+    @media (max-width: 670px) {
+      max-width: 85%;
+    }
   }
   .title-block {
     height: auto;
-  }
-  .abstract-content  {
-    max-width: 65%;
   }
   .title {
     margin: 0;
@@ -460,7 +460,12 @@ main h1 {
   }
   .abstract {
     &-content {
+      max-width: 65% !important;
       margin-bottom: 1em !important;
+      @media (max-width: 670px) {
+        max-width: 100% !important;
+        padding-right: 0 !important;
+      }
       p {
         @media (max-width: 670px) {
           font-size: 1rem !important;
