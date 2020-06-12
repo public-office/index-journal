@@ -1173,6 +1173,28 @@ h2 + h3 {
   }
 }
 
+input {
+  width: 100%;
+  max-width: 480px;
+  border: none;
+  outline: none;
+  font-family: 'DinSynt';
+  font-size: var(--font-body);
+  line-height: 1.1;
+  &.button {
+    background: white;
+    text-align: left;
+    border-bottom: 1px solid;
+    display: inline-block;
+    width: auto;
+    line-height: 1;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.25;
+    }
+  }
+}
+
 figure {
   opacity: 0;
   transition: opacity 0.35s ease-in;

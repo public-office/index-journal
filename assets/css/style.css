@@ -968,6 +968,25 @@ h2 + h3 {
   .hide-mobile {
     display: none; } }
 
+input {
+  width: 100%;
+  max-width: 480px;
+  border: none;
+  outline: none;
+  font-family: 'DinSynt';
+  font-size: var(--font-body);
+  line-height: 1.1; }
+  input.button {
+    background: white;
+    text-align: left;
+    border-bottom: 1px solid;
+    display: inline-block;
+    width: auto;
+    line-height: 1; }
+    input.button:hover {
+      cursor: pointer;
+      opacity: 0.25; }
+
 figure {
   opacity: 0;
   -webkit-transition: opacity 0.35s ease-in;
