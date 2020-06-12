@@ -1,12 +1,12 @@
 <? snippet('header') ?>
 
   <main data-template="<?= $page->template() ?>">
-    <section class="title-block" style="background-color: rgb(<?= $page->parent()->issue_color() ?>)">
+
       <h1><span class="title"><?= $page->title() ?></span>
         <? if($page->subtitle()->isNotEmpty()): ?><span class="subtitle"><?= smartypants($page->subtitle()->kti()) ?></span><? endif ?>
         <? if($page->slug() != 'introduction'): ?><span class="author">by <?= $page->author() ?></span><? endif ?>
       </h1>
-    </section>
+  
     <div class="text-block">
 
       <? if($page->abstract()->isNotEmpty()): ?>

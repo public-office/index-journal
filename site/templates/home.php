@@ -19,7 +19,6 @@
       </div>
     <? endforeach ?>
   <? else: ?>
-  'FALSE!'
   <? foreach(page('issues')->children()->listed()->flip()->limit(1) as $home): ?>
     <? $sections = $home->cfp_builder()->toStructure() ?>
     <? foreach($sections as $section): ?>

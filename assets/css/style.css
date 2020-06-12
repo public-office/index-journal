@@ -42,6 +42,14 @@ body {
 .hide {
   display: none; }
 
+img {
+  opacity: 0;
+  -webkit-transition: opacity 0.35s ease-in;
+  transition: opacity 0.35s ease-in; }
+
+img.loaded {
+  opacity: 1; }
+
 em, i {
   font-style: italic;
   font-style: 300; }
@@ -277,7 +285,7 @@ main h1 {
             transform: translate(-50%, -50%); }
     @media (max-height: 860px) {
       .title-block h1 {
-        font-size: 7vw; } }
+        font-size: 6.7vw; } }
 
 .title, .author {
   text-transform: uppercase;
@@ -377,6 +385,64 @@ main h1 {
 
 [data-template="about"] .text-block {
   padding-bottom: 8em; }
+
+[data-template="emaj-essay"] {
+  margin-top: 6.6em; }
+  [data-template="emaj-essay"] h1 {
+    font-size: var(--font-body);
+    margin: 6em auto 4em;
+    max-width: 55%; }
+  [data-template="emaj-essay"] .title-block {
+    height: auto; }
+  [data-template="emaj-essay"] .title {
+    margin: 0; }
+  [data-template="emaj-essay"] .shadow {
+    display: none; }
+  [data-template="emaj-essay"] .abstract-content {
+    margin-bottom: 1em !important; }
+  [data-template="emaj-essay"] .abstract.hidden {
+    max-height: 100% !important; }
+  [data-template="emaj-essay"] .text-block {
+    padding-top: 0; }
+  [data-template="emaj-essay"] .text-bios {
+    margin-left: 12em;
+    max-width: 45%; }
+    [data-template="emaj-essay"] .text-bios em {
+      font-style: normal; }
+  [data-template="emaj-essay"] .pdf {
+    display: inline;
+    position: static; }
+    [data-template="emaj-essay"] .pdf:before {
+      content: ', '; }
+
+[data-template="emaj"] {
+  margin: 6.6em auto;
+  max-width: 55%; }
+  [data-template="emaj"] .authors {
+    text-transform: none; }
+  [data-template="emaj"] .introduction {
+    margin: 1em; }
+    [data-template="emaj"] .introduction p + p {
+      text-indent: 2em;
+      margin-top: 0; }
+    [data-template="emaj"] .introduction hr {
+      display: block;
+      border: 0;
+      height: 1em;
+      -webkit-column-break-after: always;
+         -moz-column-break-after: always;
+              break-after: always; }
+  [data-template="emaj"] ul {
+    margin-left: 1em; }
+    [data-template="emaj"] ul li {
+      text-align: center; }
+      [data-template="emaj"] ul li ul {
+        margin: 1em 0; }
+        [data-template="emaj"] ul li ul li {
+          text-align: left;
+          text-indent: -2em;
+          margin-left: 2em;
+          margin-bottom: 0; }
 
 dl {
   font-family: 'DinSynt';
