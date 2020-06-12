@@ -449,11 +449,14 @@ main h1 {
   .title-block {
     height: auto;
   }
+  .abstract-content  {
+    max-width: 65%;
+  }
   .title {
     margin: 0;
   }
   .shadow {
-    display: none;
+    display: none !important;
   }
   .abstract {
     &-content {

@@ -386,10 +386,12 @@ main h1 {
     max-width: 55%; }
   [data-template="emaj-essay"] .title-block {
     height: auto; }
+  [data-template="emaj-essay"] .abstract-content {
+    max-width: 65%; }
   [data-template="emaj-essay"] .title {
     margin: 0; }
   [data-template="emaj-essay"] .shadow {
-    display: none; }
+    display: none !important; }
   [data-template="emaj-essay"] .abstract-content {
     margin-bottom: 1em !important; }
     @media (max-width: 670px) {
@@ -438,7 +440,8 @@ main h1 {
          -moz-column-break-after: always;
               break-after: always; }
   [data-template="emaj"] ul {
-    margin-left: 1em; }
+    margin-left: 1em;
+    margin-top: 2em; }
     [data-template="emaj"] ul li {
       text-align: center; }
       [data-template="emaj"] ul li ul {
