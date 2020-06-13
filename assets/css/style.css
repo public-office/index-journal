@@ -987,12 +987,12 @@ input {
       cursor: pointer;
       opacity: 0.25; }
 
-figure {
+img, .wipe {
   opacity: 0;
   -webkit-transition: opacity 0.35s ease-in;
   transition: opacity 0.35s ease-in; }
 
-figure.loaded {
+img.loaded, .wipe.loaded {
   opacity: 1; }
 
 @media print {
