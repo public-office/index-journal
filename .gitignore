@@ -9,6 +9,8 @@ Icon
 
 /media/*
 !/media/index.html
+*.zip
+/content/*
 
 # -------------SECURITY-------------
 # NEVER publish these files via Git!
@@ -35,7 +37,5 @@ Icon
 # License
 # ---------------
 /site/config/.license
-
-/content
 
 node_modules
