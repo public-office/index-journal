@@ -7,6 +7,14 @@ sections:
       intro:
         label: Introduction
         type: textarea
+      doi:
+        label: DOI
+        type: url
+        width: 1/2
+      issn:
+        label: ISSN
+        type: text
+        width: 1/2
   published:
     headline: Issues
     type: pages

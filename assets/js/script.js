@@ -11,7 +11,7 @@ window.addEventListener('scroll', function() {
 })
 
 function loadImages() {
-  $('img, figure').imagesLoaded({ background: true })
+  $('figure, figure > img').imagesLoaded({ background: true })
   .progress( function( instance, image ) {
     console.log()
     $(image.element || image.img).addClass('loaded');

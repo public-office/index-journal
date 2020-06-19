@@ -500,7 +500,17 @@ main h1 {
   }
 }
 
-[data-template="emaj"] {
+[data-display="emaj"] {
+  .introduction {
+    margin: 1em;
+    padding: 0 4em;
+    padding-top: 8em;
+    max-width: 72%;
+  }
+
+}
+
+[data-template="emaj"], [data-template="emaj-issue"] {
   margin: 6.6em auto;
   max-width: 55%;
   @media (max-width: 670px) {
@@ -512,6 +522,61 @@ main h1 {
   .introduction {
     margin: 1em;
 
+    figure {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      margin-bottom: 3.3em;
+      div {
+        width: 23rem;
+        height: 34rem;
+        background: white;
+        border: 1px solid;
+        color: #272727;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--font-body);
+      }
+      img {
+        max-width: 50%;
+      }
+    }
+    .header {
+      position: relative;
+      margin-bottom: 1.8em;
+      h2 {
+        position: absolute;
+        top: 0;
+        margin: 0;
+        text-align: center;
+        display: block;
+        width: 100%;
+        z-index: 0;
+
+      }
+      a {
+        margin: 0;
+        font-size: var(--font-body);
+        text-transform: none;
+        position: relative;
+        z-index: 10;
+        opacity: 0;
+      }
+    }
+    h2 {
+      & + .details {
+        // margin-top: -2.2em;
+      }
+    }
+    .details {
+      p {
+        & + p {
+          text-indent: 0;
+        }
+      }
+    }
     p {
       @media (max-width: 670px) {
         max-width: 100%;
@@ -526,6 +591,9 @@ main h1 {
       border: 0;
       height: 1em;
       break-after: always;
+    }
+    h2 {
+      font-size: var(--font-body);
     }
   }
   ul {
@@ -542,6 +610,13 @@ main h1 {
           margin-left: 2em;
           margin-bottom: 0;
         }
+      }
+    }
+    &.articles {
+      li {
+        text-align: left;
+        text-indent: -2em;
+        margin-left: 2em;
       }
     }
   }
@@ -1195,11 +1270,11 @@ input {
   }
 }
 
-figure {
+figure, figure > img {
   opacity: 0;
   transition: opacity 0.35s ease-in;
 }
-figure.loaded {
+figure.loaded, figure > img.loaded {
   opacity: 1;
 }
 

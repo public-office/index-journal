@@ -422,41 +422,97 @@ main h1 {
     [data-template="emaj-essay"] .pdf:before {
       content: ', '; }
 
-[data-template="emaj"] {
+[data-display="emaj"] .introduction {
+  margin: 1em;
+  padding: 0 4em;
+  padding-top: 8em;
+  max-width: 72%; }
+
+[data-template="emaj"], [data-template="emaj-issue"] {
   margin: 6.6em auto;
   max-width: 55%; }
   @media (max-width: 670px) {
-    [data-template="emaj"] {
+    [data-template="emaj"], [data-template="emaj-issue"] {
       max-width: 100%; } }
-  [data-template="emaj"] .authors {
+  [data-template="emaj"] .authors, [data-template="emaj-issue"] .authors {
     text-transform: none; }
-  [data-template="emaj"] .introduction {
+  [data-template="emaj"] .introduction, [data-template="emaj-issue"] .introduction {
     margin: 1em; }
+    [data-template="emaj"] .introduction figure, [data-template="emaj-issue"] .introduction figure {
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+              justify-content: center;
+      opacity: 1;
+      margin-bottom: 3.3em; }
+      [data-template="emaj"] .introduction figure div, [data-template="emaj-issue"] .introduction figure div {
+        width: 23rem;
+        height: 34rem;
+        background: white;
+        border: 1px solid;
+        color: #272727;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+                justify-content: center;
+        font-size: var(--font-body); }
+      [data-template="emaj"] .introduction figure img, [data-template="emaj-issue"] .introduction figure img {
+        max-width: 50%; }
+    [data-template="emaj"] .introduction .header, [data-template="emaj-issue"] .introduction .header {
+      position: relative;
+      margin-bottom: 1.8em; }
+      [data-template="emaj"] .introduction .header h2, [data-template="emaj-issue"] .introduction .header h2 {
+        position: absolute;
+        top: 0;
+        margin: 0;
+        text-align: center;
+        display: block;
+        width: 100%;
+        z-index: 0; }
+      [data-template="emaj"] .introduction .header a, [data-template="emaj-issue"] .introduction .header a {
+        margin: 0;
+        font-size: var(--font-body);
+        text-transform: none;
+        position: relative;
+        z-index: 10;
+        opacity: 0; }
+    [data-template="emaj"] .introduction .details p + p, [data-template="emaj-issue"] .introduction .details p + p {
+      text-indent: 0; }
     @media (max-width: 670px) {
-      [data-template="emaj"] .introduction p {
+      [data-template="emaj"] .introduction p, [data-template="emaj-issue"] .introduction p {
         max-width: 100%; } }
-    [data-template="emaj"] .introduction p + p {
+    [data-template="emaj"] .introduction p + p, [data-template="emaj-issue"] .introduction p + p {
       text-indent: 2em;
       margin-top: 0; }
-    [data-template="emaj"] .introduction hr {
+    [data-template="emaj"] .introduction hr, [data-template="emaj-issue"] .introduction hr {
       display: block;
       border: 0;
       height: 1em;
       -webkit-column-break-after: always;
          -moz-column-break-after: always;
               break-after: always; }
-  [data-template="emaj"] ul {
+    [data-template="emaj"] .introduction h2, [data-template="emaj-issue"] .introduction h2 {
+      font-size: var(--font-body); }
+  [data-template="emaj"] ul, [data-template="emaj-issue"] ul {
     margin-left: 1em;
     margin-top: 2em; }
-    [data-template="emaj"] ul li {
+    [data-template="emaj"] ul li, [data-template="emaj-issue"] ul li {
       text-align: center; }
-      [data-template="emaj"] ul li ul {
+      [data-template="emaj"] ul li ul, [data-template="emaj-issue"] ul li ul {
         margin: 1em 0; }
-        [data-template="emaj"] ul li ul li {
+        [data-template="emaj"] ul li ul li, [data-template="emaj-issue"] ul li ul li {
           text-align: left;
           text-indent: -2em;
           margin-left: 2em;
           margin-bottom: 0; }
+    [data-template="emaj"] ul.articles li, [data-template="emaj-issue"] ul.articles li {
+      text-align: left;
+      text-indent: -2em;
+      margin-left: 2em; }
 
 dl {
   font-family: 'DinSynt';
@@ -987,12 +1043,12 @@ input {
       cursor: pointer;
       opacity: 0.25; }
 
-figure {
+figure, figure > img {
   opacity: 0;
   -webkit-transition: opacity 0.35s ease-in;
   transition: opacity 0.35s ease-in; }
 
-figure.loaded {
+figure.loaded, figure > img.loaded {
   opacity: 1; }
 
 @media print {

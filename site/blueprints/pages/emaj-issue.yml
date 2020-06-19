@@ -1,5 +1,12 @@
 title: EMAJ Issue
 sections:
+  details:
+    headline: Details
+    type: fields
+    fields:
+      editors:
+        label: Editors
+        type: text
   published:
     headline: Essays
     type: pages
