@@ -951,49 +951,48 @@ figure {
   }
 }
 
-.abstract-block {
-
-
-  .abstract-content {
-    position: relative;
-    font-family: 'DinSynt';
-    // padding-right: 4em;
-    margin-bottom: 3.3em;
-    margin-top: 1em;
-    margin-left: 5.5em;
-    max-width: 55%;
-    .shadow {
-      box-shadow: inset 0px -20px 20px 0px rgba(255, 255, 255, 1);
-      height: 6.5em;
-      width: 100%;
-      z-index: 100;
-      position:absolute;
-      pointer-events: none;
-    }
-    &:hover {
-      cursor: pointer;
-    }
-    @media (max-width: 670px) {
-      margin-left: 0;
-      max-width: 100%;
-      padding-right: 1em;
-    }
-    .abstract {
-      &.hidden {
-        max-height: 6.5em;
-        overflow: hidden;
-        z-index: 0;
+.abstract {
+  &-block {
+    .abstract-content {
+      position: relative;
+      font-family: 'DinSynt';
+      margin-bottom: 3.3em;
+      margin-top: 1em;
+      margin-left: 5.5em;
+      max-width: 55%;
+      .shadow {
+        box-shadow: inset 0px -20px 20px 0px rgba(255, 255, 255, 1);
+        height: 6.5em;
+        width: 100%;
+        z-index: 100;
+        position:absolute;
+        pointer-events: none;
       }
-    }
-    p {
-      max-width: 100%;
-      font-size: 1.4rem;
-
+      &:hover {
+        cursor: pointer;
+      }
       @media (max-width: 670px) {
-        font-size: 0.8rem;
+        margin-left: 0;
+        max-width: 100%;
+        padding-right: 1em;
       }
-      & + p {
-        // text-indent: 0 !important;
+      .abstract {
+        &.hidden {
+          max-height: 6.5em;
+          overflow: hidden;
+          z-index: 0;
+        }
+      }
+      p {
+        max-width: 100%;
+        font-size: 1.4rem;
+
+        @media (max-width: 670px) {
+          font-size: 0.8rem;
+        }
+        & + p {
+          // text-indent: 0 !important;
+        }
       }
     }
   }
@@ -1058,7 +1057,6 @@ figure {
 }
 
 .inline-footnote {
-  // hyphens: auto;
   overflow-wrap: break-word;
   word-wrap: break-word;
   p {
@@ -1179,9 +1177,6 @@ p span {
   header nav {
     flex: 4;
     width: auto;
-    @media (max-width: 670px) {
-      // display: none;
-    }
   }
   header h1 nav {
     display: block;
@@ -1229,13 +1224,6 @@ p span {
   .figure-num {
     font-size: 0.6rem;
   }
-}
-
-h2:last-of-type {
-  // margin-top: 4em;
-  // max-width: 100%;
-  // break-before: always;
-  // display: none;
 }
 
 h2 + h3 {
