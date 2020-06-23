@@ -122,6 +122,9 @@ header {
   background: transparent;
   box-shadow: none; }
 
+[data-display="essay"] figure {
+  opacity: 1 !important; }
+
 @media (max-width: 670px) {
   dl {
     margin-bottom: 1.1em; }
@@ -450,9 +453,8 @@ main h1 {
       [data-template="emaj"] .introduction figure div, [data-template="emaj-issue"] .introduction figure div {
         width: 23rem;
         height: 34rem;
-        background: white;
-        border: 1px solid;
-        color: #272727;
+        background: #272727;
+        color: white;
         display: -webkit-box;
         display: flex;
         -webkit-box-align: center;

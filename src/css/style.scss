@@ -135,6 +135,9 @@ header {
     background: transparent;
     box-shadow: none;
   }
+  figure {
+    opacity: 1 !important;
+  }
 }
 
 @media (max-width: 670px) {
@@ -531,9 +534,9 @@ main h1 {
       div {
         width: 23rem;
         height: 34rem;
-        background: white;
-        border: 1px solid;
-        color: #272727;
+        background: #272727;
+        // border: 1px solid;
+        color: white;
         display: flex;
         align-items: center;
         justify-content: center;
