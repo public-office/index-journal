@@ -36,6 +36,7 @@ html {
 
 body {
   font-family: 'DinSynt', serif;
+  font-variant-ligatures: none;
   line-height: 1.15;
   .about main {
     margin-top: 6rem;
@@ -430,10 +431,9 @@ main h1 {
     display: none;
   }
   ol li {
-    font-size: 1.1rem;
     break-inside: avoid;
-    @media(max-width: 960px) {
-      font-size: 0.6rem;
+    p {
+      font-size: var(--font-small);
     }
   }
 }
@@ -509,6 +509,16 @@ main h1 {
     padding: 0 4em;
     padding-top: 8em;
     max-width: 72%;
+    p {
+      @media(max-width: 670px) {
+        max-width: 100%;
+      }
+    }
+    @media(max-width: 670px) {
+      padding: 0;
+      padding-top: 8em;
+      max-width: 100%;
+    }
   }
 
 }
@@ -541,6 +551,10 @@ main h1 {
         align-items: center;
         justify-content: center;
         font-size: var(--font-body);
+        @media(max-width: 670px) {
+          width: 70%;
+          height: 26rem;
+        }
       }
       img {
         max-width: 50%;
@@ -613,6 +627,12 @@ main h1 {
           margin-left: 2em;
           margin-bottom: 0;
         }
+      }
+    }
+    & + p {
+      @media(max-width: 670px) {
+        margin-left: 1.5em;
+        max-width: 100%;
       }
     }
     &.articles {
@@ -888,7 +908,7 @@ figure {
   word-wrap: break-word;
 
   ul {
-    margin-left: 0;
+    margin-left: 1.5em;
     margin-top: 0;
     margin-right: 4px;
     li {
@@ -903,7 +923,7 @@ figure {
 }
 
 .text-bios {
-  margin-top: 1.1em;
+  margin-top: 2.2em;
   margin-left: 5.5em;
   max-width: 50%;
   margin-bottom: 4.4em;
@@ -1163,9 +1183,9 @@ p span {
   .text-bibliography {
     column-count: 1;
     max-width: 100%;
-    margin-left: 1.25em;
+    margin-left: 0;
     ul li {
-      font-size: 0.6rem;
+      // font-size: 0.6rem;
     }
   }
   figcaption {

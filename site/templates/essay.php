@@ -19,12 +19,17 @@
       <? endif ?>
 
       <?= smartypants($page->text()->kirbytext()) ?>
+
       <div class="text-bios">
-          <?= smartypants($page->bios()->kirbytext()) ?>
+        <?= smartypants($page->bios()->kirbytext()) ?>
       </div>
-      <div class="text-bibliography">
+      
+      <? if($page->bibilography()->isNotEmpty()): ?>
+        <p style="font-size: var(--font-small); text-indent: 0; text-transform: uppercase; margin-bottom: 1em;">Bibliography</p>
+        <div class="text-bibliography">
           <?= smartypants($page->bibilography()->kirbytext()) ?>
-      </div>
+        </div>
+      <? endif ?>
     </div>
     <? if($page->slug() != 'introduction'): ?><span class="essay-extra">(<? if($page->doi()->isNotEmpty()): ?><span class="doi"><a href="<?= $page->doi() ?>"><?= $page->doi() ?></a>)</span><? endif ?><? endif ?>
   </main>
