@@ -180,6 +180,8 @@ nav {
   text-align: right; }
   nav a {
     font-family: 'DinSynt'; }
+    nav a span {
+      text-transform: none; }
 
 a {
   color: black;

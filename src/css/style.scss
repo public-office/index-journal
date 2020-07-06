@@ -199,6 +199,9 @@ nav {
   text-align: right;
   a {
     font-family: 'DinSynt';
+    span {
+      text-transform: none;
+    }
   }
 }
 
@@ -545,7 +548,6 @@ main h1 {
         width: 23rem;
         height: 34rem;
         background: #272727;
-        // border: 1px solid;
         color: white;
         display: flex;
         align-items: center;
