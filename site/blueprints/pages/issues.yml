@@ -4,4 +4,4 @@ sections:
     headline: Published Issues
     type: pages
     status: all
-    templates: issue
+#    templates: issue
