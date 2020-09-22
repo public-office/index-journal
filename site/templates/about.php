@@ -11,7 +11,7 @@
       </div>
       <div class="acknowledgement">
         <?= $page->acknowledgement()->kirbytext() ?>
-      </div>
+      </div> 
     </div>
   </main>
 </body>
