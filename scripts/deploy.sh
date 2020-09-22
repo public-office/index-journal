@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 USER=root
-HOST=public-office.info
+HOST=128.199.108.233
 WEBROOT=/var/www/index-journal.org
 
 ssh $USER@$HOST /bin/bash <<EOF
