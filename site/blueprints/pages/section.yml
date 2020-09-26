@@ -1,0 +1,18 @@
+title: Section
+sections:
+
+  issue_cover:
+    headline: Issue cover image
+    type: fields
+    fields:
+      issue_color:
+        label: Issue color
+        type: text
+        width: 1/2
+        
+  published:
+    headline: Essay in Section
+    type: pages
+    status: all
+    templates: 
+      - essay

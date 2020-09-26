@@ -39,16 +39,25 @@ sections:
     headline: Type
     type: fields
     fields:
+      issue_pdf:
+        label: Issue PDF
+        type: files
       issue_type:
         label: Issue type
         type: radio
-        columns: 2
+        columns: 3
         options:
           archive: Archive
           current: Current
 
   published:
-    headline: Essays
+    headline: Essays / Sections
     type: pages
     status: all
-    templates: essay
+    templates: 
+      - essay
+      - section
+
+
+      
+  

@@ -269,6 +269,8 @@ blockquote {
   }
 }
 main h1 {
+//  font-size: 8vw;
+  //PARIS ADJUSTMENT TO STOP OVERFLOW
   font-size: 8vw;
   font-weight: 300;
   line-height: 0.85;
@@ -280,7 +282,11 @@ main h1 {
   &:not(:last-of-type) {
     margin-bottom: 0.5em;
   }
+
+ 
 }
+
+
 
 .colophon, .acknowledgement {
   margin-top: 2.2em;
@@ -1030,7 +1036,7 @@ figure {
   }
   .title-block {
     background: white;
-    max-width: 72%;
+    max-width: 55%;
     margin: 0 auto;
     padding-top: 0 !important;
     @media (max-width: 670px) {
@@ -1047,6 +1053,18 @@ figure {
       .title {
         font-size: var(--font-body);
         display: inline !important;
+      }
+    }
+    
+    &-section {
+      font-size: var(--font-body);
+      text-align: center;
+      margin: 1em 0; 
+
+      .title {
+        font-size: var(--font-body);
+        display: inline !important;
+        text-transform: none;
       }
     }
   }
@@ -1293,3 +1311,25 @@ figure.loaded, figure > img.loaded {
 }
 
 @import './print.scss';
+
+.section-subtitle{
+  
+  p{
+    display: inline;
+  }
+  &::before {
+     
+          content: ": ";
+  }}
+
+.issue-sections {
+  .title-block-section {
+    .title{
+      margin: 0;
+    }
+  }
+  
+  ul {
+    margin: 0;
+  }
+}
