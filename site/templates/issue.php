@@ -42,7 +42,7 @@
               <!--         IF SECTION HAS ARTICLES, GET EACH ARTICLE FROM SECTION-->
               <? if($section->hasChildren()): ?>
               <? foreach($section->children()->listed() as $article): ?>
-              <li><a href="<?= $article->url() ?>"><span class="title"><?= $article->title() ?></span><? if($article->subtitle()->isNotEmpty()): ?><span class="section-subtitle"><?= $article->subtitle()->kirbytext() ?></span><? endif ?> by <?= $article->author() ?></a></li>
+              <li><a href="<?= $article->url() ?>"><span class="title"><?= $article->title() ?></span><? if($article->subtitle()->isNotEmpty()): ?><span class="section-subtitle"><?= $article->subtitle()->kti() ?></span><? endif ?> by <?= $article->author() ?></a></li>
               <? endforeach ?>
               <? endif ?>
             </ul>
