@@ -558,6 +558,8 @@ main h1 {
         color: white;
         display: flex;
         align-items: center;
+        padding: 1em;
+        text-align: center;
         justify-content: center;
         font-size: var(--font-body);
         @media(max-width: 670px) {
