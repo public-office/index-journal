@@ -270,7 +270,7 @@ main h1 {
 
 .title-block {
   padding-bottom: 4em;
-  height: 100vh;
+  min-height: 100vh;
   position: relative; }
   .title-block h1 {
     font-family: 'DinSynt', serif;
@@ -621,7 +621,7 @@ section.initial {
   top: 0;
   height: 100vh;
   left: 0;
-  width: 100vw;
+  width: 100%;
   -webkit-box-align: center;
           align-items: center;
   -webkit-box-pack: center;
@@ -637,7 +637,7 @@ section.call {
   -webkit-box-align: center;
           align-items: center;
   background: white;
-  height: 100vh; }
+  min-height: 100vh; }
   section.call p a {
     border-bottom: 1px solid; }
 
@@ -1176,6 +1176,12 @@ figure.loaded, figure > img.loaded {
   display: inline; }
 
 .section-subtitle::before {
+  content: ": "; }
+
+.essay-subtitle p {
+  display: inline; }
+
+.essay-subtitle::before {
   content: ": "; }
 
 .issue-sections .title-block-section .title {

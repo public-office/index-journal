@@ -25,12 +25,13 @@
               <li><? if($page->hasDocuments()): ?><span class="title">(<a href="<?= $page->documents()->first()->url() ?>" target="_blank">PDF</a>)</span><? endif ?> </li>
               <? foreach($page->children()->listed()->template('essay') as $article): ?>
 
-              <li><a href="<?= $article->url() ?>"><span class="title"><?= $article->title() ?></span> by <?= $article->author() ?></a></li>
+              <li><a href="<?= $article->url() ?>"><span class="title"><?= $article->title() ?></span><? if($article->subtitle()->isNotEmpty()): ?><span class="essay-subtitle"><?= $article->subtitle()->kti() ?></span><? endif ?> by <?= $article->author() ?></a></li>
 
               <? endforeach ?>
               <? endif ?>
             </ul>
           </div>
+          
 
           <!--START OF SECTIONS-->
           <div class="issue-sections">
@@ -42,7 +43,7 @@
               <!--         IF SECTION HAS ARTICLES, GET EACH ARTICLE FROM SECTION-->
               <? if($section->hasChildren()): ?>
               <? foreach($section->children()->listed() as $article): ?>
-              <li><a href="<?= $article->url() ?>"><span class="title"><?= $article->title() ?></span><? if($article->subtitle()->isNotEmpty()): ?><span class="section-subtitle"><?= $article->subtitle()->kti() ?></span><? endif ?> by <?= $article->author() ?></a></li>
+              <li><a href="<?= $article->url() ?>"><span class="title"><?= $article->title() ?></span><? if($article->subtitle()->isNotEmpty()): ?><span class="section-subtitle"><?= $article->subtitle()->kti() ?></span><? endif ?> by <?= $article->author() ?></a></li> 
               <? endforeach ?>
               <? endif ?>
             </ul>
@@ -52,7 +53,10 @@
           <!--END OF SECTIONS-->
         </div>
       </section>
-      <p style="text-indent: 0; text-align: center; max-width: 80%; font-size: 90%; margin: 1em auto; position: absolute; bottom: 0.5rem;"><?= $section->wipe_img_caption() ?></p>
+        <? $sections = $page->cfp_builder()->toStructure() ?>
+          <? foreach($sections as $section): ?>
+      <p style="text-indent: 0; text-align: center; max-width: 80%; font-size: 90%; margin: 1em auto; position: relative; "><?= $section->wipe_img_caption() ?></p>
+         <? endforeach ?>
     </section>
   </div>
   <? endforeach ?>

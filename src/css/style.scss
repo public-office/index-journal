@@ -9,7 +9,7 @@
   src: url('../fonts/DinamoSynt-Oblique.woff');
   font-style: italic;
 }
-
+ 
 * {
   margin: 0;
   padding: 0;
@@ -322,7 +322,7 @@ main h1 {
 
 .title-block {
   padding-bottom: 4em;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
 
   h1 {
@@ -744,7 +744,8 @@ section.initial {
   position: -webkit-sticky;
   position: sticky;
   top: 0; height: 100vh;
-  left: 0; width: 100vw;
+  left: 0; 
+  width: 100%;
   align-items: center;
   justify-content: center;
   &:hover {
@@ -757,7 +758,7 @@ section.call {
   justify-content: center;
   align-items: center;
   background: white;
-  height: 100vh;
+  min-height: 100vh;
 
   p {
     a {
@@ -1316,7 +1317,17 @@ figure.loaded, figure > img.loaded {
 
 .section-subtitle{
   
-  p{
+  p {
+    display: inline;
+  }
+  &::before {
+     
+          content: ": ";
+  }}
+
+.essay-subtitle{
+  
+  p {
     display: inline;
   }
   &::before {
