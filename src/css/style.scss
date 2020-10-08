@@ -1,7 +1,7 @@
 @font-face {
- font-family: 'DinSynt';
- src: url('../fonts/DinamoSynt-Regular.woff');
- font-style: normal;
+  font-family: 'DinSynt';
+  src: url('../fonts/DinamoSynt-Regular.woff');
+  font-style: normal;
 }
 
 @font-face {
@@ -9,7 +9,7 @@
   src: url('../fonts/DinamoSynt-Oblique.woff');
   font-style: italic;
 }
- 
+
 * {
   margin: 0;
   padding: 0;
@@ -21,14 +21,17 @@
 html {
   font-size: 1.1vw;
   -webkit-appearance: none;
+
   @media (max-width: 670px) {
     font-size: 18px;
   }
+
   --font-body: 1.8rem;
   --font-mid: 2.8rem;
   --font-icon: 7rem;
   --font-lge: 9.25vw;
   --font-small: 0.85rem;
+
   @media (max-width: 670px) {
     --font-mid: 1.4rem;
     --font-body: 1rem;
@@ -39,6 +42,7 @@ body {
   font-family: 'DinSynt', serif;
   font-variant-ligatures: none;
   line-height: 1.15;
+
   .about main {
     margin-top: 6rem;
     max-width: 65%;
@@ -50,7 +54,8 @@ body {
   display: none;
 }
 
-em, i {
+em,
+i {
   font-style: italic;
   font-style: 300;
 }
@@ -62,17 +67,21 @@ em, i {
   position: fixed;
   z-index: 250;
   display: none;
+
   &.open {
     display: block;
   }
+
   &-inner {
     height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
+
     figure {
       max-width: 60%;
+
       img {
         max-width: 100%;
         display: block;
@@ -85,7 +94,8 @@ em, i {
   font-size: var(--font-body);
   font-weight: 400;
   position: fixed;
-  top: 1rem; right: 1rem;
+  top: 1rem;
+  right: 1rem;
   color: black;
   text-transform: uppercase;
   line-height: 1;
@@ -97,6 +107,7 @@ figcaption {
   margin-top: 1rem;
   text-align: left;
   line-height: 1.1;
+
   a {
     text-transform: none;
     border-bottom: 1px solid;
@@ -109,20 +120,24 @@ header {
   justify-content: space-between;
   position: fixed;
   width: calc(100vw);
-  left: 0; top: 0;
+  left: 0;
+  top: 0;
   padding: 1rem;
   background: white;
-  box-shadow: 0px 11px 16px 0px rgba(255,255,255,1);
+  box-shadow: 0px 11px 16px 0px rgba(255, 255, 255, 1);
   z-index: 200;
   transition: background 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+
   &.scrolled {
     background: white !important;
-    box-shadow: 0px 11px 16px 0px rgba(255,255,255,1) !important;
+    box-shadow: 0px 11px 16px 0px rgba(255, 255, 255, 1) !important;
   }
 
-  h1, a {
+  h1,
+  a {
     // flex: 1;
   }
+
   h1 {
     font-family: 'DinSynt', serif;
     font-weight: 400;
@@ -137,6 +152,7 @@ header {
     background: transparent;
     box-shadow: none;
   }
+
   figure {
     opacity: 1 !important;
   }
@@ -146,9 +162,11 @@ header {
   dl {
     margin-bottom: 1.1em;
   }
+
   .people {
     flex-direction: column !important;
   }
+
   .call p:last-of-type {
     max-width: 100% !important;
     font-size: 0.65rem !important;
@@ -161,28 +179,42 @@ header {
   margin: 0 auto;
   padding-bottom: 4.4em;
 }
+
 [data-template="essay"] h2 {
   font-size: var(--font-body);
 }
+
 [data-template="essay"] p {
   padding-left: 0;
 }
-p, h3 {
+
+p,
+h3 {
   font-size: 1.8rem;
   font-weight: 400;
+
   @media(max-width: 960px) {
     font-size: 2.1rem;
   }
 }
-p, h1, h2, figcaption, .footnotes {
+
+p,
+h1,
+h2,
+figcaption,
+.footnotes {
   font-family: 'DinSynt';
 }
-h3 + p, p + h3 {
+
+h3 + p,
+p + h3 {
   margin-top: 1em;
 }
+
 sup {
   font-size: 0.8rem;
   line-height: 1;
+
   // + sup {
   //   margin-left: -0.25em;
   // }
@@ -198,8 +230,10 @@ nav {
   justify-content: flex-end;
   text-transform: uppercase;
   text-align: right;
+
   a {
     font-family: 'DinSynt';
+
     span {
       text-transform: none;
     }
@@ -217,24 +251,30 @@ p {
   & + p {
     margin-top: 1em;
   }
+
   span {
     display: none;
   }
+
   a {
     text-decoration: none;
     color: black;
     display: inline;
     text-transform: none !important;
     line-height: 1.2;
+
     &:hover {
       border-bottom: 1px solid;
     }
+
     & + h2 {
       margin-top: 4.4em;
     }
   }
+
   &:hover span {
     display: block !important;
+
     @media(max-width: 960px) {
       display: none !important;
     }
@@ -260,16 +300,19 @@ h3 {
 blockquote {
   margin: 2.2em 2em 2.2em 12em;
   max-width: 50%;
+
   @media (max-width: 670px) {
     margin: 1em 0 1em 3em;
     max-width: 100%;
   }
+
   p {
     max-width: 100% !important;
   }
 }
+
 main h1 {
-//  font-size: 8vw;
+  //  font-size: 8vw;
   //PARIS ADJUSTMENT TO STOP OVERFLOW
   font-size: 8vw;
   font-weight: 300;
@@ -279,18 +322,21 @@ main h1 {
   -webkit-column-count: 1;
   width: 100%;
   max-width: 90vw;
+
   &:not(:last-of-type) {
     margin-bottom: 0.5em;
   }
 
- 
+
 }
 
 
 
-.colophon, .acknowledgement {
+.colophon,
+.acknowledgement {
   margin-top: 2.2em;
 }
+
 .colophon {
   margin-top: 4.4em;
 }
@@ -305,13 +351,16 @@ main h1 {
   font-size: var(--font-body);
   display: block;
   position: absolute;
-  top: 1em; left: 2.25em;
+  top: 1em;
+  left: 2.25em;
+
   span {
     a {
       &:hover {
         border-bottom: 1px solid;
       }
     }
+
     &:nth-of-type(2) {
       &:before {
         content: ', ';
@@ -331,23 +380,28 @@ main h1 {
     margin: 0 auto;
     text-transform: none;
     position: absolute;
-    top: 50%; left: 50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
+
     @media(max-height: 860px) {
       font-size: 6.7vw;
     }
   }
 }
 
-.title, .author {
+.title,
+.author {
   text-transform: uppercase;
   font-weight: 300;
 }
+
 .title {
   display: block;
   margin-bottom: 0.5em;
   line-height: 1;
 }
+
 .text-block .title,
 .text-block .subtitle {
   font-size: var(--font-mid);
@@ -356,10 +410,12 @@ main h1 {
   // display: block;
 }
 
-.subtitle, .author {
+.subtitle,
+.author {
   margin: 0 auto;
   display: block;
   line-height: 1;
+
   @media (max-width: 670px) {
     max-width: 85%;
   }
@@ -376,30 +432,41 @@ main h1 {
   h2 {
     text-indent: 3em;
   }
-  p, p + p, h2, h3 {
+
+  p,
+  p + p,
+  h2,
+  h3 {
     max-width: 72%;
+
     @media(max-width: 960px) {
       max-width: 85%;
     }
+
     @media(max-width: 670px) {
       max-width: 100%;
     }
   }
+
   p + p {
     text-indent: 3em;
     margin: 0;
   }
+
   figure {
     display: table;
     max-width: 680px;
     margin: 6em auto;
+
     @media(max-width: 960px) {
       max-width: 100%;
       pointer-events: none;
     }
+
     &:hover img {
       filter: grayscale(0);
     }
+
     img {
       max-width: 100%;
       margin: 0 auto;
@@ -409,6 +476,7 @@ main h1 {
       // top: 50%; left: 50%;
       // transform: translate(-50%, -50%);
     }
+
     figcaption {
       display: table-caption;
       caption-side: bottom;
@@ -416,6 +484,7 @@ main h1 {
       line-height: 1.2;
     }
   }
+
   @media (max-width: 670px) {
     max-width: 100%;
     margin: 0 auto;
@@ -434,14 +503,18 @@ main h1 {
   display: none;
   overflow-wrap: break-word;
   word-wrap: break-word;
+
   @media(max-width: 670px) {
     display: block;
   }
+
   hr {
     display: none;
   }
+
   ol li {
     break-inside: avoid;
+
     p {
       font-size: var(--font-small);
     }
@@ -454,59 +527,74 @@ main h1 {
 
 [data-template="emaj-essay"] {
   margin-top: 6.6em;
+
   h1 {
     font-size: var(--font-body);
     margin: 6em auto 4em;
     max-width: 55%;
+
     @media (max-width: 670px) {
       max-width: 85%;
     }
   }
+
   .title-block {
     height: auto;
   }
+
   .title {
     margin: 0;
   }
+
   .shadow {
     display: none !important;
   }
+
   .abstract {
     &-content {
       max-width: 65% !important;
       margin-bottom: 1em !important;
+
       @media (max-width: 670px) {
         max-width: 100% !important;
         padding-right: 0 !important;
       }
+
       p {
         @media (max-width: 670px) {
           font-size: 1rem !important;
         }
       }
     }
+
     &.hidden {
       max-height: 100% !important;
     }
 
   }
+
   .text-block {
     padding-top: 0;
   }
+
   .text-bios {
     margin-left: 12em;
     max-width: 45%;
+
     @media (max-width: 670px) {
       margin-left: 4em;
       max-width: 100%;
     }
+
     em {
       font-style: normal;
     }
   }
+
   .pdf {
     display: inline;
     position: static;
+
     &:before {
       content: ', ';
     }
@@ -519,11 +607,13 @@ main h1 {
     padding: 0 4em;
     padding-top: 8em;
     max-width: 100%;
+
     p {
       @media(max-width: 670px) {
         max-width: 100%;
       }
     }
+
     @media(max-width: 670px) {
       padding: 0;
       padding-top: 8em;
@@ -533,15 +623,19 @@ main h1 {
 
 }
 
-[data-template="emaj"], [data-template="emaj-issue"] {
+[data-template="emaj"],
+[data-template="emaj-issue"] {
   margin: 6.6em auto;
   max-width: 55%;
+
   @media (max-width: 670px) {
     max-width: 100%;
   }
+
   .authors {
     text-transform: none;
   }
+
   .introduction {
     margin: 1em;
 
@@ -551,6 +645,7 @@ main h1 {
       justify-content: center;
       opacity: 1;
       margin-bottom: 3.3em;
+
       div {
         width: 23rem;
         height: 34rem;
@@ -562,18 +657,22 @@ main h1 {
         text-align: center;
         justify-content: center;
         font-size: var(--font-body);
+
         @media(max-width: 670px) {
           width: 70%;
           height: 26rem;
         }
       }
+
       img {
         max-width: 50%;
       }
     }
+
     .header {
       position: relative;
       margin-bottom: 1.8em;
+
       h2 {
         position: absolute;
         top: 0;
@@ -584,6 +683,7 @@ main h1 {
         z-index: 0;
 
       }
+
       a {
         margin: 0;
         font-size: var(--font-body);
@@ -593,11 +693,13 @@ main h1 {
         opacity: 0;
       }
     }
+
     h2 {
       & + .details {
         // margin-top: -2.2em;
       }
     }
+
     .details {
       p {
         & + p {
@@ -605,32 +707,40 @@ main h1 {
         }
       }
     }
+
     p {
       @media (max-width: 670px) {
         max-width: 100%;
       }
+
       & + p {
         text-indent: 2em;
         margin-top: 0;
       }
     }
+
     hr {
       display: block;
       border: 0;
       height: 1em;
       break-after: always;
     }
+
     h2 {
       font-size: var(--font-body);
     }
   }
+
   ul {
     margin-left: 1em;
     margin-top: 2em;
+
     li {
       text-align: center;
+
       ul {
         margin: 1em 0;
+
         // display: none;
         li {
           text-align: left;
@@ -640,12 +750,14 @@ main h1 {
         }
       }
     }
+
     & + p {
       @media(max-width: 670px) {
         margin-left: 1.5em;
         max-width: 100%;
       }
     }
+
     &.articles {
       li {
         text-align: left;
@@ -662,9 +774,11 @@ dl {
   font-size: var(--font-body);
   line-height: 1.1;
   break-inside: avoid;
+
   dt {
     text-transform: uppercase;
   }
+
   dd + dt {
     margin-top: 1.1em;
   }
@@ -685,13 +799,16 @@ ul {
   list-style: none;
   margin-left: 4rem;
   margin-top: 1em;
+
   @media (max-width: 670px) {
     margin-left: 1em;
   }
+
   li {
     font-size: 1.8rem;
     line-height: 1.1;
     font-weight: 400;
+
     &:first-of-type {
       text-transform: uppercase;
     }
@@ -700,8 +817,10 @@ ul {
 
 figure.wipe {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 3;
   background-size: 52vh;
   background-position: center;
@@ -721,6 +840,7 @@ hr {
   margin-left: 4em;
   display: flex;
   flex-direction: row;
+
   dl:first-of-type {
     margin-right: 2em;
   }
@@ -737,21 +857,26 @@ section {
   display: flex;
   flex-direction: column;
 }
+
 section.spacer {
   height: 100vh;
 }
+
 section.initial {
   position: -webkit-sticky;
   position: sticky;
-  top: 0; height: 100vh;
-  left: 0; 
+  top: 0;
+  height: 100vh;
+  left: 0;
   width: 100%;
   align-items: center;
   justify-content: center;
+
   &:hover {
     cursor: pointer;
   }
 }
+
 section.call {
   position: relative;
   top: 0;
@@ -771,6 +896,7 @@ header {
   h1 {
     display: flex;
     align-items: flex-start;
+
     @media (max-width: 670px) {
       width: 80vw;
     }
@@ -785,21 +911,26 @@ header {
       &.hover {
         height: auto;
       }
+
       &:hover {
         cursor: pointer;
       }
+
       .issue {
         display: table;
         padding-left: 0.25rem;
         border-bottom: 1px solid transparent;
+
         a {
           text-transform: none !important;
           border-bottom: 0 !important;
+
           .title {
             display: inline-block;
             margin-bottom: 0;
           }
         }
+
         &:hover {
           border-bottom: 1px solid !important;
         }
@@ -808,69 +939,86 @@ header {
   }
 }
 
-[data-template="issue"], [data-display="home"] {
+[data-template="issue"],
+[data-display="home"] {
   .title-block {
     background: white;
     padding-top: 8em;
+
     // max-width: 100%;
     // margin: 0 auto;
     @media (max-width: 670px) {
       padding-top: 4em;
     }
+
     h1 {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       font-size: var(--font-body);
       position: static !important;
-      top:inherit;
+      top: inherit;
       left: 0;
       transform: none;
+
       @media (max-width: 670px) {
         font-size: 1.05rem;
       }
     }
+
     ul {
       margin-left: 0;
+
       li {
         line-height: 1.2;
       }
     }
   }
+
   .text-block {
     padding-bottom: 0;
+
     p {
       max-width: 70% !important;
+
       @media (max-width: 670px) {
         max-width: 100% !important;
       }
     }
+
     .title {
       font-size: var(--font-body);
     }
   }
+
   .issue-items {
     margin-bottom: 4em;
+
     ul {
       font-size: var(--font-body);
+
       @media (max-width: 670px) {
         font-size: 1.05rem;
       }
 
       li {
         font-size: inherit;
+
         @media (max-width: 670px) {
           line-height: 1.3;
         }
+
         a {
           text-transform: none;
         }
       }
     }
   }
+
   h1 {
     font-weight: 300;
   }
+
   .title {
     // text-transform: none !important;
   }
@@ -878,6 +1026,7 @@ header {
 
 figure {
   position: relative;
+
   &:hover {
     cursor: pointer;
   }
@@ -887,22 +1036,41 @@ figure {
     position: fixed;
     display: flex;
     align-items: center;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100vw;
     height: 100vh;
     max-width: 100%;
     margin: 0;
     z-index: 210;
+
     img {
-      padding: 4em 0;
-      margin: 0 auto;
-      filter: grayscale(0);
+
+      //      PARIS'S:
+      position: fixed;
+      top: 50%;
+      left: 50%;
+
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      max-height: 95vh;
+
+
+      //      PAULS:
+      //      padding: 4em 0;
+      //      margin: 0 auto;
+      //      filter: grayscale(0);
     }
+
     .figure-close {
       display: block;
     }
   }
 }
+
+
 
 .figure-num {
   display: block;
@@ -923,10 +1091,12 @@ figure {
     margin-left: 1.5em;
     margin-top: 0;
     margin-right: 4px;
+
     li {
       font-family: 'DinSynt';
       font-size: var(--font-small);
       break-inside: avoid;
+
       &:first-of-type {
         text-transform: none;
       }
@@ -939,15 +1109,18 @@ figure {
   margin-left: 5.5em;
   max-width: 50%;
   margin-bottom: 4.4em;
+
   p {
     position: relative;
     font-family: 'DinSynt';
     font-size: 1.4rem;
     // padding-right: 4em;
     max-width: 100%;
+
     a {
       border-bottom: 1px solid;
     }
+
     & + p {
       text-indent: 0;
       margin-top: 1em;
@@ -957,7 +1130,8 @@ figure {
 
 .issue-overlay {
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   background: white;
@@ -966,20 +1140,26 @@ figure {
   align-items: center;
   z-index: 1000;
   display: none;
+
   &-close {
     position: fixed;
-    top: 0.5em; right: 1em;
+    top: 0.5em;
+    right: 1em;
     font-size: var(--font-body);
     font-family: 'DinSynt';
+
     @media (max-width: 670px) {
       top: 1em;
     }
+
     &:hover {
       cursor: pointer;
     }
   }
+
   img {
     max-height: 74vh;
+
     @media (max-width: 670px) {
       max-height: 35vh;
     }
@@ -995,22 +1175,26 @@ figure {
       margin-top: 1em;
       margin-left: 5.5em;
       max-width: 55%;
+
       .shadow {
         box-shadow: inset 0px -20px 20px 0px rgba(255, 255, 255, 1);
         height: 6.5em;
         width: 100%;
         z-index: 100;
-        position:absolute;
+        position: absolute;
         pointer-events: none;
       }
+
       &:hover {
         cursor: pointer;
       }
+
       @media (max-width: 670px) {
         margin-left: 0;
         max-width: 100%;
         padding-right: 1em;
       }
+
       .abstract {
         &.hidden {
           max-height: 6.5em;
@@ -1018,6 +1202,7 @@ figure {
           z-index: 0;
         }
       }
+
       p {
         max-width: 100%;
         font-size: 1.4rem;
@@ -1025,6 +1210,7 @@ figure {
         @media (max-width: 670px) {
           font-size: 0.8rem;
         }
+
         & + p {
           // text-indent: 0 !important;
         }
@@ -1033,21 +1219,26 @@ figure {
   }
 }
 
-[data-display="issue"], [data-display="home"] {
+[data-display="issue"],
+[data-display="home"] {
   .text-block {
     padding-bottom: 0;
   }
+
   .title-block {
     background: white;
     max-width: 55%;
     margin: 0 auto;
     padding-top: 0 !important;
+
     @media (max-width: 670px) {
       max-width: 100%;
     }
+
     h1 {
       position: relative;
     }
+
     &-issue {
       font-size: var(--font-body);
       text-align: center;
@@ -1058,11 +1249,11 @@ figure {
         display: inline !important;
       }
     }
-    
+
     &-section {
       font-size: var(--font-body);
       text-align: center;
-      margin: 1em 0; 
+      margin: 1em 0;
 
       .title {
         font-size: var(--font-body);
@@ -1071,20 +1262,25 @@ figure {
       }
     }
   }
+
   .issue-items {
     ul {
       margin-left: 0;
+
       li {
         text-indent: -2em;
         margin-left: 2em;
+
         a {
           text-transform: none !important;
+
           br {
             display: none;
           }
         }
       }
     }
+
     .title {
       font-size: var(--font-body);
       display: inline;
@@ -1106,10 +1302,12 @@ figure {
 .inline-footnote {
   overflow-wrap: break-word;
   word-wrap: break-word;
+
   p {
     font-size: var(--font-small);
     max-width: 100%;
     text-indent: 0;
+
     & + p {
       text-indent: 0;
     }
@@ -1136,6 +1334,7 @@ figure {
     }
 
   }
+
   &__container {
     font-size: var(--font-small);
     width: 100%;
@@ -1144,15 +1343,18 @@ figure {
     top: 0;
     left: 75vw;
     padding-right: 1em;
+
     @media(max-width: 960px) {
       display: none !important;
     }
   }
 }
+
 blockquote {
   .inline-footnotes__container {
     left: calc(75vw - 14em);
   }
+
   blockquote {
     .inline-footnotes__container {
       left: calc(62vw - 14em);
@@ -1163,9 +1365,11 @@ blockquote {
 blockquote {
   & + blockquote {
     margin-top: -2em;
+
     @media(max-width: 670px) {
       margin-top: 0;
     }
+
     p {
       text-indent: 2em;
     }
@@ -1188,59 +1392,86 @@ p span {
     max-width: 57%;
     margin-top: 3rem;
   }
+
   body.about main {
     margin-top: 6rem;
     max-width: 85%;
   }
 }
+
 @media (max-width: 670px) {
-  p, h1, h3, header h1, header a, ul li, .pane-close, dd, dt , dl, .text-bios p {
+
+  p,
+  h1,
+  h3,
+  header h1,
+  header a,
+  ul li,
+  .pane-close,
+  dd,
+  dt,
+  dl,
+  .text-bios p {
     font-size: 1rem;
   }
+
   .text-bios {
     margin-left: 0;
     max-width: 100%;
+
     p {
       padding-right: 0;
     }
   }
+
   .text-bibliography {
     column-count: 1;
     max-width: 100%;
     margin-left: 0;
+
     ul li {
       // font-size: 0.6rem;
     }
   }
+
   figcaption {
     font-size: 0.7rem;
     line-height: 1.2;
   }
+
   header h1 {
     flex: 1.5;
     line-height: 1.2;
     flex: 6;
   }
+
   header nav {
     flex: 4;
     width: auto;
   }
+
   header h1 nav {
     display: block;
+
     .title {
       display: none !important;
     }
   }
-  p, h3 {
+
+  p,
+  h3 {
     max-width: 90%;
   }
+
   figure.wipe {
     background-size: 32vh;
   }
+
   .pane-inner figure {
     max-width: 58%;
     margin-top: 1rem;
   }
+
   body.about main {
     margin-top: 6rem;
     max-width: 95%;
@@ -1259,6 +1490,7 @@ p span {
     max-width: 90%;
     margin-top: 3rem;
   }
+
   figcaption {
     font-size: 0.6rem;
     line-height: 1.2;
@@ -1268,6 +1500,7 @@ p span {
     right: 0.5rem;
     text-align: left;
   }
+
   .figure-num {
     font-size: 0.6rem;
   }
@@ -1291,6 +1524,7 @@ input {
   font-family: 'DinSynt';
   font-size: var(--font-body);
   line-height: 1.1;
+
   &.button {
     background: white;
     text-align: left;
@@ -1298,6 +1532,7 @@ input {
     display: inline-block;
     width: auto;
     line-height: 1;
+
     &:hover {
       cursor: pointer;
       opacity: 0.25;
@@ -1305,43 +1540,50 @@ input {
   }
 }
 
-figure, figure > img {
+figure,
+figure > img {
   opacity: 0;
   transition: opacity 0.35s ease-in;
 }
-figure.loaded, figure > img.loaded {
+
+figure.loaded,
+figure > img.loaded {
   opacity: 1;
 }
 
 @import './print.scss';
 
-.section-subtitle{
-  
-  p {
-    display: inline;
-  }
-  &::before {
-     
-          content: ": ";
-  }}
+.section-subtitle {
 
-.essay-subtitle{
-  
   p {
     display: inline;
   }
+
   &::before {
-     
-          content: ": ";
-  }}
+
+    content: ": ";
+  }
+}
+
+.essay-subtitle {
+
+  p {
+    display: inline;
+  }
+
+  &::before {
+
+    content: ": ";
+  }
+}
 
 .issue-sections {
   .title-block-section {
-    .title{
+    .title {
       margin: 0;
     }
   }
-  
+
   ul {
     margin: 0;
   }
