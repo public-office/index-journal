@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 USER=root
-HOST=45.77.238.91
+HOST=139.180.178.163
 WEBROOT=/var/www/index-journal
 
 ssh $USER@$HOST /bin/bash <<EOF

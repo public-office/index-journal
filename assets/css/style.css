@@ -642,6 +642,9 @@ hr {
           flex-direction: row; }
   .people dl:first-of-type {
     margin-right: 2em; }
+  .people dd {
+    text-indent: -2em;
+    padding-left: 2em; }
 
 @media (max-width: 640px) {
   figure.wipe {

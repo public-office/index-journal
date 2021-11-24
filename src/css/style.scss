@@ -844,6 +844,10 @@ hr {
   dl:first-of-type {
     margin-right: 2em;
   }
+  dd {
+    text-indent: -2em;
+    padding-left: 2em;
+  }
 }
 
 @media (max-width: 640px) {
