@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Index Journal</title>
+    <title>INDEX JOURNAL</title>
     <?= css('assets/css/style.css?v='.sha1_file('assets/css/style.css')) ?>
     <?= css('assets/css/print.css?v='.sha1_file('assets/css/print.css')) ?>
     <?= js('assets/js/jquery.min.js') ?>
