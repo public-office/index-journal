@@ -4,7 +4,7 @@ USER=root
 HOST=139.180.178.163
 WEBROOT=/var/www/index-journal
 
-ssh $USER@$HOST /bin/bash <<EOF
+ssh -A $USER@$HOST /bin/bash <<EOF
   cd $WEBROOT
   git fetch
   git reset --hard origin/master
