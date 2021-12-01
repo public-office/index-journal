@@ -30,8 +30,6 @@
     </h1>
     <nav>
       <? foreach ($site->children()->listed()->flip() as $subPage) : ?>
-        <a href="<?= $subPage->url() ?>"><?= $subPage->title() ?></a>
-      <? endforeach ?>
-      , <a href="<?= $site->url() ?>/emaj"><span>emaj</span> ARCHIVE</a>
+        <a href="<?= $subPage->url() ?>"><?= $subPage->title() ?></a><span>, </span><? endforeach ?><a href="<?= $site->url() ?>/emaj"><span>emaj</span> ARCHIVE</a>
     </nav>
   </header>
