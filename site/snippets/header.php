@@ -32,6 +32,6 @@
       <? foreach ($site->children()->listed()->flip() as $subPage) : ?>
         <a href="<?= $subPage->url() ?>"><?= $subPage->title() ?></a>
       <? endforeach ?>
-      <? if (page('emaj')->isListed()) : ?>, <a href="<?= $site->url() ?>/emaj"><span>emaj</span> ARCHIVE</a><? endif ?>
+      , <a href="<?= $site->url() ?>/emaj"><span>emaj</span> ARCHIVE</a>
     </nav>
   </header>
