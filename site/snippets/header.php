@@ -29,7 +29,7 @@
     <h1><a href="<?= $site->url() ?>">INDEX JOURNAL</a>, <nav><? foreach (page('issues')->children()->listed()->flip() as $issue) : ?><span class="issue"><span><a href="<?= $issue->url() ?>"><span class="hide-mobile">Issue</span> <span>No.</span> <?= $issue->num() ?> <span class="title"><?= $issue->title() ?></span></a></span><? endforeach ?></span></nav>
     </h1>
     <nav>
-      <? foreach ($site()->children()->published() as $subPage) : ?>
+      <? foreach ($site->children()->published() as $subPage) : ?>
         <a href="<?= $subPage->url() ?>"><?= $subPage->url() ?></a>
       <? endforeach ?>
     </nav>
