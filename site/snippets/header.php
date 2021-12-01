@@ -30,7 +30,7 @@
     </h1>
     <nav>
       <? foreach ($site->children()->published() as $subPage) : ?>
-        <a href="<?= $subPage->url() ?>"><?= $subPage->url() ?></a>
+        <a href="<?= $subPage->url() ?>"><?= $subPage->title() ?></a>
       <? endforeach ?>
     </nav>
   </header>
