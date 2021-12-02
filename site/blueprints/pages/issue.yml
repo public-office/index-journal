@@ -38,11 +38,15 @@ sections:
       issue_doi:
         label: Issue DOI
         type: text
-        width: 1/2
+        width: 1/3
       issue_date:
         label: Issue Date
         type: date
-        width: 1/2
+        width: 1/3
+      issue_num:
+        label: Issue Number
+        type: date
+        width: 1/3
   issue_type:
     headline: Type
     type: fields

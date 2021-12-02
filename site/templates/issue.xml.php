@@ -2,7 +2,7 @@
     <script />
     <head>
         <doi_batch_id>index-journal-<?php echo date("YmdHis") ?></doi_batch_id>
-        <timestamp> <?php echo date("YmdHis") ?></timestamp>
+        <timestamp><?php echo date("YmdHis") ?></timestamp>
         <depositor>
             <depositor_name>indj</depositor_name>
             <email_address>editors@index-journal.org</email_address>
