@@ -86,7 +86,7 @@
                             <title><?= $subPage->title() ?></title>
                         </titles>
                         <contributors>
-                            <?php foreach ($essay->authors()->toStructure() as $author) : ?>
+                            <?php foreach ($essay->authors()->toStructure()->slice(0,1) as $author) : ?>
                                 <person_name sequence="first" contributor_role="author">
                                     <given_name><?= $author->first_name() ?></given_name>
                                     <surname><?= $author->last_name() ?></surname>
