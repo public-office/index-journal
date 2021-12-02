@@ -39,7 +39,7 @@
             <?php foreach ($page->children() as $subPage) : ?>
 
 
-
+                // if the subPage has children – i.e., it is a 'section' – then get essays in the section
                 <?php if ($subPage->hasChildren()) : ?>
                     <?php foreach ($page->children() as $essay) : ?>
                         <journal_article publication_type="full_text">
@@ -47,7 +47,15 @@
                                 <title><?php $essay->title() ?></title>
                             </titles>
                             <contributors>
-                  
+                                <?php foreach ($page->authors()->toStructure() as $author) : ?>
+                                    <person_name sequence="first" contributor_role="author">
+                                        <given_name><?php $author->first_name() ?></given_name>
+                                        <surname><?php $author->last_name() ?></surname>
+                                        <?php if ($author->orcid()->isNotEmpty()) : ?>
+                                            <ORCID><?php $author->orcid() ?></ORCID>
+                                        <?php endif ?>
+                                    </person_name>
+                                <?php endforeach ?>
                             </contributors>
                             <publication_date media_type="print">
                                 <year><?= $page->issue_date()->toDate('Y') ?></year>
@@ -56,13 +64,13 @@
                                 <year><?= $page->issue_date()->toDate('Y') ?></year>
                             </publication_date>
                             <doi_data>
-                                <doi><<?php $essay->doi() ?></doi>
+                                <doi><?php $essay->doi() ?></doi>
                                 <resource><?php $essay->url() ?></resource>
                             </doi_data>
                         </journal_article>
                     <?php endforeach ?>
 
-
+                    // if it is not a Section, then it is an Essay — so just print the contents of the the Essay
                 <?php else :
                         $essay = $subPage
                 ?>
