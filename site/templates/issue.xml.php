@@ -31,11 +31,11 @@
                 </publication_date>
                 <issue><?= $page->issue_num()?></issue>
                 <doi_data>
-                    <doi><?= $page->issue_doi() ?>/doi>
+                    <doi><?= $page->issue_doi() ?></doi>
                     <resource>http://index-journal.org/issues/law</resource>
                 </doi_data>
             </journal_issue>
-// articles
+
             <journal_article publication_type="full_text">
                 <titles>
                     <title>Editors' Introduction</title>
