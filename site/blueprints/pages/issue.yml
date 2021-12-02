@@ -45,7 +45,7 @@ sections:
         width: 1/3
       issue_num:
         label: Issue Number
-        type: date
+        type: number
         width: 1/3
   issue_type:
     headline: Type
