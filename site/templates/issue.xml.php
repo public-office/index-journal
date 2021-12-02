@@ -29,40 +29,56 @@
                 <publication_date media_type="online">
                     <year><?= $page->issue_date()->toDate('Y') ?></year>
                 </publication_date>
-                <issue><?= $page->issue_num()?></issue>
+                <issue><?= $page->issue_num() ?></issue>
                 <doi_data>
                     <doi><?= $page->issue_doi() ?></doi>
-                    <resource>http://index-journal.org/issues/law</resource>
+                    <resource><? $page->url() ?></resource>
                 </doi_data>
             </journal_issue>
 
-            <journal_article publication_type="full_text">
-                <titles>
-                    <title>Editors' Introduction</title>
-                </titles>
-                <contributors>
-                    <person_name sequence="first" contributor_role="author">
-                        <given_name>Desmond</given_name>
-                        <surname>Manderson</surname>
-                        <ORCID>https://orcid.org/0000-0002-0376-4394</ORCID>
-                    </person_name>
-                    <person_name sequence="additional" contributor_role="author">
-                        <given_name>Ian</given_name>
-                        <surname>McLean</surname>
-                        <ORCID>https://orcid.org/0000-0002-8830-6500</ORCID>
-                    </person_name>
-                </contributors>
-                <publication_date media_type="print">
-                    <year>2020</year>
-                </publication_date>
-                <publication_date media_type="online">
-                    <year>2020</year>
-                </publication_date>
-                <doi_data>
-                    <doi>10.38030/index-journal.2020.2.0</doi>
-                    <resource>http://index-journal.org/issues/law/editors-introduction-by-desmond-manderson-and-ian-mclean</resource>
-                </doi_data>
-            </journal_article>
+            // <?php foreach ($page->children() as $subPage) : ?>
+
+
+                // if the subPage has children – i.e., it is a 'section' – then get essays in the section
+                <?php if ($subPage->hasChildren()) : ?>
+
+                    <?php foreach ($page->children() as $essay) : ?>
+                        <journal_article publication_type="full_text">
+                            <titles>
+                                <title>Editors' Introduction</title>
+                            </titles>
+                            <contributors>
+                                <person_name sequence="first" contributor_role="author">
+                                    <given_name>Desmond</given_name>
+                                    <surname>Manderson</surname>
+                                    <ORCID>https://orcid.org/0000-0002-0376-4394</ORCID>
+                                </person_name>
+                                <person_name sequence="additional" contributor_role="author">
+                                    <given_name>Ian</given_name>
+                                    <surname>McLean</surname>
+                                    <ORCID>https://orcid.org/0000-0002-8830-6500</ORCID>
+                                </person_name>
+                            </contributors>
+                            <publication_date media_type="print">
+                                <year>2020</year>
+                            </publication_date>
+                            <publication_date media_type="online">
+                                <year>2020</year>
+                            </publication_date>
+                            <doi_data>
+                                <doi>10.38030/index-journal.2020.2.0</doi>
+                                <resource>http://index-journal.org/issues/law/editors-introduction-by-desmond-manderson-and-ian-mclean</resource>
+                            </doi_data>
+                        </journal_article>
+                    <?php endforeach ?>
+
+                    // if it is not a Section, then it is an Essay — so just print the contents of the the Essay
+                <?php else :
+                        $subPage = $essay
+                ?>
+                    <?= $essay->title() ?>
+                <?php endif ?>
+            <?php endforeach ?>
         </journal>
     </body>
 </doi_batch>
