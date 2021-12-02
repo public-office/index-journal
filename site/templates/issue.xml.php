@@ -41,23 +41,21 @@
 
                 // if the subPage has children – i.e., it is a 'section' – then get essays in the section
                 <?php if ($subPage->hasChildren()) : ?>
-
                     <?php foreach ($page->children() as $essay) : ?>
                         <journal_article publication_type="full_text">
                             <titles>
                                 <title><?php $essay->title() ?></title>
                             </titles>
                             <contributors>
-                                <person_name sequence="first" contributor_role="author">
-                                    <given_name>Desmond</given_name>
-                                    <surname>Manderson</surname>
-                                    <ORCID>https://orcid.org/0000-0002-0376-4394</ORCID>
-                                </person_name>
-                                <person_name sequence="additional" contributor_role="author">
-                                    <given_name>Ian</given_name>
-                                    <surname>McLean</surname>
-                                    <ORCID>https://orcid.org/0000-0002-8830-6500</ORCID>
-                                </person_name>
+                                <?php foreach ($page->authors()->toStructure() as $author) : ?>
+                                    <person_name sequence="first" contributor_role="author">
+                                        <given_name><?php $author->first_name() ?></given_name>
+                                        <surname><?php $author->last_name() ?></surname>
+                                        <?php if ($author->orcid()->isNotEmpty()) : ?>
+                                            <ORCID><?php $author->orcid() ?></ORCID>
+                                        <?php endif ?>
+                                    </person_name>
+                                <?php endforeach ?>
                             </contributors>
                             <publication_date media_type="print">
                                 <year><?= $page->issue_date()->toDate('Y') ?></year>
@@ -66,15 +64,15 @@
                                 <year><?= $page->issue_date()->toDate('Y') ?></year>
                             </publication_date>
                             <doi_data>
-                                <doi>10.38030/index-journal.2020.2.0</doi>
-                                <resource>http://index-journal.org/issues/law/editors-introduction-by-desmond-manderson-and-ian-mclean</resource>
+                                <doi><<?php $essay->doi() ?></doi>
+                                <resource><?php $essay->url() ?></resource>
                             </doi_data>
                         </journal_article>
                     <?php endforeach ?>
 
                     // if it is not a Section, then it is an Essay — so just print the contents of the the Essay
                 <?php else :
-                         $essay = $subPage
+                        $essay = $subPage
                 ?>
                     <?= $essay->title() ?>
                 <?php endif ?>
