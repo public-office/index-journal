@@ -72,10 +72,8 @@
                 <?php else :
                     $essay = $subPage
                 ?>
-                <!-- if it is not a Section, then it is an Essay — so just print the contents of the the Essay -->
                     <journal_article publication_type="full_text">
                         <titles>
-                            <title><?= $essay->title() ?></title>
                             <title><?= $subPage->title() ?></title>
                         </titles>
                         <contributors>
