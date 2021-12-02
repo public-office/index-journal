@@ -76,6 +76,7 @@
                     <journal_article publication_type="full_text">
                         <titles>
                             <title><?php $essay->title() ?></title>
+                            <title><?php $subPage->title() ?></title>
                         </titles>
                         <contributors>
                             <?php foreach ($essay->authors()->toStructure() as $author) : ?>
