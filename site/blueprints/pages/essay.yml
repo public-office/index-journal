@@ -9,6 +9,16 @@ fields:
     label: Author
     type: text
     width: 1/2
+  authors:
+    label: Exhibitions
+    type: structure
+    fields:
+      first_name:
+        label: First Name
+        type: text
+      last_name:
+        label: Last Name/s
+        type: text
   doi:
     label: DOI
     type: text

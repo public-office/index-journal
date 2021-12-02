@@ -45,7 +45,7 @@
                     <?php foreach ($page->children() as $essay) : ?>
                         <journal_article publication_type="full_text">
                             <titles>
-                                <title>Editors' Introduction</title>
+                                <title><?php $essay->title() ?></title>
                             </titles>
                             <contributors>
                                 <person_name sequence="first" contributor_role="author">
@@ -60,10 +60,10 @@
                                 </person_name>
                             </contributors>
                             <publication_date media_type="print">
-                                <year>2020</year>
+                                <year><?= $page->issue_date()->toDate('Y') ?></year>
                             </publication_date>
                             <publication_date media_type="online">
-                                <year>2020</year>
+                                <year><?= $page->issue_date()->toDate('Y') ?></year>
                             </publication_date>
                             <doi_data>
                                 <doi>10.38030/index-journal.2020.2.0</doi>
