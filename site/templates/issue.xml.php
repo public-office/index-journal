@@ -36,7 +36,7 @@
                 </doi_data>
             </journal_issue>
 
-            // <?php foreach ($page->children() as $subPage) : ?>
+            <?php foreach ($page->children() as $subPage) : ?>
 
 
                 // if the subPage has children – i.e., it is a 'section' – then get essays in the section
