@@ -42,15 +42,15 @@
                     <?php foreach ($subPage->children()->listed() as $essay) : ?>
                         <journal_article publication_type="full_text">
                             <titles>
-                                <title><?php $essay->title() ?></title>
+                                <title><?= $essay->title() ?></title>
                             </titles>
                             <contributors>
-                                <?php foreach ($essay->authors()->toStructure() as $author) : ?>
+                                <?= foreach ($essay->authors()->toStructure() as $author) : ?>
                                     <person_name sequence="first" contributor_role="author">
-                                        <given_name><?php $author->first_name() ?></given_name>
-                                        <surname><?php $author->last_name() ?></surname>
+                                        <given_name><?= $author->first_name() ?></given_name>
+                                        <surname><?= $author->last_name() ?></surname>
                                         <?php if ($author->orcid()->isNotEmpty()) : ?>
-                                            <ORCID><?php $author->orcid() ?></ORCID>
+                                            <ORCID><?= $author->orcid() ?></ORCID>
                                         <?php endif ?>
                                     </person_name>
                                 <?php endforeach ?>
@@ -62,8 +62,8 @@
                                 <year><?= $page->issue_date()->toDate('Y') ?></year>
                             </publication_date>
                             <doi_data>
-                                <doi><?php $essay->doi() ?></doi>
-                                <resource><?php $essay->url() ?></resource>
+                                <doi><?= $essay->doi() ?></doi>
+                                <resource><?= $essay->url() ?></resource>
                             </doi_data>
                         </journal_article>
                     <?php endforeach ?>
@@ -75,16 +75,16 @@
                 <!-- if it is not a Section, then it is an Essay — so just print the contents of the the Essay -->
                     <journal_article publication_type="full_text">
                         <titles>
-                            <title><?php $essay->title() ?></title>
-                            <title><?php $subPage->title() ?></title>
+                            <title><?= $essay->title() ?></title>
+                            <title><?= $subPage->title() ?></title>
                         </titles>
                         <contributors>
                             <?php foreach ($essay->authors()->toStructure() as $author) : ?>
                                 <person_name sequence="first" contributor_role="author">
-                                    <given_name><?php $author->first_name() ?></given_name>
-                                    <surname><?php $author->last_name() ?></surname>
+                                    <given_name><?= $author->first_name() ?></given_name>
+                                    <surname><?= $author->last_name() ?></surname>
                                     <?php if ($author->orcid()->isNotEmpty()) : ?>
-                                        <ORCID><?php $author->orcid() ?></ORCID>
+                                        <ORCID><?= $author->orcid() ?></ORCID>
                                     <?php endif ?>
                                 </person_name>
                             <?php endforeach ?>
@@ -96,8 +96,8 @@
                             <year><?= $page->issue_date()->toDate('Y') ?></year>
                         </publication_date>
                         <doi_data>
-                            <doi><?php $essay->doi() ?></doi>
-                            <resource><?php $essay->url() ?></resource>
+                            <doi><?= $essay->doi() ?></doi>
+                            <resource><?= $essay->url() ?></resource>
                         </doi_data>
                     </journal_article>
                 <?php endif ?>
