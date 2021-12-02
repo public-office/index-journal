@@ -42,7 +42,7 @@
                     <?php foreach ($subPage->children()->listed() as $essay) : ?>
                         <journal_article publication_type="full_text">
                             <titles>
-                                <title><?= $essay->title() ?></title>
+                                <title><?= $essay->title() ?><?php if ($essay->subtitle()->isNotEmpty()) : ?>: <?= $essay->subtitle() ?><?php endif ?></title>
                             </titles>
                             <contributors>
                                 <?php foreach ($essay->authors()->toStructure() as $author) : ?>
