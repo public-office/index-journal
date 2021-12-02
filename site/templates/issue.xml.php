@@ -41,7 +41,7 @@
 
                 // if the subPage has children – i.e., it is a 'section' – then get essays in the section
                 <?php if ($subPage->hasChildren()) : ?>
-                    <?php foreach ($page->children() as $essay) : ?>
+                    <?php foreach ($subPage->children() as $essay) : ?>
                         <journal_article publication_type="full_text">
                             <titles>
                                 <title><?php $essay->title() ?></title>
@@ -79,7 +79,7 @@
                             <title><?php $essay->title() ?></title>
                         </titles>
                         <contributors>
-                            <?php foreach ($page->authors()->toStructure() as $author) : ?>
+                            <?php foreach ($essay->authors()->toStructure() as $author) : ?>
                                 <person_name sequence="first" contributor_role="author">
                                     <given_name><?php $author->first_name() ?></given_name>
                                     <surname><?php $author->last_name() ?></surname>
