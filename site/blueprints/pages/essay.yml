@@ -19,6 +19,9 @@ fields:
       last_name:
         label: Last Name/s
         type: text
+      orcid:
+        label: ORCID
+        type: text
   doi:
     label: DOI
     type: text
