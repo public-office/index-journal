@@ -1,5 +1,6 @@
 <doi_batch xmlns="http://www.crossref.org/schema/4.4.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.4.2" xsi:schemaLocation="http://www.crossref.org/schema/4.4.2 http://www.crossref.org/schema/deposit/crossref4.4.2.xsd">
     <script />
+
     <head>
         <doi_batch_id>index-journal-<?php echo date("YmdHis") ?></doi_batch_id>
         <timestamp><?php echo date("YmdHis") ?></timestamp>
@@ -23,18 +24,18 @@
             </journal_metadata>
             <journal_issue>
                 <publication_date media_type="print">
-                    <year>2020</year>
+                    <year><?= $page->issue_date()->toDate('Y') ?></year>
                 </publication_date>
                 <publication_date media_type="online">
-                    <year>2020</year>
+                    <year><?= $page->issue_date()->toDate('Y') ?></year>
                 </publication_date>
-                <issue>2</issue>
+                <issue><?= $page->issue_num()?></issue>
                 <doi_data>
-                    <doi>10.38030/index-journal.2020.2</doi>
+                    <doi><?= $page->issue_doi() ?>/doi>
                     <resource>http://index-journal.org/issues/law</resource>
                 </doi_data>
             </journal_issue>
-            <!--  ==============  -->
+// articles
             <journal_article publication_type="full_text">
                 <titles>
                     <title>Editors' Introduction</title>
