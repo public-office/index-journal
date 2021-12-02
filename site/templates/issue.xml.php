@@ -36,8 +36,9 @@
                 </doi_data>
             </journal_issue>
 
-            <?php foreach ($page->children() as $subPage) : ?>
+            <?php foreach ($page->children()->listed() as $subPage) : ?>
                 <?php if ($subPage->hasChildren()) : ?>
+                    <!-- if it is a Section, then loop each essay in section -->
                     <?php foreach ($subPage->children()->listed() as $essay) : ?>
                         <journal_article publication_type="full_text">
                             <titles>
@@ -67,10 +68,11 @@
                         </journal_article>
                     <?php endforeach ?>
 
-                    <!-- if it is not a Section, then it is an Essay — so just print the contents of the the Essay -->
+                    
                 <?php else :
                     $essay = $subPage
                 ?>
+                <!-- if it is not a Section, then it is an Essay — so just print the contents of the the Essay -->
                     <journal_article publication_type="full_text">
                         <titles>
                             <title><?php $essay->title() ?></title>
