@@ -35,10 +35,8 @@
                     <resource><? $page->url() ?></resource>
                 </doi_data>
             </journal_issue>
-
             <?php foreach ($page->children()->listed() as $subPage) : ?>
                 <?php if ($subPage->hasChildren()) : ?>
-                    <!-- if it is a Section, then loop each essay in section -->
                     <?php foreach ($subPage->children()->listed() as $essay) : ?>
                         <journal_article publication_type="full_text">
                             <titles>
@@ -76,8 +74,6 @@
                             </doi_data>
                         </journal_article>
                     <?php endforeach ?>
-
-
                 <?php else :
                     $essay = $subPage
                 ?>
