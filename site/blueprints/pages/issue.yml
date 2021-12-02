@@ -35,6 +35,14 @@ sections:
         label: Issue color
         type: text
         width: 1/2
+      issue_doi:
+        label: Issue DOI
+        type: text
+        width: 1/2
+      issue_date:
+        label: Issue Date
+        type: date
+        width: 1/2
   issue_type:
     headline: Type
     type: fields
