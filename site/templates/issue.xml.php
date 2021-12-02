@@ -37,11 +37,8 @@
             </journal_issue>
 
             <?php foreach ($page->children() as $subPage) : ?>
-
-
-                // if the subPage has children – i.e., it is a 'section' – then get essays in the section
                 <?php if ($subPage->hasChildren()) : ?>
-                    <?php foreach ($subPage->children() as $essay) : ?>
+                    <?php foreach ($subPage->children()->listed() as $essay) : ?>
                         <journal_article publication_type="full_text">
                             <titles>
                                 <title><?php $essay->title() ?></title>
