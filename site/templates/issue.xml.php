@@ -45,8 +45,17 @@
                                 <title><?= $essay->title() ?><?php if ($essay->subtitle()->isNotEmpty()) : ?>: <?= $essay->subtitle() ?><?php endif ?></title>
                             </titles>
                             <contributors>
-                                <?php foreach ($essay->authors()->toStructure() as $author) : ?>
+                                <?php foreach ($essay->authors()->toStructure()->slice(0, 1) as $author) : ?>
                                     <person_name sequence="first" contributor_role="author">
+                                        <given_name><?= $author->first_name() ?></given_name>
+                                        <surname><?= $author->last_name() ?></surname>
+                                        <?php if ($author->orcid()->isNotEmpty()) : ?>
+                                            <ORCID><?= $author->orcid() ?></ORCID>
+                                        <?php endif ?>
+                                    </person_name>
+                                <?php endforeach ?>
+                                <?php foreach ($essay->authors()->toStructure()->slice(1) as $author) : ?>
+                                    <person_name sequence="additional" contributor_role="author">
                                         <given_name><?= $author->first_name() ?></given_name>
                                         <surname><?= $author->last_name() ?></surname>
                                         <?php if ($author->orcid()->isNotEmpty()) : ?>
@@ -68,7 +77,7 @@
                         </journal_article>
                     <?php endforeach ?>
 
-                    
+
                 <?php else :
                     $essay = $subPage
                 ?>
@@ -79,6 +88,15 @@
                         <contributors>
                             <?php foreach ($essay->authors()->toStructure() as $author) : ?>
                                 <person_name sequence="first" contributor_role="author">
+                                    <given_name><?= $author->first_name() ?></given_name>
+                                    <surname><?= $author->last_name() ?></surname>
+                                    <?php if ($author->orcid()->isNotEmpty()) : ?>
+                                        <ORCID><?= $author->orcid() ?></ORCID>
+                                    <?php endif ?>
+                                </person_name>
+                            <?php endforeach ?>
+                            <?php foreach ($essay->authors()->toStructure()->slice(1) as $author) : ?>
+                                <person_name sequence="additional" contributor_role="author">
                                     <given_name><?= $author->first_name() ?></given_name>
                                     <surname><?= $author->last_name() ?></surname>
                                     <?php if ($author->orcid()->isNotEmpty()) : ?>
