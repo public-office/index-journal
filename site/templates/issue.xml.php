@@ -45,7 +45,7 @@
                                 <title><?= $essay->title() ?></title>
                             </titles>
                             <contributors>
-                                <?= foreach ($essay->authors()->toStructure() as $author) : ?>
+                                <?php foreach ($essay->authors()->toStructure() as $author) : ?>
                                     <person_name sequence="first" contributor_role="author">
                                         <given_name><?= $author->first_name() ?></given_name>
                                         <surname><?= $author->last_name() ?></surname>
