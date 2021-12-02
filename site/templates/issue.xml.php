@@ -74,7 +74,7 @@
 
                     // if it is not a Section, then it is an Essay — so just print the contents of the the Essay
                 <?php else :
-                        $subPage = $essay
+                         $essay = $subPage
                 ?>
                     <?= $essay->title() ?>
                 <?php endif ?>
