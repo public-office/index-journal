@@ -10,7 +10,7 @@ fields:
     type: text
     width: 1/2
   authors:
-    label: Exhibitions
+    label: Authors
     type: structure
     fields:
       first_name:
