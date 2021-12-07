@@ -1,4 +1,3 @@
-<?php echo '<?xml version="1.0" encoding="UTF-8"?>' ?>
 <doi_batch xmlns="http://www.crossref.org/schema/4.4.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.4.2" xsi:schemaLocation="http://www.crossref.org/schema/4.4.2 http://www.crossref.org/schema/deposit/crossref4.4.2.xsd">
 
     <head>
