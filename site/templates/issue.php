@@ -77,11 +77,10 @@
 <div class="issue-overlay">
   <span class="issue-overlay-close">(close)</span>
   <img src="<?= $page->issue_image()->toFile()->url() ?>" alt="">
-  <figcaption><?= $section->wipe_img_caption() ?></figcaption>
   <? $sections = $page->cfp_builder()->toStructure() ?>
-  <? foreach ($sections as $section) : ?>
-    <p style="text-indent: 0; text-align: center; max-width: 80%; font-size: 90%; margin: 1em auto; position: relative; "><?= $section->wipe_img_caption() ?></p>
-  <? endforeach ?>
+  <figcaption style="text-align: center;max-width: 78%;">
+    <? foreach ($sections as $section) : ?><?= $section->wipe_img_caption() ?> <? endforeach ?>
+  </figcaption>
 </div>
 </body>
 
