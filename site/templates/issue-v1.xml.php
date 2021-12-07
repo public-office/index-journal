@@ -17,11 +17,9 @@
                 <issn media_type="electronic">26524740</issn>
                 <doi_data>
                     <doi>10.38030/index-journal</doi>
-                    <timestamp><?php echo date("YmdHis") ?></timestamp>
                     <resource>http://www.index-journal.org/</resource>
                 </doi_data>
             </journal_metadata>
-
             <journal_issue>
                 <publication_date media_type="print">
                     <year><?= $page->issue_date()->toDate('Y') ?></year>
@@ -35,7 +33,6 @@
                     <resource><? $page->url() ?></resource>
                 </doi_data>
             </journal_issue>
-            
             <?php foreach ($page->children()->listed() as $subPage) : ?>
                 <?php if ($subPage->hasChildren()) : ?>
                     <?php foreach ($subPage->children()->listed() as $essay) : ?>

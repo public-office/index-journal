@@ -1,7 +1,5 @@
-<doi_batch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.crossref.org/schema/5.3.0 ../../schemas/crossref5.3.0.xsd"
-    xmlns="http://www.crossref.org/schema/5.3.0" xmlns:jats="http://www.ncbi.nlm.nih.gov/JATS1"
-    xmlns:fr="http://www.crossref.org/fundref.xsd" version="5.3.0" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+<doi_batch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.crossref.org/schema/5.3.0 ../../schemas/crossref5.3.0.xsd" xmlns="http://www.crossref.org/schema/5.3.0" xmlns:jats="http://www.ncbi.nlm.nih.gov/JATS1" xmlns:fr="http://www.crossref.org/fundref.xsd" version="5.3.0" xmlns:mml="http://www.w3.org/1998/Math/MathML">
+
     <head>
         <doi_batch_id>index-journal-<?php echo date("YmdHis") ?></doi_batch_id>
         <timestamp>2021010100000000</timestamp>
@@ -9,23 +7,14 @@
             <depositor_name>indj</depositor_name>
             <email_address>editors@index-journal.org</email_address>
         </depositor>
-        <!-- <registrant>Society of Metadata Idealists</registrant> -->
     </head>
+
     <body>
         <journal>
             <journal_metadata language="en" reference_distribution_opts="any">
                 <full_title>Index Journal</full_title>
                 <abbrev_title>Index</abbrev_title>
                 <issn media_type="electronic">2652-4740</issn>
-                <!-- <coden>xyIUB8</coden> -->
-                <!-- <archive_locations>
-                    <archive name="Portico"/>
-                    <archive name="CLOCKSS"/>
-                    <archive name="DWT"/>
-                    <archive name="Internet Archive"/>
-                    <archive name="KB"/>
-                    <archive name="LOCKSS"/>
-                </archive_locations> -->
                 <doi_data>
                     <doi>10.38030/index-journal</doi>
                     <timestamp><?php echo date("YmdHis") ?></timestamp>
@@ -34,7 +23,6 @@
             </journal_metadata>
 
             <journal_issue>
-                <!-- contributors and title are mostly relevant for special issues that have guest editors -->
                 <contributors>
                     <?php foreach ($page->editors()->toStructure()->slice(0, 1) as $editor) : ?>
                         <person_name sequence="first" contributor_role="editor">
@@ -56,7 +44,7 @@
                     <?php endforeach ?>
                 </contributors>
                 <titles>
-                    <title><?php $page->title() ?></title> 
+                    <title><?php $page->title() ?></title>
                 </titles>
                 <publication_date media_type="online">
                     <month><?= $page->issue_date()->toDate('m') ?></month>
@@ -69,16 +57,16 @@
                     <resource><? $page->url() ?></resource>
                 </doi_data>
             </journal_issue>
-
-<!-- aarticle state -->
-<!--  -->
-<?php foreach ($page->children()->listed() as $subPage) : ?>
+            <?php foreach ($page->children()->listed() as $subPage) : ?>
                 <?php if ($subPage->hasChildren()) : ?>
                     <?php foreach ($subPage->children()->listed() as $essay) : ?>
                         <journal_article publication_type="full_text">
                             <titles>
                                 <title><?= $essay->title() ?><?php if ($essay->subtitle()->isNotEmpty()) : ?>: <?= $essay->subtitle() ?><?php endif ?></title>
                             </titles>
+                            <jats:abstract>
+                                <jats:p xml:lang="en"><?= $essay->abstract() ?></jats:p>
+                            </jats:abstract>
                             <contributors>
                                 <?php foreach ($essay->authors()->toStructure()->slice(0, 1) as $author) : ?>
                                     <person_name sequence="first" contributor_role="author">
@@ -118,8 +106,11 @@
                         <titles>
                             <title><?= $subPage->title() ?></title>
                         </titles>
+                        <jats:abstract>
+                            <jats:p xml:lang="en"><?= $essay->abstract() ?></jats:p>
+                        </jats:abstract>
                         <contributors>
-                            <?php foreach ($essay->authors()->toStructure()->slice(0,1) as $author) : ?>
+                            <?php foreach ($essay->authors()->toStructure()->slice(0, 1) as $author) : ?>
                                 <person_name sequence="first" contributor_role="author">
                                     <given_name><?= $author->first_name() ?></given_name>
                                     <surname><?= $author->last_name() ?></surname>
@@ -151,12 +142,6 @@
                     </journal_article>
                 <?php endif ?>
             <?php endforeach ?>
-
-
-
-<!-- article end -->
-
-
-        </journal>        
+        </journal>
     </body>
 </doi_batch>
