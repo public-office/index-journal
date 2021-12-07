@@ -18,7 +18,7 @@
                 <issn media_type="electronic">26524740</issn>
                 <doi_data>
                     <doi>10.38030/index-journal</doi>
-                    <resource><?= $page->url() ?></resource>
+                    <resource><?= $site->url() ?></resource>
                 </doi_data>
             </journal_metadata>
             <journal_issue>
@@ -53,7 +53,8 @@
                 <issue><?= $page->issue_num() ?></issue>
                 <doi_data>
                     <doi><?= $page->issue_doi() ?></doi>
-                    <resource><? $page->url() ?></resource>
+                    <resource><?= $page->url() ?></resource>
+
                 </doi_data>
             </journal_issue>
             <?php foreach ($page->children()->listed() as $subPage) : ?>
