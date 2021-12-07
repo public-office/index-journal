@@ -40,9 +40,14 @@
                             <titles>
                                 <title><?= $essay->title() ?><?php if ($essay->subtitle()->isNotEmpty()) : ?>: <?= $essay->subtitle() ?><?php endif ?></title>
                             </titles>
-                            <jats:abstract>
-                                <jats:p xml:lang="en"><?= $essay->abstract() ?></jats:p>
-                            </jats:abstract>
+                            <?php echo '<jats:abstract>'?>
+                                <?php echo '<jats:p xml:lang="en">'?>
+                                
+                                <?= $essay->abstract() ?>
+
+                                <?php echo ' </jats:p>'?>
+                           
+                            <?php echo '</jats:abstract>'?>
                             <contributors>
                                 <?php foreach ($essay->authors()->toStructure()->slice(0, 1) as $author) : ?>
                                     <person_name sequence="first" contributor_role="author">
