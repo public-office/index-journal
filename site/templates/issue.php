@@ -71,7 +71,6 @@
         </div>
       </div>
     </div>
-
   <? endforeach ?>
 </main>
 <div class="issue-overlay">
