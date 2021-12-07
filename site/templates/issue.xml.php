@@ -17,7 +17,7 @@
                 <issn media_type="electronic">26524740</issn>
                 <doi_data>
                     <doi>10.38030/index-journal</doi>
-                    <resource>http://www.index-journal.org/</resource>
+                    <resource><?= $page->url() ?></resource>
                 </doi_data>
             </journal_metadata>
             <journal_issue>
@@ -40,6 +40,9 @@
                             <titles>
                                 <title><?= $essay->title() ?><?php if ($essay->subtitle()->isNotEmpty()) : ?>: <?= $essay->subtitle() ?><?php endif ?></title>
                             </titles>
+                            <jats:abstract>
+                                <jats:p xml:lang="en"><?= $essay->abstract() ?></jats:p>
+                            </jats:abstract>
                             <contributors>
                                 <?php foreach ($essay->authors()->toStructure()->slice(0, 1) as $author) : ?>
                                     <person_name sequence="first" contributor_role="author">
@@ -79,6 +82,9 @@
                         <titles>
                             <title><?= $subPage->title() ?></title>
                         </titles>
+                        <jats:abstract>
+                                <jats:p xml:lang="en"><?= $essay->abstract() ?></jats:p>
+                            </jats:abstract>
                         <contributors>
                             <?php foreach ($essay->authors()->toStructure()->slice(0,1) as $author) : ?>
                                 <person_name sequence="first" contributor_role="author">
