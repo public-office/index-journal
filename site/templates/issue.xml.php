@@ -60,23 +60,104 @@
                     <title><?php $page->title() ?></title> 
                 </titles>
                 <publication_date media_type="online">
-                    <month>07</month>
-                    <day>07</day>
-                    <year>2021</year>
+                    <month><?= $page->issue_date()->toDate('m') ?></month>
+                    <day><?= $page->issue_date()->toDate('d') ?></day>
+                    <year><?= $page->issue_date()->toDate('Y') ?></year>
                 </publication_date>
-                <journal_volume>
-                    <volume>4</volume>
-                    <doi_data>
-                        <doi>10.32013/U.4fAZy4</doi>
-                        <resource>https://gitlab.com/crossref/schema</resource>
-                    </doi_data>
-                </journal_volume>
-                <issue>1</issue>
+                <issue><?= $page->issue_num() ?></issue>
                 <doi_data>
-                    <doi>10.32013/B2Y7qLJ</doi>
-                    <resource>https://gitlab.com/crossref/schema</resource>
+                    <doi><?= $page->issue_doi() ?></doi>
+                    <resource><? $page->url() ?></resource>
                 </doi_data>
             </journal_issue>
+
+<!-- aarticle state -->
+<!--  -->
+<?php foreach ($page->children()->listed() as $subPage) : ?>
+                <?php if ($subPage->hasChildren()) : ?>
+                    <?php foreach ($subPage->children()->listed() as $essay) : ?>
+                        <journal_article publication_type="full_text">
+                            <titles>
+                                <title><?= $essay->title() ?><?php if ($essay->subtitle()->isNotEmpty()) : ?>: <?= $essay->subtitle() ?><?php endif ?></title>
+                            </titles>
+                            <contributors>
+                                <?php foreach ($essay->authors()->toStructure()->slice(0, 1) as $author) : ?>
+                                    <person_name sequence="first" contributor_role="author">
+                                        <given_name><?= $author->first_name() ?></given_name>
+                                        <surname><?= $author->last_name() ?></surname>
+                                        <?php if ($author->orcid()->isNotEmpty()) : ?>
+                                            <ORCID><?= $author->orcid() ?></ORCID>
+                                        <?php endif ?>
+                                    </person_name>
+                                <?php endforeach ?>
+                                <?php foreach ($essay->authors()->toStructure()->slice(1) as $author) : ?>
+                                    <person_name sequence="additional" contributor_role="author">
+                                        <given_name><?= $author->first_name() ?></given_name>
+                                        <surname><?= $author->last_name() ?></surname>
+                                        <?php if ($author->orcid()->isNotEmpty()) : ?>
+                                            <ORCID><?= $author->orcid() ?></ORCID>
+                                        <?php endif ?>
+                                    </person_name>
+                                <?php endforeach ?>
+                            </contributors>
+                            <publication_date media_type="print">
+                                <year><?= $page->issue_date()->toDate('Y') ?></year>
+                            </publication_date>
+                            <publication_date media_type="online">
+                                <year><?= $page->issue_date()->toDate('Y') ?></year>
+                            </publication_date>
+                            <doi_data>
+                                <doi><?= $essay->doi() ?></doi>
+                                <resource><?= $essay->url() ?></resource>
+                            </doi_data>
+                        </journal_article>
+                    <?php endforeach ?>
+                <?php else :
+                    $essay = $subPage
+                ?>
+                    <journal_article publication_type="full_text">
+                        <titles>
+                            <title><?= $subPage->title() ?></title>
+                        </titles>
+                        <contributors>
+                            <?php foreach ($essay->authors()->toStructure()->slice(0,1) as $author) : ?>
+                                <person_name sequence="first" contributor_role="author">
+                                    <given_name><?= $author->first_name() ?></given_name>
+                                    <surname><?= $author->last_name() ?></surname>
+                                    <?php if ($author->orcid()->isNotEmpty()) : ?>
+                                        <ORCID><?= $author->orcid() ?></ORCID>
+                                    <?php endif ?>
+                                </person_name>
+                            <?php endforeach ?>
+                            <?php foreach ($essay->authors()->toStructure()->slice(1) as $author) : ?>
+                                <person_name sequence="additional" contributor_role="author">
+                                    <given_name><?= $author->first_name() ?></given_name>
+                                    <surname><?= $author->last_name() ?></surname>
+                                    <?php if ($author->orcid()->isNotEmpty()) : ?>
+                                        <ORCID><?= $author->orcid() ?></ORCID>
+                                    <?php endif ?>
+                                </person_name>
+                            <?php endforeach ?>
+                        </contributors>
+                        <publication_date media_type="print">
+                            <year><?= $page->issue_date()->toDate('Y') ?></year>
+                        </publication_date>
+                        <publication_date media_type="online">
+                            <year><?= $page->issue_date()->toDate('Y') ?></year>
+                        </publication_date>
+                        <doi_data>
+                            <doi><?= $essay->doi() ?></doi>
+                            <resource><?= $essay->url() ?></resource>
+                        </doi_data>
+                    </journal_article>
+                <?php endif ?>
+            <?php endforeach ?>
+
+
+
+<!-- article end -->
+
+
         </journal>        
     </body>
 </doi_batch>
