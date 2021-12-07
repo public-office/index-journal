@@ -47,6 +47,19 @@ sections:
         label: Issue Number
         type: number
         width: 1/3
+      editors:
+        label: Editors
+        type: structure
+        fields:
+          first_name:
+            label: First Name
+            type: text
+          last_name:
+            label: Last Name/s
+            type: text
+          orcid:
+            label: ORCID
+            type: text
   issue_type:
     headline: Type
     type: fields
