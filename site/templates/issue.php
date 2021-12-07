@@ -2,7 +2,7 @@
 
 <main>
 <style>
-  .doi{
+  .issue-doi{
     position:fixed;
     bottom:0;
     left:0;
@@ -10,15 +10,15 @@
 
   }
 
-  .issue{
+  .issue-issue{
     position:fixed;
     bottom:0;
     right:0;
     padding: 1rem;
   }
 </style>
-  <div class="doi"><h1> <?= $page->issue_doi() ?></h1></div>
-  <div class="issue"><h1><?= $page->issue_date()->toDate('d m Y') ?></h1></div>
+  <div class="issue-doi"><h2> <?= $page->issue_doi() ?></h2></div>
+  <div class="issue-issue"><h2><?= $page->issue_date()->toDate('d m Y') ?></h2></div>
 
 
   <? $sections = $page->cfp_builder()->toStructure() ?>
