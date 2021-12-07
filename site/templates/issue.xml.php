@@ -1,5 +1,4 @@
 <doi_batch xmlns="http://www.crossref.org/schema/4.4.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="4.4.2" xsi:schemaLocation="http://www.crossref.org/schema/4.4.2 http://www.crossref.org/schema/deposit/crossref4.4.2.xsd">
-
     <head>
         <doi_batch_id>index-journal-<?php echo date("YmdHis") ?></doi_batch_id>
         <timestamp><?php echo date("YmdHis") ?></timestamp>
@@ -41,14 +40,6 @@
                             <titles>
                                 <title><?= $essay->title() ?><?php if ($essay->subtitle()->isNotEmpty()) : ?>: <?= $essay->subtitle() ?><?php endif ?></title>
                             </titles>
-                            <?php echo '<jats:abstract>' ?>
-                            <?php echo '<jats:p xml:lang="en">' ?>
-
-                            <?= $essay->abstract() ?>
-
-                            <?php echo ' </jats:p>' ?>
-
-                            <?php echo '</jats:abstract>' ?>
                             <contributors>
                                 <?php foreach ($essay->authors()->toStructure()->slice(0, 1) as $author) : ?>
                                     <person_name sequence="first" contributor_role="author">
@@ -88,16 +79,8 @@
                         <titles>
                             <title><?= $subPage->title() ?></title>
                         </titles>
-                        <?php echo '<jats:abstract>' ?>
-                        <?php echo '<jats:p xml:lang="en">' ?>
-
-                        <?= $essay->abstract() ?>
-
-                        <?php echo ' </jats:p>' ?>
-
-                        <?php echo '</jats:abstract>' ?>
                         <contributors>
-                            <?php foreach ($essay->authors()->toStructure()->slice(0, 1) as $author) : ?>
+                            <?php foreach ($essay->authors()->toStructure()->slice(0,1) as $author) : ?>
                                 <person_name sequence="first" contributor_role="author">
                                     <given_name><?= $author->first_name() ?></given_name>
                                     <surname><?= $author->last_name() ?></surname>
