@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <doi_batch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.crossref.org/schema/5.3.0 ../../schemas/crossref5.3.0.xsd"
     xmlns="http://www.crossref.org/schema/5.3.0" xmlns:jats="http://www.ncbi.nlm.nih.gov/JATS1"
