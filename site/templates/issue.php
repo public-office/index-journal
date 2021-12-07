@@ -1,26 +1,6 @@
 <? snippet('header') ?>
 
 <main>
-<style>
-  .issue-doi{
-    position:fixed;
-    bottom:0;
-    left:0;
-    padding: 1rem;
-
-  }
-
-  .issue-issue{
-    position:fixed;
-    bottom:0;
-    right:0;
-    padding: 1rem;
-  }
-</style>
-  <div class="issue-doi"><h2> <?= $page->issue_doi() ?></h2></div>
-  <div class="issue-issue"><h2><?= $page->issue_date()->toDate('d m Y') ?></h2></div>
-
-
   <? $sections = $page->cfp_builder()->toStructure() ?>
   <? foreach ($sections as $section) : ?>
     <section class="initial ">
@@ -78,7 +58,39 @@
           <p style="text-indent: 0; text-align: center; max-width: 80%; font-size: 90%; margin: 1em auto; position: relative; "><?= $section->wipe_img_caption() ?></p>
         <? endforeach ?>
       </section>
+      <style>
+        .issue-doi {
+          /* position: fixed;
+          bottom: 0;
+          left: 0;
+          padding: 1rem; */
+
+        }
+
+        .issue-issue {
+          /* position: fixed;
+          bottom: 0;
+          right: 0;
+          padding: 1rem; */
+        }
+
+        .meta-container{
+          padding: 1rem;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+      </style>
+      <div class="meta-container">
+        <div class="issue-doi">
+          <h2 style="margin:0"> <?= $page->issue_doi() ?></h2>
+        </div>
+        <div class="issue-issue">
+          <h2 style="margin:0"><?= $page->issue_date()->toDate('d m Y') ?></h2>
+        </div>
+      </div>
     </div>
+
   <? endforeach ?>
 </main>
 <div class="issue-overlay">
