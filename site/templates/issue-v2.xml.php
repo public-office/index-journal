@@ -2,25 +2,26 @@
 
     <head>
         <doi_batch_id>index-journal-<?php echo date("YmdHis") ?></doi_batch_id>
-        <timestamp><?php echo date("YmdHis") ?></timestamp>
+        <timestamp>2021010100000000</timestamp>
         <depositor>
             <depositor_name>indj</depositor_name>
             <email_address>editors@index-journal.org</email_address>
         </depositor>
-        <registrant>WEB-FORM</registrant>
     </head>
 
     <body>
         <journal>
-            <journal_metadata>
+            <journal_metadata language="en" reference_distribution_opts="any">
                 <full_title>Index Journal</full_title>
                 <abbrev_title>Index</abbrev_title>
-                <issn media_type="electronic">26524740</issn>
+                <issn media_type="electronic">2652-4740</issn>
                 <doi_data>
                     <doi>10.38030/index-journal</doi>
-                    <resource><?= $site->url() ?></resource>
+                    <timestamp><?php echo date("YmdHis") ?></timestamp>
+                    <resource>http://www.index-journal.org/</resource>
                 </doi_data>
             </journal_metadata>
+
             <journal_issue>
                 <contributors>
                     <?php foreach ($page->editors()->toStructure()->slice(0, 1) as $editor) : ?>
@@ -53,8 +54,7 @@
                 <issue><?= $page->issue_num() ?></issue>
                 <doi_data>
                     <doi><?= $page->issue_doi() ?></doi>
-                    <resource><?= $page->url() ?></resource>
-
+                    <resource><? $page->url() ?></resource>
                 </doi_data>
             </journal_issue>
             <?php foreach ($page->children()->listed() as $subPage) : ?>
@@ -64,6 +64,9 @@
                             <titles>
                                 <title><?= $essay->title() ?><?php if ($essay->subtitle()->isNotEmpty()) : ?>: <?= $essay->subtitle() ?><?php endif ?></title>
                             </titles>
+                            <jats:abstract>
+                                <jats:p xml:lang="en"><?= $essay->abstract() ?></jats:p>
+                            </jats:abstract>
                             <contributors>
                                 <?php foreach ($essay->authors()->toStructure()->slice(0, 1) as $author) : ?>
                                     <person_name sequence="first" contributor_role="author">
@@ -103,6 +106,9 @@
                         <titles>
                             <title><?= $subPage->title() ?></title>
                         </titles>
+                        <jats:abstract>
+                            <jats:p xml:lang="en"><?= $essay->abstract() ?></jats:p>
+                        </jats:abstract>
                         <contributors>
                             <?php foreach ($essay->authors()->toStructure()->slice(0, 1) as $author) : ?>
                                 <person_name sequence="first" contributor_role="author">
