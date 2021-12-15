@@ -1,7 +1,7 @@
 <?php
 
 use Kirby\Cms\File;
-use Kirby\Form\Form;
+use Kirby\Cms\Form;
 
 /**
  * File
@@ -18,7 +18,7 @@ return [
             return $file->dimensions()->toArray();
         },
         'dragText' => function (File $file) {
-            return $file->panel()->dragText();
+            return $file->dragText();
         },
         'exists' => function (File $file) {
             return $file->exists();
@@ -33,7 +33,7 @@ return [
             return $file->id();
         },
         'link' => function (File $file) {
-            return $file->panel()->url(true);
+            return $file->panelUrl(true);
         },
         'mime' => function (File $file) {
             return $file->mime();
@@ -48,7 +48,7 @@ return [
             return $file->next();
         },
         'nextWithTemplate' => function (File $file) {
-            $files = $file->templateSiblings()->sorted();
+            $files = $file->templateSiblings()->sortBy('sort', 'asc', 'filename', 'asc');
             $index = $files->indexOf($file);
 
             return $files->nth($index + 1);
@@ -57,26 +57,22 @@ return [
             return $file->niceSize();
         },
         'options' => function (File $file) {
-            return $file->panel()->options();
+            return $file->panelOptions();
         },
         'panelIcon' => function (File $file) {
-            // TODO: remove in 3.7.0
-            // @codeCoverageIgnoreStart
-            deprecated('The API field file.panelIcon has been deprecated and will be removed in 3.7.0. Use file.panelImage instead');
-            return $file->panel()->image();
-        // @codeCoverageIgnoreEnd
+            return $file->panelIcon();
         },
         'panelImage' => function (File $file) {
-            return $file->panel()->image();
+            return $file->panelImage();
         },
         'panelUrl' => function (File $file) {
-            return $file->panel()->url(true);
+            return $file->panelUrl(true);
         },
         'prev' => function (File $file) {
             return $file->prev();
         },
         'prevWithTemplate' => function (File $file) {
-            $files = $file->templateSiblings()->sorted();
+            $files = $file->templateSiblings()->sortBy('sort', 'asc', 'filename', 'asc');
             $index = $files->indexOf($file);
 
             return $files->nth($index - 1);
@@ -110,7 +106,7 @@ return [
             return $file->type();
         },
         'url' => function (File $file) {
-            return $file->url();
+            return $file->url(true);
         },
     ],
     'type'  => 'Kirby\Cms\File',

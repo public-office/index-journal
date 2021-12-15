@@ -2,7 +2,6 @@
 
 namespace Kirby\Toolkit;
 
-use Kirby\Filesystem\F;
 use Throwable;
 
 /**
@@ -19,21 +18,23 @@ class Tpl
     /**
      * Renders the template
      *
-     * @param string $file
-     * @param array $data
+     * @param string $__file
+     * @param array $__data
      * @return string
      */
-    public static function load(string $file = null, array $data = []): string
+    public static function load(string $__file = null, array $__data = []): string
     {
-        if (is_file($file) === false) {
+        if (file_exists($__file) === false) {
             return '';
         }
 
-        ob_start();
-
         $exception = null;
+
+        ob_start();
+        extract($__data);
+
         try {
-            F::load($file, null, $data);
+            require $__file;
         } catch (Throwable $e) {
             $exception = $e;
         }

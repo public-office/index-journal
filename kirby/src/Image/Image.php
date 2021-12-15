@@ -2,20 +2,22 @@
 
 namespace Kirby\Image;
 
-use Kirby\Filesystem\File;
+use Exception;
+use Kirby\Http\Response;
+use Kirby\Toolkit\File;
 use Kirby\Toolkit\Html;
+use Kirby\Toolkit\I18n;
+use Kirby\Toolkit\Mime;
+use Kirby\Toolkit\V;
 
 /**
- * A representation of an image file
+ * A representation of an image/media file
  * with dimensions, optional exif data and
  * a connection to our darkroom classes to resize/crop
  * images.
  *
- * Extends the `Kirby\Filesystem\File` class with
- * those image-specific methods.
- *
  * @package   Kirby Image
- * @author    Nico Hoffmann <nico@getkirby.com>
+ * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier GmbH
  * @license   https://opensource.org/licenses/MIT
@@ -23,62 +25,55 @@ use Kirby\Toolkit\Html;
 class Image extends File
 {
     /**
-     * @var \Kirby\Image\Exif|null
+     * optional url where the file is reachable
+     * @var string
+     */
+    protected $url;
+
+    /**
+     * @var Exif|null
      */
     protected $exif;
 
     /**
-     * @var \Kirby\Image\Dimensions|null
+     * @var Dimensions|null
      */
     protected $dimensions;
 
     /**
-     * @var array
-     */
-    public static $resizableTypes = [
-        'jpg',
-        'jpeg',
-        'gif',
-        'png',
-        'webp'
-    ];
-
-    /**
-     * @var array
-     */
-    public static $viewableTypes = [
-        'avif',
-        'jpg',
-        'jpeg',
-        'gif',
-        'png',
-        'svg',
-        'webp'
-    ];
-
-    /**
-     * Validation rules to be used for `::match()`
+     * Constructor
      *
-     * @var array
+     * @param string $root
+     * @param string|null $url
      */
-    public static $validations = [
-        'maxsize'     => ['size',   'max'],
-        'minsize'     => ['size',   'min'],
-        'maxwidth'    => ['width',  'max'],
-        'minwidth'    => ['width',  'min'],
-        'maxheight'   => ['height', 'max'],
-        'minheight'   => ['height', 'min'],
-        'orientation' => ['orientation', 'same']
-    ];
+    public function __construct(string $root = null, string $url = null)
+    {
+        parent::__construct($root);
+        $this->url = $url;
+    }
 
     /**
-     * Returns the `<img>` tag for the image object
+     * Improved `var_dump` output
+     *
+     * @return array
+     */
+    public function __debugInfo(): array
+    {
+        return array_merge($this->toArray(), [
+            'dimensions' => $this->dimensions(),
+            'exif'       => $this->exif(),
+        ]);
+    }
+
+    /**
+     * Returns a full link to this file
+     * Perfect for debugging in connection with echo
      *
      * @return string
      */
     public function __toString(): string
     {
-        return $this->html();
+        return $this->root;
     }
 
     /**
@@ -92,13 +87,7 @@ class Image extends File
             return $this->dimensions;
         }
 
-        if (in_array($this->mime(), [
-            'image/jpeg',
-            'image/jp2',
-            'image/png',
-            'image/gif',
-            'image/webp'
-        ])) {
+        if (in_array($this->mime(), ['image/jpeg', 'image/jp2', 'image/png', 'image/gif', 'image/webp'])) {
             return $this->dimensions = Dimensions::forImage($this->root);
         }
 
@@ -109,6 +98,18 @@ class Image extends File
         return $this->dimensions = new Dimensions(0, 0);
     }
 
+    /*
+     * Automatically sends all needed headers for the file to be downloaded
+     * and echos the file's content
+     *
+     * @param  string|null $filename  Optional filename for the download
+     * @return string
+     */
+    public function download($filename = null): string
+    {
+        return Response::download($this->root, $filename ?? $this->filename());
+    }
+
     /**
      * Returns the exif object for this file (if image)
      *
@@ -116,7 +117,24 @@ class Image extends File
      */
     public function exif()
     {
-        return $this->exif ??= new Exif($this);
+        if ($this->exif !== null) {
+            return $this->exif;
+        }
+        $this->exif = new Exif($this);
+        return $this->exif;
+    }
+
+    /**
+     * Sends an appropriate header for the asset
+     *
+     * @param bool $send
+     * @return \Kirby\Http\Response|string
+     */
+    public function header(bool $send = true)
+    {
+        $response = new Response();
+        $response->type($this->mime());
+        return $send === true ? $response->send() : $response;
     }
 
     /**
@@ -130,8 +148,6 @@ class Image extends File
     }
 
     /**
-     * Converts the file to html
-     *
      * @param array $attr
      * @return string
      */
@@ -181,24 +197,49 @@ class Image extends File
     }
 
     /**
-     * Checks if the file is a resizable image
+     * Runs a set of validations on the image object
      *
+     * @param array $rules
      * @return bool
      */
-    public function isResizable(): bool
+    public function match(array $rules): bool
     {
-        return in_array($this->extension(), static::$resizableTypes) === true;
-    }
+        if (($rules['mime'] ?? null) !== null) {
+            if (Mime::isAccepted($this->mime(), $rules['mime']) !== true) {
+                throw new Exception(I18n::template('error.file.mime.invalid', [
+                    'mime' => $this->mime()
+                ]));
+            }
+        }
 
-    /**
-     * Checks if a preview can be displayed for the file
-     * in the Panel or in the frontend
-     *
-     * @return bool
-     */
-    public function isViewable(): bool
-    {
-        return in_array($this->extension(), static::$viewableTypes) === true;
+        $rules = array_change_key_case($rules);
+
+        $validations = [
+            'maxsize'     => ['size',   'max'],
+            'minsize'     => ['size',   'min'],
+            'maxwidth'    => ['width',  'max'],
+            'minwidth'    => ['width',  'min'],
+            'maxheight'   => ['height', 'max'],
+            'minheight'   => ['height', 'min'],
+            'orientation' => ['orientation', 'same']
+        ];
+
+        foreach ($validations as $key => $arguments) {
+            $rule = $rules[$key] ?? null;
+
+            if ($rule !== null) {
+                $property  = $arguments[0];
+                $validator = $arguments[1];
+
+                if (V::$validator($this->$property(), $rule) === false) {
+                    throw new Exception(I18n::template('error.file.' . $key, [
+                        $property => $rule
+                    ]));
+                }
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -223,20 +264,38 @@ class Image extends File
     }
 
     /**
-     * Converts the object to an array
+     * Converts the media object to a
+     * plain PHP array
      *
      * @return array
      */
     public function toArray(): array
     {
-        $array = array_merge(parent::toArray(), [
+        return array_merge(parent::toArray(), [
             'dimensions' => $this->dimensions()->toArray(),
             'exif'       => $this->exif()->toArray(),
         ]);
+    }
 
-        ksort($array);
+    /**
+     * Converts the entire file array into
+     * a json string
+     *
+     * @return string
+     */
+    public function toJson(): string
+    {
+        return json_encode($this->toArray());
+    }
 
-        return $array;
+    /**
+     * Returns the url
+     *
+     * @return string
+     */
+    public function url()
+    {
+        return $this->url;
     }
 
     /**

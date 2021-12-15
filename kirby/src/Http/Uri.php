@@ -129,7 +129,7 @@ class Uri
     /**
      * Creates a new URI object
      *
-     * @param array|string $props
+     * @param array $props
      * @param array $inject
      */
     public function __construct($props = [], array $inject = [])
@@ -144,10 +144,10 @@ class Uri
 
         // parse the path and extract params
         if (empty($props['path']) === false) {
-            $extract           = Params::extract($props['path']);
-            $props['params'] ??= $extract['params'];
-            $props['path']     = $extract['path'];
-            $props['slash']  ??= $extract['slash'];
+            $extract         = Params::extract($props['path']);
+            $props['params'] = $props['params'] ?? $extract['params'];
+            $props['path']   = $extract['path'];
+            $props['slash']  = $props['slash'] ?? $extract['slash'];
         }
 
         $this->setProperties($this->props = $props);
@@ -222,7 +222,7 @@ class Uri
      * new props.
      *
      * @param array $props
-     * @return static
+     * @return self
      */
     public function clone(array $props = [])
     {
@@ -238,7 +238,7 @@ class Uri
     /**
      * @param array $props
      * @param bool $forwarded
-     * @return static
+     * @return self
      */
     public static function current(array $props = [], bool $forwarded = false)
     {
@@ -246,12 +246,8 @@ class Uri
             return static::$current;
         }
 
-        $uri = Server::get('REQUEST_URI') ?? '';
-        $uri = preg_replace(
-            '!^(http|https)\:\/\/' . Server::get('HTTP_HOST') . '!',
-            '',
-            $uri
-        );
+        $uri = Server::get('REQUEST_URI');
+        $uri = preg_replace('!^(http|https)\:\/\/' . Server::get('HTTP_HOST') . '!', '', $uri);
         $uri = parse_url('http://getkirby.com' . $uri);
 
         $url = new static(array_merge([
@@ -320,7 +316,7 @@ class Uri
      * Tries to convert the internationalized host
      * name to the human-readable UTF8 representation
      *
-     * @return $this
+     * @return self
      */
     public function idn()
     {
@@ -378,7 +374,7 @@ class Uri
 
     /**
      * @param string|null $fragment
-     * @return $this
+     * @return self
      */
     public function setFragment(string $fragment = null)
     {
@@ -388,7 +384,7 @@ class Uri
 
     /**
      * @param string $host
-     * @return $this
+     * @return self
      */
     public function setHost(string $host = null)
     {
@@ -398,7 +394,7 @@ class Uri
 
     /**
      * @param \Kirby\Http\Params|string|array|null $params
-     * @return $this
+     * @return self
      */
     public function setParams($params = null)
     {
@@ -408,7 +404,7 @@ class Uri
 
     /**
      * @param string|null $password
-     * @return $this
+     * @return self
      */
     public function setPassword(string $password = null)
     {
@@ -418,7 +414,7 @@ class Uri
 
     /**
      * @param \Kirby\Http\Path|string|array|null $path
-     * @return $this
+     * @return self
      */
     public function setPath($path = null)
     {
@@ -428,7 +424,7 @@ class Uri
 
     /**
      * @param int|null $port
-     * @return $this
+     * @return self
      */
     public function setPort(int $port = null)
     {
@@ -448,7 +444,7 @@ class Uri
 
     /**
      * @param \Kirby\Http\Query|string|array|null $query
-     * @return $this
+     * @return self
      */
     public function setQuery($query = null)
     {
@@ -458,7 +454,7 @@ class Uri
 
     /**
      * @param string $scheme
-     * @return $this
+     * @return self
      */
     public function setScheme(string $scheme = null)
     {
@@ -475,7 +471,7 @@ class Uri
      * the path when the URI is being built
      *
      * @param bool $slash
-     * @return $this
+     * @return self
      */
     public function setSlash(bool $slash = false)
     {
@@ -485,7 +481,7 @@ class Uri
 
     /**
      * @param string|null $username
-     * @return $this
+     * @return self
      */
     public function setUsername(string $username = null)
     {
@@ -555,7 +551,7 @@ class Uri
      * Tries to convert a URL with an internationalized host
      * name to the machine-readable Punycode representation
      *
-     * @return $this
+     * @return self
      */
     public function unIdn()
     {

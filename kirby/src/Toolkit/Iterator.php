@@ -40,7 +40,7 @@ class Iterator implements IteratorAggregate
      *
      * @return \ArrayIterator
      */
-    public function getIterator(): ArrayIterator
+    public function getIterator()
     {
         return new ArrayIterator($this->data);
     }
@@ -98,7 +98,7 @@ class Iterator implements IteratorAggregate
     }
 
     /**
-     * Moves the cursor to the first element
+     * Moves the cusor to the first element
      */
     public function rewind()
     {
@@ -129,7 +129,7 @@ class Iterator implements IteratorAggregate
      * Tries to find the index number for the given element
      *
      * @param mixed $needle the element to search for
-     * @return int|false the index (int) of the element or false
+     * @return string|false the name of the key or false
      */
     public function indexOf($needle)
     {

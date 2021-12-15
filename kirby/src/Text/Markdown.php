@@ -56,11 +56,11 @@ class Markdown
     /**
      * Parses the given text and returns the HTML
      *
-     * @param string|null $text
+     * @param string $text
      * @param bool $inline
      * @return string
      */
-    public function parse(string $text = null, bool $inline = false): string
+    public function parse(string $text, bool $inline = false): string
     {
         if ($this->options['extra'] === true) {
             $parser = new ParsedownExtra();

@@ -5,7 +5,7 @@ namespace Kirby\Cms;
 use Kirby\Exception\InvalidArgumentException;
 
 /**
- * Trait for image resizing, blurring etc.
+ * Resizing, blurring etc.
  *
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -40,7 +40,7 @@ trait FileModifications
      * Crops the image by the given width and height
      *
      * @param int $width
-     * @param int|null $height
+     * @param int $height
      * @param string|array $options
      * @return \Kirby\Cms\FileVersion|\Kirby\Cms\File
      */
@@ -103,11 +103,10 @@ trait FileModifications
      * Resizes the file with the given width and height
      * while keeping the aspect ratio.
      *
-     * @param int|null $width
-     * @param int|null $height
-     * @param int|null $quality
+     * @param int $width
+     * @param int $height
+     * @param int $quality
      * @return \Kirby\Cms\FileVersion|\Kirby\Cms\File
-     * @throws \Kirby\Exception\InvalidArgumentException
      */
     public function resize(int $width = null, int $height = null, int $quality = null)
     {
@@ -124,7 +123,7 @@ trait FileModifications
      * also be set up in the config with the thumbs.srcsets option.
      * @since 3.1.0
      *
-     * @param array|string|null $sizes
+     * @param array|string $sizes
      * @return string|null
      */
     public function srcset($sizes = null): ?string
@@ -176,7 +175,6 @@ trait FileModifications
      *
      * @param array|null|string $options
      * @return \Kirby\Cms\FileVersion|\Kirby\Cms\File
-     * @throws \Kirby\Exception\InvalidArgumentException
      */
     public function thumb($options = null)
     {
@@ -191,22 +189,10 @@ trait FileModifications
             return $this;
         }
 
-        // fallback to global config options
-        if (isset($options['format']) === false) {
-            if ($format = $this->kirby()->option('thumbs.format')) {
-                $options['format'] = $format;
-            }
-        }
+        $result = $this->kirby()->component('file::version')($this->kirby(), $this, $options);
 
-        $component = $this->kirby()->component('file::version');
-        $result    = $component($this->kirby(), $this, $options);
-
-        if (
-            is_a($result, 'Kirby\Cms\FileVersion') === false &&
-            is_a($result, 'Kirby\Cms\File') === false &&
-            is_a($result, 'Kirby\Filesystem\Asset') === false
-        ) {
-            throw new InvalidArgumentException('The file::version component must return a File, FileVersion or Asset object');
+        if (is_a($result, 'Kirby\Cms\FileVersion') === false && is_a($result, 'Kirby\Cms\File') === false) {
+            throw new InvalidArgumentException('The file::version component must return a File or FileVersion object');
         }
 
         return $result;

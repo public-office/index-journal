@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Data\Data;
-use Kirby\Form\Form;
+use Kirby\Cms\Form;
+use Kirby\Data\Yaml;
 use Kirby\Toolkit\I18n;
 
 return [
@@ -24,14 +24,6 @@ return [
             // be lowercase as well.
             return array_change_key_case($columns);
         },
-
-        /**
-         * Toggles duplicating rows for the structure
-         */
-        'duplicate' => function (bool $duplicate = true) {
-            return $duplicate;
-        },
-
         /**
          * The placeholder text if no items have been added yet
          */
@@ -71,12 +63,6 @@ return [
             return $min;
         },
         /**
-         * Toggles adding to the top or bottom of the list
-         */
-        'prepend' => function (bool $prepend = null) {
-            return $prepend;
-        },
-        /**
          * Toggles drag & drop sorting
          */
         'sortable' => function (bool $sortable = null) {
@@ -110,9 +96,9 @@ return [
             if (empty($this->columns)) {
                 foreach ($this->fields as $field) {
 
-                    // Skip hidden and unsaveable fields
+                    // Skip hidden fields.
                     // They should never be included as column
-                    if ($field['type'] === 'hidden' || $field['saveable'] === false) {
+                    if ($field['type'] === 'hidden') {
                         continue;
                     }
 
@@ -129,7 +115,7 @@ return [
 
                     $field = $this->fields[$columnName] ?? null;
 
-                    if (empty($field) === true || $field['saveable'] === false) {
+                    if (empty($field) === true) {
                         continue;
                     }
 
@@ -145,7 +131,7 @@ return [
     ],
     'methods' => [
         'rows' => function ($value) {
-            $rows  = Data::decode($value, 'yaml');
+            $rows  = Yaml::decode($value);
             $value = [];
 
             foreach ($rows as $index => $row) {
@@ -181,7 +167,7 @@ return [
         $data = [];
 
         foreach ($value as $row) {
-            $data[] = $this->form($row)->content();
+            $data[] = $this->form($row)->data();
         }
 
         return $data;

@@ -2,7 +2,6 @@
 
 namespace Kirby\Cms;
 
-use Closure;
 use Throwable;
 
 /**
@@ -35,40 +34,14 @@ trait AppUsers
     }
 
     /**
-     * Become any existing user or disable the current user
+     * Become any existing user
      *
-     * @param string|null $who User ID or email address,
-     *                         `null` to use the actual user again,
-     *                         `'kirby'` for a virtual admin user or
-     *                         `'nobody'` to disable the actual user
-     * @param Closure|null $callback Optional action function that will be run with
-     *                               the permissions of the impersonated user; the
-     *                               impersonation will be reset afterwards
-     * @return mixed If called without callback: User that was impersonated;
-     *               if called with callback: Return value from the callback
-     * @throws \Throwable
+     * @param string|null $who
+     * @return \Kirby\Cms\User|null
      */
-    public function impersonate(?string $who = null, ?Closure $callback = null)
+    public function impersonate(string $who = null)
     {
-        $auth = $this->auth();
-
-        $userBefore = $auth->currentUserFromImpersonation();
-        $userAfter  = $auth->impersonate($who);
-
-        if ($callback === null) {
-            return $userAfter;
-        }
-
-        try {
-            // bind the App object to the callback
-            return $callback->call($this, $userAfter);
-        } catch (Throwable $e) {
-            throw $e;
-        } finally {
-            // ensure that the impersonation is *always* reset
-            // to the original value, even if an error occurred
-            $auth->impersonate($userBefore !== null ? $userBefore->id() : null);
-        }
+        return $this->auth()->impersonate($who);
     }
 
     /**
@@ -86,7 +59,7 @@ trait AppUsers
     /**
      * Create your own set of app users
      *
-     * @param array|null $users
+     * @param array $users
      * @return \Kirby\Cms\App
      */
     protected function setUsers(array $users = null)
@@ -104,23 +77,20 @@ trait AppUsers
      * Returns a specific user by id
      * or the current user if no id is given
      *
-     * @param string|null $id
-     * @param bool $allowImpersonation If set to false, only the actually
-     *                                 logged in user will be returned
-     *                                 (when `$id` is passed as `null`)
+     * @param string $id
      * @return \Kirby\Cms\User|null
      */
-    public function user(?string $id = null, bool $allowImpersonation = true)
+    public function user(string $id = null)
     {
         if ($id !== null) {
             return $this->users()->find($id);
         }
 
-        if ($allowImpersonation === true && is_string($this->user) === true) {
+        if (is_string($this->user) === true) {
             return $this->auth()->impersonate($this->user);
         } else {
             try {
-                return $this->auth()->user(null, $allowImpersonation);
+                return $this->auth()->user();
             } catch (Throwable $e) {
                 return null;
             }

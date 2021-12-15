@@ -1,14 +1,12 @@
 <?php
 
-$uri = urldecode(
-    parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
-);
+$root = dirname(__DIR__);
 
-// Emulate Apache's `mod_rewrite` functionality
-if ($uri !== '/' && file_exists($_SERVER['DOCUMENT_ROOT'] . '/' . $uri)) {
-    return false;
+// https://yourdomain.com/media/super/nice.jpg
+if (file_exists($root . '/' . $_SERVER['SCRIPT_NAME'])) {
+    return false; // serve the requested resource as-is.
 }
 
-$_SERVER['SCRIPT_NAME'] = '/index.php';
+$_SERVER['SCRIPT_NAME'] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $index = $root . '/index.php');
 
-require $_SERVER['DOCUMENT_ROOT'] . '/' . $_SERVER['SCRIPT_NAME'];
+include $index;

@@ -3,7 +3,6 @@
 namespace Kirby\Toolkit;
 
 use Closure;
-use Kirby\Filesystem\F;
 use ReflectionFunction;
 
 /**
@@ -52,11 +51,11 @@ class Controller
 
     public static function load(string $file)
     {
-        if (is_file($file) === false) {
+        if (file_exists($file) === false) {
             return null;
         }
 
-        $function = F::load($file);
+        $function = require $file;
 
         if (is_a($function, 'Closure') === false) {
             return null;

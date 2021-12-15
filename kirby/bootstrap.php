@@ -2,12 +2,9 @@
 
 /**
  * Validate the PHP version to already
- * stop at older or too recent versions
+ * stop at older versions
  */
-if (
-    version_compare(PHP_VERSION, '7.4.0', '>=') === false ||
-    version_compare(PHP_VERSION, '8.2.0', '<')  === false
-) {
+if (version_compare(phpversion(), '7.1.0', '>=') === false) {
     die(include __DIR__ . '/views/php.php');
 }
 

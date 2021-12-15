@@ -50,7 +50,6 @@ class LanguageRouter
      * current language from the Kirby instance
      *
      * @return array
-     * @throws \Kirby\Exception\NotFoundException
      */
     public function routes(): array
     {
@@ -87,12 +86,11 @@ class LanguageRouter
                     $patterns = A::wrap($route['pattern']);
 
                     // prefix all patterns with the page slug
-                    $patterns = A::map(
-                        $patterns,
-                        fn ($pattern) => $page->uri($language) . '/' . $pattern
-                    );
+                    $patterns = array_map(function ($pattern) use ($page, $language) {
+                        return $page->uri($language) . '/' . $pattern;
+                    }, $patterns);
 
-                    // re-inject the pattern and the full page object
+                    // reinject the pattern and the full page object
                     $routes[$index]['pattern'] = $patterns;
                     $routes[$index]['page']    = $page;
                 } else {
@@ -119,10 +117,7 @@ class LanguageRouter
         $router   = new Router($this->routes());
 
         try {
-            return $router->call($path, $kirby->request()->method(), function ($route) use ($kirby, $language) {
-                $kirby->setCurrentTranslation($language);
-                $kirby->setCurrentLanguage($language);
-
+            return $router->call($path, $kirby->request()->method(), function ($route) use ($language) {
                 if ($page = $route->page()) {
                     return $route->action()->call($route, $language, $page, ...$route->arguments());
                 } else {

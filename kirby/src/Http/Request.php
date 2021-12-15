@@ -6,6 +6,7 @@ use Kirby\Http\Request\Auth\BasicAuth;
 use Kirby\Http\Request\Auth\BearerAuth;
 use Kirby\Http\Request\Body;
 use Kirby\Http\Request\Files;
+use Kirby\Http\Request\Method;
 use Kirby\Http\Request\Query;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
@@ -106,7 +107,7 @@ class Request
     public function __construct(array $options = [])
     {
         $this->options = $options;
-        $this->method  = $this->detectRequestMethod($options['method'] ?? null);
+        $this->method  = $options['method'] ?? $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
         if (isset($options['body']) === true) {
             $this->body = new Body($options['body']);
@@ -174,7 +175,7 @@ class Request
      */
     public function body()
     {
-        return $this->body ??= new Body();
+        return $this->body = $this->body ?? new Body();
     }
 
     /**
@@ -208,39 +209,6 @@ class Request
     }
 
     /**
-     * Detect the request method from various
-     * options: given method, query string, server vars
-     *
-     * @param string $method
-     * @return string
-     */
-    public function detectRequestMethod(string $method = null): string
-    {
-        // all possible methods
-        $methods = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH'];
-
-        // the request method can be overwritten with a header
-        $methodOverride = strtoupper($_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] ?? '');
-
-        if ($method === null && in_array($methodOverride, $methods) === true) {
-            $method = $methodOverride;
-        }
-
-        // final chain of options to detect the method
-        $method = $method ?? $_SERVER['REQUEST_METHOD'] ?? 'GET';
-
-        // uppercase the shit out of it
-        $method = strtoupper($method);
-
-        // sanitize the method
-        if (in_array($method, $methods) === false) {
-            $method = 'GET';
-        }
-
-        return $method;
-    }
-
-    /**
      * Returns the domain
      *
      * @return string
@@ -269,7 +237,7 @@ class Request
      */
     public function files()
     {
-        return $this->files ??= new Files();
+        return $this->files = $this->files ?? new Files();
     }
 
     /**
@@ -375,11 +343,11 @@ class Request
     /**
      * Returns the Query object
      *
-     * @return \Kirby\Http\Request\Query
+     * @return \Kirby\Http\Query
      */
     public function query()
     {
-        return $this->query ??= new Query();
+        return $this->query = $this->query ?? new Query();
     }
 
     /**
@@ -407,6 +375,6 @@ class Request
             return $this->url()->clone($props);
         }
 
-        return $this->url ??= Uri::current();
+        return $this->url = $this->url ?? Uri::current();
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Kirby\Cms;
 
-use Kirby\Form\Form;
-
 /**
  * The Content class handles all fields
  * for content from pages, the site and users
@@ -148,7 +146,7 @@ class Content
      * Returns either a single field object
      * or all registered fields
      *
-     * @param string|null $key
+     * @param string $key
      * @return \Kirby\Cms\Field|array
      */
     public function get(string $key = null)
@@ -200,7 +198,7 @@ class Content
      * passed key(s)
      *
      * @param string ...$keys
-     * @return static
+     * @return self
      */
     public function not(...$keys)
     {
@@ -229,7 +227,7 @@ class Content
      * Set the parent model
      *
      * @param \Kirby\Cms\Model $parent
-     * @return $this
+     * @return self
      */
     public function setParent(Model $parent)
     {
@@ -252,17 +250,13 @@ class Content
      * Updates the content and returns
      * a cloned object
      *
-     * @param array|null $content
+     * @param array $content
      * @param bool $overwrite
-     * @return $this
+     * @return self
      */
     public function update(array $content = null, bool $overwrite = false)
     {
         $this->data = $overwrite === true ? (array)$content : array_merge($this->data, (array)$content);
-
-        // clear cache of Field objects
-        $this->fields = [];
-
         return $this;
     }
 }

@@ -31,17 +31,13 @@ trait SiteActions
      */
     protected function commit(string $action, array $arguments, Closure $callback)
     {
-        $old            = $this->hardcopy();
-        $kirby          = $this->kirby();
-        $argumentValues = array_values($arguments);
+        $old   = $this->hardcopy();
+        $kirby = $this->kirby();
 
-        $this->rules()->$action(...$argumentValues);
-        $kirby->trigger('site.' . $action . ':before', $arguments);
-
-        $result = $callback(...$argumentValues);
-
-        $kirby->trigger('site.' . $action . ':after', ['newSite' => $result, 'oldSite' => $old]);
-
+        $this->rules()->$action(...$arguments);
+        $kirby->trigger('site.' . $action . ':before', ...$arguments);
+        $result = $callback(...$arguments);
+        $kirby->trigger('site.' . $action . ':after', $result, $old);
         $kirby->cache('pages')->flush();
         return $result;
     }
@@ -51,15 +47,11 @@ trait SiteActions
      *
      * @param string $title
      * @param string|null $languageCode
-     * @return static
+     * @return self
      */
     public function changeTitle(string $title, string $languageCode = null)
     {
-        $site     = $this;
-        $title     = trim($title);
-        $arguments = compact('site', 'title', 'languageCode');
-
-        return $this->commit('changeTitle', $arguments, function ($site, $title, $languageCode) {
+        return $this->commit('changeTitle', [$this, $title, $languageCode], function ($site, $title, $languageCode) {
             return $site->save(['title' => $title], $languageCode);
         });
     }
@@ -85,7 +77,7 @@ trait SiteActions
     /**
      * Clean internal caches
      *
-     * @return $this
+     * @return self
      */
     public function purge()
     {

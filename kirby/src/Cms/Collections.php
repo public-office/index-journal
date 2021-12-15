@@ -3,7 +3,6 @@
 namespace Kirby\Cms;
 
 use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\F;
 use Kirby\Toolkit\Controller;
 
 /**
@@ -112,7 +111,6 @@ class Collections
      *
      * @param string $name
      * @return mixed
-     * @throws \Kirby\Exception\NotFoundException
      */
     public function load(string $name)
     {
@@ -121,8 +119,8 @@ class Collections
         // first check for collection file
         $file = $kirby->root('collections') . '/' . $name . '.php';
 
-        if (is_file($file) === true) {
-            $collection = F::load($file);
+        if (file_exists($file)) {
+            $collection = require $file;
 
             if (is_a($collection, 'Closure')) {
                 return $collection;

@@ -2,11 +2,11 @@
 
 namespace Kirby\Data;
 
-use Kirby\Exception\InvalidArgumentException;
+use Exception;
 use Spyc;
 
 /**
- * Simple Wrapper around the Spyc YAML class
+ * Simple Wrapper around Symfony's Yaml Component
  *
  * @package   Kirby Data
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -24,9 +24,6 @@ class Yaml extends Handler
      */
     public static function encode($data): string
     {
-        // TODO: The locale magic should no longer be
-        //       necessary when support for PHP 7.x is dropped
-
         // fetch the current locale setting for numbers
         $locale = setlocale(LC_NUMERIC, 0);
 
@@ -45,33 +42,29 @@ class Yaml extends Handler
     /**
      * Parses an encoded YAML string and returns a multi-dimensional array
      *
-     * @param mixed $string
+     * @param string $yaml
      * @return array
      */
-    public static function decode($string): array
+    public static function decode($yaml): array
     {
-        if ($string === null || $string === '') {
+        if ($yaml === null) {
             return [];
         }
 
-        if (is_array($string) === true) {
-            return $string;
-        }
-
-        if (is_string($string) === false) {
-            throw new InvalidArgumentException('Invalid YAML data; please pass a string');
+        if (is_array($yaml) === true) {
+            return $yaml;
         }
 
         // remove BOM
-        $string = str_replace("\xEF\xBB\xBF", '', $string);
-        $result = Spyc::YAMLLoadString($string);
+        $yaml   = str_replace("\xEF\xBB\xBF", '', $yaml);
+        $result = Spyc::YAMLLoadString($yaml);
 
         if (is_array($result)) {
             return $result;
         } else {
             // apparently Spyc always returns an array, even for invalid YAML syntax
             // so this Exception should currently never be thrown
-            throw new InvalidArgumentException('The YAML data cannot be parsed'); // @codeCoverageIgnore
+            throw new Exception('YAML string is invalid'); // @codeCoverageIgnore
         }
     }
 }

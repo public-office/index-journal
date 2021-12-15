@@ -1,7 +1,7 @@
 <?php
 
+use Kirby\Cms\Form;
 use Kirby\Cms\User;
-use Kirby\Form\Form;
 
 /**
  * User
@@ -24,7 +24,7 @@ return [
             return $user->email();
         },
         'files' => function (User $user) {
-            return $user->files()->sorted();
+            return $user->files()->sortBy('sort', 'asc', 'filename', 'asc');
         },
         'id' => function (User $user) {
             return $user->id();
@@ -39,10 +39,7 @@ return [
             return $user->next();
         },
         'options' => function (User $user) {
-            return $user->panel()->options();
-        },
-        'panelImage' => function (User $user) {
-            return $user->panel()->image();
+            return $user->panelOptions();
         },
         'permissions' => function (User $user) {
             return $user->role()->permissions()->toArray();
@@ -52,9 +49,6 @@ return [
         },
         'role' => function (User $user) {
             return $user->role();
-        },
-        'roles' => function (User $user) {
-            return $user->roles();
         },
         'username' => function (User $user) {
             return $user->username();

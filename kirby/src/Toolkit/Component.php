@@ -3,9 +3,7 @@
 namespace Kirby\Toolkit;
 
 use ArgumentCountError;
-use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\F;
 use TypeError;
 
 /**
@@ -179,7 +177,7 @@ class Component
     protected function applyProps(array $props): void
     {
         foreach ($props as $propName => $propFunction) {
-            if (is_a($propFunction, 'Closure') === true) {
+            if (is_callable($propFunction) === true) {
                 if (isset($this->attrs[$propName]) === true) {
                     try {
                         $this->$propName = $this->props[$propName] = $propFunction->call($this, $this->attrs[$propName]);
@@ -209,7 +207,7 @@ class Component
     protected function applyComputed(array $computed): void
     {
         foreach ($computed as $computedName => $computedFunction) {
-            if (is_a($computedFunction, 'Closure') === true) {
+            if (is_callable($computedFunction) === true) {
                 $this->$computedName = $this->computed[$computedName] = $computedFunction->call($this);
             }
         }
@@ -226,12 +224,8 @@ class Component
         $definition = static::$types[$type];
 
         // load definitions from string
-        if (is_string($definition) === true) {
-            if (is_file($definition) !== true) {
-                throw new Exception('Component definition ' . $definition . ' does not exist');
-            }
-
-            static::$types[$type] = $definition = F::load($definition);
+        if (is_array($definition) === false) {
+            static::$types[$type] = $definition = include $definition;
         }
 
         return $definition;
@@ -263,11 +257,6 @@ class Component
         if (isset($options['mixins']) === true) {
             foreach ($options['mixins'] as $mixin) {
                 if (isset(static::$mixins[$mixin]) === true) {
-                    if (is_string(static::$mixins[$mixin]) === true) {
-                        // resolve a path to a mixin on demand
-                        static::$mixins[$mixin] = include static::$mixins[$mixin];
-                    }
-
                     $options = array_replace_recursive(static::$mixins[$mixin], $options);
                 }
             }

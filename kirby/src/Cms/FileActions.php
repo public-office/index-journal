@@ -5,8 +5,8 @@ namespace Kirby\Cms;
 use Closure;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
-use Kirby\Filesystem\F;
-use Kirby\Form\Form;
+use Kirby\Image\Image;
+use Kirby\Toolkit\F;
 
 /**
  * FileActions
@@ -25,8 +25,7 @@ trait FileActions
      *
      * @param string $name
      * @param bool $sanitize
-     * @return $this|static
-     * @throws \Kirby\Exception\LogicException
+     * @return self
      */
     public function changeName(string $name, bool $sanitize = true)
     {
@@ -39,7 +38,7 @@ trait FileActions
             return $this;
         }
 
-        return $this->commit('changeName', ['file' => $this, 'name' => $name], function ($oldFile, $name) {
+        return $this->commit('changeName', [$this, $name], function ($oldFile, $name) {
             $newFile = $oldFile->clone([
                 'filename' => $name . '.' . $oldFile->extension(),
             ]);
@@ -75,8 +74,6 @@ trait FileActions
                 F::move($oldFile->contentFile(), $newFile->contentFile());
             }
 
-            $newFile->parent()->files()->remove($oldFile->id());
-            $newFile->parent()->files()->set($newFile->id(), $newFile);
 
             return $newFile;
         });
@@ -86,11 +83,11 @@ trait FileActions
      * Changes the file's sorting number in the meta file
      *
      * @param int $sort
-     * @return static
+     * @return self
      */
     public function changeSort(int $sort)
     {
-        return $this->commit('changeSort', ['file' => $this, 'position' => $sort], function ($file, $sort) {
+        return $this->commit('changeSort', [$this, $sort], function ($file, $sort) {
             return $file->save(['sort' => $sort]);
         });
     }
@@ -111,24 +108,13 @@ trait FileActions
      */
     protected function commit(string $action, array $arguments, Closure $callback)
     {
-        $old            = $this->hardcopy();
-        $kirby          = $this->kirby();
-        $argumentValues = array_values($arguments);
+        $old   = $this->hardcopy();
+        $kirby = $this->kirby();
 
-        $this->rules()->$action(...$argumentValues);
-        $kirby->trigger('file.' . $action . ':before', $arguments);
-
-        $result = $callback(...$argumentValues);
-
-        if ($action === 'create') {
-            $argumentsAfter = ['file' => $result];
-        } elseif ($action === 'delete') {
-            $argumentsAfter = ['status' => $result, 'file' => $old];
-        } else {
-            $argumentsAfter = ['newFile' => $result, 'oldFile' => $old];
-        }
-        $kirby->trigger('file.' . $action . ':after', $argumentsAfter);
-
+        $this->rules()->$action(...$arguments);
+        $kirby->trigger('file.' . $action . ':before', ...$arguments);
+        $result = $callback(...$arguments);
+        $kirby->trigger('file.' . $action . ':after', $result, $old);
         $kirby->cache('pages')->flush();
         return $result;
     }
@@ -163,9 +149,7 @@ trait FileActions
      * way of generating files.
      *
      * @param array $props
-     * @return static
-     * @throws \Kirby\Exception\InvalidArgumentException
-     * @throws \Kirby\Exception\LogicException
+     * @return self
      */
     public static function create(array $props)
     {
@@ -179,8 +163,8 @@ trait FileActions
         $props['model'] = strtolower($props['template'] ?? 'default');
 
         // create the basic file and a test upload object
-        $file = static::factory($props);
-        $upload = $file->asset($props['source']);
+        $file = File::factory($props);
+        $upload = new Image($props['source']);
 
         // create a form for the file
         $form = Form::for($file, [
@@ -191,7 +175,7 @@ trait FileActions
         $file = $file->clone(['content' => $form->strings(true)]);
 
         // run the hook
-        return $file->commit('create', compact('file', 'upload'), function ($file, $upload) {
+        return $file->commit('create', [$file, $upload], function ($file, $upload) {
 
             // delete all public versions
             $file->unpublish();
@@ -227,7 +211,7 @@ trait FileActions
      */
     public function delete(): bool
     {
-        return $this->commit('delete', ['file' => $this], function ($file) {
+        return $this->commit('delete', [$this], function ($file) {
 
             // remove all versions in the media folder
             $file->unpublish();
@@ -247,9 +231,6 @@ trait FileActions
 
             F::remove($file->root());
 
-            // remove the file from the sibling collection
-            $file->parent()->files()->remove($file);
-
             return true;
         });
     }
@@ -258,12 +239,26 @@ trait FileActions
      * Move the file to the public media folder
      * if it's not already there.
      *
-     * @return $this
+     * @return self
      */
     public function publish()
     {
-        Media::publish($this, $this->mediaRoot());
+        Media::publish($this->root(), $this->mediaRoot());
         return $this;
+    }
+
+    /**
+     * @deprecated 3.0.0 Use `File::changeName()` instead
+     *
+     * @param string $name
+     * @param bool $sanitize
+     * @return self
+     */
+    public function rename(string $name, bool $sanitize = true)
+    {
+        deprecated('$file->rename() is deprecated, use $file->changeName() instead. $file->rename() will be removed in Kirby 3.5.0.');
+
+        return $this->changeName($name, $sanitize);
     }
 
     /**
@@ -274,19 +269,11 @@ trait FileActions
      * source.
      *
      * @param string $source
-     * @return static
-     * @throws \Kirby\Exception\LogicException
+     * @return self
      */
     public function replace(string $source)
     {
-        $file = $this->clone();
-
-        $arguments = [
-            'file' => $file,
-            'upload' => $file->asset($source)
-        ];
-
-        return $this->commit('replace', $arguments, function ($file, $upload) {
+        return $this->commit('replace', [$this, new Image($source)], function ($file, $upload) {
 
             // delete all public versions
             $file->unpublish();
@@ -304,11 +291,11 @@ trait FileActions
     /**
      * Remove all public versions of this file
      *
-     * @return $this
+     * @return self
      */
     public function unpublish()
     {
-        Media::unpublish($this->parent()->mediaRoot(), $this);
+        Media::unpublish($this->parent()->mediaRoot(), $this->filename());
         return $this;
     }
 }

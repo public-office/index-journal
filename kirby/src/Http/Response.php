@@ -3,7 +3,7 @@
 namespace Kirby\Http;
 
 use Exception;
-use Kirby\Filesystem\F;
+use Kirby\Toolkit\F;
 use Throwable;
 
 /**
@@ -151,35 +151,32 @@ class Response
      *
      * @param string $file
      * @param string $filename
-     * @param array $props Custom overrides for response props (e.g. headers)
-     * @return static
+     * @return self
      */
-    public static function download(string $file, string $filename = null, array $props = [])
+    public static function download(string $file, string $filename = null)
     {
         if (file_exists($file) === false) {
             throw new Exception('The file could not be found');
         }
 
-        $filename ??= basename($file);
-        $modified   = filemtime($file);
-        $body       = file_get_contents($file);
-        $size       = strlen($body);
+        $filename = $filename ?? basename($file);
+        $modified = filemtime($file);
+        $body     = file_get_contents($file);
+        $size     = strlen($body);
 
-        $props = array_replace_recursive([
+        return new static([
             'body'    => $body,
-            'type'    => F::mime($file),
+            'type'    => 'application/force-download',
             'headers' => [
                 'Pragma'                    => 'public',
-                'Cache-Control'             => 'no-cache, no-store, must-revalidate',
+                'Expires'                   => '0',
                 'Last-Modified'             => gmdate('D, d M Y H:i:s', $modified) . ' GMT',
                 'Content-Disposition'       => 'attachment; filename="' . $filename . '"',
                 'Content-Transfer-Encoding' => 'binary',
                 'Content-Length'            => $size,
                 'Connection'                => 'close'
             ]
-        ], $props);
-
-        return new static($props);
+        ]);
     }
 
     /**
@@ -187,17 +184,11 @@ class Response
      * sends the file content to the browser
      *
      * @param string $file
-     * @param array $props Custom overrides for response props (e.g. headers)
-     * @return static
+     * @return self
      */
-    public static function file(string $file, array $props = [])
+    public static function file(string $file)
     {
-        $props = array_merge([
-            'body' => F::read($file),
-            'type' => F::extensionToMime(F::extension($file))
-        ], $props);
-
-        return new static($props);
+        return new static(F::read($file), F::extensionToMime(F::extension($file)));
     }
 
     /**
@@ -229,12 +220,12 @@ class Response
      * @param int $code
      * @param bool $pretty
      * @param array $headers
-     * @return static
+     * @return self
      */
     public static function json($body = '', ?int $code = null, ?bool $pretty = null, array $headers = [])
     {
         if (is_array($body) === true) {
-            $body = json_encode($body, $pretty === true ? JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES : 0);
+            $body = json_encode($body, $pretty === true ? JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES : null);
         }
 
         return new static([
@@ -252,14 +243,14 @@ class Response
      *
      * @param string $location
      * @param int $code
-     * @return static
+     * @return self
      */
-    public static function redirect(string $location = '/', int $code = 302)
+    public static function redirect(?string $location = null, ?int $code = null)
     {
         return new static([
-            'code' => $code,
+            'code' => $code ?? 302,
             'headers' => [
-                'Location' => Url::unIdn($location)
+                'Location' => Url::unIdn($location ?? '/')
             ]
         ]);
     }

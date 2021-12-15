@@ -17,7 +17,7 @@ class Exif
 {
     /**
      * the parent image object
-     * @var \Kirby\Image\Image
+     * @var Image
      */
     protected $image;
 
@@ -185,7 +185,7 @@ class Exif
      *
      * @return bool|null
      */
-    public function isBW(): ?bool
+    public function isBW(): bool
     {
         return ($this->isColor !== null) ? $this->isColor === false : null;
     }
@@ -207,11 +207,9 @@ class Exif
      */
     protected function read(): array
     {
-        // @codeCoverageIgnoreStart
         if (function_exists('exif_read_data') === false) {
             return [];
         }
-        // @codeCoverageIgnoreEnd
 
         $data = @exif_read_data($this->image->root());
         return is_array($data) ? $data : [];
@@ -255,7 +253,7 @@ class Exif
     }
 
     /**
-     * Return the focal length
+     * Teturn the focal length
      *
      * @return string|null
      */

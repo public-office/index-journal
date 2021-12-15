@@ -180,7 +180,7 @@ class PageBlueprint extends Blueprint
 
     /**
      * Returns the preview settings
-     * The preview setting controls the "Open"
+     * The preview setting controlls the "Open"
      * button in the panel and redirects it to a
      * different URL if necessary.
      *

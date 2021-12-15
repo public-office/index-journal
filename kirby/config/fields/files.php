@@ -1,14 +1,13 @@
 <?php
 
-use Kirby\Data\Data;
+use Kirby\Data\Yaml;
 use Kirby\Toolkit\A;
 
 return [
     'mixins' => [
-        'filepicker',
-        'layout',
-        'min',
         'picker',
+        'filepicker',
+        'min',
         'upload'
     ],
     'props' => [
@@ -26,6 +25,20 @@ return [
          */
         'default' => function ($default = null) {
             return $default;
+        },
+
+        /**
+         * Changes the layout of the selected files. Available layouts: `list`, `cards`
+         */
+        'layout' => function (string $layout = 'list') {
+            return $layout;
+        },
+
+        /**
+         * Layout size for cards: `tiny`, `small`, `medium`, `large` or `huge`
+         */
+        'size' => function (string $size = 'auto') {
+            return $size;
         },
 
         'value' => function ($value = null) {
@@ -55,18 +68,17 @@ return [
     ],
     'methods' => [
         'fileResponse' => function ($file) {
-            return $file->panel()->pickerData([
-                'image'  => $this->image,
-                'info'   => $this->info ?? false,
-                'layout' => $this->layout,
-                'model'  => $this->model(),
-                'text'   => $this->text,
+            return $file->panelPickerData([
+                'image' => $this->image,
+                'info'  => $this->info ?? false,
+                'model' => $this->model(),
+                'text'  => $this->text,
             ]);
         },
         'toFiles' => function ($value = null) {
             $files = [];
 
-            foreach (Data::decode($value, 'yaml') as $id) {
+            foreach (Yaml::decode($value) as $id) {
                 if (is_array($id) === true) {
                     $id = $id['id'] ?? null;
                 }
@@ -89,7 +101,6 @@ return [
                     return $field->filepicker([
                         'image'  => $field->image(),
                         'info'   => $field->info(),
-                        'layout' => $field->layout(),
                         'limit'  => $field->limit(),
                         'page'   => $this->requestQuery('page'),
                         'query'  => $field->query(),
@@ -105,18 +116,14 @@ return [
                     $field   = $this->field();
                     $uploads = $field->uploads();
 
-                    // move_uploaded_file() not working with unit test
-                    // @codeCoverageIgnoreStart
                     return $field->upload($this, $uploads, function ($file, $parent) use ($field) {
-                        return $file->panel()->pickerData([
-                            'image'  => $field->image(),
-                            'info'   => $field->info(),
-                            'layout' => $field->layout(),
-                            'model'  => $field->model(),
-                            'text'   => $field->text(),
+                        return $file->panelPickerData([
+                            'image' => $field->image(),
+                            'info'  => $field->info(),
+                            'model' => $field->model(),
+                            'text'  => $field->text(),
                         ]);
                     });
-                    // @codeCoverageIgnoreEnd
                 }
             ]
         ];
