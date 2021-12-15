@@ -25,11 +25,11 @@
 </head>
 
 <body data-display="<?= $page->template() ?>">
-  <header <? if ($page->template() == 'essay') : ?>style="background-color: rgb(<?= $page->parent()->issue_color() ?>); box-shadow: 0px 11px 16px 0px rgba(<?= $page->parent()->issue_color() ?>,1);" <? endif ?>>
-    <h1><a href="<?= $site->url() ?>">INDEX JOURNAL</a>, <nav><? foreach (page('issues')->children()->listed()->flip() as $issue) : ?><span class="issue"><span><a href="<?= $issue->url() ?>"><span class="hide-mobile">Issue</span> <span>No.</span> <?= $issue->num() ?> <span class="title"><?= $issue->title() ?></span></a></span><? endforeach ?></span></nav>
+  <header <?= if ($page->template() == 'essay') : ?>style="background-color: rgb(<?= $page->parent()->issue_color() ?>); box-shadow: 0px 11px 16px 0px rgba(<?= $page->parent()->issue_color() ?>,1);" <?= endif ?>>
+    <h1><a href="<?= $site->url() ?>">INDEX JOURNAL</a>, <nav><?= foreach (page('issues')->children()->listed()->flip() as $issue) : ?><span class="issue"><span><a href="<?= $issue->url() ?>"><span class="hide-mobile">Issue</span> <span>No.</span> <?= $issue->num() ?> <span class="title"><?= $issue->title() ?></span></a></span><?= endforeach ?></span></nav>
     </h1>
     <nav>
-      <? foreach ($site->children()->listed()->flip() as $subPage) : ?>
-        <a href="<?= $subPage->url() ?>"><?= $subPage->title() ?></a><span>, </span><? endforeach ?><a href="<?= $site->url() ?>/emaj"><span>emaj</span> ARCHIVE</a>
+      <?= foreach ($site->children()->listed()->flip() as $subPage) : ?>
+        <a href="<?= $subPage->url() ?>"><?= $subPage->title() ?></a><span>, </span><?= endforeach ?><a href="<?= $site->url() ?>/emaj"><span>emaj</span> ARCHIVE</a>
     </nav>
   </header>

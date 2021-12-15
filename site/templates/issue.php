@@ -1,8 +1,8 @@
-<? snippet('header') ?>
+<?= snippet('header') ?>
 
 <main>
-  <? $sections = $page->cfp_builder()->toStructure() ?>
-  <? foreach ($sections as $section) : ?>
+  <?= $sections = $page->cfp_builder()->toStructure() ?>
+  <?= foreach ($sections as $section) : ?>
     <section class="initial ">
       <?= $section->message()->kirbytext() ?>
     </section>
@@ -19,16 +19,16 @@
           <div class="issue-items">
             <div class="issue-essays">
               <ul>
-                <? if ($page->hasChildren()) : ?>
+                <?= if ($page->hasChildren()) : ?>
 
 
-                  <li><? if ($page->hasDocuments()) : ?><span class="title">(<a href="<?= $page->documents()->first()->url() ?>" target="_blank">PDF</a>)</span><? endif ?> </li>
-                  <? foreach ($page->children()->listed()->template('essay') as $article) : ?>
+                  <li><?= if ($page->hasDocuments()) : ?><span class="title">(<a href="<?= $page->documents()->first()->url() ?>" target="_blank">PDF</a>)</span><?= endif ?> </li>
+                  <?= foreach ($page->children()->listed()->template('essay') as $article) : ?>
 
-                    <li><a href="<?= $article->url() ?>"><span class="title"><?= $article->title() ?></span><? if ($article->subtitle()->isNotEmpty()) : ?><span class="essay-subtitle"><?= $article->subtitle()->kti() ?></span><? endif ?> by <?= $article->author() ?></a></li>
+                    <li><a href="<?= $article->url() ?>"><span class="title"><?= $article->title() ?></span><?= if ($article->subtitle()->isNotEmpty()) : ?><span class="essay-subtitle"><?= $article->subtitle()->kti() ?></span><?= endif ?> by <?= $article->author() ?></a></li>
 
-                  <? endforeach ?>
-                <? endif ?>
+                  <?= endforeach ?>
+                <?= endif ?>
               </ul>
             </div>
 
@@ -36,19 +36,19 @@
             <!--START OF SECTIONS-->
             <div class="issue-sections">
               <!--         IF ISSUE HAS SECTIONS, GET EACH SECTION OF THE ISSUE-->
-              <? if ($page->hasChildren()) : ?>
-                <? foreach ($page->children()->listed()->template('section') as $section) : ?>
+              <?= if ($page->hasChildren()) : ?>
+                <?= foreach ($page->children()->listed()->template('section') as $section) : ?>
                   <div class="title-block-section" style=""><span class="title"><?= $section->title() ?></span></div>
                   <ul>
                     <!--         IF SECTION HAS ARTICLES, GET EACH ARTICLE FROM SECTION-->
-                    <? if ($section->hasChildren()) : ?>
-                      <? foreach ($section->children()->listed() as $article) : ?>
-                        <li><a href="<?= $article->url() ?>"><span class="title"><?= $article->title() ?></span><? if ($article->subtitle()->isNotEmpty()) : ?><span class="section-subtitle"><?= $article->subtitle()->kti() ?></span><? endif ?> by <?= $article->author() ?></a></li>
-                      <? endforeach ?>
-                    <? endif ?>
+                    <?= if ($section->hasChildren()) : ?>
+                      <?= foreach ($section->children()->listed() as $article) : ?>
+                        <li><a href="<?= $article->url() ?>"><span class="title"><?= $article->title() ?></span><?= if ($article->subtitle()->isNotEmpty()) : ?><span class="section-subtitle"><?= $article->subtitle()->kti() ?></span><?= endif ?> by <?= $article->author() ?></a></li>
+                      <?= endforeach ?>
+                    <?= endif ?>
                   </ul>
-                <? endforeach ?>
-              <? endif ?>
+                <?= endforeach ?>
+              <?= endif ?>
             </div>
             <!--END OF SECTIONS-->
           </div>
@@ -71,14 +71,14 @@
         </div>
       </div>
     </div>
-  <? endforeach ?>
+  <?= endforeach ?>
 </main>
 <div class="issue-overlay">
   <span class="issue-overlay-close">(close)</span>
   <img src="<?= $page->issue_image()->toFile()->url() ?>" alt="">
-  <? $sections = $page->cfp_builder()->toStructure() ?>
+  <?= $sections = $page->cfp_builder()->toStructure() ?>
   <figcaption style="text-align: center;max-width: 78%;">
-    <? foreach ($sections as $section) : ?><?= $section->wipe_img_caption() ?> <? endforeach ?>
+    <?= foreach ($sections as $section) : ?><?= $section->wipe_img_caption() ?> <?= endforeach ?>
   </figcaption>
 </div>
 </body>

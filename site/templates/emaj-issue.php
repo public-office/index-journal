@@ -1,4 +1,4 @@
-<? snippet('header') ?>
+<?= snippet('header') ?>
 
   <main data-template="<?= $page->template() ?>">
     <div class="introduction">
@@ -16,8 +16,8 @@
       </div>
     </div>
     <ul class="articles">
-      <? foreach($page->children()->listed() as $article): ?>
+      <?= foreach($page->children()->listed() as $article): ?>
         <li><a href="<?= $article->url() ?>"><?= $article->title() ?> <span class="authors">by <?= $article->author() ?></span></a></li>
-      <? endforeach ?>
+      <?= endforeach ?>
     </ul>
   </main>
