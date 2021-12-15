@@ -4,7 +4,7 @@ namespace Kirby\Cms;
 
 use Exception;
 use Kirby\Data\Data;
-use Kirby\Filesystem\F;
+use Kirby\Toolkit\F;
 use Kirby\Toolkit\I18n;
 
 /**
@@ -39,18 +39,11 @@ class Role extends Model
         return $this->toArray();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->name();
     }
 
-    /**
-     * @param array $inject
-     * @return static
-     */
     public static function admin(array $inject = [])
     {
         try {
@@ -60,9 +53,6 @@ class Role extends Model
         }
     }
 
-    /**
-     * @return array
-     */
     protected static function defaults(): array
     {
         return [
@@ -81,9 +71,6 @@ class Role extends Model
         ];
     }
 
-    /**
-     * @return mixed
-     */
     public function description()
     {
         return $this->description;
@@ -92,32 +79,23 @@ class Role extends Model
     /**
      * @param array $props
      * @param array $inject
-     * @return static
+     * @return self
      */
     public static function factory(array $props, array $inject = [])
     {
         return new static($props + $inject);
     }
 
-    /**
-     * @return string
-     */
     public function id(): string
     {
         return $this->name();
     }
 
-    /**
-     * @return bool
-     */
     public function isAdmin(): bool
     {
         return $this->name() === 'admin';
     }
 
-    /**
-     * @return bool
-     */
     public function isNobody(): bool
     {
         return $this->name() === 'nobody';
@@ -126,7 +104,7 @@ class Role extends Model
     /**
      * @param string $file
      * @param array $inject
-     * @return static
+     * @return self
      */
     public static function load(string $file, array $inject = [])
     {
@@ -136,9 +114,6 @@ class Role extends Model
         return static::factory($data, $inject);
     }
 
-    /**
-     * @return string
-     */
     public function name(): string
     {
         return $this->name;
@@ -146,7 +121,7 @@ class Role extends Model
 
     /**
      * @param array $inject
-     * @return static
+     * @return self
      */
     public static function nobody(array $inject = [])
     {
@@ -166,8 +141,8 @@ class Role extends Model
     }
 
     /**
-     * @param mixed $description
-     * @return $this
+     * @param [type] $description
+     * @return self
      */
     protected function setDescription($description = null)
     {
@@ -177,7 +152,7 @@ class Role extends Model
 
     /**
      * @param string $name
-     * @return $this
+     * @return self
      */
     protected function setName(string $name)
     {
@@ -186,8 +161,8 @@ class Role extends Model
     }
 
     /**
-     * @param mixed $permissions
-     * @return $this
+     * @param [type] $permissions
+     * @return self
      */
     protected function setPermissions($permissions = null)
     {
@@ -196,8 +171,8 @@ class Role extends Model
     }
 
     /**
-     * @param mixed $title
-     * @return $this
+     * @param [type] $title
+     * @return self
      */
     protected function setTitle($title = null)
     {
@@ -205,12 +180,9 @@ class Role extends Model
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function title(): string
     {
-        return $this->title ??= ucfirst($this->name());
+        return $this->title = $this->title ?? ucfirst($this->name());
     }
 
     /**

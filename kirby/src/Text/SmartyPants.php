@@ -115,10 +115,10 @@ class SmartyPants
     /**
      * Parses the given text
      *
-     * @param string|null $text
+     * @param string $text
      * @return string
      */
-    public function parse(string $text = null): string
+    public function parse(string $text): string
     {
         // prepare the text
         $text = str_replace('&quot;', '"', $text);

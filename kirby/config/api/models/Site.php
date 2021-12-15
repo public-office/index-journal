@@ -1,7 +1,7 @@
 <?php
 
+use Kirby\Cms\Form;
 use Kirby\Cms\Site;
-use Kirby\Form\Form;
 
 /**
  * Site
@@ -24,7 +24,7 @@ return [
             return $site->drafts();
         },
         'files' => function (Site $site) {
-            return $site->files()->sorted();
+            return $site->files()->sortBy('sort', 'asc', 'filename', 'asc');
         },
         'options' => function (Site $site) {
             return $site->permissions()->toArray();

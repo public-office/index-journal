@@ -66,7 +66,7 @@ class Pagination
      *
      * @param \Kirby\Toolkit\Collection $collection
      * @param mixed ...$arguments
-     * @return static
+     * @return self
      */
     public static function for(Collection $collection, ...$arguments)
     {
@@ -126,30 +126,45 @@ class Pagination
     /**
      * Getter for the current page
      *
+     * @deprecated 3.3.0 Setter is no longer supported, use $pagination->clone()
      * @return int
      */
-    public function page(): int
+    public function page(int $page = null): int
     {
+        if ($page !== null) {
+            throw new Exception('$pagination->page() setter is no longer supported, use $pagination->clone()'); // @codeCoverageIgnore
+        }
+
         return $this->page;
     }
 
     /**
      * Getter for the total number of items
      *
+     * @deprecated 3.3.0 Setter is no longer supported, use $pagination->clone()
      * @return int
      */
-    public function total(): int
+    public function total(int $total = null): int
     {
+        if ($total !== null) {
+            throw new Exception('$pagination->total() setter is no longer supported, use $pagination->clone()'); // @codeCoverageIgnore
+        }
+
         return $this->total;
     }
 
     /**
      * Getter for the number of items per page
      *
+     * @deprecated 3.3.0 Setter is no longer supported, use $pagination->clone()
      * @return int
      */
-    public function limit(): int
+    public function limit(int $limit = null): int
     {
+        if ($limit !== null) {
+            throw new Exception('$pagination->limit() setter is no longer supported, use $pagination->clone()'); // @codeCoverageIgnore
+        }
+
         return $this->limit;
     }
 
@@ -196,7 +211,7 @@ class Pagination
             return 0;
         }
 
-        return (int)ceil($this->total() / $this->limit());
+        return ceil($this->total() / $this->limit());
     }
 
     /**
@@ -335,18 +350,17 @@ class Pagination
             return range($start, $end);
         }
 
-        $middle = (int)floor($range/2);
-        $start  = $page - $middle + ($range % 2 === 0);
-        $end    = $start + $range - 1;
+        $start = $page - (int)floor($range/2);
+        $end   = $page + (int)floor($range/2);
 
         if ($start <= 0) {
-            $end   = $range;
-            $start = 1;
+            $end   += abs($start);
+            $start  = 1;
         }
 
         if ($end > $pages) {
-            $start = $pages - $range + 1;
-            $end   = $pages;
+            $start -= $end - $pages;
+            $end    = $pages;
         }
 
         return range($start, $end);
@@ -380,7 +394,7 @@ class Pagination
      * and validates that the properties match
      *
      * @param array $props Array with keys limit, total and/or page
-     * @return $this
+     * @return self
      */
     protected function setProperties(array $props)
     {
@@ -417,7 +431,7 @@ class Pagination
      * Sets the number of items per page
      *
      * @param int $limit
-     * @return $this
+     * @return self
      */
     protected function setLimit(int $limit = 20)
     {
@@ -433,7 +447,7 @@ class Pagination
      * Sets the total number of items
      *
      * @param int $total
-     * @return $this
+     * @return self
      */
     protected function setTotal(int $total = 0)
     {
@@ -450,7 +464,7 @@ class Pagination
      *
      * @param int|string|null $page Int or int in string form;
      *                              automatically determined if null
-     * @return $this
+     * @return self
      */
     protected function setPage($page = null)
     {

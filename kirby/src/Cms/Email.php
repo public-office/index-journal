@@ -53,11 +53,6 @@ class Email
             $this->props['transport'] = $this->options['transport'] ?? [];
         }
 
-        // add predefined beforeSend option
-        if (isset($this->props['beforeSend']) === false) {
-            $this->props['beforeSend'] = $this->options['beforeSend'] ?? null;
-        }
-
         // transform model objects to values
         $this->transformUserSingle('from', 'fromName');
         $this->transformUserSingle('replyTo', 'replyToName');
@@ -76,7 +71,6 @@ class Email
      *
      * @param string|array $preset Preset name or simple prop array
      * @return array
-     * @throws \Kirby\Exception\NotFoundException
      */
     protected function preset($preset): array
     {
@@ -101,7 +95,6 @@ class Email
      * to the result
      *
      * @return void
-     * @throws \Kirby\Exception\NotFoundException
      */
     protected function template(): void
     {

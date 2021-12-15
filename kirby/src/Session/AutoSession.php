@@ -160,7 +160,7 @@ class AutoSession
      * Deletes all expired sessions
      *
      * If the `gcInterval` is configured, this is done automatically
-     * when initializing the AutoSession class
+     * when intializing the AutoSession class
      *
      * @return void
      */

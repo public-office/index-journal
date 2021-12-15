@@ -15,7 +15,7 @@ use Kirby\Toolkit\Str;
  * @copyright Bastian Allgeier GmbH
  * @license   https://opensource.org/licenses/MIT
  */
-abstract class Sql
+class Sql
 {
     /**
      * List of literals which should not be escaped in queries
@@ -27,21 +27,12 @@ abstract class Sql
     /**
      * The parent database connection
      *
-     * @var \Kirby\Database\Database
+     * @var Database
      */
-    protected $database;
-
-    /**
-     * List of used bindings; used to avoid
-     * duplicate binding names
-     *
-     * @var array
-     */
-    protected $bindings = [];
+    public $database;
 
     /**
      * Constructor
-     * @codeCoverageIgnore
      *
      * @param \Kirby\Database\Database $database
      */
@@ -53,45 +44,51 @@ abstract class Sql
     /**
      * Returns a randomly generated binding name
      *
-     * @param string $label String that only contains alphanumeric chars and
-     *                      underscores to use as a human-readable identifier
-     * @return string Binding name that is guaranteed to be unique for this connection
+     * @param string $label String that contains lowercase letters and numbers to use as a readable identifier
+     * @param string $prefix
+     * @return string
      */
     public function bindingName(string $label): string
     {
-        // make sure that the binding name is safe to prevent injections;
-        // otherwise use a generic label
-        if (!$label || preg_match('/^[a-zA-Z0-9_]+$/', $label) !== 1) {
+        // make sure that the binding name is valid to prevent injections
+        if (!preg_match('/^[a-z0-9_]+$/', $label)) {
             $label = 'invalid';
         }
 
-        // generate random bindings until the name is unique
-        do {
-            $binding = ':' . $label . '_' . Str::random(8, 'alphaNum');
-        } while (in_array($binding, $this->bindings) === true);
-
-        // cache the generated binding name for future invocations
-        $this->bindings[] = $binding;
-        return $binding;
+        return ':' . $label . '_' . Str::random(16);
     }
 
     /**
-     * Returns a query to list the columns of a specified table;
-     * the query needs to return rows with a column `name`
+     * Returns a list of columns for a specified table
+     * MySQL version
      *
-     * @param string $table Table name
+     * @param string $table The table name
      * @return array
      */
-    abstract public function columns(string $table): array;
+    public function columns(string $table): array
+    {
+        $databaseBinding = $this->bindingName('database');
+        $tableBinding    = $this->bindingName('table');
+
+        $query  = 'SELECT COLUMN_NAME AS name FROM INFORMATION_SCHEMA.COLUMNS ';
+        $query .= 'WHERE TABLE_SCHEMA = ' . $databaseBinding . ' AND TABLE_NAME = ' . $tableBinding;
+
+        return [
+            'query'    => $query,
+            'bindings' => [
+                $databaseBinding => $this->database->name(),
+                $tableBinding    => $table,
+            ]
+        ];
+    }
 
     /**
-     * Returns a query snippet for a column default value
+     * Optionl default value definition for the column
      *
-     * @param string $name Column name
-     * @param array $column Column definition array with an optional `default` key
-     * @return array Array with a `query` string and a `bindings` array
+     * @param array $column
+     * @return array
      */
-    public function columnDefault(string $name, array $column): array
+    public function columnDefault(array $column): array
     {
         if (isset($column['default']) === false) {
             return [
@@ -100,63 +97,74 @@ abstract class Sql
             ];
         }
 
-        $binding = $this->bindingName($name . '_default');
+        $binding = $this->bindingName($column['name'] . '_default');
 
         return [
             'query'    => 'DEFAULT ' . $binding,
             'bindings' => [
-                $binding => $column['default']
+                $binding = $column['default']
             ]
         ];
     }
 
     /**
-     * Returns the cleaned identifier based on the table and column name
+     * Returns a valid column name
      *
-     * @param string $table Table name
-     * @param string $column Column name
-     * @param bool $enforceQualified If true, a qualified identifier is returned in all cases
-     * @return string|null Identifier or null if the table or column is invalid
+     * @param string $table
+     * @param string $column
+     * @param bool $enforceQualified
+     * @return string|null
      */
     public function columnName(string $table, string $column, bool $enforceQualified = false): ?string
     {
-        // ensure we have clean $table and $column values without qualified identifiers
         list($table, $column) = $this->splitIdentifier($table, $column);
 
-        // combine the identifiers again
-        if ($this->database->validateColumn($table, $column) === true) {
+        if ($this->validateColumn($table, $column) === true) {
             return $this->combineIdentifier($table, $column, $enforceQualified !== true);
         }
 
-        // the table or column does not exist
         return null;
     }
 
     /**
      * Abstracted column types to simplify table
      * creation for multiple database drivers
-     * @codeCoverageIgnore
      *
      * @return array
      */
     public function columnTypes(): array
     {
         return [
-            'id'        => '{{ name }} INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
-            'varchar'   => '{{ name }} varchar(255) {{ null }} {{ default }} {{ unique }}',
-            'text'      => '{{ name }} TEXT {{ unique }}',
-            'int'       => '{{ name }} INT(11) UNSIGNED {{ null }} {{ default }} {{ unique }}',
-            'timestamp' => '{{ name }} TIMESTAMP {{ null }} {{ default }} {{ unique }}'
+            'id'        => '{{ name }} INT(11) UNSIGNED NOT NULL AUTO_INCREMENT',
+            'varchar'   => '{{ name }} varchar(255) {{ null }} {{ default }}',
+            'text'      => '{{ name }} TEXT',
+            'int'       => '{{ name }} INT(11) UNSIGNED {{ null }} {{ default }}',
+            'timestamp' => '{{ name }} TIMESTAMP {{ null }} {{ default }}'
+        ];
+    }
+
+    /**
+     * Optional key definition for the column.
+     *
+     * @param array $column
+     * @return array
+     */
+    public function columnKey(array $column): array
+    {
+        return [
+            'query' => null,
+            'bindings' => []
         ];
     }
 
     /**
      * Combines an identifier (table and column)
+     * Default version for MySQL
      *
      * @param $table string
      * @param $column string
-     * @param $values boolean Whether the identifier is going to be used for a VALUES clause;
-     *                        only relevant for SQLite
+     * @param $values boolean Whether the identifier is going to be used for a values clause
+     *                        Only relevant for SQLite
      * @return string
      */
     public function combineIdentifier(string $table, string $column, bool $values = false): string
@@ -165,30 +173,33 @@ abstract class Sql
     }
 
     /**
-     * Creates the CREATE TABLE syntax for a single column
+     * Creates the create syntax for a single column
      *
-     * @param string $name Column name
-     * @param array $column Column definition array; valid keys:
-     *                      - `type` (required): Column template to use
-     *                      - `null`: Whether the column may be NULL (boolean)
-     *                      - `key`: Index this column is part of; special values `'primary'` for PRIMARY KEY and `true` for automatic naming
-     *                      - `unique`: Whether the index (or if not set the column itself) has a UNIQUE constraint
-     *                      - `default`: Default value of this column
-     * @return array Array with `query` and `key` strings, a `unique` boolean and a `bindings` array
-     * @throws \Kirby\Exception\InvalidArgumentException if no column type is given or the column type is not supported.
+     * @param string $table
+     * @param array $column
+     * @return array
      */
-    public function createColumn(string $name, array $column): array
+    public function createColumn(string $table, array $column): array
     {
         // column type
         if (isset($column['type']) === false) {
-            throw new InvalidArgumentException('No column type given for column ' . $name);
+            throw new InvalidArgumentException('No column type given for column ' . $column);
         }
-        $template = $this->columnTypes()[$column['type']] ?? null;
-        if (!$template) {
+
+        // column name
+        if (isset($column['name']) === false) {
+            throw new InvalidArgumentException('No column name given');
+        }
+
+        if ($column['type'] === 'id') {
+            $column['key'] = 'PRIMARY';
+        }
+
+        if (!$template = ($this->columnTypes()[$column['type']] ?? null)) {
             throw new InvalidArgumentException('Unsupported column type: ' . $column['type']);
         }
 
-        // null option
+        // null
         if (A::get($column, 'null') === false) {
             $null = 'NOT NULL';
         } else {
@@ -196,125 +207,85 @@ abstract class Sql
         }
 
         // indexes/keys
-        if (isset($column['key']) === true) {
-            if (is_string($column['key']) === true) {
-                $column['key'] = strtolower($column['key']);
-            } elseif ($column['key'] === true) {
-                $column['key'] = $name . '_index';
-            }
-        }
+        $key = false;
 
-        // unique
-        $uniqueKey = false;
-        $uniqueColumn = null;
-        if (isset($column['unique']) === true && $column['unique'] === true) {
-            if (isset($column['key']) === true) {
-                // this column is part of an index, make that unique
-                $uniqueKey = true;
-            } else {
-                // make the column itself unique
-                $uniqueColumn = 'UNIQUE';
+        if (isset($column['key']) === true) {
+            $column['key'] = strtoupper($column['key']);
+
+            // backwards compatibility
+            if ($column['key'] === 'PRIMARY') {
+                $column['key'] = 'PRIMARY KEY';
+            }
+
+            if (in_array($column['key'], ['PRIMARY KEY', 'INDEX']) === true) {
+                $key = $column['key'];
             }
         }
 
         // default value
-        $columnDefault = $this->columnDefault($name, $column);
+        $columnDefault = $this->columnDefault($column);
+        $columnKey     = $this->columnKey($column);
 
         $query = trim(Str::template($template, [
-            'name'    => $this->quoteIdentifier($name),
+            'name'    => $this->quoteIdentifier($column['name']),
             'null'    => $null,
+            'key'     => $columnKey['query'],
             'default' => $columnDefault['query'],
-            'unique'  => $uniqueColumn
-        ], ['fallback' => '']));
+        ]));
+
+        $bindings = array_merge($columnKey['bindings'], $columnDefault['bindings']);
 
         return [
             'query'    => $query,
-            'bindings' => $columnDefault['bindings'],
-            'key'      => $column['key'] ?? null,
-            'unique'   => $uniqueKey
-        ];
-    }
-
-    /**
-     * Creates the inner query for the columns in a CREATE TABLE query
-     *
-     * @param array $columns Array of column definition arrays, see `Kirby\Database\Sql::createColumn()`
-     * @return array Array with a `query` string and `bindings`, `keys` and `unique` arrays
-     */
-    public function createTableInner(array $columns): array
-    {
-        $query    = [];
-        $bindings = [];
-        $keys     = [];
-        $unique   = [];
-
-        foreach ($columns as $name => $column) {
-            $sql = $this->createColumn($name, $column);
-
-            // collect query and bindings
-            $query[] = $sql['query'];
-            $bindings += $sql['bindings'];
-
-            // make a list of keys per key name
-            if ($sql['key'] !== null) {
-                if (isset($keys[$sql['key']]) !== true) {
-                    $keys[$sql['key']] = [];
-                }
-
-                $keys[$sql['key']][] = $name;
-                if ($sql['unique'] === true) {
-                    $unique[$sql['key']] = true;
-                }
-            }
-        }
-
-        return [
-            'query'    => implode(',' . PHP_EOL, $query),
             'bindings' => $bindings,
-            'keys'     => $keys,
-            'unique'   => $unique
+            'key'      => $key
         ];
     }
 
     /**
-     * Creates a CREATE TABLE query
+     * Creates a table with a simple scheme array for columns
+     * Default version for MySQL
      *
-     * @param string $table Table name
-     * @param array $columns Array of column definition arrays, see `Kirby\Database\Sql::createColumn()`
-     * @return array Array with a `query` string and a `bindings` array
+     * @param string $table The table name
+     * @param array $columns
+     * @return array
      */
     public function createTable(string $table, array $columns = []): array
     {
-        $inner = $this->createTableInner($columns);
+        $output   = [];
+        $keys     = [];
+        $bindings = [];
 
-        // add keys
-        foreach ($inner['keys'] as $key => $columns) {
-            // quote each column name and make a list string out of the column names
-            $columns = implode(', ', array_map(
-                fn ($name) => $this->quoteIdentifier($name),
-                $columns
-            ));
+        foreach ($columns as $name => $column) {
+            $sql = $this->createColumn($table, $column);
 
-            if ($key === 'primary') {
-                $key = 'PRIMARY KEY';
-            } else {
-                $unique = isset($inner['unique'][$key]) === true ? 'UNIQUE ' : '';
-                $key = $unique . 'INDEX ' . $this->quoteIdentifier($key);
+            $output[] = $sql['query'];
+
+            if ($sql['key']) {
+                $keys[$column['name']] = $sql['key'];
             }
 
-            $inner['query'] .= ',' . PHP_EOL . $key . ' (' . $columns . ')';
+            $bindings = array_merge($bindings, $sql['bindings']);
+        }
+
+        // combine columns
+        $inner = implode(',' . PHP_EOL, $output);
+
+        // add keys
+        foreach ($keys as $name => $key) {
+            $inner .= ',' . PHP_EOL . $key . ' (' . $this->quoteIdentifier($name) . ')';
         }
 
         return [
-            'query'    => 'CREATE TABLE ' . $this->quoteIdentifier($table) . ' (' . PHP_EOL . $inner['query'] . PHP_EOL . ')',
-            'bindings' => $inner['bindings']
+            'query'    => 'CREATE TABLE ' . $this->quoteIdentifier($table) . ' (' . PHP_EOL . $inner . PHP_EOL . ')',
+            'bindings' => $bindings
         ];
     }
 
     /**
-     * Builds a DELETE clause
+     * Builds a delete clause
      *
-     * @param array $params List of parameters for the DELETE clause. See defaults for more info.
+     * @param array $params List of parameters for the delete clause. See defaults for more info.
      * @return array
      */
     public function delete(array $params = []): array
@@ -364,7 +335,7 @@ abstract class Sql
      * @param array $input
      * @return void
      */
-    public function extend(&$query, array &$bindings, $input)
+    public function extend(&$query, array &$bindings = [], $input)
     {
         if (empty($input['query']) === false) {
             $query[]  = $input['query'];
@@ -410,7 +381,7 @@ abstract class Sql
     /**
      * Creates the having syntax
      *
-     * @param string|null $having
+     * @param string $having
      * @return array
      */
     public function having(string $having = null): array
@@ -457,7 +428,6 @@ abstract class Sql
      * @param string $type
      * @param string $on
      * @return array
-     * @throws \Kirby\Exception\InvalidArgumentException if an invalid join type is given
      */
     public function join(string $type, string $table, string $on): array
     {
@@ -492,7 +462,7 @@ abstract class Sql
     /**
      * Create the syntax for multiple joins
      *
-     * @param array|null $joins
+     * @param array $joins
      * @return array
      */
     public function joins(array $joins = null): array
@@ -527,7 +497,7 @@ abstract class Sql
             ];
         }
 
-        $limit ??= '18446744073709551615';
+        $limit = $limit ?? '18446744073709551615';
 
         $offsetBinding = $this->bindingName('offset');
         $limitBinding  = $this->bindingName('limit');
@@ -576,18 +546,19 @@ abstract class Sql
 
     /**
      * Quotes an identifier (table *or* column)
+     * Default version for MySQL
      *
      * @param $identifier string
      * @return string
      */
     public function quoteIdentifier(string $identifier): string
     {
-        // * is special, don't quote that
+        // * is special
         if ($identifier === '*') {
             return $identifier;
         }
 
-        // escape backticks inside the identifier name
+        // replace every backtick with two backticks
         $identifier = str_replace('`', '``', $identifier);
 
         // wrap in backticks
@@ -695,7 +666,6 @@ abstract class Sql
      * @param $table string Default table if the identifier is not qualified
      * @param $identifier string
      * @return array
-     * @throws \Kirby\Exception\InvalidArgumentException if an invalid identifier is given
      */
     public function splitIdentifier($table, $identifier): array
     {
@@ -718,19 +688,28 @@ abstract class Sql
     }
 
     /**
-     * Returns a query to list the tables of the current database;
-     * the query needs to return rows with a column `name`
+     * Returns a list of tables for a specified database
+     * MySQL version
      *
      * @return array
      */
-    abstract public function tables(): array;
+    public function tables(): array
+    {
+        $binding = $this->bindingName('database');
+
+        return [
+            'query'    => 'SELECT TABLE_NAME AS name FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = ' . $binding,
+            'bindings' => [
+                $binding => $this->database->name()
+            ]
+        ];
+    }
 
     /**
      * Validates and quotes a table name
      *
      * @param string $table
      * @return string
-     * @throws \Kirby\Exception\InvalidArgumentException if an invalid table name is given
      */
     public function tableName(string $table): string
     {
@@ -802,11 +781,10 @@ abstract class Sql
      * @param string $table
      * @param string $column
      * @return bool
-     * @throws \Kirby\Exception\InvalidArgumentException If the column is invalid
      */
     public function validateColumn(string $table, string $column): bool
     {
-        if ($this->database->validateColumn($table, $column) !== true) {
+        if ($this->database->validateColumn($table, $column) === false) {
             throw new InvalidArgumentException('Invalid column ' . $column);
         }
 
@@ -886,7 +864,6 @@ abstract class Sql
      * @param string $separator
      * @param bool $enforceQualified
      * @param array
-     * @return array
      */
     public function valueSet(string $table, $values, string $separator = ',', bool $enforceQualified = false): array
     {

@@ -2,9 +2,8 @@
 
 namespace Kirby\Data;
 
-use Kirby\Exception\BadMethodCallException;
-use Kirby\Exception\Exception;
-use Kirby\Filesystem\F;
+use Exception;
+use Kirby\Toolkit\F;
 
 /**
  * Reader and write of PHP files with data in a returned array
@@ -24,7 +23,7 @@ class PHP extends Handler
      * @param string $indent For internal use only
      * @return string
      */
-    public static function encode($data, string $indent = ''): string
+    public static function encode($data, $indent = ''): string
     {
         switch (gettype($data)) {
             case 'array':
@@ -38,7 +37,7 @@ class PHP extends Handler
                 return "[\n" . implode(",\n", $array) . "\n" . $indent . ']';
             case 'boolean':
                 return $data ? 'true' : 'false';
-            case 'integer':
+            case 'int':
             case 'double':
                 return $data;
             default:
@@ -47,14 +46,14 @@ class PHP extends Handler
     }
 
     /**
-     * PHP strings shouldn't be decoded manually
+     * PHP arrays don't have to be decoded
      *
-     * @param mixed $string
+     * @param array $array
      * @return array
      */
-    public static function decode($string): array
+    public static function decode($array): array
     {
-        throw new BadMethodCallException('The PHP::decode() method is not implemented');
+        return $array;
     }
 
     /**
@@ -69,17 +68,17 @@ class PHP extends Handler
             throw new Exception('The file "' . $file . '" does not exist');
         }
 
-        return (array)F::load($file, []);
+        return (array)(include $file);
     }
 
     /**
      * Creates a PHP file with the given data
      *
      * @param string $file
-     * @param mixed $data
+     * @param array $data
      * @return bool
      */
-    public static function write(string $file = null, $data = []): bool
+    public static function write(string $file = null, array $data = []): bool
     {
         $php = static::encode($data);
         $php = "<?php\n\nreturn $php;";

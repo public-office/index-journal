@@ -24,15 +24,14 @@ class Query
     /**
      * Parent Database object
      *
-     * @var \Kirby\Database\Database
+     * @var Database
      */
     protected $database = null;
 
     /**
      * The object which should be fetched for each row
-     * or function to call for each row
      *
-     * @var string|\Closure
+     * @var string
      */
     protected $fetch = 'Kirby\Toolkit\Obj';
 
@@ -220,14 +219,13 @@ class Query
     }
 
     /**
-     * Sets the object class, which should be fetched;
-     * set this to `'array'` to get a simple array instead of an object;
-     * pass a function that receives the `$data` and the `$key` to generate arbitrary data structures
+     * Sets the object class, which should be fetched
+     * Set this to array to get a simple array instead of an object
      *
-     * @param string|\Closure $fetch
+     * @param string $fetch
      * @return \Kirby\Database\Query
      */
-    public function fetch($fetch)
+    public function fetch(string $fetch)
     {
         $this->fetch = $fetch;
         return $this;
@@ -251,7 +249,6 @@ class Query
      *
      * @param string $table
      * @return \Kirby\Database\Query
-     * @throws \Kirby\Exception\InvalidArgumentException if the table does not exist
      */
     public function table(string $table)
     {
@@ -294,7 +291,7 @@ class Query
      * @param string $table Name of the table, which should be joined
      * @param string $on The on clause for this join
      * @param string $type The join type. Uses an inner join by default
-     * @return $this
+     * @return object
      */
     public function join(string $table, string $on, string $type = 'JOIN')
     {
@@ -341,7 +338,7 @@ class Query
      */
     public function innerJoin($table, $on)
     {
-        return $this->join($table, $on, 'inner join');
+        return $this->join($table, $on, 'inner');
     }
 
     /**
@@ -363,7 +360,7 @@ class Query
      * Also can be used as getter for all attached bindings by not passing an argument.
      *
      * @param mixed $bindings Array of bindings or null to use this method as getter
-     * @return array|\Kirby\Database\Query
+     * @return array|Query
      */
     public function bindings(array $bindings = null)
     {
@@ -446,7 +443,7 @@ class Query
     /**
      * Attaches a group by clause
      *
-     * @param string|null $group
+     * @param string $group
      * @return \Kirby\Database\Query
      */
     public function group(string $group = null)
@@ -478,7 +475,7 @@ class Query
     /**
      * Attaches an order clause
      *
-     * @param string|null $order
+     * @param string $order
      * @return \Kirby\Database\Query
      */
     public function order(string $order = null)
@@ -490,7 +487,7 @@ class Query
     /**
      * Sets the offset for select clauses
      *
-     * @param int|null $offset
+     * @param int $offset
      * @return \Kirby\Database\Query
      */
     public function offset(int $offset = null)
@@ -502,7 +499,7 @@ class Query
     /**
      * Sets the limit for select clauses
      *
-     * @param int|null $limit
+     * @param int $limit
      * @return \Kirby\Database\Query
      */
     public function limit(int $limit = null)
@@ -516,9 +513,9 @@ class Query
      * This uses the SQL class to build stuff.
      *
      * @param string $type (select, update, insert)
-     * @return array The final query
+     * @return string The final query
      */
-    public function build(string $type)
+    public function build($type)
     {
         $sql = $this->database->sql();
 
@@ -562,55 +559,55 @@ class Query
     /**
      * Builds a count query
      *
-     * @return int
+     * @return \Kirby\Database\Query
      */
-    public function count(): int
+    public function count()
     {
-        return (int)$this->aggregate('COUNT');
+        return $this->aggregate('COUNT');
     }
 
     /**
      * Builds a max query
      *
      * @param string $column
-     * @return float
+     * @return \Kirby\Database\Query
      */
-    public function max(string $column): float
+    public function max(string $column)
     {
-        return (float)$this->aggregate('MAX', $column);
+        return $this->aggregate('MAX', $column);
     }
 
     /**
      * Builds a min query
      *
      * @param string $column
-     * @return float
+     * @return \Kirby\Database\Query
      */
-    public function min(string $column): float
+    public function min(string $column)
     {
-        return (float)$this->aggregate('MIN', $column);
+        return $this->aggregate('MIN', $column);
     }
 
     /**
      * Builds a sum query
      *
      * @param string $column
-     * @return float
+     * @return \Kirby\Database\Query
      */
-    public function sum(string $column): float
+    public function sum(string $column)
     {
-        return (float)$this->aggregate('SUM', $column);
+        return $this->aggregate('SUM', $column);
     }
 
     /**
      * Builds an average query
      *
      * @param string $column
-     * @return float
+     * @return \Kirby\Database\Query
      */
-    public function avg(string $column): float
+    public function avg(string $column)
     {
-        return (float)$this->aggregate('AVG', $column);
+        return $this->aggregate('AVG', $column);
     }
 
     /**
@@ -619,7 +616,7 @@ class Query
      *
      * @param string $method
      * @param string $column
-     * @param int $default An optional default value, which should be returned if the query fails
+     * @param string $default An optional default value, which should be returned if the query fails
      * @return mixed
      */
     public function aggregate(string $method, string $column = '*', $default = 0)
@@ -710,7 +707,7 @@ class Query
             $this->database->fail();
         }
 
-        $result = $this->database->execute($sql['query'], $sql['bindings']);
+        $result = $this->database->execute($sql['query'], $sql['bindings'], $params);
 
         $this->reset();
 
@@ -813,18 +810,12 @@ class Query
      * @param string $column
      * @return mixed
      */
-    public function column(string $column)
+    public function column($column)
     {
-        // if there isn't already an explicit order, order by the primary key
-        // instead of the column that was requested (which would be implied otherwise)
-        if ($this->order === null) {
-            $sql        = $this->database->sql();
-            $primaryKey = $sql->combineIdentifier($this->table, $this->primaryKeyName);
+        $sql        = $this->database->sql();
+        $primaryKey = $sql->combineIdentifier($this->table, $this->primaryKeyName);
 
-            $this->order($primaryKey . ' ASC');
-        }
-
-        $results = $this->query($this->select([$column])->build('select'), [
+        $results = $this->query($this->select([$column])->order($primaryKey . ' ASC')->build('select'), [
             'iterator' => 'array',
             'fetch'    => 'array',
         ]);
@@ -851,7 +842,7 @@ class Query
      * @param mixed $value
      * @return mixed
      */
-    public function findBy(string $column, $value)
+    public function findBy($column, $value)
     {
         return $this->where([$column => $value])->first();
     }
@@ -870,7 +861,7 @@ class Query
     /**
      * Fires an insert query
      *
-     * @param mixed $values You can pass values here or set them with ->values() before
+     * @param array $values You can pass values here or set them with ->values() before
      * @return mixed Returns the last inserted id on success or false.
      */
     public function insert($values = null)
@@ -887,7 +878,7 @@ class Query
     /**
      * Fires an update query
      *
-     * @param mixed $values You can pass values here or set them with ->values() before
+     * @param array $values You can pass values here or set them with ->values() before
      * @param mixed $where You can pass a where clause here or set it with ->where() before
      * @return bool
      */
@@ -928,10 +919,10 @@ class Query
      * Builder for where and having clauses
      *
      * @param array $args Arguments, see where() description
-     * @param mixed $current Current value (like $this->where)
+     * @param string $current Current value (like $this->where)
      * @return string
      */
-    protected function filterQuery(array $args, $current)
+    protected function filterQuery($args, $current)
     {
         $mode   = A::last($args);
         $result = '';
@@ -1009,8 +1000,9 @@ class Query
                     $key = $sql->columnName($this->table, $args[0]);
 
                     // ->where('username', 'in', ['myuser', 'myotheruser']);
-                    $predicate = trim(strtoupper($args[1]));
                     if (is_array($args[2]) === true) {
+                        $predicate = trim(strtoupper($args[1]));
+
                         if (in_array($predicate, ['IN', 'NOT IN']) === false) {
                             throw new InvalidArgumentException('Invalid predicate ' . $predicate);
                         }
@@ -1028,8 +1020,11 @@ class Query
                         // add that to the where clause in parenthesis
                         $result = $key . ' ' . $predicate . ' (' . implode(', ', $values) . ')';
 
+                        $this->bindings($bindings);
+
                     // ->where('username', 'like', 'myuser');
                     } else {
+                        $predicate  = trim(strtoupper($args[1]));
                         $predicates = [
                             '=', '>=', '>', '<=', '<', '<>', '!=', '<=>',
                             'IS', 'IS NOT',
@@ -1047,8 +1042,9 @@ class Query
                         $bindings[$valueBinding] = $args[2];
 
                         $result = $key . ' ' . $predicate . ' ' . $valueBinding;
+
+                        $this->bindings($bindings);
                     }
-                    $this->bindings($bindings);
                 }
 
                 break;

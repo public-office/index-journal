@@ -25,8 +25,6 @@ class Value
 
     /**
      * the number of minutes until the value expires
-     * @todo Rename this property to $expiry to reflect
-     *       both minutes and absolute timestamps
      * @var int
      */
     protected $minutes;
@@ -42,8 +40,7 @@ class Value
      *
      * @param mixed $value
      * @param int $minutes the number of minutes until the value expires
-     *                     or an absolute UNIX timestamp
-     * @param int $created the UNIX timestamp when the value has been created
+     * @param int $created the unix timestamp when the value has been created
      */
     public function __construct($value, int $minutes = 0, int $created = null)
     {
@@ -75,11 +72,6 @@ class Value
             return null;
         }
 
-        if ($this->minutes > 1000000000) {
-            // absolute timestamp
-            return $this->minutes;
-        }
-
         return $this->created + ($this->minutes * 60);
     }
 
@@ -87,7 +79,7 @@ class Value
      * Creates a value object from an array
      *
      * @param array $array
-     * @return static
+     * @return self
      */
     public static function fromArray(array $array)
     {
@@ -99,7 +91,7 @@ class Value
      * returns null on error
      *
      * @param string $json
-     * @return static|null
+     * @return self|null
      */
     public static function fromJson(string $json)
     {

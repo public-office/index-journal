@@ -2,9 +2,7 @@
 
 namespace Kirby\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
+use Kirby\Toolkit\Dir;
 use Kirby\Toolkit\Str;
 
 /**
@@ -38,14 +36,13 @@ class Users extends Collection
      * an entire second collection to the
      * current collection
      *
-     * @param \Kirby\Cms\Users|\Kirby\Cms\User|string $object
-     * @return $this
-     * @throws \Kirby\Exception\InvalidArgumentException When no `User` or `Users` object or an ID of an existing user is passed
+     * @param mixed $object
+     * @return self
      */
     public function add($object)
     {
-        // add a users collection
-        if (is_a($object, self::class) === true) {
+        // add a page collection
+        if (is_a($object, static::class) === true) {
             $this->data = array_merge($this->data, $object->data);
 
         // add a user by id
@@ -55,11 +52,6 @@ class Users extends Collection
         // add a user object
         } elseif (is_a($object, 'Kirby\Cms\User') === true) {
             $this->__set($object->id(), $object);
-
-        // give a useful error message on invalid input;
-        // silently ignore "empty" values for compatibility with existing setups
-        } elseif (in_array($object, [null, false, true], true) !== true) {
-            throw new InvalidArgumentException('You must pass a Users or User object or an ID of an existing user to the Users collection');
         }
 
         return $this;
@@ -70,7 +62,7 @@ class Users extends Collection
      *
      * @param array $users
      * @param array $inject
-     * @return static
+     * @return self
      */
     public static function factory(array $users, array $inject = [])
     {
@@ -94,7 +86,7 @@ class Users extends Collection
     public function findByKey(string $key)
     {
         if (Str::contains($key, '@') === true) {
-            return parent::findBy('email', Str::lower($key));
+            return parent::findBy('email', strtolower($key));
         }
 
         return parent::findByKey($key);
@@ -105,7 +97,7 @@ class Users extends Collection
      *
      * @param string $root
      * @param array $inject
-     * @return static
+     * @return self
      */
     public static function load(string $root, array $inject = [])
     {
@@ -117,9 +109,8 @@ class Users extends Collection
             }
 
             // get role information
-            $path = $root . '/' . $userDirectory . '/index.php';
-            if (is_file($path) === true) {
-                $credentials = F::load($path);
+            if (file_exists($root . '/' . $userDirectory . '/index.php') === true) {
+                $credentials = require $root . '/' . $userDirectory . '/index.php';
             }
 
             // create user model based on role
@@ -135,13 +126,13 @@ class Users extends Collection
     }
 
     /**
-     * Shortcut for `$users->filter('role', 'admin')`
+     * Shortcut for `$users->filterBy('role', 'admin')`
      *
      * @param string $role
-     * @return static
+     * @return self
      */
     public function role(string $role)
     {
-        return $this->filter('role', $role);
+        return $this->filterBy('role', $role);
     }
 }

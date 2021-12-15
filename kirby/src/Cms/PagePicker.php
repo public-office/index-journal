@@ -162,7 +162,7 @@ class PagePicker extends Picker
         }
 
         // filter protected pages
-        $items = $items->filter('isReadable', true);
+        $items = $items->filterBy('isReadable', true);
 
         // search
         $items = $this->search($items);
@@ -185,7 +185,6 @@ class PagePicker extends Picker
      * Search for pages by query string
      *
      * @return \Kirby\Cms\Pages
-     * @throws \Kirby\Exception\InvalidArgumentException
      */
     public function itemsForQuery()
     {

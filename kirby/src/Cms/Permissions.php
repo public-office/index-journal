@@ -17,28 +17,17 @@ use Kirby\Exception\InvalidArgumentException;
  */
 class Permissions
 {
-    /**
-     * @var array
-     */
-    public static $extendedActions = [];
-
-    /**
-     * @var array
-     */
     protected $actions = [
         'access' => [
-            'account'   => true,
-            'languages' => true,
-            'panel'     => true,
-            'site'      => true,
-            'system'    => true,
-            'users'     => true,
+            'panel'    => true,
+            'settings' => true,
+            'site'     => true,
+            'users'    => true,
         ],
         'files' => [
             'changeName' => true,
             'create'     => true,
             'delete'     => true,
-            'read'       => true,
             'replace'    => true,
             'update'     => true
         ],
@@ -84,23 +73,8 @@ class Permissions
         ]
     ];
 
-    /**
-     * Permissions constructor
-     *
-     * @param array $settings
-     * @throws \Kirby\Exception\InvalidArgumentException
-     */
     public function __construct($settings = [])
     {
-        // dynamically register the extended actions
-        foreach (static::$extendedActions as $key => $actions) {
-            if (isset($this->actions[$key]) === true) {
-                throw new InvalidArgumentException('The action ' . $key . ' is already a core action');
-            }
-
-            $this->actions[$key] = $actions;
-        }
-
         if (is_array($settings) === true) {
             return $this->setCategories($settings);
         }
@@ -110,11 +84,6 @@ class Permissions
         }
     }
 
-    /**
-     * @param string|null $category
-     * @param string|null $action
-     * @return bool
-     */
     public function for(string $category = null, string $action = null): bool
     {
         if ($action === null) {
@@ -132,39 +101,18 @@ class Permissions
         return $this->actions[$category][$action];
     }
 
-    /**
-     * @param string $category
-     * @param string $action
-     * @return bool
-     */
     protected function hasAction(string $category, string $action): bool
     {
         return $this->hasCategory($category) === true && array_key_exists($action, $this->actions[$category]) === true;
     }
 
-    /**
-     * @param string $category
-     * @return bool
-     */
     protected function hasCategory(string $category): bool
     {
         return array_key_exists($category, $this->actions) === true;
     }
 
-    /**
-     * @param string $category
-     * @param string $action
-     * @param $setting
-     * @return $this
-     */
     protected function setAction(string $category, string $action, $setting)
     {
-        // deprecated fallback for the settings/system view
-        // TODO: remove in 3.7
-        if ($category === 'access' && $action === 'settings') {
-            $action = 'system';
-        }
-
         // wildcard to overwrite the entire category
         if ($action === '*') {
             return $this->setCategory($category, $setting);
@@ -175,10 +123,6 @@ class Permissions
         return $this;
     }
 
-    /**
-     * @param bool $setting
-     * @return $this
-     */
     protected function setAll(bool $setting)
     {
         foreach ($this->actions as $categoryName => $actions) {
@@ -188,10 +132,6 @@ class Permissions
         return $this;
     }
 
-    /**
-     * @param array $settings
-     * @return $this
-     */
     protected function setCategories(array $settings)
     {
         foreach ($settings as $categoryName => $categoryActions) {
@@ -209,12 +149,6 @@ class Permissions
         return $this;
     }
 
-    /**
-     * @param string $category
-     * @param bool $setting
-     * @return $this
-     * @throws \Kirby\Exception\InvalidArgumentException
-     */
     protected function setCategory(string $category, bool $setting)
     {
         if ($this->hasCategory($category) === false) {
@@ -228,9 +162,6 @@ class Permissions
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         return $this->actions;

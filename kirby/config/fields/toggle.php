@@ -1,7 +1,6 @@
 <?php
 
 use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\A;
 use Kirby\Toolkit\I18n;
 
 return [
@@ -21,25 +20,19 @@ return [
          * Sets the text next to the toggle. The text can be a string or an array of two options. The first one is the negative text and the second one the positive. The text will automatically switch when the toggle is triggered.
          */
         'text' => function ($value = null) {
-            $model = $this->model();
-
             if (is_array($value) === true) {
                 if (A::isAssociative($value) === true) {
-                    return $model->toSafeString(I18n::translate($value, $value));
+                    return I18n::translate($value, $value);
                 }
 
                 foreach ($value as $key => $val) {
-                    $value[$key] = $model->toSafeString(I18n::translate($val, $val));
+                    $value[$key] = I18n::translate($val, $val);
                 }
 
                 return $value;
             }
 
-            if (empty($value) === false) {
-                return $model->toSafeString(I18n::translate($value, $value));
-            }
-
-            return $value;
+            return I18n::translate($value, $value);
         },
     ],
     'computed' => [
@@ -66,7 +59,9 @@ return [
         'boolean',
         'required' => function ($value) {
             if ($this->isRequired() && ($value === false || $this->isEmpty($value))) {
-                throw new InvalidArgumentException(I18n::translate('field.required'));
+                throw new InvalidArgumentException([
+                    'key' => 'form.field.required'
+                ]);
             }
         },
     ]

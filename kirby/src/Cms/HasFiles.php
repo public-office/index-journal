@@ -27,7 +27,7 @@ trait HasFiles
      */
     public function audio()
     {
-        return $this->files()->filter('type', '==', 'audio');
+        return $this->files()->filterBy('type', '==', 'audio');
     }
 
     /**
@@ -37,7 +37,7 @@ trait HasFiles
      */
     public function code()
     {
-        return $this->files()->filter('type', '==', 'code');
+        return $this->files()->filterBy('type', '==', 'code');
     }
 
     /**
@@ -74,13 +74,13 @@ trait HasFiles
      */
     public function documents()
     {
-        return $this->files()->filter('type', '==', 'document');
+        return $this->files()->filterBy('type', '==', 'document');
     }
 
     /**
      * Returns a specific file by filename or the first one
      *
-     * @param string|null $filename
+     * @param string $filename
      * @param string $in
      * @return \Kirby\Cms\File|null
      */
@@ -181,7 +181,7 @@ trait HasFiles
     /**
      * Returns a specific image by filename or the first one
      *
-     * @param string|null $filename
+     * @param string $filename
      * @return \Kirby\Cms\File|null
      */
     public function image(string $filename = null)
@@ -196,14 +196,14 @@ trait HasFiles
      */
     public function images()
     {
-        return $this->files()->filter('type', '==', 'image');
+        return $this->files()->filterBy('type', '==', 'image');
     }
 
     /**
      * Sets the Files collection
      *
      * @param \Kirby\Cms\Files|null $files
-     * @return $this
+     * @return self
      */
     protected function setFiles(array $files = null)
     {
@@ -221,6 +221,6 @@ trait HasFiles
      */
     public function videos()
     {
-        return $this->files()->filter('type', '==', 'video');
+        return $this->files()->filterBy('type', '==', 'video');
     }
 }

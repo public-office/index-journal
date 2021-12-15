@@ -2,8 +2,8 @@
 
 namespace Kirby\Cms;
 
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
+use Kirby\Toolkit\Dir;
+use Kirby\Toolkit\F;
 
 /**
  * A collection of all available Translations.
@@ -19,19 +19,11 @@ use Kirby\Filesystem\F;
  */
 class Translations extends Collection
 {
-    /**
-     * @param string $code
-     * @return void
-     */
     public function start(string $code): void
     {
         F::move($this->parent->contentFile('', true), $this->parent->contentFile($code, true));
     }
 
-    /**
-     * @param string $code
-     * @return void
-     */
     public function stop(string $code): void
     {
         F::move($this->parent->contentFile($code, true), $this->parent->contentFile('', true));
@@ -39,7 +31,7 @@ class Translations extends Collection
 
     /**
      * @param array $translations
-     * @return static
+     * @return self
      */
     public static function factory(array $translations)
     {
@@ -56,7 +48,7 @@ class Translations extends Collection
     /**
      * @param string $root
      * @param array $inject
-     * @return static
+     * @return self
      */
     public static function load(string $root, array $inject = [])
     {

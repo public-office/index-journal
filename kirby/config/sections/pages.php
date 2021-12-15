@@ -1,7 +1,6 @@
 <?php
 
 use Kirby\Cms\Blueprint;
-use Kirby\Exception\InvalidArgumentException;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\I18n;
 
@@ -18,11 +17,10 @@ return [
     ],
     'props' => [
         /**
-         * Optional array of templates that should only be allowed to add
-         * or `false` to completely disable page creation
+         * Optional array of templates that should only be allowed to add.
          */
-        'create' => function ($create = null) {
-            return $create;
+        'create' => function ($add = null) {
+            return $add;
         },
         /**
          * Enables/disables reverse sorting
@@ -39,8 +37,8 @@ return [
         /**
          * Optional info text setup. Info text is shown on the right (lists) or below (cards) the page title.
          */
-        'info' => function ($info = null) {
-            return I18n::translate($info, $info);
+        'info' => function (string $info = null) {
+            return $info;
         },
         /**
          * The size option controls the size of cards. By default cards are auto-sized and the cards grid will always fill the full width. With a size you can disable auto-sizing. Available sizes: `tiny`, `small`, `medium`, `large`, `huge`
@@ -83,19 +81,13 @@ return [
         /**
          * Setup for the main text in the list or cards. By default this will display the page title.
          */
-        'text' => function ($text = '{{ page.title }}') {
-            return I18n::translate($text, $text);
+        'text' => function (string $text = '{{ page.title }}') {
+            return $text;
         }
     ],
     'computed' => [
         'parent' => function () {
-            $parent = $this->parentModel();
-
-            if (is_a($parent, 'Kirby\Cms\Site') === false && is_a($parent, 'Kirby\Cms\Page') === false) {
-                throw new InvalidArgumentException('The parent is invalid. You must choose the site or a page as parent.');
-            }
-
-            return $parent;
+            return $this->parentModel();
         },
         'pages' => function () {
             switch ($this->status) {
@@ -133,7 +125,7 @@ return [
 
             // sort
             if ($this->sortBy) {
-                $pages = $pages->sort(...$pages::sortArgs($this->sortBy));
+                $pages = $pages->sortBy(...$pages::sortArgs($this->sortBy));
             }
 
             // flip
@@ -143,9 +135,8 @@ return [
 
             // pagination
             $pages = $pages->paginate([
-                'page'   => $this->page,
-                'limit'  => $this->limit,
-                'method' => 'none' // the page is manually provided
+                'page'  => $this->page,
+                'limit' => $this->limit
             ]);
 
             return $pages;
@@ -157,25 +148,23 @@ return [
             $data = [];
 
             foreach ($this->pages as $item) {
-                $panel       = $item->panel();
                 $permissions = $item->permissions();
+                $image       = $item->panelImage($this->image);
 
                 $data[] = [
-                    'dragText'    => $panel->dragText(),
                     'id'          => $item->id(),
-                    'image'       => $panel->image($this->image, $this->layout),
-                    'info'        => $item->toSafeString($this->info ?? false),
-                    'link'        => $panel->url(true),
+                    'dragText'    => $item->dragText(),
+                    'text'        => $item->toString($this->text),
+                    'info'        => $item->toString($this->info ?? false),
                     'parent'      => $item->parentId(),
+                    'icon'        => $item->panelIcon($image),
+                    'image'       => $image,
+                    'link'        => $item->panelUrl(true),
+                    'status'      => $item->status(),
                     'permissions' => [
                         'sort'         => $permissions->can('sort'),
-                        'changeSlug'   => $permissions->can('changeSlug'),
-                        'changeStatus' => $permissions->can('changeStatus'),
-                        'changeTitle'  => $permissions->can('changeTitle'),
-                    ],
-                    'status'      => $item->status(),
-                    'template'    => $item->intendedTemplate()->name(),
-                    'text'        => $item->toSafeString($this->text),
+                        'changeStatus' => $permissions->can('changeStatus')
+                    ]
                 ];
             }
 
@@ -225,8 +214,8 @@ return [
             return true;
         },
         'link' => function () {
-            $modelLink  = $this->model->panel()->url(true);
-            $parentLink = $this->parent->panel()->url(true);
+            $modelLink  = $this->model->panelUrl(true);
+            $parentLink = $this->parent->panelUrl(true);
 
             if ($modelLink !== $parentLink) {
                 return $parentLink;

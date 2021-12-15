@@ -2,9 +2,6 @@
 
 namespace Kirby\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\F;
-
 /**
  * The `$files` object extends the general
  * `Collection` class and refers to a
@@ -33,14 +30,13 @@ class Files extends Collection
      * an entire second collection to the
      * current collection
      *
-     * @param \Kirby\Cms\Files|\Kirby\Cms\File|string $object
-     * @return $this
-     * @throws \Kirby\Exception\InvalidArgumentException When no `File` or `Files` object or an ID of an existing file is passed
+     * @param mixed $object
+     * @return self
      */
     public function add($object)
     {
-        // add a files collection
-        if (is_a($object, self::class) === true) {
+        // add a page collection
+        if (is_a($object, static::class) === true) {
             $this->data = array_merge($this->data, $object->data);
 
         // add a file by id
@@ -50,11 +46,6 @@ class Files extends Collection
         // add a file object
         } elseif (is_a($object, 'Kirby\Cms\File') === true) {
             $this->__set($object->id(), $object);
-
-        // give a useful error message on invalid input;
-        // silently ignore "empty" values for compatibility with existing setups
-        } elseif (in_array($object, [null, false, true], true) !== true) {
-            throw new InvalidArgumentException('You must pass a Files or File object or an ID of an existing file to the Files collection');
         }
 
         return $this;
@@ -64,9 +55,9 @@ class Files extends Collection
      * Sort all given files by the
      * order in the array
      *
-     * @param array $files List of file ids
+     * @param array $files List of filenames
      * @param int $offset Sorting offset
-     * @return $this
+     * @return self
      */
     public function changeSort(array $files, int $offset = 0)
     {
@@ -85,7 +76,8 @@ class Files extends Collection
      *
      * @param array $files
      * @param \Kirby\Cms\Model $parent
-     * @return static
+     * @param array $inject
+     * @return self
      */
     public static function factory(array $files, Model $parent)
     {
@@ -130,48 +122,10 @@ class Files extends Collection
     }
 
     /**
-     * Returns the file size for all
-     * files in the collection in a
-     * human-readable format
-     * @since 3.6.0
-     *
-     * @return string
-     */
-    public function niceSize(): string
-    {
-        return F::niceSize($this->size());
-    }
-
-    /**
-     * Returns the raw size for all
-     * files in the collection
-     * @since 3.6.0
-     *
-     * @return int
-     */
-    public function size(): int
-    {
-        return F::size($this->values(function ($file) {
-            return $file->root();
-        }));
-    }
-
-    /**
-     * Returns the collection sorted by
-     * the sort number and the filename
-     *
-     * @return static
-     */
-    public function sorted()
-    {
-        return $this->sort('sort', 'asc', 'filename', 'asc');
-    }
-
-    /**
      * Filter all files by the given template
      *
      * @param null|string|array $template
-     * @return $this|static
+     * @return self
      */
     public function template($template)
     {
@@ -179,14 +133,6 @@ class Files extends Collection
             return $this;
         }
 
-        if ($template === 'default') {
-            $template = ['default', ''];
-        }
-
-        return $this->filter(
-            'template',
-            is_array($template) ? 'in' : '==',
-            $template
-        );
+        return $this->filterBy('template', is_array($template) ? 'in' : '==', $template);
     }
 }

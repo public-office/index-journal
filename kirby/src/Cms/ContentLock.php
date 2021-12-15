@@ -62,7 +62,6 @@ class ContentLock
      * Sets lock with the current user
      *
      * @return bool
-     * @throws \Kirby\Exception\DuplicateException
      */
     public function create(): bool
     {
@@ -154,7 +153,6 @@ class ContentLock
      * Removes lock of current user
      *
      * @return bool
-     * @throws \Kirby\Exception\LogicException
      */
     public function remove(): bool
     {
@@ -208,7 +206,7 @@ class ContentLock
         }
 
         // add lock user to unlocked data
-        $this->data['unlock'] ??= [];
+        $this->data['unlock']   = $this->data['unlock'] ?? [];
         $this->data['unlock'][] = $this->data['lock']['user'];
 
         return $this->clearLock();
@@ -219,7 +217,6 @@ class ContentLock
      * throws exception if none is authenticated
      *
      * @return \Kirby\Cms\User
-     * @throws \Kirby\Exception\PermissionException
      */
     protected function user(): User
     {

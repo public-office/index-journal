@@ -11,6 +11,7 @@ return [
         'before'      => null,
         'default'     => null,
         'disabled'    => null,
+        'help'        => null,
         'icon'        => null,
         'placeholder' => null,
         'required'    => null,

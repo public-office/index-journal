@@ -27,11 +27,10 @@ return [
             if ($template) {
                 $file = new File([
                     'filename' => 'tmp',
-                    'parent'   => $this->model(),
                     'template' => $template
                 ]);
 
-                $uploads['accept'] = $file->blueprint()->acceptMime();
+                $uploads['accept'] = $file->blueprint()->accept()['mime'] ?? '*';
             } else {
                 $uploads['accept'] = '*';
             }

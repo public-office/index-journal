@@ -163,7 +163,7 @@ class ContentTranslation
 
     /**
      * @param string $code
-     * @return $this
+     * @return self
      */
     protected function setCode(string $code)
     {
@@ -172,8 +172,8 @@ class ContentTranslation
     }
 
     /**
-     * @param array|null $content
-     * @return $this
+     * @param array $content
+     * @return self
      */
     protected function setContent(array $content = null)
     {
@@ -183,7 +183,7 @@ class ContentTranslation
 
     /**
      * @param \Kirby\Cms\Model $parent
-     * @return $this
+     * @return self
      */
     protected function setParent(Model $parent)
     {
@@ -192,8 +192,8 @@ class ContentTranslation
     }
 
     /**
-     * @param string|null $slug
-     * @return $this
+     * @param string $slug
+     * @return self
      */
     protected function setSlug(string $slug = null)
     {
@@ -208,7 +208,7 @@ class ContentTranslation
      */
     public function slug(): ?string
     {
-        return $this->slug ??= ($this->content()['slug'] ?? null);
+        return $this->slug = $this->slug ?? ($this->content()['slug'] ?? null);
     }
 
     /**
@@ -216,7 +216,7 @@ class ContentTranslation
      *
      * @param array|null $data
      * @param bool $overwrite
-     * @return $this
+     * @return self
      */
     public function update(array $data = null, bool $overwrite = false)
     {
@@ -225,7 +225,7 @@ class ContentTranslation
     }
 
     /**
-     * Converts the most important translation
+     * Converts the most imporant translation
      * props to an array
      *
      * @return array

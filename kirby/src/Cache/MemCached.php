@@ -2,8 +2,6 @@
 
 namespace Kirby\Cache;
 
-use Memcached as MemcachedExt;
-
 /**
  * Memcached Driver
  *
@@ -16,8 +14,8 @@ use Memcached as MemcachedExt;
 class MemCached extends Cache
 {
     /**
-     * store for the memcache connection
-     * @var \Memcached
+     * store for the memache connection
+     * @var Memcached
      */
     protected $connection;
 
@@ -38,7 +36,7 @@ class MemCached extends Cache
 
         parent::__construct(array_merge($defaults, $options));
 
-        $this->connection = new MemcachedExt();
+        $this->connection = new \Memcached();
         $this->connection->addServer($this->options['host'], $this->options['port']);
     }
 

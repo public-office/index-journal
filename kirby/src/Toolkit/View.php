@@ -3,7 +3,6 @@
 namespace Kirby\Toolkit;
 
 use Exception;
-use Kirby\Filesystem\F;
 use Throwable;
 
 /**
@@ -61,7 +60,7 @@ class View
      */
     public function exists(): bool
     {
-        return is_file($this->file()) === true;
+        return file_exists($this->file()) === true;
     }
 
     /**
@@ -95,11 +94,13 @@ class View
             throw new Exception($this->missingViewMessage());
         }
 
-        ob_start();
-
         $exception = null;
+
+        ob_start();
+        extract($this->data());
+
         try {
-            F::load($this->file(), null, $this->data());
+            require $this->file();
         } catch (Throwable $e) {
             $exception = $e;
         }

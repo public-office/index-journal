@@ -2,7 +2,6 @@
 
 namespace Kirby\Cms;
 
-use Kirby\Filesystem\Dir;
 use Kirby\Toolkit\Str;
 
 /**
@@ -17,21 +16,21 @@ use Kirby\Toolkit\Str;
 trait HasChildren
 {
     /**
-     * The list of available published children
+     * The Pages collection
      *
      * @var \Kirby\Cms\Pages
      */
     public $children;
 
     /**
-     * The list of available draft children
+     * The list of available drafts
      *
      * @var \Kirby\Cms\Pages
      */
     public $drafts;
 
     /**
-     * Returns all published children
+     * Returns the Pages collection
      *
      * @return \Kirby\Cms\Pages
      */
@@ -45,7 +44,7 @@ trait HasChildren
     }
 
     /**
-     * Returns all published and draft children at the same time
+     * Returns all children and drafts at the same time
      *
      * @return \Kirby\Cms\Pages
      */
@@ -55,8 +54,8 @@ trait HasChildren
     }
 
     /**
-     * Returns a list of IDs for the model's
-     * `toArray` method
+     * Return a list of ids for the model's
+     * toArray method
      *
      * @return array
      */
@@ -66,7 +65,7 @@ trait HasChildren
     }
 
     /**
-     * Searches for a draft child by ID
+     * Searches for a child draft by id
      *
      * @param string $path
      * @return \Kirby\Cms\Page|null
@@ -100,7 +99,7 @@ trait HasChildren
     }
 
     /**
-     * Returns all draft children
+     * Return all drafts of the model
      *
      * @return \Kirby\Cms\Pages
      */
@@ -124,10 +123,10 @@ trait HasChildren
     }
 
     /**
-     * Finds one or multiple published children by ID
+     * Finds one or multiple children by id
      *
      * @param string ...$arguments
-     * @return \Kirby\Cms\Page|\Kirby\Cms\Pages|null
+     * @return \Kirby\Cms\Page|\Kirby\Cms\Pages
      */
     public function find(...$arguments)
     {
@@ -135,7 +134,7 @@ trait HasChildren
     }
 
     /**
-     * Finds a single published or draft child
+     * Finds a single page or draft
      *
      * @param string $path
      * @return \Kirby\Cms\Page|null
@@ -146,7 +145,7 @@ trait HasChildren
     }
 
     /**
-     * Returns a collection of all published children of published children
+     * Returns a collection of all children of children
      *
      * @return \Kirby\Cms\Pages
      */
@@ -156,7 +155,7 @@ trait HasChildren
     }
 
     /**
-     * Checks if the model has any published children
+     * Checks if the model has any children
      *
      * @return bool
      */
@@ -166,13 +165,24 @@ trait HasChildren
     }
 
     /**
-     * Checks if the model has any draft children
+     * Checks if the model has any drafts
      *
      * @return bool
      */
     public function hasDrafts(): bool
     {
         return $this->drafts()->count() > 0;
+    }
+
+    /**
+     * @deprecated 3.0.0 Use `Page::hasUnlistedChildren()` instead
+     * @return bool
+     */
+    public function hasInvisibleChildren(): bool
+    {
+        deprecated('$page->hasInvisibleChildren() is deprecated, use $page->hasUnlistedChildren() instead. $page->hasInvisibleChildren() will be removed in Kirby 3.5.0.');
+
+        return $this->hasUnlistedChildren();
     }
 
     /**
@@ -196,9 +206,20 @@ trait HasChildren
     }
 
     /**
+     * @deprecated 3.0.0 Use `Page::hasListedChildren()` instead
+     * @return bool
+     */
+    public function hasVisibleChildren(): bool
+    {
+        deprecated('$page->hasVisibleChildren() is deprecated, use $page->hasListedChildren() instead. $page->hasVisibleChildren() will be removed in Kirby 3.5.0.');
+
+        return $this->hasListedChildren();
+    }
+
+    /**
      * Creates a flat child index
      *
-     * @param bool $drafts If set to `true`, draft children are included
+     * @param bool $drafts
      * @return \Kirby\Cms\Pages
      */
     public function index(bool $drafts = false)
@@ -211,10 +232,10 @@ trait HasChildren
     }
 
     /**
-     * Sets the published children collection
+     * Sets the Children collection
      *
      * @param array|null $children
-     * @return $this
+     * @return self
      */
     protected function setChildren(array $children = null)
     {
@@ -226,10 +247,10 @@ trait HasChildren
     }
 
     /**
-     * Sets the draft children collection
+     * Sets the Drafts collection
      *
      * @param array|null $drafts
-     * @return $this
+     * @return self
      */
     protected function setDrafts(array $drafts = null)
     {
