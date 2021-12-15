@@ -1,4 +1,4 @@
-<? snippet('header') ?>
+<?php snippet('header') ?>
 
   <main data-template="<?= $page->template() ?>">
     <div class="text-block">

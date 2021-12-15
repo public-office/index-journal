@@ -1,8 +1,8 @@
-<? snippet('header') ?>
+<?php snippet('header') ?>
 
   <main>
-    <? $sections = $page->cfp_builder()->toStructure() ?>
-    <? foreach($sections as $section): ?>
+    <?php $sections = $page->cfp_builder()->toStructure() ?>
+    <?php foreach($sections as $section): ?>
       <section class="initial">
         <?= $section->message()->kirbytext() ?>
       </section>
@@ -18,18 +18,18 @@
             <span class="title-block-issue">Issue No.<?= $page->num() ?> <span class="title"><?= $page->title() ?></span></span>
             <div class="issue-items">
               <ul>
-                <? if($page->hasChildren()): ?>
-                  <? foreach($page->children()->listed() as $article): ?>
+                <?php if($page->hasChildren()): ?>
+                  <?php foreach($page->children()->listed() as $article): ?>
                     <li><a href="<?= $article->url() ?>"><span class="title"><?= $article->title() ?></span> by <?= $article->author() ?></a></li>
-                  <? endforeach ?>
-                <? endif ?>
+                  <?php endforeach ?>
+                <?php endif ?>
               </ul>
             </div>
           </section>
           <p style="text-indent: 0; text-align: center; max-width: 80%; font-size: 90%; margin: 1em auto; position: absolute; bottom: 0.5rem;"><?= $section->wipe_img_caption() ?></p>
         </section>
       </div>
-    <? endforeach ?>
+    <?php endforeach ?>
   </main>
   <div class="issue-overlay">
     <span class="issue-overlay-close">(close)</span>
