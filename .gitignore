@@ -9,11 +9,10 @@ Icon
 
 /media/*
 !/media/index.html
-<<<<<<< HEAD
 *.zip
 /content/*
 =======
->>>>>>> 5f979fc5572cb99a51cc72603da9f9efa1fcad67
+
 
 # -------------SECURITY-------------
 # NEVER publish these files via Git!
@@ -41,9 +40,9 @@ Icon
 # ---------------
 /site/config/.license
 
-<<<<<<< HEAD
+
 =======
 /content
 
->>>>>>> 5f979fc5572cb99a51cc72603da9f9efa1fcad67
+
 node_modules
