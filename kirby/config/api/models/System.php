@@ -11,8 +11,11 @@ return [
         'ascii' => function () {
             return Str::$ascii;
         },
+        'authStatus' => function () {
+            return $this->kirby()->auth()->status()->toArray();
+        },
         'defaultLanguage' => function () {
-            return $this->kirby()->option('panel.language', 'en');
+            return $this->kirby()->panelLanguage();
         },
         'isOk' => function (System $system) {
             return $system->isOk();
@@ -35,15 +38,22 @@ return [
         'license' => function (System $system) {
             return $system->license();
         },
+        'locales' => function () {
+            $locales = [];
+            $translations = $this->kirby()->translations();
+            foreach ($translations as $translation) {
+                $locales[$translation->code()] = $translation->locale();
+            }
+            return $locales;
+        },
+        'loginMethods' => function (System $system) {
+            return array_keys($system->loginMethods());
+        },
         'requirements' => function (System $system) {
             return $system->toArray();
         },
-        'site' => function () {
-            try {
-                return $this->site()->blueprint()->title();
-            } catch (Throwable $e) {
-                return $this->site()->title()->value();
-            }
+        'site' => function (System $system) {
+            return $system->title();
         },
         'slugs' => function () {
             return Str::$language;
@@ -55,7 +65,7 @@ return [
             if ($user = $this->user()) {
                 $translationCode = $user->language();
             } else {
-                $translationCode = $this->kirby()->option('panel.language', 'en');
+                $translationCode = $this->kirby()->panelLanguage();
             }
 
             if ($translation = $this->kirby()->translation($translationCode)) {
@@ -71,15 +81,23 @@ return [
             return $this->user();
         },
         'version' => function () {
-            return $this->kirby()->version();
+            $user = $this->user();
+
+            if ($user && $user->role()->permissions()->for('access', 'system') === true) {
+                return $this->kirby()->version();
+            } else {
+                return null;
+            }
         }
     ],
     'type'   => 'Kirby\Cms\System',
     'views'  => [
         'login' => [
+            'authStatus',
             'isOk',
             'isInstallable',
             'isInstalled',
+            'loginMethods',
             'title',
             'translation'
         ],
@@ -100,6 +118,7 @@ return [
             'kirbytext',
             'languages',
             'license',
+            'locales',
             'multilang',
             'requirements',
             'site',
