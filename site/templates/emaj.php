@@ -1,4 +1,4 @@
-<?php snippet('header') ?>
+<? snippet('header') ?>
 
   <div class="introduction">
     <?= $page->intro()->kirbytext() ?>
@@ -6,17 +6,17 @@
   <main data-template="<?= $page->template() ?>">
 
     <ul>
-      <?php foreach(page('emaj')->children()->listed() as $issue): ?>
+      <? foreach(page('emaj')->children()->listed() as $issue): ?>
         <div class="issue-items">
           <li><a href="<?= $issue->url() ?>"><?= $issue->title() ?></a>
             <ul>
-              <?php foreach($issue->children()->listed() as $article): ?>
+              <? foreach($issue->children()->listed() as $article): ?>
                 <li><a href="<?= $article->url() ?>"><?= $article->title() ?> <span class="authors">by <?= $article->author() ?></span></a></li>
-              <?php endforeach ?>
+              <? endforeach ?>
             </ul>
           </li>
         </div>
-      <?php endforeach ?>
+      <? endforeach ?>
     </ul>
     <p style="text-indent: 0; margin-top: 2.2em;">(ISSN (elec): <?= $page->issn() ?>, DOI: <a href="<?= $page->doi() ?>"><?= $page->doi() ?></a>)</p>
   </main>
