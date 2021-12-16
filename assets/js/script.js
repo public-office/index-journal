@@ -37,7 +37,7 @@ $(document).ready(function () {
     }
   })
 
-  $('figure').on('click', function() {
+  $('figure > img').on('click', function() {
     $(this).toggleClass('expand');
   })
 
