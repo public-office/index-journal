@@ -19,6 +19,14 @@ fields:
       secondary_text:
         label: Secondary text
         type: textarea
+  wipe_img_full:
+    label: Issue image (full)
+    type: files
+    width: 1/2
+  wipe_img_caption: 
+    label: Issue image (full) Caption
+    type: text
+    width: 1/2
   show_hide:
     label: Show/hide
     type: toggle
