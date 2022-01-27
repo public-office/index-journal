@@ -1,9 +1,10 @@
-<? snippet('header') ?>
+<?php snippet('header') ?>
 
-  <main data-template="<?= $page->template() ?>">
-    <? foreach(page('issues')->children()->listed()->filterBy('issue_type', 'archive') as $issue): ?>
-      <?= $issue->title() ?>
-    <? endforeach ?>
-  </main>
+<main data-template="<?= $page->template() ?>">
+  <?php foreach (page('issues')->children()->listed()->filterBy('issue_type', 'archive') as $issue) : ?>
+    <?= $issue->title() ?>
+  <?php endforeach ?>
+</main>
 </body>
+
 </html>

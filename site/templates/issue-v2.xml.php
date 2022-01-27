@@ -54,7 +54,7 @@
                 <issue><?= $page->issue_num() ?></issue>
                 <doi_data>
                     <doi><?= $page->issue_doi() ?></doi>
-                    <resource><? $page->url() ?></resource>
+                    <resource><?php $page->url() ?></resource>
                 </doi_data>
             </journal_issue>
             <?php foreach ($page->children()->listed() as $subPage) : ?>

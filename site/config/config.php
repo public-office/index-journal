@@ -1,4 +1,4 @@
-<?
+<?php
 // function output_pdf($page) {
 //   if($page->template() == 'essay'):
 //     $pdf_name = $page->slug().'.pdf';
@@ -15,10 +15,9 @@ return [
     'extra' => true
   ],
   'panel.install' => true,
-  'hooks' => [
-    // 'page.update:after' => function($page, $oldPage) {
-    //   output_pdf($page);
-    // }
-  ]
+  // 'hooks' => [
+  //   // 'page.update:after' => function($page, $oldPage) {
+  //   //   output_pdf($page);
+  //   // }
+  // ]
 ];
-?>
