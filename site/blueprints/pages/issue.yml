@@ -1,6 +1,5 @@
 title: Issue
 sections:
-
   builder:
     headline: Builder
     type: fields
@@ -79,10 +78,8 @@ sections:
     headline: Essays / Sections
     type: pages
     status: all
-    templates: 
+    templates:
       - essay
       - section
-
-
-      
-  
+  files:
+    layout: cardlets
