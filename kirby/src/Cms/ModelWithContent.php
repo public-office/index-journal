@@ -15,7 +15,7 @@ use Throwable;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 abstract class ModelWithContent extends Model
@@ -90,7 +90,8 @@ abstract class ModelWithContent extends Model
                 return $this->content;
             }
 
-            return $this->setContent($this->readContent())->content;
+            // don't normalize field keys (already handled by the `Data` class)
+            return $this->content = new Content($this->readContent(), $this, false);
 
         // multi language support
         } else {
@@ -102,7 +103,8 @@ abstract class ModelWithContent extends Model
 
             // get the translation by code
             if ($translation = $this->translation($languageCode)) {
-                $content = new Content($translation->content(), $this);
+                // don't normalize field keys (already handled by the `ContentTranslation` class)
+                $content = new Content($translation->content(), $this, false);
             } else {
                 throw new InvalidArgumentException('Invalid language: ' . $languageCode);
             }
@@ -347,6 +349,7 @@ abstract class ModelWithContent extends Model
             $result = Str::query($query, [
                 'kirby'             => $this->kirby(),
                 'site'              => is_a($this, 'Kirby\Cms\Site') ? $this : $this->site(),
+                'model'             => $this,
                 static::CLASS_ALIAS => $this
             ]);
         } catch (Throwable $e) {
@@ -452,7 +455,7 @@ abstract class ModelWithContent extends Model
         if ($languageCode !== $kirby->defaultLanguage()->code()) {
             foreach ($this->blueprint()->fields() as $field) {
                 if (($field['translate'] ?? true) === false) {
-                    $content[$field['name']] = null;
+                    $content[strtolower($field['name'])] = null;
                 }
             }
 
@@ -543,7 +546,8 @@ abstract class ModelWithContent extends Model
         $result = Str::$handler($template, array_replace([
             'kirby'             => $this->kirby(),
             'site'              => is_a($this, 'Kirby\Cms\Site') ? $this : $this->site(),
-            static::CLASS_ALIAS => $this
+            'model'             => $this,
+            static::CLASS_ALIAS => $this,
         ], $data), ['fallback' => $fallback]);
 
         return $result;
@@ -651,7 +655,6 @@ abstract class ModelWithContent extends Model
      * Returns the panel icon definition
      *
      * @deprecated 3.6.0 Use `->panel()->image()` instead
-     * @todo Add `deprecated()` helper warning in 3.7.0
      * @todo Remove in 3.8.0
      *
      * @internal
@@ -661,12 +664,12 @@ abstract class ModelWithContent extends Model
      */
     public function panelIcon(array $params = null): ?array
     {
+        Helpers::deprecated('Cms\ModelWithContent::panelIcon() has been deprecated and will be removed in Kirby 3.8.0. Use $model->panel()->image() instead.');
         return $this->panel()->image($params);
     }
 
     /**
      * @deprecated 3.6.0 Use `->panel()->image()` instead
-     * @todo Add `deprecated()` helper warning in 3.7.0
      * @todo Remove in 3.8.0
      *
      * @internal
@@ -676,6 +679,7 @@ abstract class ModelWithContent extends Model
      */
     public function panelImage($settings = null): ?array
     {
+        Helpers::deprecated('Cms\ModelWithContent::panelImage() has been deprecated and will be removed in Kirby 3.8.0. Use $model->panel()->image() instead.');
         return $this->panel()->image($settings);
     }
 
@@ -685,7 +689,6 @@ abstract class ModelWithContent extends Model
      * This also checks for the lock status
      *
      * @deprecated 3.6.0 Use `->panel()->options()` instead
-     * @todo Add `deprecated()` helper warning in 3.7.0
      * @todo Remove in 3.8.0
      *
      * @param array $unlock An array of options that will be force-unlocked
@@ -694,6 +697,7 @@ abstract class ModelWithContent extends Model
      */
     public function panelOptions(array $unlock = []): array
     {
+        Helpers::deprecated('Cms\ModelWithContent::panelOptions() has been deprecated and will be removed in Kirby 3.8.0. Use $model->panel()->options() instead.');
         return $this->panel()->options($unlock);
     }
 }

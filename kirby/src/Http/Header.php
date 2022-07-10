@@ -11,7 +11,7 @@ use Kirby\Filesystem\F;
  * @package   Kirby Http
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class Header
@@ -130,7 +130,7 @@ class Header
     public static function status($code = null, bool $send = true)
     {
         $codes    = static::$codes;
-        $protocol = $_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.1';
+        $protocol = Environment::getGlobally('SERVER_PROTOCOL', 'HTTP/1.1');
 
         // allow full control over code and message
         if (is_string($code) === true && preg_match('/^\d{3} \w.+$/', $code) === 1) {

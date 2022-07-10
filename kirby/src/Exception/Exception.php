@@ -2,6 +2,7 @@
 
 namespace Kirby\Exception;
 
+use Kirby\Http\Environment;
 use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Str;
 
@@ -13,7 +14,7 @@ use Kirby\Toolkit\Str;
  * @package   Kirby Exception
  * @author    Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class Exception extends \Exception
@@ -143,10 +144,11 @@ class Exception extends \Exception
      */
     final public function getFileRelative(): string
     {
-        $file = $this->getFile();
+        $file    = $this->getFile();
+        $docRoot = Environment::getGlobally('DOCUMENT_ROOT');
 
-        if (empty($_SERVER['DOCUMENT_ROOT']) === false) {
-            $file = ltrim(Str::after($file, $_SERVER['DOCUMENT_ROOT']), '/');
+        if (empty($docRoot) === false) {
+            $file = ltrim(Str::after($file, $docRoot), '/');
         }
 
         return $file;

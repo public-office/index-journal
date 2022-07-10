@@ -15,7 +15,7 @@ use Kirby\Toolkit\V;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Plugin extends Model
@@ -122,9 +122,10 @@ class Plugin extends Model
      */
     public function link(): ?string
     {
-        $homepage = $this->info['homepage'] ?? null;
-        $docs     = $this->info['support']['docs'] ?? null;
-        $source   = $this->info['support']['source'] ?? null;
+        $info     = $this->info();
+        $homepage = $info['homepage'] ?? null;
+        $docs     = $info['support']['docs'] ?? null;
+        $source   = $info['support']['source'] ?? null;
 
         $link = $homepage ?? $docs ?? $source;
 

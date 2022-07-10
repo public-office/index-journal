@@ -12,7 +12,7 @@ use Kirby\Exception\InvalidArgumentException;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Permissions
@@ -160,7 +160,7 @@ class Permissions
     protected function setAction(string $category, string $action, $setting)
     {
         // deprecated fallback for the settings/system view
-        // TODO: remove in 3.7
+        // TODO: remove in 3.8.0
         if ($category === 'access' && $action === 'settings') {
             $action = 'system';
         }

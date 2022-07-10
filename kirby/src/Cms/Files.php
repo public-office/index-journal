@@ -16,7 +16,7 @@ use Kirby\Filesystem\F;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Files extends Collection
@@ -107,26 +107,30 @@ class Files extends Collection
 
     /**
      * Tries to find a file by id/filename
+     * @deprecated 3.7.0 Use `$files->find()` instead
+     * @todo 3.8.0 Remove method
+     * @codeCoverageIgnore
      *
      * @param string $id
      * @return \Kirby\Cms\File|null
      */
     public function findById(string $id)
     {
-        return $this->get(ltrim($this->parent->id() . '/' . $id, '/'));
+        Helpers::deprecated('Cms\Files::findById() has been deprecated and will be removed in Kirby 3.8.0. Use $files->find() instead.');
+
+        return $this->findByKey($id);
     }
 
     /**
-     * Alias for FilesFinder::findById() which is
-     * used internally in the Files collection to
-     * map the get method correctly.
+     * Finds a file by its filename
+     * @internal Use `$files->find()` instead
      *
      * @param string $key
      * @return \Kirby\Cms\File|null
      */
     public function findByKey(string $key)
     {
-        return $this->findById($key);
+        return $this->get(ltrim($this->parent->id() . '/' . $key, '/'));
     }
 
     /**
@@ -135,11 +139,14 @@ class Files extends Collection
      * human-readable format
      * @since 3.6.0
      *
+     * @param string|null|false $locale Locale for number formatting,
+     *                                  `null` for the current locale,
+     *                                  `false` to disable number formatting
      * @return string
      */
-    public function niceSize(): string
+    public function niceSize($locale = null): string
     {
-        return F::niceSize($this->size());
+        return F::niceSize($this->size(), $locale);
     }
 
     /**
@@ -151,9 +158,7 @@ class Files extends Collection
      */
     public function size(): int
     {
-        return F::size($this->values(function ($file) {
-            return $file->root();
-        }));
+        return F::size($this->values(fn ($file) => $file->root()));
     }
 
     /**

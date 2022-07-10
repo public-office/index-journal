@@ -15,7 +15,7 @@ use Kirby\Toolkit\Str;
  * @package   Kirby Http
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class Visitor
@@ -55,10 +55,10 @@ class Visitor
      */
     public function __construct(array $arguments = [])
     {
-        $this->ip($arguments['ip'] ?? $_SERVER['REMOTE_ADDR'] ?? '');
-        $this->userAgent($arguments['userAgent'] ?? $_SERVER['HTTP_USER_AGENT'] ?? '');
-        $this->acceptedLanguage($arguments['acceptedLanguage'] ?? $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '');
-        $this->acceptedMimeType($arguments['acceptedMimeType'] ?? $_SERVER['HTTP_ACCEPT'] ?? '');
+        $this->ip($arguments['ip'] ?? Environment::getGlobally('REMOTE_ADDR', ''));
+        $this->userAgent($arguments['userAgent'] ?? Environment::getGlobally('HTTP_USER_AGENT', ''));
+        $this->acceptedLanguage($arguments['acceptedLanguage'] ?? Environment::getGlobally('HTTP_ACCEPT_LANGUAGE', ''));
+        $this->acceptedMimeType($arguments['acceptedMimeType'] ?? Environment::getGlobally('HTTP_ACCEPT', ''));
     }
 
     /**

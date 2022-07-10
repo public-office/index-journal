@@ -3,6 +3,7 @@
 namespace Kirby\Cms;
 
 use Kirby\Data\Data;
+use Kirby\Toolkit\Str;
 use Throwable;
 
 /**
@@ -12,12 +13,12 @@ use Throwable;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Layouts extends Items
 {
-    const ITEM_CLASS = '\Kirby\Cms\Layout';
+    public const ITEM_CLASS = '\Kirby\Cms\Layout';
 
     public static function factory(array $items = null, array $params = [])
     {
@@ -27,7 +28,7 @@ class Layouts extends Items
         if (array_key_exists('content', $first) === true || array_key_exists('type', $first) === true) {
             $items = [
                 [
-                    'id'      => uuid(),
+                    'id'      => Str::uuid(),
                     'columns' => [
                         [
                             'width'  => '1/1',

@@ -1,11 +1,12 @@
 <?php
 
 use Kirby\Panel\Panel;
+use Kirby\Toolkit\I18n;
 
 return function ($kirby) {
     return [
         'icon'  => 'settings',
-        'label' => t('view.installation'),
+        'label' => I18n::translate('view.installation'),
         'views' => [
             'installation' => [
                 'pattern' => 'installation',
@@ -32,9 +33,7 @@ return function ($kirby) {
             'installation.fallback' => [
                 'pattern' => '(:all)',
                 'auth'    => false,
-                'action'  => function () {
-                    Panel::go('installation');
-                }
+                'action'  => fn () => Panel::go('installation')
             ]
         ]
     ];

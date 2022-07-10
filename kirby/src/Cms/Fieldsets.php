@@ -14,12 +14,12 @@ use Kirby\Toolkit\Str;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Fieldsets extends Items
 {
-    const ITEM_CLASS = '\Kirby\Cms\Fieldset';
+    public const ITEM_CLASS = '\Kirby\Cms\Fieldset';
 
     protected static function createFieldsets($params)
     {
@@ -70,7 +70,7 @@ class Fieldsets extends Items
 
     public static function factory(array $items = null, array $params = [])
     {
-        $items ??= option('blocks.fieldsets', [
+        $items ??= App::instance()->option('blocks.fieldsets', [
             'code'     => 'blocks/code',
             'gallery'  => 'blocks/gallery',
             'heading'  => 'blocks/heading',

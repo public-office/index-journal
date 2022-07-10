@@ -12,7 +12,7 @@ use Kirby\Form\Form;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Api extends BaseApi
@@ -114,7 +114,7 @@ class Api extends BaseApi
      */
     public function language(): ?string
     {
-        return get('language') ?? $this->requestHeaders('x-language');
+        return $this->requestQuery('language') ?? $this->requestHeaders('x-language');
     }
 
     /**

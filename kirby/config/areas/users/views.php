@@ -1,5 +1,6 @@
 <?php
 
+use Kirby\Cms\App;
 use Kirby\Cms\Find;
 use Kirby\Toolkit\Escape;
 
@@ -7,14 +8,12 @@ return [
     'users' => [
         'pattern' => 'users',
         'action'  => function () {
-            $kirby = kirby();
-            $role  = get('role');
-            $roles = $kirby->roles()->toArray(function ($role) {
-                return [
-                    'id'    => $role->id(),
-                    'title' => $role->title(),
-                ];
-            });
+            $kirby = App::instance();
+            $role  = $kirby->request()->get('role');
+            $roles = $kirby->roles()->toArray(fn ($role) => [
+                'id'    => $role->id(),
+                'title' => $role->title(),
+            ]);
 
             return [
                 'component' => 'k-users-view',
@@ -34,19 +33,17 @@ return [
 
                         $users = $users->paginate([
                             'limit' => 20,
-                            'page'  => get('page')
+                            'page'  => $kirby->request()->get('page')
                         ]);
 
                         return [
-                            'data' => $users->values(function ($user) {
-                                return [
-                                    'id'    => $user->id(),
-                                    'image' => $user->panel()->image(),
-                                    'info'  => Escape::html($user->role()->title()),
-                                    'link'  => $user->panel()->url(true),
-                                    'text'  => Escape::html($user->username())
-                                ];
-                            }),
+                            'data' => $users->values(fn ($user) => [
+                                'id'    => $user->id(),
+                                'image' => $user->panel()->image(),
+                                'info'  => Escape::html($user->role()->title()),
+                                'link'  => $user->panel()->url(true),
+                                'text'  => Escape::html($user->username())
+                            ]),
                             'pagination' => $users->pagination()->toArray()
                         ];
                     },

@@ -17,7 +17,7 @@ use ZipArchive;
  * @package   Kirby Filesystem
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class F
@@ -394,6 +394,34 @@ class F
     }
 
     /**
+     * A super simple class autoloader
+     * @since 3.7.0
+     *
+     * @param array $classmap
+     * @param string|null $base
+     * @return void
+     */
+    public static function loadClasses(array $classmap, ?string $base = null): void
+    {
+        // convert all classnames to lowercase
+        $classmap = array_change_key_case($classmap);
+
+        spl_autoload_register(function ($class) use ($classmap, $base) {
+            $class = strtolower($class);
+
+            if (!isset($classmap[$class])) {
+                return false;
+            }
+
+            if ($base) {
+                include $base . '/' . $classmap[$class];
+            } else {
+                include $classmap[$class];
+            }
+        });
+    }
+
+    /**
      * Loads a file with as little as possible in the variable scope
      *
      * @param string $file
@@ -463,11 +491,11 @@ class F
      * Get the file's last modification time.
      *
      * @param string $file
-     * @param string $format
-     * @param string $handler date or strftime
+     * @param string|\IntlDateFormatter|null $format
+     * @param string $handler date, intl or strftime
      * @return mixed
      */
-    public static function modified(string $file, string $format = null, string $handler = 'date')
+    public static function modified(string $file, $format = null, string $handler = 'date')
     {
         if (file_exists($file) !== true) {
             return false;
@@ -756,9 +784,11 @@ class F
     public static function size($file): int
     {
         if (is_array($file) === true) {
-            return array_reduce($file, function ($total, $file) {
-                return $total + F::size($file);
-            }, 0);
+            return array_reduce(
+                $file,
+                fn ($total, $file) => $total + F::size($file),
+                0
+            );
         }
 
         try {

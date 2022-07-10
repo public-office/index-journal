@@ -17,7 +17,7 @@ use Kirby\Toolkit\Pagination as BasePagination;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Pagination extends BasePagination
@@ -96,9 +96,9 @@ class Pagination extends BasePagination
     /**
      * Returns the Url for the first page
      *
-     * @return string
+     * @return string|null
      */
-    public function firstPageUrl(): string
+    public function firstPageUrl(): ?string
     {
         return $this->pageUrl(1);
     }
@@ -106,9 +106,9 @@ class Pagination extends BasePagination
     /**
      * Returns the Url for the last page
      *
-     * @return string
+     * @return string|null
      */
-    public function lastPageUrl(): string
+    public function lastPageUrl(): ?string
     {
         return $this->pageUrl($this->lastPage());
     }

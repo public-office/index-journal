@@ -2,7 +2,11 @@
 
 namespace Kirby\Panel;
 
+use Kirby\Cms\App;
+use Kirby\Cms\Helpers;
 use Kirby\Exception\Exception;
+use Kirby\Exception\InvalidArgumentException;
+use Kirby\Filesystem\Asset;
 use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
 use Kirby\Http\Response;
@@ -19,7 +23,7 @@ use Throwable;
  * @package   Kirby Panel
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Document
@@ -32,7 +36,7 @@ class Document
      */
     public static function assets(): array
     {
-        $kirby = kirby();
+        $kirby = App::instance();
         $nonce = $kirby->nonce();
 
         // get the assets from the Vite dev server in dev mode;
@@ -65,22 +69,9 @@ class Document
             'css' => [
                 'index'   => $url . '/css/style.css',
                 'plugins' => $plugins->url('css'),
-                'custom'  => static::customCss(),
+                'custom'  => static::customAsset('panel.css'),
             ],
-            'icons' => $kirby->option('panel.favicon', [
-                'apple-touch-icon' => [
-                    'type' => 'image/png',
-                    'url'  => $url . '/apple-touch-icon.png',
-                ],
-                'shortcut icon' => [
-                    'type' => 'image/svg+xml',
-                    'url'  => $url . '/favicon.svg',
-                ],
-                'alternate icon' => [
-                    'type' => 'image/png',
-                    'url'  => $url . '/favicon.png',
-                ]
-            ]),
+            'icons' => static::favicon($url),
             'js' => [
                 'vendor'       => [
                     'nonce' => $nonce,
@@ -99,7 +90,7 @@ class Document
                 ],
                 'custom'       => [
                     'nonce' => $nonce,
-                    'src'   => static::customJs(),
+                    'src'   => static::customAsset('panel.js'),
                     'type'  => 'module'
                 ],
                 'index'        => [
@@ -139,15 +130,17 @@ class Document
     }
 
     /**
-     * Check for a custom css file from the
-     * config (panel.css)
+     * Check for a custom asset file from the
+     * config (e.g. panel.css or panel.js)
+     * @since 3.7.0
      *
+     * @param string $option asset option name
      * @return string|null
      */
-    public static function customCss(): ?string
+    public static function customAsset(string $option): ?string
     {
-        if ($css = kirby()->option('panel.css')) {
-            $asset = asset($css);
+        if ($path = App::instance()->option($option)) {
+            $asset = new Asset($path);
 
             if ($asset->exists() === true) {
                 return $asset->url() . '?' . $asset->modified();
@@ -158,22 +151,68 @@ class Document
     }
 
     /**
-     * Check for a custom js file from the
-     * config (panel.js)
-     *
-     * @return string|null
+     * @deprecated 3.7.0 Use `Document::customAsset('panel.css)` instead
+     * @todo remove in 3.8.0
+     * @codeCoverageIgnore
+     */
+    public static function customCss(): ?string
+    {
+        Helpers::deprecated('Panel\Document::customCss() has been deprecated and will be removed in Kirby 3.8.0. Use Panel\Document::customAsset(\'panel.css\') instead.');
+        return static::customAsset('panel.css');
+    }
+
+    /**
+     * @deprecated 3.7.0 Use `Document::customAsset('panel.js)` instead
+     * @todo remove in 3.8.0
+     * @codeCoverageIgnore
      */
     public static function customJs(): ?string
     {
-        if ($js = kirby()->option('panel.js')) {
-            $asset = asset($js);
+        Helpers::deprecated('Panel\Document::customJs() has been deprecated and will be removed in Kirby 3.8.0. Use Panel\Document::customAsset(\'panel.js\') instead.');
+        return static::customAsset('panel.js');
+    }
 
-            if ($asset->exists() === true) {
-                return $asset->url() . '?' . $asset->modified();
-            }
+    /**
+     * Returns array of favion icons
+     * based on config option
+     * @since 3.7.0
+     *
+     * @param string $url URL prefix for default icons
+     * @return array
+     */
+    public static function favicon(string $url = ''): array
+    {
+        $kirby = App::instance();
+        $icons = $kirby->option('panel.favicon', [
+            'apple-touch-icon' => [
+                'type' => 'image/png',
+                'url'  => $url . '/apple-touch-icon.png',
+            ],
+            'shortcut icon' => [
+                'type' => 'image/svg+xml',
+                'url'  => $url . '/favicon.svg',
+            ],
+            'alternate icon' => [
+                'type' => 'image/png',
+                'url'  => $url . '/favicon.png',
+            ]
+        ]);
+
+        if (is_array($icons) === true) {
+            return $icons;
         }
 
-        return null;
+        // make sure to convert favicon string to array
+        if (is_string($icons) === true) {
+            return [
+                'shortcut icon' => [
+                    'type' => F::mime($icons),
+                    'url'  => $icons,
+                ]
+            ];
+        }
+
+        throw new InvalidArgumentException('Invalid panel.favicon option');
     }
 
     /**
@@ -185,7 +224,7 @@ class Document
      */
     public static function icons(): string
     {
-        return F::read(kirby()->root('kirby') . '/panel/dist/img/icons.svg');
+        return F::read(App::instance()->root('kirby') . '/panel/dist/img/icons.svg');
     }
 
     /**
@@ -197,7 +236,7 @@ class Document
      */
     public static function link(): bool
     {
-        $kirby       = kirby();
+        $kirby       = App::instance();
         $mediaRoot   = $kirby->root('media') . '/panel';
         $panelRoot   = $kirby->root('panel') . '/dist';
         $versionHash = $kirby->versionHash();
@@ -230,14 +269,14 @@ class Document
      */
     public static function response(array $fiber)
     {
-        $kirby = kirby();
+        $kirby = App::instance();
 
         // Full HTML response
         // @codeCoverageIgnoreStart
         try {
             if (static::link() === true) {
                 usleep(1);
-                go($kirby->url('index') . '/' . $kirby->path());
+                Response::go($kirby->url('index') . '/' . $kirby->path());
             }
         } catch (Throwable $e) {
             die('The Panel assets cannot be installed properly. ' . $e->getMessage());

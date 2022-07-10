@@ -11,6 +11,7 @@ use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
 use Kirby\Form\Form;
 use Kirby\Toolkit\A;
+use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Str;
 
 /**
@@ -19,7 +20,7 @@ use Kirby\Toolkit\Str;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 trait PageActions
@@ -201,9 +202,11 @@ trait PageActions
     protected function changeStatusToDraft()
     {
         $arguments = ['page' => $this, 'status' => 'draft', 'position' => null];
-        $page = $this->commit('changeStatus', $arguments, function ($page) {
-            return $page->unpublish();
-        });
+        $page = $this->commit(
+            'changeStatus',
+            $arguments,
+            fn ($page) => $page->unpublish()
+        );
 
         return $page;
     }
@@ -663,7 +666,7 @@ trait PageActions
     {
 
         // create the slug for the duplicate
-        $slug = Str::slug($slug ?? $this->slug() . '-' . Str::slug(t('page.duplicate.appendix')));
+        $slug = Str::slug($slug ?? $this->slug() . '-' . Str::slug(I18n::translate('page.duplicate.appendix')));
 
         $arguments = [
             'originalPage' => $this,
@@ -755,9 +758,7 @@ trait PageActions
             ->children()
             ->listed()
             ->append($this)
-            ->filter(function ($page) {
-                return $page->blueprint()->num() === 'default';
-            });
+            ->filter(fn ($page) => $page->blueprint()->num() === 'default');
 
         // get a non-associative array of ids
         $keys  = $siblings->keys();
@@ -780,10 +781,8 @@ trait PageActions
         foreach ($sorted as $key => $id) {
             if ($id === $this->id()) {
                 continue;
-            } else {
-                if ($sibling = $siblings->get($id)) {
-                    $sibling->changeNum($key + 1);
-                }
+            } elseif ($sibling = $siblings->get($id)) {
+                $sibling->changeNum($key + 1);
             }
         }
 
@@ -804,9 +803,7 @@ trait PageActions
             ->children()
             ->listed()
             ->not($this)
-            ->filter(function ($page) {
-                return $page->blueprint()->num() === 'default';
-            });
+            ->filter(fn ($page) => $page->blueprint()->num() === 'default');
 
         if ($siblings->count() > 0) {
             foreach ($siblings as $sibling) {

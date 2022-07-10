@@ -15,6 +15,9 @@ return [
     'extra' => true
   ],
   'panel.install' => true,
+  'diesdasdigital.meta-knight' => [
+    'siteTitleAfterPageTitle' => false,
+  ],
   // 'hooks' => [
   //   // 'page.update:after' => function($page, $oldPage) {
   //   //   output_pdf($page);

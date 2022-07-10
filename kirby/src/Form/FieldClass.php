@@ -3,6 +3,7 @@
 namespace Kirby\Form;
 
 use Exception;
+use Kirby\Cms\App;
 use Kirby\Cms\HasSiblings;
 use Kirby\Cms\ModelWithContent;
 use Kirby\Data\Data;
@@ -18,7 +19,7 @@ use Throwable;
  * @package   Kirby Form
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 abstract class FieldClass
@@ -144,7 +145,7 @@ abstract class FieldClass
         $this->setHelp($params['help'] ?? null);
         $this->setIcon($params['icon'] ?? null);
         $this->setLabel($params['label'] ?? null);
-        $this->setModel($params['model'] ?? site());
+        $this->setModel($params['model'] ?? App::instance()->site());
         $this->setName($params['name'] ?? null);
         $this->setPlaceholder($params['placeholder'] ?? null);
         $this->setRequired($params['required'] ?? false);

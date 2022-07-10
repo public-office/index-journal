@@ -12,12 +12,12 @@ use Exception;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Items extends Collection
 {
-    const ITEM_CLASS = '\Kirby\Cms\Item';
+    public const ITEM_CLASS = '\Kirby\Cms\Item';
 
     /**
      * @var array
@@ -38,7 +38,7 @@ class Items extends Collection
     public function __construct($objects = [], array $options = [])
     {
         $this->options = $options;
-        $this->parent  = $options['parent'] ?? site();
+        $this->parent  = $options['parent'] ?? App::instance()->site();
 
         parent::__construct($objects, $this->parent);
     }
@@ -55,7 +55,7 @@ class Items extends Collection
     {
         $options = array_merge([
             'options' => [],
-            'parent'  => site(),
+            'parent'  => App::instance()->site(),
         ], $params);
 
         if (empty($items) === true || is_array($items) === false) {

@@ -2,6 +2,8 @@
 
 namespace Kirby\Panel;
 
+use Kirby\Toolkit\I18n;
+
 /**
  * Provides information about the page model for the Panel
  * @since 3.6.0
@@ -9,11 +11,16 @@ namespace Kirby\Panel;
  * @package   Kirby Panel
  * @author    Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Page extends Model
 {
+    /**
+     * @var \Kirby\Cms\Page
+     */
+    protected $model;
+
     /**
      * Breadcrumb array
      *
@@ -22,12 +29,10 @@ class Page extends Model
     public function breadcrumb(): array
     {
         $parents = $this->model->parents()->flip()->merge($this->model);
-        return $parents->values(function ($parent) {
-            return [
-                'label' => $parent->title()->toString(),
-                'link'  => $parent->panel()->url(true),
-            ];
-        });
+        return $parents->values(fn ($parent) => [
+            'label' => $parent->title()->toString(),
+            'link'  => $parent->panel()->url(true),
+        ]);
     }
 
     /**
@@ -63,14 +68,11 @@ class Page extends Model
      */
     public function dropdown(array $options = []): array
     {
-        $defaults = [
-            'view'   => get('view'),
-            'sort'   => get('sort'),
-            'delete' => get('delete')
-        ];
+        $page = $this->model;
 
-        $options     = array_merge($defaults, $options);
-        $page        = $this->model;
+        $defaults = $page->kirby()->request()->get(['view', 'sort', 'delete']);
+        $options  = array_merge($defaults, $options);
+
         $permissions = $this->options(['preview']);
         $view        = $options['view'] ?? 'view';
         $url         = $this->url(true);
@@ -81,7 +83,7 @@ class Page extends Model
                 'link'     => $page->previewUrl(),
                 'target'   => '_blank',
                 'icon'     => 'open',
-                'text'     => t('open'),
+                'text'     => I18n::translate('open'),
                 'disabled' => $this->isDisabledDropdownOption('preview', $options, $permissions)
             ];
             $result[] = '-';
@@ -95,14 +97,14 @@ class Page extends Model
                 ]
             ],
             'icon'     => 'title',
-            'text'     => t('rename'),
+            'text'     => I18n::translate('rename'),
             'disabled' => $this->isDisabledDropdownOption('changeTitle', $options, $permissions)
         ];
 
         $result['duplicate'] = [
             'dialog'   => $url . '/duplicate',
             'icon'     => 'copy',
-            'text'     => t('duplicate'),
+            'text'     => I18n::translate('duplicate'),
             'disabled' => $this->isDisabledDropdownOption('duplicate', $options, $permissions)
         ];
 
@@ -116,14 +118,14 @@ class Page extends Model
                 ]
             ],
             'icon'     => 'url',
-            'text'     => t('page.changeSlug'),
+            'text'     => I18n::translate('page.changeSlug'),
             'disabled' => $this->isDisabledDropdownOption('changeSlug', $options, $permissions)
         ];
 
         $result['changeStatus'] = [
             'dialog'   => $url . '/changeStatus',
             'icon'     => 'preview',
-            'text'     => t('page.changeStatus'),
+            'text'     => I18n::translate('page.changeStatus'),
             'disabled' => $this->isDisabledDropdownOption('changeStatus', $options, $permissions)
         ];
 
@@ -132,14 +134,14 @@ class Page extends Model
         $result['changeSort'] = [
             'dialog'   => $url . '/changeSort',
             'icon'     => 'sort',
-            'text'     => t('page.sort'),
+            'text'     => I18n::translate('page.sort'),
             'disabled' => $siblings->count() === 0 || $this->isDisabledDropdownOption('sort', $options, $permissions)
         ];
 
         $result['changeTemplate'] = [
             'dialog'   => $url . '/changeTemplate',
             'icon'     => 'template',
-            'text'     => t('page.changeTemplate'),
+            'text'     => I18n::translate('page.changeTemplate'),
             'disabled' => $this->isDisabledDropdownOption('changeTemplate', $options, $permissions)
         ];
 
@@ -147,7 +149,7 @@ class Page extends Model
         $result['delete'] = [
             'dialog'   => $url . '/delete',
             'icon'     => 'trash',
-            'text'     => t('delete'),
+            'text'     => I18n::translate('delete'),
             'disabled' => $this->isDisabledDropdownOption('delete', $options, $permissions)
         ];
 
@@ -311,14 +313,8 @@ class Page extends Model
         };
 
         return [
-            'next' => function () use ($siblings) {
-                $next = $siblings('next')->first();
-                return $next ? $next->panel()->toLink('title') : null;
-            },
-            'prev'   => function () use ($siblings) {
-                $prev = $siblings('prev')->last();
-                return $prev ? $prev->panel()->toLink('title') : null;
-            }
+            'next' => fn () => $this->toPrevNextLink($siblings('next')->first()),
+            'prev' => fn () => $this->toPrevNextLink($siblings('prev')->last())
         ];
     }
 

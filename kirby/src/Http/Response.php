@@ -14,7 +14,7 @@ use Throwable;
  * @package   Kirby Http
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class Response
@@ -198,6 +198,23 @@ class Response
         ], $props);
 
         return new static($props);
+    }
+
+
+    /**
+     * Redirects to the given Urls
+     * Urls can be relative or absolute.
+     * @since 3.7.0
+     *
+     * @param string $url
+     * @param int $code
+     * @return void
+     *
+     * @codeCoverageIgnore
+     */
+    public static function go(string $url = '/', int $code = 302)
+    {
+        die(static::redirect($url, $code));
     }
 
     /**

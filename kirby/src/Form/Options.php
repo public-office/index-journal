@@ -14,7 +14,7 @@ use Kirby\Toolkit\I18n;
  * @package   Kirby Form
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class Options
@@ -143,6 +143,9 @@ class Options
                     'text'  => $option
                 ];
             }
+
+            // fallback for the text
+            $option['text'] ??= $option['value'];
 
             // translate the option text
             if (is_array($option['text']) === true) {

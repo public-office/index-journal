@@ -17,17 +17,17 @@ use Kirby\Toolkit\A;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Site extends ModelWithContent
 {
-    const CLASS_ALIAS = 'site';
-
     use SiteActions;
     use HasChildren;
     use HasFiles;
     use HasMethods;
+
+    public const CLASS_ALIAS = 'site';
 
     /**
      * The SiteBlueprint object
@@ -572,10 +572,10 @@ class Site extends ModelWithContent
         return [
             'children'  => $this->children()->keys(),
             'content'   => $this->content()->toArray(),
-            'errorPage' => $this->errorPage() ? $this->errorPage()->id(): false,
+            'errorPage' => $this->errorPage() ? $this->errorPage()->id() : false,
             'files'     => $this->files()->keys(),
-            'homePage'  => $this->homePage() ? $this->homePage()->id(): false,
-            'page'      => $this->page() ? $this->page()->id(): false,
+            'homePage'  => $this->homePage() ? $this->homePage()->id() : false,
+            'page'      => $this->page() ? $this->page()->id() : false,
             'title'     => $this->title()->value(),
             'url'       => $this->url(),
         ];
@@ -668,7 +668,6 @@ class Site extends ModelWithContent
     /**
      * Returns the full path without leading slash
      *
-     * @todo Add `deprecated()` helper warning in 3.7.0
      * @todo Remove in 3.8.0
      *
      * @internal
@@ -677,6 +676,7 @@ class Site extends ModelWithContent
      */
     public function panelPath(): string
     {
+        Helpers::deprecated('Cms\Site::panelPath() has been deprecated and will be removed in Kirby 3.8.0. Use $site->panel()->path() instead.');
         return $this->panel()->path();
     }
 
@@ -684,7 +684,6 @@ class Site extends ModelWithContent
      * Returns the url to the editing view
      * in the panel
      *
-     * @todo Add `deprecated()` helper warning in 3.7.0
      * @todo Remove in 3.8.0
      *
      * @internal
@@ -694,6 +693,7 @@ class Site extends ModelWithContent
      */
     public function panelUrl(bool $relative = false): string
     {
+        Helpers::deprecated('Cms\Site::panelUrl() has been deprecated and will be removed in Kirby 3.8.0. Use $site->panel()->url() instead.');
         return $this->panel()->url($relative);
     }
 }

@@ -2,12 +2,9 @@
 
 namespace Kirby\Cms;
 
-use Exception;
 use Kirby\Data\Json;
-use Kirby\Data\Yaml;
 use Kirby\Parsley\Parsley;
 use Kirby\Parsley\Schema\Blocks as BlockSchema;
-use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 use Throwable;
 
@@ -18,12 +15,12 @@ use Throwable;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Blocks extends Items
 {
-    const ITEM_CLASS = '\Kirby\Cms\Block';
+    public const ITEM_CLASS = '\Kirby\Cms\Block';
 
     /**
      * Return HTML when the collection is
@@ -60,7 +57,6 @@ class Blocks extends Items
     public static function factory(array $items = null, array $params = [])
     {
         $items = static::extractFromLayouts($items);
-        $items = BlockConverter::editorBlocks($items);
 
         return parent::factory($items, $params);
     }
@@ -77,12 +73,8 @@ class Blocks extends Items
             return [];
         }
 
-        if (
-            // no columns = no layout
-            array_key_exists('columns', $input[0]) === false ||
-            // checks if this is a block for the builder plugin
-            array_key_exists('_key', $input[0]) === true
-        ) {
+        // no columns = no layout
+        if (array_key_exists('columns', $input[0]) === false) {
             return $input;
         }
 
@@ -123,21 +115,8 @@ class Blocks extends Items
             try {
                 $input = Json::decode((string)$input);
             } catch (Throwable $e) {
-                try {
-                    // try to import the old YAML format
-                    $yaml  = Yaml::decode((string)$input);
-                    $first = A::first($yaml);
-
-                    // check for valid yaml
-                    if (empty($yaml) === true || (isset($first['_key']) === false && isset($first['type']) === false)) {
-                        throw new Exception('Invalid YAML');
-                    } else {
-                        $input = $yaml;
-                    }
-                } catch (Throwable $e) {
-                    $parser = new Parsley((string)$input, new BlockSchema());
-                    $input  = $parser->blocks();
-                }
+                $parser = new Parsley((string)$input, new BlockSchema());
+                $input  = $parser->blocks();
             }
         }
 

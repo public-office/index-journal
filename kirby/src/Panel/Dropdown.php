@@ -2,6 +2,7 @@
 
 namespace Kirby\Panel;
 
+use Kirby\Cms\App;
 use Kirby\Cms\Find;
 use Kirby\Exception\LogicException;
 use Kirby\Http\Uri;
@@ -17,7 +18,7 @@ use Throwable;
  * @package   Kirby Panel
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Dropdown extends Json
@@ -31,9 +32,9 @@ class Dropdown extends Json
      */
     public static function changes(): array
     {
-        $kirby     = kirby();
+        $kirby     = App::instance();
         $multilang = $kirby->multilang();
-        $ids       = Str::split(get('ids'));
+        $ids       = Str::split($kirby->request()->get('ids'));
         $options   = [];
 
         foreach ($ids as $id) {

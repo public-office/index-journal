@@ -9,7 +9,7 @@ namespace Kirby\Cms;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 abstract class Picker
@@ -61,7 +61,7 @@ abstract class Picker
             // optional mapping function for the result array
             'map' => null,
             // the reference model
-            'model' => site(),
+            'model' => App::instance()->site(),
             // current page when paginating
             'page' => 1,
             // a query string to fetch specific items

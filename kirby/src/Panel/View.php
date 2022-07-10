@@ -2,9 +2,10 @@
 
 namespace Kirby\Panel;
 
+use Kirby\Cms\App;
 use Kirby\Http\Response;
-use Kirby\Http\Url;
 use Kirby\Toolkit\A;
+use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Str;
 
 /**
@@ -16,7 +17,7 @@ use Kirby\Toolkit\Str;
  * @package   Kirby Panel
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class View
@@ -32,14 +33,14 @@ class View
      */
     public static function apply(array $data): array
     {
-        $request = kirby()->request();
-        $only    = $request->header('X-Fiber-Only') ?? get('_only');
+        $request = App::instance()->request();
+        $only    = $request->header('X-Fiber-Only') ?? $request->get('_only');
 
         if (empty($only) === false) {
             return static::applyOnly($data, $only);
         }
 
-        $globals = $request->header('X-Fiber-Globals') ?? get('_globals');
+        $globals = $request->header('X-Fiber-Globals') ?? $request->get('_globals');
 
         if (empty($globals) === false) {
             return static::applyGlobals($data, $globals);
@@ -139,7 +140,7 @@ class View
      */
     public static function data(array $view = [], array $options = []): array
     {
-        $kirby = kirby();
+        $kirby = App::instance();
 
         // multilang setup check
         $multilang = Panel::multilang();
@@ -178,15 +179,13 @@ class View
             },
             '$languages' => function () use ($kirby, $multilang): array {
                 if ($multilang === true) {
-                    return $kirby->languages()->values(function ($language) {
-                        return [
-                            'code'      => $language->code(),
-                            'default'   => $language->isDefault(),
-                            'direction' => $language->direction(),
-                            'name'      => $language->name(),
-                            'rules'     => $language->rules(),
-                        ];
-                    });
+                    return $kirby->languages()->values(fn ($language) => [
+                        'code'      => $language->code(),
+                        'default'   => $language->isDefault(),
+                        'direction' => $language->direction(),
+                        'name'      => $language->name(),
+                        'rules'     => $language->rules(),
+                    ]);
                 }
 
                 return [];
@@ -198,7 +197,7 @@ class View
             '$license' => (bool)$kirby->system()->license(),
             '$multilang' => $multilang,
             '$searches' => static::searches($options['areas'] ?? [], $permissions),
-            '$url' => Url::current(),
+            '$url' => $kirby->request()->url()->toString(),
             '$user' => function () use ($user) {
                 if ($user) {
                     return [
@@ -253,7 +252,7 @@ class View
             'error'     => $message,
             'props'     => [
                 'error'  => $message,
-                'layout' => Panel::hasAccess(kirby()->user()) ? 'inside' : 'outside'
+                'layout' => Panel::hasAccess(App::instance()->user()) ? 'inside' : 'outside'
             ],
             'title' => 'Error'
         ];
@@ -271,7 +270,7 @@ class View
      */
     public static function globals(): array
     {
-        $kirby = kirby();
+        $kirby = App::instance();
 
         return [
             '$config' => function () use ($kirby) {
@@ -315,12 +314,10 @@ class View
                     'name'      => $translation->name(),
                 ];
             },
-            '$urls' => function () use ($kirby) {
-                return [
-                    'api'  => $kirby->url('api'),
-                    'site' => $kirby->url('index')
-                ];
-            }
+            '$urls' => fn () => [
+                'api'  => $kirby->url('api'),
+                'site' => $kirby->url('index')
+            ]
         ];
     }
 
@@ -376,7 +373,7 @@ class View
             'id'       => 'account',
             'link'     => 'account',
             'disabled' => ($permissions['access']['account'] ?? false) === false,
-            'text'     => t('view.account'),
+            'text'     => I18n::translate('view.account'),
         ];
         $menu[] = '-';
 
@@ -385,7 +382,7 @@ class View
             'icon' => 'logout',
             'id'   => 'logout',
             'link' => 'logout',
-            'text' => t('logout')
+            'text' => I18n::translate('logout')
         ];
         return $menu;
     }
@@ -401,10 +398,6 @@ class View
      */
     public static function response($data, array $options = [])
     {
-        $kirby = kirby();
-        $area  = $options['area']  ?? [];
-        $areas = $options['areas'] ?? [];
-
         // handle redirects
         if (is_a($data, 'Kirby\Panel\Redirect') === true) {
             return Response::redirect($data->location(), $data->code());

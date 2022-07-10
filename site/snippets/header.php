@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>INDEX JOURNAL</title>
+  <?php snippet('meta_information'); ?>
+  <?php snippet('robots'); ?>
   <?= css('assets/css/style.css?v=' . sha1_file('assets/css/style.css')) ?>
   <?= css('assets/css/print.css?v=' . sha1_file('assets/css/print.css')) ?>
   <?= js('assets/js/jquery.min.js') ?>

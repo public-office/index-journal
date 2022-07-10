@@ -2,6 +2,9 @@
 
 namespace Kirby\Panel;
 
+use Kirby\Cms\Url;
+use Kirby\Toolkit\I18n;
+
 /**
  * Provides information about the user model for the Panel
  * @since 3.6.0
@@ -9,11 +12,16 @@ namespace Kirby\Panel;
  * @package   Kirby Panel
  * @author    Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class User extends Model
 {
+    /**
+     * @var \Kirby\Cms\User
+     */
+    protected $model;
+
     /**
      * Breadcrumb array
      *
@@ -46,7 +54,7 @@ class User extends Model
         $result[] = [
             'dialog'   => $url . '/changeName',
             'icon'     => 'title',
-            'text'     => t($i18nPrefix . '.changeName'),
+            'text'     => I18n::translate($i18nPrefix . '.changeName'),
             'disabled' => $this->isDisabledDropdownOption('changeName', $options, $permissions)
         ];
 
@@ -55,28 +63,28 @@ class User extends Model
         $result[] = [
             'dialog'   => $url . '/changeEmail',
             'icon'     => 'email',
-            'text'     => t('user.changeEmail'),
+            'text'     => I18n::translate('user.changeEmail'),
             'disabled' => $this->isDisabledDropdownOption('changeEmail', $options, $permissions)
         ];
 
         $result[] = [
             'dialog'   => $url . '/changeRole',
             'icon'     => 'bolt',
-            'text'     => t('user.changeRole'),
+            'text'     => I18n::translate('user.changeRole'),
             'disabled' => $this->isDisabledDropdownOption('changeRole', $options, $permissions)
         ];
 
         $result[] = [
             'dialog'   => $url . '/changePassword',
             'icon'     => 'key',
-            'text'     => t('user.changePassword'),
+            'text'     => I18n::translate('user.changePassword'),
             'disabled' => $this->isDisabledDropdownOption('changePassword', $options, $permissions)
         ];
 
         $result[] = [
             'dialog'   => $url . '/changeLanguage',
             'icon'     => 'globe',
-            'text'     => t('user.changeLanguage'),
+            'text'     => I18n::translate('user.changeLanguage'),
             'disabled' => $this->isDisabledDropdownOption('changeLanguage', $options, $permissions)
         ];
 
@@ -85,7 +93,7 @@ class User extends Model
         $result[] = [
             'dialog'   => $url . '/delete',
             'icon'     => 'trash',
-            'text'     => t($i18nPrefix . '.delete'),
+            'text'     => I18n::translate($i18nPrefix . '.delete'),
             'disabled' => $this->isDisabledDropdownOption('delete', $options, $permissions)
         ];
 
@@ -114,7 +122,7 @@ class User extends Model
     {
         if ($home = ($this->model->blueprint()->home() ?? null)) {
             $url = $this->model->toString($home);
-            return url($url);
+            return Url::to($url);
         }
 
         return Panel::url('site');
@@ -193,14 +201,8 @@ class User extends Model
         $user = $this->model;
 
         return [
-            'next' => function () use ($user) {
-                $next = $user->next();
-                return $next ? $next->panel()->toLink('username') : null;
-            },
-            'prev' => function () use ($user) {
-                $prev = $user->prev();
-                return $prev ? $prev->panel()->toLink('username') : null;
-            }
+            'next' => fn () => $this->toPrevNextLink($user->next(), 'username'),
+            'prev' => fn () => $this->toPrevNextLink($user->prev(), 'username')
         ];
     }
 

@@ -16,7 +16,7 @@ namespace Kirby\Cms;
  * @package   Kirby Cms
  * @author    Bastian Allgeier <bastian@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Core
@@ -267,6 +267,7 @@ class Core
             'textarea'    => $this->root . '/fields/textarea.php',
             'time'        => $this->root . '/fields/time.php',
             'toggle'      => $this->root . '/fields/toggle.php',
+            'toggles'     => $this->root . '/fields/toggles.php',
             'url'         => $this->root . '/fields/url.php',
             'users'       => $this->root . '/fields/users.php',
             'writer'      => $this->root . '/fields/writer.php'
@@ -322,98 +323,32 @@ class Core
     public function roots(): array
     {
         return $this->cache['roots'] ??= [
-            // kirby
-            'kirby' => function (array $roots) {
-                return dirname(__DIR__, 2);
-            },
+            'kirby'       => fn (array $roots) => dirname(__DIR__, 2),
+            'i18n'        => fn (array $roots) => $roots['kirby'] . '/i18n',
+            'i18n:translations' => fn (array $roots) => $roots['i18n'] . '/translations',
+            'i18n:rules'  => fn (array $roots) => $roots['i18n'] . '/rules',
 
-            // i18n
-            'i18n' => function (array $roots) {
-                return $roots['kirby'] . '/i18n';
-            },
-            'i18n:translations' => function (array $roots) {
-                return $roots['i18n'] . '/translations';
-            },
-            'i18n:rules' => function (array $roots) {
-                return $roots['i18n'] . '/rules';
-            },
-
-            // index
-            'index' => function (array $roots) {
-                return dirname(__DIR__, 3);
-            },
-
-            // assets
-            'assets' => function (array $roots) {
-                return $roots['index'] . '/assets';
-            },
-
-            // content
-            'content' => function (array $roots) {
-                return $roots['index'] . '/content';
-            },
-
-            // media
-            'media' => function (array $roots) {
-                return $roots['index'] . '/media';
-            },
-
-            // panel
-            'panel' => function (array $roots) {
-                return $roots['kirby'] . '/panel';
-            },
-
-            // site
-            'site' => function (array $roots) {
-                return $roots['index'] . '/site';
-            },
-            'accounts' => function (array $roots) {
-                return $roots['site'] . '/accounts';
-            },
-            'blueprints' => function (array $roots) {
-                return $roots['site'] . '/blueprints';
-            },
-            'cache' => function (array $roots) {
-                return $roots['site'] . '/cache';
-            },
-            'collections' => function (array $roots) {
-                return $roots['site'] . '/collections';
-            },
-            'config' => function (array $roots) {
-                return $roots['site'] . '/config';
-            },
-            'controllers' => function (array $roots) {
-                return $roots['site'] . '/controllers';
-            },
-            'languages' => function (array $roots) {
-                return $roots['site'] . '/languages';
-            },
-            'license' => function (array $roots) {
-                return $roots['config'] . '/.license';
-            },
-            'logs' => function (array $roots) {
-                return $roots['site'] . '/logs';
-            },
-            'models' => function (array $roots) {
-                return $roots['site'] . '/models';
-            },
-            'plugins' => function (array $roots) {
-                return $roots['site'] . '/plugins';
-            },
-            'sessions' => function (array $roots) {
-                return $roots['site'] . '/sessions';
-            },
-            'snippets' => function (array $roots) {
-                return $roots['site'] . '/snippets';
-            },
-            'templates' => function (array $roots) {
-                return $roots['site'] . '/templates';
-            },
-
-            // blueprints
-            'roles' => function (array $roots) {
-                return $roots['blueprints'] . '/users';
-            },
+            'index'       => fn (array $roots) => dirname(__DIR__, 3),
+            'assets'      => fn (array $roots) => $roots['index'] . '/assets',
+            'content'     => fn (array $roots) => $roots['index'] . '/content',
+            'media'       => fn (array $roots) => $roots['index'] . '/media',
+            'panel'       => fn (array $roots) => $roots['kirby'] . '/panel',
+            'site'        => fn (array $roots) => $roots['index'] . '/site',
+            'accounts'    => fn (array $roots) => $roots['site'] . '/accounts',
+            'blueprints'  => fn (array $roots) => $roots['site'] . '/blueprints',
+            'cache'       => fn (array $roots) => $roots['site'] . '/cache',
+            'collections' => fn (array $roots) => $roots['site'] . '/collections',
+            'config'      => fn (array $roots) => $roots['site'] . '/config',
+            'controllers' => fn (array $roots) => $roots['site'] . '/controllers',
+            'languages'   => fn (array $roots) => $roots['site'] . '/languages',
+            'license'     => fn (array $roots) => $roots['config'] . '/.license',
+            'logs'        => fn (array $roots) => $roots['site'] . '/logs',
+            'models'      => fn (array $roots) => $roots['site'] . '/models',
+            'plugins'     => fn (array $roots) => $roots['site'] . '/plugins',
+            'sessions'    => fn (array $roots) => $roots['site'] . '/sessions',
+            'snippets'    => fn (array $roots) => $roots['site'] . '/snippets',
+            'templates'   => fn (array $roots) => $roots['site'] . '/templates',
+            'roles'       => fn (array $roots) => $roots['blueprints'] . '/users',
         ];
     }
 
@@ -465,6 +400,7 @@ class Core
     public function sectionMixins(): array
     {
         return [
+            'details'    => $this->root . '/sections/mixins/details.php',
             'empty'      => $this->root . '/sections/mixins/empty.php',
             'headline'   => $this->root . '/sections/mixins/headline.php',
             'help'       => $this->root . '/sections/mixins/help.php',
@@ -473,6 +409,8 @@ class Core
             'min'        => $this->root . '/sections/mixins/min.php',
             'pagination' => $this->root . '/sections/mixins/pagination.php',
             'parent'     => $this->root . '/sections/mixins/parent.php',
+            'search'     => $this->root . '/sections/mixins/search.php',
+            'sort'        => $this->root . '/sections/mixins/sort.php',
         ];
     }
 
@@ -490,6 +428,7 @@ class Core
             'files'  => $this->root . '/sections/files.php',
             'info'   => $this->root . '/sections/info.php',
             'pages'  => $this->root . '/sections/pages.php',
+            'stats'  => $this->root . '/sections/stats.php',
         ];
     }
 
@@ -518,12 +457,8 @@ class Core
     public function urls(): array
     {
         return $this->cache['urls'] ??= [
-            'index' => function () {
-                return Url::index();
-            },
-            'base' => function (array $urls) {
-                return rtrim($urls['index'], '/');
-            },
+            'index'   => fn () => $this->kirby->environment()->baseUrl(),
+            'base'    => fn (array $urls) => rtrim($urls['index'], '/'),
             'current' => function (array $urls) {
                 $path = trim($this->kirby->path(), '/');
 
@@ -533,18 +468,10 @@ class Core
                     return $urls['base'] . '/' . $path;
                 }
             },
-            'assets' => function (array $urls) {
-                return $urls['base'] . '/assets';
-            },
-            'api' => function (array $urls) {
-                return $urls['base'] . '/' . $this->kirby->option('api.slug', 'api');
-            },
-            'media' => function (array $urls) {
-                return $urls['base'] . '/media';
-            },
-            'panel' => function (array $urls) {
-                return $urls['base'] . '/' . $this->kirby->option('panel.slug', 'panel');
-            }
+            'assets' => fn (array $urls) => $urls['base'] . '/assets',
+            'api'    => fn (array $urls) => $urls['base'] . '/' . $this->kirby->option('api.slug', 'api'),
+            'media'  => fn (array $urls) => $urls['base'] . '/media',
+            'panel'  => fn (array $urls) => $urls['base'] . '/' . $this->kirby->option('panel.slug', 'panel')
         ];
     }
 }

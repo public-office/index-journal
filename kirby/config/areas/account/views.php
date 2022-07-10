@@ -1,17 +1,16 @@
 <?php
 
+use Kirby\Cms\App;
 use Kirby\Cms\Find;
 use Kirby\Panel\Panel;
 
 return [
     'account' => [
         'pattern' => 'account',
-        'action'  => function () {
-            return [
-                'component' => 'k-account-view',
-                'props'     => kirby()->user()->panel()->props(),
-            ];
-        },
+        'action'  => fn () => [
+            'component' => 'k-account-view',
+            'props'     => App::instance()->user()->panel()->props(),
+        ],
     ],
     'account.file' => [
         'pattern' => 'account/files/(:any)',
@@ -23,7 +22,7 @@ return [
         'pattern' => 'logout',
         'auth'    => false,
         'action'  => function () {
-            if ($user = kirby()->user()) {
+            if ($user = App::instance()->user()) {
                 $user->logout();
             }
             Panel::go('login');
@@ -31,10 +30,6 @@ return [
     ],
     'account.password' => [
         'pattern' => 'reset-password',
-        'action'  => function () {
-            return [
-                'component' => 'k-reset-password-view',
-            ];
-        }
+        'action'  => fn () => ['component' => 'k-reset-password-view']
     ]
 ];

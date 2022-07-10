@@ -3,6 +3,7 @@
 namespace Kirby\Panel;
 
 use Kirby\Form\Form;
+use Kirby\Http\Uri;
 use Kirby\Toolkit\A;
 
 /**
@@ -12,7 +13,7 @@ use Kirby\Toolkit\A;
  * @package   Kirby Panel
  * @author    Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
- * @copyright Bastian Allgeier GmbH
+ * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 abstract class Model
@@ -52,7 +53,7 @@ abstract class Model
     public function dragTextFromCallback(string $type, ...$args): ?string
     {
         $option   = 'panel.' . $type . '.' . $this->model::CLASS_ALIAS . 'DragText';
-        $callback = option($option);
+        $callback = $this->model->kirby()->option($option);
 
         if (
             empty($callback) === false &&
@@ -80,7 +81,8 @@ abstract class Model
         $type ??= 'auto';
 
         if ($type === 'auto') {
-            $type = option('panel.kirbytext', true) ? 'kirbytext' : 'markdown';
+            $kirby = $this->model->kirby();
+            $type  = $kirby->option('panel.kirbytext', true) ? 'kirbytext' : 'markdown';
         }
 
         return $type === 'markdown' ? 'markdown' : 'kirbytext';
@@ -350,8 +352,9 @@ abstract class Model
     public function props(): array
     {
         $blueprint = $this->model->blueprint();
+        $request   = $this->model->kirby()->request();
         $tabs      = $blueprint->tabs();
-        $tab       = $blueprint->tab(get('tab')) ?? $tabs[0] ?? null;
+        $tab       = $blueprint->tab($request->get('tab')) ?? $tabs[0] ?? null;
 
         $props = [
             'lock'        => $this->lock(),
@@ -385,6 +388,36 @@ abstract class Model
             'link'    => $this->url(true),
             'tooltip' => (string)$this->model->{$tooltip}()
         ];
+    }
+
+    /**
+     * Returns link url and tooltip
+     * for optional sibling model and
+     * preserves tab selection
+     *
+     * @internal
+     *
+     * @param \Kirby\Cms\ModelWithContent|null $model
+     * @param string $tooltip
+     * @return array
+     */
+    protected function toPrevNextLink($model = null, string $tooltip = 'title'): ?array
+    {
+        if ($model === null) {
+            return null;
+        }
+
+        $data = $model->panel()->toLink($tooltip);
+
+        if ($tab = $model->kirby()->request()->get('tab')) {
+            $uri = new Uri($data['link'], [
+                'query' => ['tab' => $tab]
+            ]);
+
+            $data['link'] = $uri->toString();
+        }
+
+        return $data;
     }
 
     /**
