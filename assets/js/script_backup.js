@@ -49,6 +49,7 @@ $(document).ready(function () {
   $(".initial").on("click", function () {
     $(".issue-overlay").css({ opacity: 0, display: "flex" }).fadeTo("slow", 1);
   });
+
   $(".issue-overlay-close").on("click", function () {
     $(".issue-overlay").fadeOut();
   });
