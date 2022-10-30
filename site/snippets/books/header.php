@@ -33,6 +33,6 @@
     </h1>
     <nav>
 
-      <a href="/shop">Shop</a>,&nbsp;<a href="/">ABOUT</a> <span></span>
+      <a href="/">ABOUT</a> <span></span>
     </nav>
   </header>

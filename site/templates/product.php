@@ -12,7 +12,7 @@
 
         <li class="text">
             <?= $product->description()->kt() ?>
-            <?php if ($product->reviews()) : ?>
+            <?php if ($product->reviews()->isNotEmpty()) : ?>
                 <h2>Reviews</h2>
                 <?= $product->reviews()->kt() ?>
             <?php endif ?>

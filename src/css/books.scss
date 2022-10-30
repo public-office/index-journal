@@ -1,22 +1,29 @@
-.shop-container {
-  font-size: var(--font-small);
+.shop {
   padding: 5.6em 4rem 5.6em 0;
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  --gutter: 1rem;
-  grid-column-gap: var(--gutter);
-  column-gap: var(--gutter);
-  //   padding: var(--gutter) calc(var(--gutter)) 0 var(--gutter);
-  li {
-    display: flex;
-    flex-direction: column;
+
+  &-about {
+    padding-bottom: 5.6em;
   }
-  figure {
-    // width: 30rem;
-  }
-  .product-title {
-    font-style: italic;
+  &-container {
+    font-size: var(--font-small);
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    --gutter: 1rem;
+    grid-column-gap: var(--gutter);
+    gap: var(--gutter);
+
+    //   padding: var(--gutter) calc(var(--gutter)) 0 var(--gutter);
+    li {
+      display: flex;
+      flex-direction: column;
+    }
+    figure {
+      // width: 30rem;
+    }
+    .product-title {
+      // font-style: italic;
+    }
   }
 }
 
@@ -25,6 +32,9 @@ ul.editors {
 
   li.editor {
     display: inline;
+    font-size: 1rem;
+
+    font-family: "DinSynt";
     &:before {
       content: ", ";
     }
@@ -38,6 +48,57 @@ ul.editors {
       content: "by ";
     }
   }
+}
+
+.product {
+  transition: 0s;
+  opacity: 1;
+  display: block;
+}
+
+.link-container {
+  // display: flex;
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.link-container:hover {
+  & .info {
+    // opacity: 1;
+    visibility: visible;
+  }
+  & .product {
+    opacity: 0;
+  }
+}
+
+.info {
+  .text {
+    text-align: center;
+  }
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  z-index: 2;
+  visibility: hidden;
 }
 
 .product-container {
