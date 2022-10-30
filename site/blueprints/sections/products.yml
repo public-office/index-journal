@@ -1,0 +1,9 @@
+type: pages
+headline: Products
+parent: site.find("books")
+template: product
+info: "$ {{ page.price }} / {{ page.design }}"
+image:
+  src: page.image
+  ratio: 1/1
+  back: pattern

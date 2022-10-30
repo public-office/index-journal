@@ -78,6 +78,10 @@ sections:
     headline: Essays / Sections
     type: pages
     status: all
+    layout: table
+    columns:
+      author: true
+      doi: true
     templates:
       - essay
       - section

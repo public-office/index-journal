@@ -1,0 +1,105 @@
+title: Product
+preset: page
+# num: zero
+
+status:
+  draft: true
+  listed: true
+
+fields:
+  price:
+    type: number
+    step: 0.01
+    before: $
+    width: 1/2
+  design:
+    label: Design by …
+    type: text
+    width: 1/2
+  link:
+    type: url
+    width: 1/2
+  editors:
+    type: tags
+    width: 1/2
+
+  authors:
+    type: tags
+    width: 1/2
+
+  isbn:
+    type: text
+    width: 1/2
+
+  description:
+    type: textarea
+
+  details:
+    type: textarea
+
+  format:
+    type: text
+    width: 1/2
+
+  subjects:
+    type: tags
+    width: 1/2
+
+  pub_date:
+    type: date
+
+  targetAudience:
+    type: text
+
+  Reviews:
+    type: textarea
+
+  layout:
+    type: layout
+    pretty: true
+    layouts:
+      - "1/1"
+      - "1/2, 1/2"
+      - "1/4, 1/4, 1/4, 1/4"
+      - "1/3, 2/3"
+      - "2/3, 1/3"
+      - "1/3, 1/3, 1/3"
+    fieldsets:
+      - heading
+      - markdown
+      - image
+      - video
+      - gallery
+    settings:
+      fields:
+        class:
+          type: text
+          width: 1/2
+        id:
+          type: text
+          width: 1/2
+    # Title Description
+
+    # Author biog
+
+    # Selling points
+
+    # Media/publicity/promotion
+
+    # Author location
+
+sidebar:
+  cover:
+    type: fields
+    fields:
+      cover:
+        extends: sections/cover
+        template: cover
+        # required: true
+
+  images:
+    type: files
+    layout: cards
+    size: tiny
+    help: Click image to add caption and alt text.
+    # template: image

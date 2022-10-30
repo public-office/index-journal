@@ -1,0 +1,7 @@
+fields:
+  caption:
+    label: Caption
+    type: text
+  alt_text:
+    label: Alt text
+    type: text
