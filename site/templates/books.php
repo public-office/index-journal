@@ -7,7 +7,7 @@
 
     <div class="">
         <ul class="shop-about">
-            <p>INDEX BOOKS is an independent art history and theory printing house based in Melbourne, Australia. The press presents original scholarship by art historians and theorists from all specialisations, treating the art of the past with the same urgency as it does the art of the present. New titles are forthcoming.</p>
+            <?= $site->about()->kt() ?>
         </ul>
         <ul class="shop-container">
 
@@ -28,10 +28,19 @@
                                 <figcaption class="text">
                                     <p><?= $product->title() ?></p>
                                     <?php if ($product->editors()) : ?>
-                                        <ul class="editors">
-                                            <?php foreach ($product->editors()->split() as $editor) : ?>
-                                                <li class="editor"><span><?= $editor ?></span></li>
-                                            <?php endforeach ?>
+
+                                        <ul class="editors" style="margin-top:0.6rem">
+                                            <?php if ($product->editors()->isNotEmpty()) : ?>
+                                                <?php foreach ($product->editors()->split() as $editor) : ?>
+                                                    <li class="editor sub-title-books"><span> <?= $editor ?></span></li>
+                                                <?php endforeach ?>
+                                            <?php else : ?>
+                                                <?php foreach ($product->authors()->split() as $author) : ?>
+                                                    <li class="author sub-title-books"><span><?= $author ?></span></li>
+                                                <?php endforeach ?>
+                                            <?php endif ?>
+
+
                                         </ul>
                                     <?php endif ?>
                                 </figcaption>

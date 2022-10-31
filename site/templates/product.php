@@ -7,6 +7,27 @@
 <?php $product = $page ?>
 
 <main>
+    <section class="title-block product-title" style="background-color: rgb(<?= $page->parent()->issue_color() ?>)">
+        <h1 style="font-size:6vw"><span class="title"><?= $page->title() ?></span>
+            <?php if ($page->subtitle()->isNotEmpty()) : ?><span class="subtitle"><?= smartypants($page->subtitle()->kti()) ?></span><?php endif ?>
+            <?php if ($page->slug() != 'introduction') : ?><span class="author">
+
+                    <ul class="editors" style="font-size:6vw">
+                        <?php if ($product->editors()->isNotEmpty()) : ?>
+                            <?php foreach ($product->editors()->split() as $editor) : ?>
+                                <li class="editor" style="font-size:6vw"><span> <?= $editor ?></span></li>
+                            <?php endforeach ?>
+                        <?php else : ?>
+                            <?php foreach ($product->authors()->split() as $author) : ?>
+                                <li class="author" style="font-size:6vw"><span><?= $author ?></span></li>
+                            <?php endforeach ?>
+                        <?php endif ?>
+                    </ul>
+
+                </span><?php endif ?>
+        </h1>
+    </section>
+
     <ul class="product-container">
 
 

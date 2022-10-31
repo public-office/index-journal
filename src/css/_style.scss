@@ -288,6 +288,9 @@ h2 {
   text-align: center;
   text-indent: 0 !important;
   // max-width: 60%;
+  @media (max-width: 670px) {
+    font-size: 1rem;
+  }
 }
 
 h3 {
@@ -1439,11 +1442,17 @@ p span {
     flex: 1.5;
     line-height: 1.2;
     flex: 6;
+    @media screen and (max-width: 668px) {
+      flex: 4;
+    }
   }
 
   header nav {
     flex: 4;
     width: auto;
+    @media screen and (max-width: 668px) {
+      flex: 6;
+    }
   }
 
   header h1 nav {
@@ -1457,6 +1466,9 @@ p span {
   p,
   h3 {
     max-width: 90%;
+    @media screen and (max-width: 668px) {
+      max-width: 100%;
+    }
   }
 
   figure.wipe {
@@ -1488,7 +1500,7 @@ p span {
   }
 
   figcaption {
-    font-size: 0.6rem;
+    font-size: 1rem;
     line-height: 1.2;
     margin-top: 0.75em;
     bottom: 1rem;

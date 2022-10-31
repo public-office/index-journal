@@ -8,6 +8,14 @@ tabs:
         status: all
   books:
     sections:
+      content:
+        type: fields
+        fields:
+          About:
+            headline: About
+            type: textarea
+            size: small
+
       books:
         type: pages
         headline: Books
@@ -17,7 +25,7 @@ tabs:
         # size: medium
         info: "{{ page.author }}"
         template: product
-        empty: No reviews yet
+        empty: No books yet
         # sortBy: num
         size: medium
         type: pages
@@ -29,8 +37,8 @@ tabs:
           src: page.image
           ratio: 5/3
           back: black
-image:
-  # query: page.image
-  query: page.cover.tofile
-  cover: true
-  ratio: 5/4
+          image:
+            # query: page.image
+            query: page.cover.tofile
+            cover: true
+            ratio: 5/4

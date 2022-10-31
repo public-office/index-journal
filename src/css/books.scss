@@ -1,14 +1,35 @@
+.no-mobile {
+  @media screen and (max-width: 668px) {
+    display: none;
+  }
+}
+
+.mobile-only {
+  @media screen and (min-width: 668px) {
+    display: none;
+  }
+}
 .shop {
   padding: 5.6em 4rem 5.6em 0;
 
+  @media screen and (max-width: 668px) {
+    padding: 5.6em 1rem 5.6em 0;
+  }
+
   &-about {
     padding-bottom: 5.6em;
+    p {
+      max-width: 100%;
+    }
   }
   &-container {
     font-size: var(--font-small);
     position: relative;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    @media screen and (max-width: 668px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
     --gutter: 1rem;
     grid-column-gap: var(--gutter);
     gap: var(--gutter);
@@ -27,22 +48,41 @@
   }
 }
 
+.sub-title-books {
+  font-size: 1rem;
+}
+
 ul.editors {
   margin: 0;
 
   li.editor {
     display: inline;
-    font-size: 1rem;
-
     font-family: "DinSynt";
     &:before {
       content: ", ";
     }
     &:after {
-      content: "";
+      content: " ";
     }
     &:last-child:before {
-      content: " and ";
+      content: "and ";
+    }
+    &:first-child::before {
+      content: "Edited by ";
+    }
+  }
+
+  li.author {
+    display: inline;
+    font-family: "DinSynt";
+    &:before {
+      content: ", ";
+    }
+    &:after {
+      content: " ";
+    }
+    &:last-child:before {
+      content: "and ";
     }
     &:first-child::before {
       content: "by ";
@@ -105,6 +145,7 @@ ul.editors {
 }
 
 .product-container {
+  min-height: 100vh;
   font-size: var(--font-small);
   padding: 5.6em 4rem 5.6em 0;
   position: relative;
@@ -114,7 +155,15 @@ ul.editors {
   --gutter: 1rem;
   grid-column-gap: var(--gutter);
   column-gap: var(--gutter);
-  //   padding: var(--gutter) calc(var(--gutter)) 0 var(--gutter);
+  // mobile
+  @media screen and (max-width: 668px) {
+    padding: 5.6em 1rem 5.6em 0;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+      "title title title"
+      "image image image"
+      "text text text";
+  }
   li {
     display: flex;
     flex-direction: column;
@@ -126,16 +175,19 @@ ul.editors {
   .text {
     grid-area: text;
   }
-
+  .product-title {
+    grid-area: title;
+  }
   .image {
     grid-area: image;
+    padding: 0 0 1rem 0;
   }
   figure {
     // width: 30rem;
   }
-  .product-title {
-    font-style: italic;
-  }
+  // .product-title {
+  //   font-style: italic;
+  // }
 }
 
 .gallery {

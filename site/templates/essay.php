@@ -1,6 +1,7 @@
 <?php snippet('header') ?>
 
 <main data-template="<?= $page->template() ?>">
+
   <section class="title-block" style="background-color: rgb(<?= $page->parent()->issue_color() ?>)">
     <h1 style="font-size:6vw"><span class="title"><?= $page->title() ?></span>
       <?php if ($page->subtitle()->isNotEmpty()) : ?><span class="subtitle"><?= smartypants($page->subtitle()->kti()) ?></span><?php endif ?>
