@@ -42,3 +42,5 @@ tabs:
             query: page.cover.tofile
             cover: true
             ratio: 5/4
+
+ seotab: seo

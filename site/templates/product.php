@@ -54,14 +54,61 @@
                 </figure>
                 <figcaption class="details"><?= kirbytextinline($product->details()) ?>
                 </figcaption>
-                <figcaption>A$<?php
-                                $number = $product->price()->value();
-                                echo number_format((float)$number, 2, '.', '');
-                                ?></figcaption>
-
-                <figcaption class="snipcart-add-item" data-item-id="<?= $product->id() ?>" data-item-price="<?= $product->price() ?>" data-item-description="<?= $product->details() ?>" data-item-image="<?= $image->resize(300)->url() ?>" data-item-name="<?= $product->title() ?>" data-item-width="<?= $product->width() ?>" data-item-height="<?= $product->height() ?>" data-item-length="<?= $product->length() ?>" data-item-weight="<?= $product->weight() ?>" style="cursor:pointer;">
-                    ADD TO CART
+                <figcaption>
+                    A$<?php
+                        $number = $product->price()->value();
+                        echo number_format((float)$number, 2, '.', '');
+                        ?>
                 </figcaption>
+
+
+                <style>
+                    .add-to-cart {
+                        color: #fff;
+                        margin-top: 1rem;
+                        border-color: transparent;
+                        border-color: var(--borderColor-buttonPrimary, transparent);
+                        background-color: black;
+
+                        /* snipcart-base-button */
+                        padding: 16px;
+                        border: 1px solid;
+                        border-radius: 4px;
+                        cursor: pointer;
+                        transition: .2s ease-out;
+                        transition-property: color, border-color, background-color, box-shadow;
+                        width: 100%;
+
+                    }
+
+                    .add-to-cart:hover {
+                        color: #fff;
+                        border-color: transparent;
+                        background-color: gray;
+                        /* background-color: var(--bgColor-buttonPrimary-hover, #0d59f2); */
+                        box-shadow: 0 10px 4px -8px rgb(0 0 0 / 50%);
+                        box-shadow: var(--shadow-buttonPrimary-hover, 0 10px 4px -8px rgba(0, 0, 0, .5));
+                    }
+
+                    .add-to-cart-wrapper {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    .add-to-cart-wrapper {
+                        flex-grow: 1;
+                        padding: 0 16px;
+                        font-family: Montserrat, sans-serif;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+                </style>
+                <button type="button" class="add-to-cart  is-icon-right snipcart-add-item" data-item-id="<?= $product->id() ?>" data-item-price="<?= $product->price() ?>" data-item-description="<?= $product->details() ?>" data-item-image="<?= $image->resize(300)->url() ?>" data-item-name="<?= $product->title() ?>" data-item-width="<?= $product->width() ?>" data-item-height="<?= $product->height() ?>" data-item-length="<?= $product->length() ?>" data-item-weight="<?= $product->weight() ?>" style="cursor:pointer;">
+                    <div class="add-to-cart-wrapper">
+                        <div class="add-to-cart-wrapper"> ADD TO CART </div>
+                    </div>
+                </button>
 
 
             <?php endif ?>

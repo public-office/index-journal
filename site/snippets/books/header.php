@@ -2,6 +2,10 @@
 <html lang="en" dir="ltr">
 
 <head>
+  <!-- https://github.com/diesdasdigital/kirby-meta-knight -->
+  <?php snippet('meta_information'); ?>
+  <?php snippet('robots'); ?>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>INDEX BOOKS</title>
@@ -80,7 +84,8 @@
     </h1>
     <nav>
 
-      <a href="/" class="no-mobile">ABOUT, </a><a class="snipcart-checkout">CART</a> (<span class="snipcart-items-count "></span>, <span class="snipcart-total-price"></span>)
+      <!-- <a href="/books/about" class="no-mobile">ABOUT, </a> -->
+      <a class="snipcart-checkout">CART</a> (<span class="snipcart-items-count "></span>, <span class="snipcart-total-price"></span>)
     </nav>
   </header>
   <!-- https://getkirby.com/docs/cookbook/security/access-restriction -->

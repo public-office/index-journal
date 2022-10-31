@@ -1,16 +1,28 @@
 title: Books
-preset: pages
 
 icon: 📚
 
 options:
   status: true
+tabs:
+  pages:
+    sections:
+      pages:
+        label: Books
+        status: all
+        template: product
+        layout: cards
+        size: medium
+        image:
+          back: black
+  about:
+    sections:
+      content:
+        type: fields
+        fields:
+          about:
+            type: textarea
+            headline: About
+            size: small
 
-drafts:
-  extends: sections/products
-  headline: Unpublished Products
-
-listed:
-  extends: sections/products
-  headline: Published Products
-  layout: cards
+  seotab: seo
