@@ -7,7 +7,7 @@
 
     <div class="">
         <ul class="shop-about">
-            <p>INDEX BOOKS is an independent art history and theory printing house based in Melbourne, Australia. The press presents original scholarship by art historians and theorists from all specialisations, treating the art of the past with the same urgency as it does the art of the present.</p>
+            <p>INDEX BOOKS is an independent art history and theory printing house based in Melbourne, Australia. The press presents original scholarship by art historians and theorists from all specialisations, treating the art of the past with the same urgency as it does the art of the present. New titles are forthcoming.</p>
         </ul>
         <ul class="shop-container">
 
