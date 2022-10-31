@@ -26,11 +26,23 @@
                             <source srcset="<?= $image->srcset('avif') ?>" type="image/avif">
                             <source srcset="<?= $image->srcset('webp') ?>" type="image/webp">
                             <img alt="<?= $image->alt() ?>" src="<?= $image->resize(300)->url() ?>" srcset="<?= $image->srcset() ?>" width="<?= $image->resize(500)->width() ?>" height="<?= $image->resize(500)->height() ?>" style="  height: 80%; margin: auto;">
+
+
                         </picture>
                     </span>
                 </figure>
                 <figcaption class="details"><?= kirbytextinline($product->details()) ?>
                 </figcaption>
+                <figcaption>A$<?php
+                                $number = $product->price()->value();
+                                echo number_format((float)$number, 2, '.', '');
+                                ?></figcaption>
+
+                <figcaption class="snipcart-add-item" data-item-id="<?= $product->id() ?>" data-item-price="<?= $product->price() ?>" data-item-description="<?= $product->details() ?>" data-item-image="<?= $image->resize(300)->url() ?>" data-item-name="<?= $product->title() ?>" data-item-width="<?= $product->width() ?>" data-item-height="<?= $product->height() ?>" data-item-length="<?= $product->length() ?>" data-item-weight="<?= $product->weight() ?>" style="cursor:pointer;">
+                    ADD TO CART
+                </figcaption>
+
+
             <?php endif ?>
 
 

@@ -6,4 +6,31 @@ tabs:
       pages:
         label: Main Pages
         status: all
-  seotab: seo
+  books:
+    sections:
+      books:
+        type: pages
+        headline: Books
+        parent: kirby.page("books")
+        layout: cards
+
+        # size: medium
+        info: "{{ page.author }}"
+        template: product
+        empty: No reviews yet
+        # sortBy: num
+        size: medium
+        type: pages
+        headline: Books
+        parent: site.find("books")
+        template: product
+        info: "$ {{ page.price }} / {{ page.design }}"
+        image:
+          src: page.image
+          ratio: 5/3
+          back: black
+image:
+  # query: page.image
+  query: page.cover.tofile
+  cover: true
+  ratio: 5/4

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "caf9ce9e35a7e723e66b21f95f4f9c25",
+    "content-hash": "9ce5d800752b11cfbe73139e8870ea24",
     "packages": [
         {
             "name": "claviska/simpleimage",
@@ -397,6 +397,57 @@
             "time": "2020-12-28T12:54:39+00:00"
         },
         {
+            "name": "johannschopplich/kirby-blurry-placeholder",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/johannschopplich/kirby-blurry-placeholder.git",
+                "reference": "3197e221c3845ecf9b023e07a732754307f963e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/johannschopplich/kirby-blurry-placeholder/zipball/3197e221c3845ecf9b023e07a732754307f963e8",
+                "reference": "3197e221c3845ecf9b023e07a732754307f963e8",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.2",
+                "php": ">=8.0.0"
+            },
+            "require-dev": {
+                "getkirby/cms": "^3.7"
+            },
+            "type": "kirby-plugin",
+            "extra": {
+                "kirby-cms-path": false
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Johann Schopplich",
+                    "email": "pkg@johannschopplich.com",
+                    "homepage": "https://johannschopplich.com"
+                }
+            ],
+            "description": "Blurry image placeholders for better UX",
+            "homepage": "https://github.com/johannschopplich/kirby-blurry-placeholder#readme",
+            "keywords": [
+                "image",
+                "kirby",
+                "lazyload",
+                "placeholder",
+                "seo"
+            ],
+            "support": {
+                "issues": "https://github.com/johannschopplich/kirby-blurry-placeholder/issues",
+                "source": "https://github.com/johannschopplich/kirby-blurry-placeholder/tree/v2.0.1"
+            },
+            "time": "2022-09-20T19:24:10+00:00"
+        },
+        {
             "name": "laminas/laminas-escaper",
             "version": "2.12.0",
             "source": {
@@ -697,6 +748,42 @@
                 "source": "https://github.com/php-fig/log/tree/3.0.0"
             },
             "time": "2021-07-14T16:46:02+00:00"
+        },
+        {
+            "name": "rasteiner/k3-pagesdisplay-section",
+            "version": "0.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rasteiner/k3-pagesdisplay-section.git",
+                "reference": "07ad9412d1ed61530faccf282373893cb96310ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rasteiner/k3-pagesdisplay-section/zipball/07ad9412d1ed61530faccf282373893cb96310ad",
+                "reference": "07ad9412d1ed61530faccf282373893cb96310ad",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/cms": "^3.7.2",
+                "getkirby/composer-installer": "^1.2"
+            },
+            "type": "kirby-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "ISC"
+            ],
+            "authors": [
+                {
+                    "name": "Roman Steiner",
+                    "email": "roman@toastlab.ch"
+                }
+            ],
+            "description": "K3 plugin: display any page list in a section. Any parent, many parents, filtered, don't care.",
+            "support": {
+                "issues": "https://github.com/rasteiner/k3-pagesdisplay-section/issues",
+                "source": "https://github.com/rasteiner/k3-pagesdisplay-section/tree/0.2.3"
+            },
+            "time": "2022-10-24T16:11:55+00:00"
         },
         {
             "name": "symfony/polyfill-intl-idn",

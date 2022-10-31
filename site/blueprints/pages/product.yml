@@ -10,14 +10,33 @@ fields:
   price:
     type: number
     step: 0.01
+    required: true
     before: $
     width: 1/2
-  design:
-    label: Design by …
-    type: text
+
+  weight:
+    label: Weight
+    type: number
+    required: true
     width: 1/2
-  link:
-    type: url
+
+  width:
+    label: Width
+    type: number
+    width: 1/2
+    required: true
+  height:
+    label: Height
+    width: 1/2
+    type: number
+    required: true
+  length:
+    label: Length
+    width: 1/2
+    type: number
+    required: true
+  isbn:
+    type: text
     width: 1/2
   editors:
     type: tags
@@ -25,10 +44,6 @@ fields:
 
   authors:
     type: tags
-    width: 1/2
-
-  isbn:
-    type: text
     width: 1/2
 
   description:
@@ -102,4 +117,6 @@ sidebar:
     layout: cards
     size: tiny
     help: Click image to add caption and alt text.
+    image:
+      back: black
     # template: image

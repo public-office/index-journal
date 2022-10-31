@@ -20,7 +20,7 @@
                                     <picture>
                                         <source srcset="<?= $image->srcset('avif') ?>" type="image/avif">
                                         <source srcset="<?= $image->srcset('webp') ?>" type="image/webp">
-                                        <img alt="<?= $image->alt() ?>" src="<?= $image->resize(300)->url() ?>" srcset="<?= $image->srcset() ?>" width="<?= $image->resize(500)->width() ?>" height="<?= $image->resize(500)->height() ?>" style="  height: 80%; margin: auto;">
+                                        <img alt="<?= $image->alt() ?>" src="<?= $image->url() ?>" srcset="<?= $image->srcset() ?>" style="  height: 80%; margin: auto;">
                                     </picture>
                                 </span>
                             </figure>
