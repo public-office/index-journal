@@ -42,9 +42,14 @@ $(document).ready(function () {
     }
   });
 
-  $("figure > img").on("click", function () {
+  $(".text-block figure").on("click", function () {
     $(this).toggleClass("expand");
   });
+
+  // $(".text-block").on("click", ".inline-footnotes__container", function () {
+  //   //your code here..
+  //   $(this).toggleClass("expanded");
+  // });
 
   $(".initial").on("click", function () {
     $(".issue-overlay").css({ opacity: 0, display: "flex" }).fadeTo("slow", 1);
