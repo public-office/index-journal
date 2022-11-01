@@ -3,7 +3,7 @@
         'name' => 'getkirby/plainkit',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '58e8debefc892786c76bbb5a69931039082f66de',
+        'reference' => '438507f1520528e4b9108612ee4724ca6d2d9deb',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -67,7 +67,7 @@
         'getkirby/plainkit' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '58e8debefc892786c76bbb5a69931039082f66de',
+            'reference' => '438507f1520528e4b9108612ee4724ca6d2d9deb',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -105,6 +105,15 @@
             'replaced' => array(
                 0 => '*',
             ),
+        ),
+        'medienbaecker/autoresize' => array(
+            'pretty_version' => '2.1.4',
+            'version' => '2.1.4.0',
+            'reference' => 'aced13014a4d11469cce42d5f968c26e0dc93c0a',
+            'type' => 'kirby-plugin',
+            'install_path' => __DIR__ . '/../../site/plugins/autoresize',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'michelf/php-smartypants' => array(
             'pretty_version' => '1.8.1',

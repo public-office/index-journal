@@ -24,6 +24,9 @@ return [
   //   // }
   // ]
 
+  // https://github.com/medienbaecker/kirby-autoresize
+  'medienbaecker.autoresize.maxWidth' => 2560,
+
   # https://getkirby.com/docs/cookbook/performance/responsive-images
   'thumbs' => [
     'srcsets' => [
