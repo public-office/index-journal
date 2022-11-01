@@ -32,6 +32,6 @@
     </h1>
     <nav>
       <?php foreach ($site->children()->listed()->flip() as $subPage) : ?>
-        <a href="<?= $subPage->url() ?>"><?= $subPage->title() ?></a><span>, </span><?php endforeach ?><a href="<?= $site->url() ?>/emaj"><span>emaj</span> ARCHIVE</a>
+        <a href="<?= $subPage->url() ?>"><?= $subPage->title() ?></a><span>, </span><?php endforeach ?><a href="<?= $site->url() ?>/emaj">EMAJ</a>
     </nav>
   </header>
