@@ -38,11 +38,11 @@
                 <?= $product->reviews()->kt() ?>
             <?php endif ?>
         </li>
-        <li class="image">
+        <li class="image ">
 
             <?php if ($image = $product->cover()->tofile()) : ?>
-                <figure style="opacity: 1" class="figuregrid">
-                    <span class="img " style="--w:4;--h:3;--background:black;background:black" data-contain="false">
+                <figure style="opacity: 1" class="figuregrid ">
+                    <span class="img rounded-corners" style="--w:4;--h:3;--background:black;background:black" data-contain="false">
                         <picture>
                             <source srcset="<?= $image->srcset('avif') ?>" type="image/avif">
                             <source srcset="<?= $image->srcset('webp') ?>" type="image/webp">

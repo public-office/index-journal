@@ -13,9 +13,9 @@
 
             <?php foreach ($page->children()->listed() as $product) : ?>
                 <li>
-                    <a href="<?= $product->url() ?>" class="link-container">
+                    <a href="<?= $product->url() ?>" class="link-container rounded-corners">
                         <?php if ($image = $product->cover()->tofile()) : ?>
-                            <figure class="figuregrid product">
+                            <figure class="figuregrid product ">
                                 <span class="img " style="--w:4;--h:3;--background:black;background:black" data-contain="false">
                                     <picture>
                                         <source srcset="<?= $image->srcset('avif') ?>" type="image/avif">
@@ -25,7 +25,7 @@
                                 </span>
                             </figure>
                             <div class="info">
-                                <figcaption class="text">
+                                <figcaption class="text ">
                                     <p><?= $product->title() ?></p>
                                     <?php if ($product->editors()) : ?>
 
