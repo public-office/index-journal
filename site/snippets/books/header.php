@@ -89,4 +89,3 @@
     </nav>
   </header>
   <!-- https://getkirby.com/docs/cookbook/security/access-restriction -->
-  <?php if (!$kirby->user()) go('/') ?>
