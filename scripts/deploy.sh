@@ -17,8 +17,8 @@ git push
 
 # pull to server
 USER=root                     # connect with root user
-HOST=149.28.168.105           # 
-WEBROOT=/var/www/$PROJECT     # get the location of the project on the server
+HOST=67.219.98.22             # 
+WEBROOT=/etc/easypanel/projects/memo/index-journal/volumes/html     # get the location of the project on the server
 
 ssh -A $USER@$HOST /bin/bash <<EOF
   cd $WEBROOT
