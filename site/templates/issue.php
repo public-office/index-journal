@@ -54,14 +54,7 @@
           </div>
         </section>
       </section>
-      <style>
-        .meta-container {
-          padding: 1rem;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-        }
-      </style>
+
       <div class="meta-container">
         <div class="issue-doi">
           <h2 style="margin:0;max-width:unset"> <?= $page->issue_doi() ?></h2>

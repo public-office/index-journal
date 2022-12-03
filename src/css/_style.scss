@@ -17,8 +17,15 @@
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
 }
-.no-mobile {
-  display: none;
+
+.meta-container {
+  padding: 1rem 0 1rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @media (max-width: 670px) {
+    display: none;
+  }
 }
 
 html {
@@ -106,7 +113,8 @@ i {
 }
 
 figcaption {
-  font-size: 1rem;
+  // font-size: 1rem;
+  font-size: var(--font-small);
   margin-top: 1rem;
   text-align: left;
   line-height: 1.1;
@@ -172,7 +180,7 @@ figcaption {
 
   .call p:last-of-type {
     max-width: 100% !important;
-    font-size: 0.65rem !important;
+    // font-size: 0.65rem !important;
   }
 }
 
@@ -243,12 +251,14 @@ nav {
   }
   &.pages,
   &.issues {
+    display: none;
+
     @media screen and (max-width: 668px) {
       display: none;
     }
   }
   &.menu {
-    display: none;
+    // display: none;
 
     @media screen and (max-width: 668px) {
       display: block;
@@ -1532,13 +1542,13 @@ p span {
   }
 
   figcaption {
-    font-size: 1rem;
     line-height: 1.2;
     margin-top: 0.75em;
     bottom: 1rem;
     left: 1rem;
     right: 0.5rem;
     text-align: left;
+    font-size: var(--font-small);
   }
 
   .figure-num {
@@ -1598,6 +1608,7 @@ figure.video {
     caption-side: bottom;
     text-align: left;
     line-height: 1.2;
+    font-size: var(--font-small);
   }
 }
 

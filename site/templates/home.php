@@ -14,7 +14,7 @@
       <div class="text-block">
         <section class="call">
           <?= $section->secondary_text()->kirbytext() ?>
-          <p style="text-indent: 0; text-align: center; max-width: 80%; font-size: 90%; margin: 1em auto; position: absolute; bottom: 0.5rem;"><?= $section->wipe_img_caption() ?></p>
+          <p style="text-indent: 0; text-align: center; max-width: 80%; font-size: 90%; margin: 1em auto; position: absolute; bottom: 0.5rem;font-size: 0.65rem"><?= $section->wipe_img_caption() ?></p>
         </section>
       </div>
     <?php endforeach ?>
@@ -45,7 +45,7 @@
                 </ul>
               </div>
             </section>
-            <p style="text-indent: 0; text-align: center; max-width: 80%; font-size: 90%; margin: 1em auto; position: absolute; bottom: 0.5rem;"><?= $section->wipe_img_caption() ?></p>
+            <p style="text-indent: 0; text-align: center; max-width: 80%; font-size: 90%; margin: 1em auto; position: absolute; bottom: 0.5rem;font-size: 0.65rem"><?= $section->wipe_img_caption() ?></p>
           </section>
         </div>
       <?php endforeach ?>

@@ -48,7 +48,16 @@
 <body data-display="<?= $page->template() ?>">
   <header class="index-header" <?php if ($page->template() == 'essay') : ?>style="background-color: rgb(<?= $page->parent()->issue_color() ?>); box-shadow: 0px 11px 16px 0px rgba(<?= $page->parent()->issue_color() ?>,1);" <?php endif ?>>
     <h1>
-      <a href="<?= $site->url() ?>">INDEX JOURNAL</a><span class="no-mobile">,</span>
+      <a href="<?= $site->url() ?>">INDEX JOURNAL</a>
+
+
+      <?php foreach (page('issues')->children()->listed()->flip()->slice(0, 1) as $issue) : ?>
+        <a href="<?= $issue->url() ?>" class="current-issue"><span>, Issue </span><span>No. </span><?= $issue->num() ?><span style="text-transform: uppercase;"> <?= $issue->title() ?></span></a>
+      <?php endforeach ?>
+
+
+
+
       <nav class=" issues"><?php foreach (page('issues')->children()->listed()->flip() as $issue) : ?><span class="issue"><span><a href="<?= $issue->url() ?>"><span class="hide-mobile"> Issue</span><span> No. </span><?= $issue->num() ?> <span class="title"><?= $issue->title() ?></span></a></span><?php endforeach ?></span></nav>
     </h1>
     <nav class="pages">
