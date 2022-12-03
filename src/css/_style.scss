@@ -238,6 +238,19 @@ nav {
       text-transform: none;
     }
   }
+  &.pages,
+  &.issues {
+    @media screen and (max-width: 668px) {
+      display: none;
+    }
+  }
+  &.menu {
+    display: none;
+
+    @media screen and (max-width: 668px) {
+      display: block;
+    }
+  }
 }
 
 a {
@@ -1467,7 +1480,7 @@ p span {
     flex: 4;
     width: auto;
     @media screen and (max-width: 668px) {
-      flex: 6;
+      flex: 3;
     }
   }
 
@@ -1626,4 +1639,8 @@ figure.video {
   ul {
     margin: 0;
   }
+}
+
+video {
+  max-width: 100%;
 }

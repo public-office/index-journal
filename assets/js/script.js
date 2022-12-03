@@ -37,8 +37,10 @@ $(document).ready(function () {
   $(window).on("scroll", function () {
     if (window.scrollY > window.innerHeight - 60) {
       $("header").addClass("scrolled");
+      $(".menu-pane").addClass("scrolled");
     } else {
       $("header").removeClass("scrolled");
+      $(".menu-pane").removeClass("scrolled");
     }
   });
 
@@ -62,6 +64,16 @@ $(document).ready(function () {
     console.log("clicked toggle");
     $(".abstract").toggleClass("hidden");
     $(".shadow").toggle();
+  });
+
+  $(".menu").on("click", function () {
+    // $(".abstract").toggleClass("hidden");
+    $(".menu-pane").toggle();
+  });
+
+  $(".close").on("click", function () {
+    // $(".abstract").toggleClass("hidden");
+    $(".menu-pane").toggle();
   });
 
   $(".text-block figure").each(function (number) {
