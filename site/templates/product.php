@@ -40,7 +40,18 @@
         </li>
         <li class="image ">
 
+
+
+            <style>
+                img {
+                    max-width: 100%;
+                }
+            </style>
+
+
             <?php if ($image = $product->cover()->tofile()) : ?>
+
+
                 <figure style="opacity: 1" class="figuregrid ">
                     <span class="img rounded-corners" style="--w:4;--h:3;--background:black;background:black" data-contain="false">
                         <picture>
@@ -112,6 +123,7 @@
 
 
             <?php endif ?>
+
 
 
 
