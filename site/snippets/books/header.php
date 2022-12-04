@@ -99,12 +99,16 @@
   </script>
 
   <header class="index-header" <?php if ($page->template() == 'essay') : ?>style="background-color: rgb(<?= $page->parent()->issue_color() ?>); box-shadow: 0px 11px 16px 0px rgba(<?= $page->parent()->issue_color() ?>,1);" <?php endif ?>>
-    <h1><a href="<?= $site->url() ?>/books">INDEX<span> BOOKS</span> </a><span class="no-mobile" style="">,&nbsp;<?= $page->title() ?></span> </nav>
-    </h1>
-    <nav>
+    <h1><a href="<?= $site->url() ?>/books">INDEX<span> BOOKS</span> </a>,&nbsp; </nav>
+      <nav>
 
-      <!-- <a href="/books/about" class="no-mobile">ABOUT, </a> -->
-      <a class="snipcart-checkout">CART</a> (<span class="snipcart-items-count "></span>, <span class="snipcart-total-price"></span>)
+        <!-- <a href="/books/about" class="no-mobile">ABOUT, </a> -->
+        <a class="snipcart-checkout">CART</a> (<span class="snipcart-items-count "></span>, <span class="snipcart-total-price"></span>)
+      </nav>
+    </h1>
+
+    <nav class="menu" style="cursor:pointer">
+      <span>Menu</span>
     </nav>
   </header>
-  <!-- https://getkirby.com/docs/cookbook/security/access-restriction -->
+  <?php snippet('menu-pane'); ?>
