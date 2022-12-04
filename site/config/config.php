@@ -10,7 +10,7 @@
 // }
 
 return [
-  // 'url' => 'https://index-journal.org/',
+  'url' => 'https://index-journal.org/',
 
   'debug' => true,
   'markdown' => [

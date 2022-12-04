@@ -1490,10 +1490,10 @@ p span {
   }
 
   header nav {
-    flex: 4;
+    // flex: 4;
     width: auto;
     @media screen and (max-width: 668px) {
-      flex: 3;
+      // flex: 3;
     }
   }
 
