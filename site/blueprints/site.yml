@@ -1,11 +1,41 @@
 title: INDEX JOURNAL
 
 tabs:
-  pages:
+  issues:
     sections:
-      pages:
-        label: Main Pages
-        status: all
+      # content:
+      #   type: fields
+      #   fields:
+      #     About:
+      #       headline: About
+      #       type: textarea
+      #       size: small
+
+      issues:
+        type: pages
+        parent: kirby.page("issues")
+        layout: table
+
+        # size: medium
+        # info: "{{ page.author }}"
+        # template: product
+        # empty: No books yet
+        # # sortBy: num
+        # size: medium
+        # type: pages
+        # headline: Books
+        # parent: site.find("books")
+        # template: product
+        # info: "$ {{ page.price }} / {{ page.design }}"
+        # image:
+        #   src: page.image
+        #   ratio: 5/3
+        #   back: black
+        #   image:
+        #     # query: page.image
+        #     query: page.cover.tofile
+        #     cover: true
+        #     ratio: 5/4
   books:
     sections:
       content:
@@ -42,5 +72,9 @@ tabs:
             query: page.cover.tofile
             cover: true
             ratio: 5/4
-
+  pages:
+    sections:
+      pages:
+        label: Main Pages
+        status: all
  seotab: seo
