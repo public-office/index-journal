@@ -135,13 +135,13 @@ figcaption {
   top: 0;
   padding: 1rem;
   background: white;
-  box-shadow: 0px 11px 16px 0px rgba(255, 255, 255, 1);
+  box-shadow: 0px 15px 16px 0px rgba(255, 255, 255);
   z-index: 10;
   transition: background 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
 
   &.scrolled {
     background: white !important;
-    box-shadow: 0px 11px 16px 0px rgba(255, 255, 255, 1) !important;
+    box-shadow: 0px 15px 16px 0px rgba(255, 255, 255, 1) !important;
   }
 
   h1,
