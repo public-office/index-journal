@@ -1,14 +1,14 @@
 <?php
-function output_pdf($page)
-{
-  if ($page->template() == 'essay') :
-    $pdf_name = $page->slug() . '.pdf';
-    $outfile = $page->contentFileDirectory() . '/' . $pdf_name;
-    $url = $page->previewUrl();
-    // exec('google-chrome --headless --print-to-pdf="'.$outfile.'" '.$url. ' > /dev/null 2>/dev/null &');
-    exec('google-chrome-stable --headless --print-to-pdf="' . $outfile . '" ' . $url . ' > /dev/null 2>/dev/null &');
-  endif;
-}
+// function output_pdf($page)
+// {
+//   if ($page->template() == 'essay') :
+//     $pdf_name = $page->slug() . '.pdf';
+//     $outfile = $page->contentFileDirectory() . '/' . $pdf_name;
+//     $url = $page->previewUrl();
+//     // exec('google-chrome --headless --print-to-pdf="'.$outfile.'" '.$url. ' > /dev/null 2>/dev/null &');
+//     exec('google-chrome-stable --headless --print-to-pdf="' . $outfile . '" ' . $url . ' > /dev/null 2>/dev/null &');
+//   endif;
+// }
 
 return [
   'url' => 'https://index-journal.org/',
@@ -21,11 +21,11 @@ return [
   'diesdasdigital.meta-knight' => [
     'siteTitleAfterPageTitle' => false,
   ],
-  'hooks' => [
-    'page.update:after' => function ($page, $oldPage) {
-      output_pdf($page);
-    }
-  ],
+  // 'hooks' => [
+  //   'page.update:after' => function ($page, $oldPage) {
+  //     output_pdf($page);
+  //   }
+  // ],
 
   // https://github.com/medienbaecker/kirby-autoresize
   'medienbaecker.autoresize.maxWidth' => 3000,
