@@ -27,6 +27,8 @@ return [
   //   }
   // ],
 
+
+
   // https://github.com/medienbaecker/kirby-autoresize
   'medienbaecker.autoresize.maxWidth' => 3000,
 

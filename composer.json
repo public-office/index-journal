@@ -27,7 +27,9 @@
     "diesdasdigital/kirby-meta-knight": "^1.2",
     "johannschopplich/kirby-blurry-placeholder": "^2.0",
     "rasteiner/k3-pagesdisplay-section": "^0.2.3",
-    "medienbaecker/autoresize": "^2.1"
+    "medienbaecker/autoresize": "^2.1",
+    "hananils/kirby-colors": "^1.7",
+    "sylvainjule/color-palette": "^1.0"
   },
   "scripts": {
     "start": [

@@ -98,7 +98,7 @@
     })();
   </script>
 
-  <header class="index-header" <?php if ($page->template() == 'essay') : ?>style="background-color: rgb(<?= $page->parent()->issue_color() ?>); box-shadow: 0px 11px 16px 0px rgba(<?= $page->parent()->issue_color() ?>,1);" <?php endif ?>>
+  <header class="index-header" style="background-color: <?= $color ?>; box-shadow: 0px 15px 16px 0px <?= $color ?>">
     <h1><a href="<?= $site->url() ?>/books">INDEX<span> BOOKS</span> </a>,&nbsp; </nav>
       <nav>
 

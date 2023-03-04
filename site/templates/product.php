@@ -1,4 +1,6 @@
-<?php snippet('books/header') ?>
+<?php
+$color = $page->color();
+snippet('books/header', ['color' => $color]) ?>
 
 <head>
     <?= css('assets/css/books.css?v=' . sha1_file('assets/css/books.css')) ?>
@@ -7,7 +9,7 @@
 <?php $product = $page ?>
 
 <main>
-    <section class="title-block product-title" style="background-color: rgb(<?= $page->parent()->issue_color() ?>)">
+    <section class="title-block product-title" style="background-color: <?= $page->color() ?>">
         <h1 style="font-size:6vw"><span class="title"><?= $page->title() ?></span>
             <?php if ($page->subtitle()->isNotEmpty()) : ?><span class="subtitle"><?= smartypants($page->subtitle()->kti()) ?></span><?php endif ?>
             <?php if ($page->slug() != 'introduction') : ?><span class="author">
@@ -53,7 +55,7 @@
 
 
                 <figure style="opacity: 1" class="figuregrid ">
-                    <span class="img rounded-corners" style="--w:4;--h:3;--background:black;background:black" data-contain="false">
+                    <span class="img " style="--w:4;--h:3;--background:black;background:black" data-contain="false">
                         <picture>
                             <source srcset="<?= $image->srcset('avif') ?>" type="image/avif">
                             <source srcset="<?= $image->srcset('webp') ?>" type="image/webp">

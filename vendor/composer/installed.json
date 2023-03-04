@@ -409,6 +409,49 @@
             "install-path": "../getkirby/composer-installer"
         },
         {
+            "name": "hananils/kirby-colors",
+            "version": "1.7.0",
+            "version_normalized": "1.7.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hananils/kirby-colors.git",
+                "reference": "6b49acf525cdd987e6063de7ee33f4035a2d5824"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hananils/kirby-colors/zipball/6b49acf525cdd987e6063de7ee33f4035a2d5824",
+                "reference": "6b49acf525cdd987e6063de7ee33f4035a2d5824",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.2"
+            },
+            "time": "2022-11-11T11:15:13+00:00",
+            "type": "kirby-plugin",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Hananils\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "hana+nils · Büro für Gestaltung",
+                    "email": "buero@hananils.de"
+                }
+            ],
+            "description": "A color field for Kirby 3",
+            "support": {
+                "issues": "https://github.com/hananils/kirby-colors/issues/",
+                "source": "https://github.com/hananils/kirby-colors/tree/1.7.0"
+            },
+            "install-path": "../../site/plugins/kirby-colors"
+        },
+        {
             "name": "johannschopplich/kirby-blurry-placeholder",
             "version": "2.0.1",
             "version_normalized": "2.0.1.0",
@@ -866,6 +909,47 @@
                 "source": "https://github.com/rasteiner/k3-pagesdisplay-section/tree/0.2.3"
             },
             "install-path": "../../site/plugins/k3-pagesdisplay-section"
+        },
+        {
+            "name": "sylvainjule/color-palette",
+            "version": "1.0.4",
+            "version_normalized": "1.0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sylvainjule/kirby-color-palette.git",
+                "reference": "290da479c5bddf55a61974119243987504085223"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sylvainjule/kirby-color-palette/zipball/290da479c5bddf55a61974119243987504085223",
+                "reference": "290da479c5bddf55a61974119243987504085223",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.1"
+            },
+            "time": "2020-04-11T10:05:01+00:00",
+            "type": "kirby-plugin",
+            "extra": {
+                "installer-name": "color-palette"
+            },
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sylvain Julé",
+                    "email": "contact@sylvain-jule.fr"
+                }
+            ],
+            "description": "A color palette to pick colors from for Kirby",
+            "support": {
+                "issues": "https://github.com/sylvainjule/kirby-color-palette/issues",
+                "source": "https://github.com/sylvainjule/kirby-color-palette/tree/master"
+            },
+            "install-path": "../../site/plugins/color-palette"
         },
         {
             "name": "symfony/polyfill-intl-idn",

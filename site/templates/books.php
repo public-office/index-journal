@@ -1,4 +1,4 @@
-<?php snippet('books/header') ?>
+<?php snippet('books/header', ['color' => 'white']) ?>
 
 <head>
     <?= css('assets/css/books.css?v=' . sha1_file('assets/css/books.css')) ?>
@@ -13,7 +13,7 @@
 
             <?php foreach ($page->children()->listed() as $product) : ?>
                 <li>
-                    <a href="<?= $product->url() ?>" class="link-container rounded-corners">
+                    <a href="<?= $product->url() ?>" class="link-container">
                         <?php if ($image = $product->cover()->tofile()) : ?>
                             <figure class="figuregrid product ">
                                 <span class="img " style="--w:4;--h:3;--background:black;background:black" data-contain="false">

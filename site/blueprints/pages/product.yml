@@ -111,6 +111,14 @@ sidebar:
         extends: sections/cover
         template: cover
         # required: true
+      color:
+        label: Pick a color
+        type: color-palette
+        options:
+          - "#8091a1"
+          - "#ffe191"
+          - "#91b94f"
+          - "#33bfce"
 
   images:
     type: files
