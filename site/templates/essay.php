@@ -32,7 +32,7 @@
   </div>
 <?php endif ?>
   </div>
-  <?php if ($page->slug() != 'introduction') : ?><span class="essay-extra">(<?php if ($page->doi()->isNotEmpty()) : ?><span class="doi"><a href="<?= $page->doi() ?>"><?= $page->doi() ?></a>)</span><?php endif ?><?php endif ?>
+  <?php if ($page->slug() != 'introduction') : ?><span class="essay-extra">(<?php if ($page->doi()->isNotEmpty()) : ?><span class="doi"><a href="http://doi.org/<?= $page->doi() ?>"><?= $page->doi() ?></a>)</span><?php endif ?><?php endif ?>
 </main>
 </body>
 
