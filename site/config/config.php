@@ -5,8 +5,8 @@ function output_pdf($newPage)
     $pdf_name = $newPage->slug() . '.pdf';
     $outfile = $newPage->contentFileDirectory() . '/' . $pdf_name;
     $url = $newPage->previewUrl();
-    // exec('google-chrome --headless --print-to-pdf="' . $outfile . '" ' . $url . ' > /dev/null 2>/dev/null &');
-    exec('google-chrome-stable --headless --print-to-pdf="' . $outfile . '" ' . $url . ' > /dev/null 2>/dev/null &');
+    exec('google-chrome --headless --print-to-pdf="' . $outfile . '" ' . $url . ' > /dev/null 2>/dev/null &');
+  // exec('google-chrome-stable --headless --print-to-pdf="' . $outfile . '" ' . $url . ' > /dev/null 2>/dev/null &');
   endif;
 }
 
