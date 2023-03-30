@@ -1,5 +1,18 @@
 <?php snippet('header') ?>
 
+<head>
+  <!-- https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
+  <meta name="citation_title" content="<?= $page->title() ?>">
+  <?php foreach ($page->authors()->yaml() as $author) : ?>
+    <meta name="citation_author" content="<?= $author['last_name'] ?>, <?= $author['first_name'] ?>">
+  <?php endforeach ?>
+  <meta name="citation_publication_date" content="<?= $page->parent()->issue_date()->toDate('Y/m/d') ?>">
+  <meta name="citation_journal_title" content="<?= $site->title() ?>">
+  <meta name="citation_volume" content="<?= $page->parent()->issue_date()->toDate('Y') ?>">
+  <meta name="citation_issue" content="<?= $page->parent()->num() ?>">
+  <meta name="citation_pdf_url" content="<?= $page->documents()->first()->url() ?>">
+</head>
+
 <main data-template="<?= $page->template() ?>">
 
   <section class="title-block" style="background-color: rgb(<?= $page->parent()->issue_color() ?>)">

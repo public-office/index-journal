@@ -43,7 +43,7 @@
                     <?php endforeach ?>
                 </contributors>
                 <titles>
-                    <title><?php $page->title() ?></title>
+                    <title><?= $page->title() ?></title>
                 </titles>
                 <publication_date media_type="online">
                     <month><?= $page->issue_date()->toDate('m') ?></month>

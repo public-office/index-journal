@@ -21,7 +21,7 @@ fields:
         type: text
       orcid:
         label: ORCID
-        type: text
+        type: url
   doi:
     label: DOI
     type: text
