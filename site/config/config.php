@@ -1,4 +1,6 @@
 <?php
+c::set('ssl', true);
+
 function output_pdf($newPage)
 {
   if ($newPage->template() == 'essay') :
@@ -11,7 +13,8 @@ function output_pdf($newPage)
 }
 
 return [
-  'url' => 'https://index-journal.org/',
+  // 'url' => 'https://index-journal.org/',
+
 
   'debug' => true,
   'markdown' => [
