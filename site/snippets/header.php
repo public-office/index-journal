@@ -7,8 +7,15 @@
   <title>INDEX JOURNAL</title>
   <?php snippet('meta_information'); ?>
   <?php snippet('robots'); ?>
+  <!-- facivon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <!-- css -->
   <?= css('assets/css/style.css?v=' . sha1_file('assets/css/style.css')) ?>
   <?= css('assets/css/print.css?v=' . sha1_file('assets/css/print.css')) ?>
+  <!-- js -->
   <?= js('assets/js/jquery.min.js') ?>
   <?= js('assets/js/images.js') ?>
   <?= js('assets/js/script.js?v=' . sha1_file('assets/js/script.js')) ?>
