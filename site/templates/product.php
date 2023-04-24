@@ -84,7 +84,7 @@ snippet('books/header', ['color' => $color]) ?>
                             transition: .2s ease-out;
                             transition-property: color, border-color, background-color, box-shadow;
                             width: 100%;
-                            width: 80%;
+                            /* width: 80%; */
 
                         }
 
@@ -105,7 +105,7 @@ snippet('books/header', ['color' => $color]) ?>
 
                         .add-to-cart-wrapper {
                             flex-grow: 1;
-                            padding: 0 16px;
+                            /* padding: 0 16px; */
                             font-family: Montserrat, sans-serif;
                             font-size: 14px;
                             font-weight: 500;

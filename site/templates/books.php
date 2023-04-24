@@ -4,7 +4,6 @@
     <?= css('assets/css/books.css?v=' . sha1_file('assets/css/books.css')) ?>
 </head>
 <main class="shop">
-
     <div class="">
         <ul class="shop-about">
             <?= $site->about()->kt() ?>
