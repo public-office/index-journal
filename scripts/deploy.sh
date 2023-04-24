@@ -16,7 +16,7 @@ git commit -m "$DESCRIPTION"
 git push
 
 # pull to server
-USER=root                     # connect with root user
+USER=ubuntu                     # connect with root user
 HOST=67.219.98.22             # 
 WEBROOT=/etc/easypanel/projects/memo/index-journal/volumes/html     # get the location of the project on the server
 
