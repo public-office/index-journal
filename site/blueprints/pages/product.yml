@@ -111,15 +111,21 @@ sidebar:
         extends: sections/cover
         template: cover
         # required: true
+      # color:
+      # label: Pick a color
+      # type: color-palette
+      # options:
+      #   - "#8091a1"
+      #   - "#ffe191"
+      #   - "#91b94f"
+      #   - "#33bfce"
       color:
-        label: Pick a color
-        type: color-palette
-        options:
-          - "#8091a1"
-          - "#ffe191"
-          - "#91b94f"
-          - "#33bfce"
-
+        type: colors
+        label: Background colour
+        alpha: true
+        # default: "#dfa280"
+        # contrast: true
+        width: 1/2
   images:
     type: files
     layout: cards
@@ -127,4 +133,4 @@ sidebar:
     help: Click image to add caption and alt text.
     image:
       back: black
-    # template: image
+    template: image

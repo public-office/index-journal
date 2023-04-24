@@ -15,7 +15,6 @@ function output_pdf($newPage)
 return [
   'url' => 'https://index-journal.org/',
 
-
   'debug' => true,
   'markdown' => [
     'extra' => true
