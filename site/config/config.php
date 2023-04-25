@@ -15,7 +15,7 @@ function output_pdf($newPage)
 return [
   'url' => 'https://index-journal.org/',
 
-  'debug' => true,
+  'debug' => false,
   'markdown' => [
     'extra' => true
   ],
@@ -28,8 +28,6 @@ return [
       output_pdf($newPage);
     }
   ],
-
-
 
   // https://github.com/medienbaecker/kirby-autoresize
   'medienbaecker.autoresize.maxWidth' => 3000,
