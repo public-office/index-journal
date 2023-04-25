@@ -1,4 +1,4 @@
-<section class="menu-pane" <?php if ($page->template() == 'essay') : ?>style="background-color: rgb(<?= $page->parent()->issue_color() ?>); box-shadow: 0px 15px 16px 0px rgba(<?= $page->parent()->issue_color() ?>);" <?php endif ?>>
+<section class="menu-pane" <?php if ($page->template() == 'essay') : ?> style="background-color: rgb(<?= $page->parent()->issue_color() ?>); box-shadow: 0px 15px 16px 0px rgba(<?= $page->parent()->issue_color() ?>);" <?php endif ?><?php if ($page->template() == 'product') : ?> style="background-color: <?= $page->color() ?>; box-shadow: 0px 15px 16px 0px <?= $page->color() ?>;" <?php endif ?>>
     <h1 class="close">(close)</h1>
 
     <h1 style="display: flex;flex-direction: row;">
