@@ -13,9 +13,15 @@ function output_pdf($newPage)
 }
 
 return [
-  'url' => 'https://index-journal.org/',
+  // 'url' => 'https://index-journal.org/',
 
   'debug' => false,
+
+  # https://getkirby.com/docs/reference/system/options/panel
+  'panel' => [
+    'install' => true
+  ],
+
   'markdown' => [
     'extra' => true
   ],
