@@ -40,6 +40,21 @@ snippet('books/header', ['color' => $color]) ?>
                 <h2>Reviews</h2>
                 <?= $product->reviews()->kt() ?>
             <?php endif ?>
+            <div class="layouts">
+                <?php foreach ($page->layout()->toLayouts() as $layout) : ?>
+                    <section class="grid" id="<?= $layout->id() ?>">
+                        <?php foreach ($layout->columns() as $column) : ?>
+                            <div class="column" style="--span:<?= $column->span() ?>; --columns:<?= $column->span() ?>">
+                                <?php foreach ($column->blocks() as $block) : ?>
+                                    <div id="<?= $block->id() ?>" class="block block-type-<?= $block->type() ?>">
+                                        <?= $block ?>
+                                    </div>
+                                <?php endforeach ?>
+                            </div>
+                        <?php endforeach ?>
+                    </section>
+                <?php endforeach ?>
+            </div>
         </li>
         <li class="image ">
 
@@ -145,21 +160,7 @@ snippet('books/header', ['color' => $color]) ?>
 
     </ul>
 
-    <div class="layouts">
-        <?php foreach ($page->layout()->toLayouts() as $layout) : ?>
-            <section class="grid" id="<?= $layout->id() ?>">
-                <?php foreach ($layout->columns() as $column) : ?>
-                    <div class="column" style="--span:<?= $column->span() ?>; --columns:<?= $column->span() ?>">
-                        <?php foreach ($column->blocks() as $block) : ?>
-                            <div id="<?= $block->id() ?>" class="block block-type-<?= $block->type() ?>">
-                                <?= $block ?>
-                            </div>
-                        <?php endforeach ?>
-                    </div>
-                <?php endforeach ?>
-            </section>
-        <?php endforeach ?>
-    </div>
+
 </main>
 
 <?php snippet('books/footer') ?>
