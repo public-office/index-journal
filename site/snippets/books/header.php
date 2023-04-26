@@ -13,6 +13,7 @@
   <?php snippet('robots'); ?>
   <?= css('assets/css/style.css?v=' . sha1_file('assets/css/style.css')) ?>
   <?= css('assets/css/print.css?v=' . sha1_file('assets/css/print.css')) ?>
+  <?= css('assets/css/lightbox.css?v=' . sha1_file('assets/css/lightbox.css')) ?>
   <?= js('assets/js/jquery.min.js') ?>
   <?= js('assets/js/images.js') ?>
   <?= js('assets/js/lightbox.js') ?>
