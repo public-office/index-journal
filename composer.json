@@ -30,7 +30,8 @@
     "medienbaecker/autoresize": "^2.1",
     "hananils/kirby-colors": "^1.7",
     "sylvainjule/color-palette": "^1.0",
-    "getkirby/cli": "^1.1"
+    "getkirby/cli": "^1.1",
+    "bnomei/kirby3-janitor": "^3.9"
   },
   "scripts": {
     "start": [

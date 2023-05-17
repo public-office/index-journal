@@ -2,6 +2,7 @@ title: INDEX JOURNAL
 
 tabs:
   issues:
+  icon: pen
     sections:
       # content:
       #   type: fields
@@ -37,6 +38,7 @@ tabs:
         #     cover: true
         #     ratio: 5/4
   books:
+  icon: book
     sections:
       content:
         type: fields
@@ -73,8 +75,21 @@ tabs:
             cover: true
             ratio: 5/4
   pages:
+  icon: page
     sections:
       pages:
         label: Main Pages
         status: all
+  
+  admin:
+  icon: settings
+    sections:
+      admin:
+        type: fields
+        fields:
+          janitor_thumbssite:
+            type: janitor
+            command: 'janitor:thumbs --site'
+            label:  Thumbs
+            icon: images
  seotab: seo
