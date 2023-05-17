@@ -2,7 +2,7 @@ title: INDEX JOURNAL
 
 tabs:
   issues:
-  icon: pen
+    icon: pen
     sections:
       # content:
       #   type: fields
@@ -38,7 +38,7 @@ tabs:
         #     cover: true
         #     ratio: 5/4
   books:
-  icon: book
+    icon: book
     sections:
       content:
         type: fields
@@ -75,14 +75,14 @@ tabs:
             cover: true
             ratio: 5/4
   pages:
-  icon: page
+    icon: page
     sections:
       pages:
         label: Main Pages
         status: all
   
   admin:
-  icon: settings
+    icon: settings
     sections:
       admin:
         type: fields
