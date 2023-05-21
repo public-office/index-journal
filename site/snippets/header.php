@@ -7,6 +7,10 @@
   <title>INDEX JOURNAL</title>
   <?php snippet('meta_information'); ?>
   <?php snippet('robots'); ?>
+
+  <!-- plausible -->
+  <script defer data-domain="index-journal.org" src="https://plausible.memoreview.net/js/script.js"></script>
+
   <!-- facivon -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">

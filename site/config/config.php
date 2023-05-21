@@ -12,8 +12,18 @@ function output_pdf($newPage)
   endif;
 }
 
+# https://github.com/johannschopplich/kirby-helpers
+// load dotenv plugins class so getenv can be used outside of closures
+$base = dirname(__DIR__, 2);
+\JohannSchopplich\Helpers\Env::load($base);
+
 return [
-  'url' => 'https://index-journal.org/',
+  'url' => env('URL'),
+
+  'floriankarsten.plausible' => [
+    'sharedLink' => env('PLAUSIBLE_SHARED_LINK'),
+    // 'domain' => 'test.com' // not required if not set it will be taken from $site->url
+  ],
 
   'debug' => false,
 

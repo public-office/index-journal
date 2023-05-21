@@ -49,6 +49,15 @@ WORKDIR /var/www/html
 COPY ./ /var/www/html
 RUN mkdir /var/www/html/content
 
+# create env
+# Set the environmental variables from EasyPanel during the build
+ARG PLAUSIBLES_SHARED_LINK
+ARG URL
+
+# Create a .env file and set its contents to the environmental variables
+RUN echo "PLAUSIBLE_SHARED_LINK=$PLAUSIBLES_SHARED_LINK" >> .env
+RUN echo "URL=$URL" >> .env
+
 # Fix files and directories ownership
 RUN chown -R www-data:www-data /var/www/html/
 

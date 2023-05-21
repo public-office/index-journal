@@ -6,6 +6,9 @@
   <?php snippet('meta_information'); ?>
   <?php snippet('robots'); ?>
 
+  <!-- plausible -->
+  <script defer data-domain="index-journal.org" src="https://plausible.memoreview.net/js/script.js"></script>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>INDEX BOOKS</title>

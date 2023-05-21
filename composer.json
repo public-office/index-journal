@@ -22,7 +22,7 @@
     "source": "https://github.com/getkirby/starterkit"
   },
   "require": {
-    "php": ">=7.4.0 <8.1.0",
+    "php": ">=7.1.0 || ^8.0",
     "getkirby/cms": "^3.6",
     "diesdasdigital/kirby-meta-knight": "^1.2",
     "johannschopplich/kirby-blurry-placeholder": "^2.0",
@@ -31,7 +31,9 @@
     "hananils/kirby-colors": "^1.7",
     "sylvainjule/color-palette": "^1.0",
     "getkirby/cli": "^1.1",
-    "bnomei/kirby3-janitor": "^3.9"
+    "bnomei/kirby3-janitor": "^3.9",
+    "floriankarsten/kirby-plausible": "^0.1.8",
+    "johannschopplich/kirby-helpers": "^4.0"
   },
   "scripts": {
     "start": [
