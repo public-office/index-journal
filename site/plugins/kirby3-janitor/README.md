@@ -247,21 +247,6 @@ If you want you can also call any of [the core shipping with the CLI](https://gi
 
 Keep in mind that the Janitor panel button and webhooks will append the `--quiet` option on all commands automatically to silence outputs to the non-existing CLI. But if you use `janitor()->command()` you will have to append `--quiet` to your command yourself.
 
-### Smartly delaying resolution of a command argument
-
-In some cases you do not want to resolve the query language of a commands argument(s) **every time** when the button is shown in the panel but delay that until the api call is received by Janitor. Janitor will then resolve it **once** and forward the updated argument(s) to your command. This is useful for process-intensive calls or when the string of the data would be very long, like when the data is HTML.
-
-To achieve this you need to change the query language bounds for that argument from `{{ query }}` to `{( query )}`.
-
-```yml
-test_sendmail:
-  type: janitor
-  command: 'sendmail --to {{ user.email }} --data {( page.htmlOfEmail )}'
-  label: send mail
-```
-
-> Note: This only works inside the Janitor fields `command`-property.
-
 ### Running commands in your code
 
 You can run any command in you own code as well like in a model, template, controller or hook. Since commands do not return data directly you need to retrieve data stored for Janitor using a helper `janitor()->data($commandName)`.

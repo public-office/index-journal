@@ -10,6 +10,7 @@ use Kirby\Filesystem\F;
 use Kirby\Panel\User as Panel;
 use Kirby\Session\Session;
 use Kirby\Toolkit\Str;
+use SensitiveParameter;
 
 /**
  * The `$user` object represents a
@@ -274,11 +275,11 @@ class User extends ModelWithContent
 	 * which will leave it as `null`
 	 *
 	 * @internal
-	 * @param string|null $password
-	 * @return string|null
 	 */
-	public static function hashPassword($password): string|null
-	{
+	public static function hashPassword(
+		#[SensitiveParameter]
+		string $password = null
+	): string|null {
 		if ($password !== null) {
 			$password = password_hash($password, PASSWORD_DEFAULT);
 		}
@@ -372,8 +373,9 @@ class User extends ModelWithContent
 	 */
 	public function isLastAdmin(): bool
 	{
-		return $this->role()->isAdmin() === true &&
-			   $this->kirby()->users()->filter('role', 'admin')->count() <= 1;
+		return
+			$this->role()->isAdmin() === true &&
+			$this->kirby()->users()->filter('role', 'admin')->count() <= 1;
 	}
 
 	/**
@@ -410,12 +412,13 @@ class User extends ModelWithContent
 	/**
 	 * Logs the user in
 	 *
-	 * @param string $password
 	 * @param \Kirby\Session\Session|array|null $session Session options or session object to set the user in
-	 * @return bool
 	 */
-	public function login(string $password, $session = null): bool
-	{
+	public function login(
+		#[SensitiveParameter]
+		string $password,
+		$session = null
+	): bool {
 		$this->validatePassword($password);
 		$this->loginPasswordless($session);
 
@@ -438,6 +441,9 @@ class User extends ModelWithContent
 
 		$session->regenerateToken(); // privilege change
 		$session->data()->set('kirby.userId', $this->id());
+		if ($this->passwordTimestamp() !== null) {
+			$session->data()->set('kirby.loginTimestamp', time());
+		}
 		$this->kirby()->auth()->setUser($this);
 
 		$kirby->trigger('user.login:after', ['user' => $this, 'session' => $session]);
@@ -458,6 +464,7 @@ class User extends ModelWithContent
 
 		// remove the user from the session for future requests
 		$session->data()->remove('kirby.userId');
+		$session->data()->remove('kirby.loginTimestamp');
 
 		// clear the cached user object from the app state of the current request
 		$this->kirby()->auth()->flush();
@@ -602,6 +609,26 @@ class User extends ModelWithContent
 		}
 
 		return $this->password = $this->readPassword();
+	}
+
+	/**
+	 * Returns the timestamp when the password
+	 * was last changed
+	 */
+	public function passwordTimestamp(): int|null
+	{
+		$file = $this->passwordFile();
+
+		// ensure we have the latest information
+		// to prevent cache attacks
+		clearstatcache();
+
+		// user does not have a password
+		if (is_file($file) === false) {
+			return null;
+		}
+
+		return filemtime($file);
 	}
 
 	/**
@@ -750,11 +777,12 @@ class User extends ModelWithContent
 	/**
 	 * Sets the user's password hash
 	 *
-	 * @param string $password|null
 	 * @return $this
 	 */
-	protected function setPassword(string $password = null)
-	{
+	protected function setPassword(
+		#[SensitiveParameter]
+		string $password = null
+	): static {
 		$this->password = $password;
 		return $this;
 	}
@@ -848,21 +876,27 @@ class User extends ModelWithContent
 	/**
 	 * Compares the given password with the stored one
 	 *
-	 * @param string $password|null
-	 * @return bool
-	 *
 	 * @throws \Kirby\Exception\NotFoundException If the user has no password
 	 * @throws \Kirby\Exception\InvalidArgumentException If the entered password is not valid
 	 *                                                   or does not match the user password
 	 */
-	public function validatePassword(string $password = null): bool
-	{
+	public function validatePassword(
+		#[SensitiveParameter]
+		string $password = null
+	): bool {
 		if (empty($this->password()) === true) {
 			throw new NotFoundException(['key' => 'user.password.undefined']);
 		}
 
+		// `UserRules` enforces a minimum length of 8 characters,
+		// so everything below that is a typo
 		if (Str::length($password) < 8) {
 			throw new InvalidArgumentException(['key' => 'user.password.invalid']);
+		}
+
+		// too long passwords can cause DoS attacks
+		if (Str::length($password) > 1000) {
+			throw new InvalidArgumentException(['key' => 'user.password.excessive']);
 		}
 
 		if (password_verify($password, $this->password()) !== true) {
@@ -870,5 +904,13 @@ class User extends ModelWithContent
 		}
 
 		return true;
+	}
+
+	/**
+	 * Returns the path to the password file
+	 */
+	protected function passwordFile(): string
+	{
+		return $this->root() . '/.htpasswd';
 	}
 }

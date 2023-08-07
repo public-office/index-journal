@@ -2,8 +2,10 @@
 
 namespace Kirby\Cms;
 
+use Kirby\Cms\Auth\Challenge;
 use Kirby\Cms\Auth\Status;
 use Kirby\Data\Data;
+use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
 use Kirby\Exception\NotFoundException;
@@ -13,6 +15,7 @@ use Kirby\Http\Idn;
 use Kirby\Http\Request\Auth\BasicAuth;
 use Kirby\Session\Session;
 use Kirby\Toolkit\A;
+use SensitiveParameter;
 use Throwable;
 
 /**
@@ -133,7 +136,7 @@ class Auth
 				if (
 					$class &&
 					class_exists($class) === true &&
-					is_subclass_of($class, 'Kirby\Cms\Auth\Challenge') === true &&
+					is_subclass_of($class, Challenge::class) === true &&
 					$class::isAvailable($user, $mode) === true
 				) {
 					$challenge = $name;
@@ -276,18 +279,39 @@ class Auth
 
 		$id = $session->data()->get('kirby.userId');
 
+		// if no user is logged in, return immediately
 		if (is_string($id) !== true) {
 			return null;
 		}
 
-		if ($user = $this->kirby->users()->find($id)) {
-			// in case the session needs to be updated, do it now
-			// for better performance
-			$session->commit();
-			return $user;
+		// a user is logged in, ensure it exists
+		$user = $this->kirby->users()->find($id);
+		if ($user === null) {
+			return null;
 		}
 
-		return null;
+		if ($passwordTimestamp = $user->passwordTimestamp()) {
+			$loginTimestamp = $session->data()->get('kirby.loginTimestamp');
+			if (is_int($loginTimestamp) !== true) {
+				// session that was created before Kirby
+				// 3.5.8.3, 3.6.6.3, 3.7.5.2, 3.8.4.1 or 3.9.6
+				// or when the user didn't have a password set
+				$user->logout();
+				return null;
+			}
+
+			// invalidate the session if the password
+			// changed since the login
+			if ($loginTimestamp < $passwordTimestamp) {
+				$user->logout();
+				return null;
+			}
+		}
+
+		// in case the session needs to be updated, do it now
+		// for better performance
+		$session->commit();
+		return $user;
 	}
 
 	/**
@@ -379,17 +403,16 @@ class Auth
 	/**
 	 * Login a user by email and password
 	 *
-	 * @param string $email
-	 * @param string $password
-	 * @param bool $long
-	 * @return \Kirby\Cms\User
-	 *
 	 * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
 	 * @throws \Kirby\Exception\NotFoundException If the email was invalid
 	 * @throws \Kirby\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
 	 */
-	public function login(string $email, string $password, bool $long = false)
-	{
+	public function login(
+		string $email,
+		#[SensitiveParameter]
+		string $password,
+		bool $long = false
+	): User {
 		// session options
 		$options = [
 			'createMode' => 'cookie',
@@ -410,17 +433,16 @@ class Auth
 	 * Login a user by email, password and auth challenge
 	 * @since 3.5.0
 	 *
-	 * @param string $email
-	 * @param string $password
-	 * @param bool $long
-	 * @return \Kirby\Cms\Auth\Status
-	 *
 	 * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
 	 * @throws \Kirby\Exception\NotFoundException If the email was invalid
 	 * @throws \Kirby\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
 	 */
-	public function login2fa(string $email, string $password, bool $long = false)
-	{
+	public function login2fa(
+		string $email,
+		#[SensitiveParameter]
+		string $password,
+		bool $long = false
+	): Status {
 		$this->validatePassword($email, $password);
 		return $this->createChallenge($email, $long, '2fa');
 	}
@@ -514,16 +536,15 @@ class Auth
 	 * Validates the user credentials and returns the user object on success;
 	 * otherwise logs the failed attempt
 	 *
-	 * @param string $email
-	 * @param string $password
-	 * @return \Kirby\Cms\User
-	 *
 	 * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
 	 * @throws \Kirby\Exception\NotFoundException If the email was invalid
 	 * @throws \Kirby\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
 	 */
-	public function validatePassword(string $email, string $password)
-	{
+	public function validatePassword(
+		string $email,
+		#[SensitiveParameter]
+		string $password
+	): User {
 		$email = Idn::decodeEmail($email);
 
 		try {
@@ -543,7 +564,7 @@ class Auth
 				]
 			]);
 		} catch (Throwable $e) {
-			$details = is_a($e, 'Kirby\Exception\Exception') === true ? $e->getDetails() : [];
+			$details = $e instanceof Exception ? $e->getDetails() : [];
 
 			// log invalid login trial unless the rate limit is already active
 			if (($details['reason'] ?? null) !== 'rate-limited') {
@@ -796,8 +817,10 @@ class Auth
 	 * @throws \Kirby\Exception\InvalidArgumentException If no authentication challenge is active
 	 * @throws \Kirby\Exception\LogicException If the authentication challenge is invalid
 	 */
-	public function verifyChallenge(string $code)
-	{
+	public function verifyChallenge(
+		#[SensitiveParameter]
+		string $code
+	) {
 		try {
 			$session = $this->kirby->session();
 
@@ -848,7 +871,7 @@ class Auth
 			if (
 				isset(static::$challenges[$challenge]) === true &&
 				class_exists(static::$challenges[$challenge]) === true &&
-				is_subclass_of(static::$challenges[$challenge], 'Kirby\Cms\Auth\Challenge') === true
+				is_subclass_of(static::$challenges[$challenge], Challenge::class) === true
 			) {
 				$class = static::$challenges[$challenge];
 				if ($class::verify($user, $code) === true) {

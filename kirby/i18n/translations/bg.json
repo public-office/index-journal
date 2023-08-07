@@ -72,9 +72,12 @@
 	"error.blocks.min.singular": "You must add at least one block",
 	"error.blocks.validation": "There's an error on the \"{field}\" field in block {index} using the \"{fieldset}\" block type",
 
+	"error.cache.type.invalid": "Invalid cache type \"{type}\"",
+
 	"error.email.preset.notFound": "Email шаблонът \"{name}\" не може да бъде открит",
 
 	"error.field.converter.invalid": "Невалиден конвертор \"{converter}\"",
+	"error.field.type.missing": "Field \"{ name }\": The field type \"{ type }\" does not exist",
 
 	"error.file.changeName.empty": "The name must not be empty",
 	"error.file.changeName.permission": "Не можете да смените името на \"{filename}\"",
@@ -180,6 +183,7 @@
 	"error.user.email.invalid": "Моля въведете валиден email адрес",
 	"error.user.language.invalid": "Моля въведете валиден език",
 	"error.user.notFound": "\u041f\u043e\u0442\u0440\u0435\u0431\u0438\u0442\u0435\u043b\u044f\u0442 \u043d\u0435 \u043c\u043e\u0436\u0435 \u0434\u0430 \u0431\u044a\u0434\u0435 \u043d\u0430\u043c\u0435\u0440\u0435\u043d.",
+	"error.user.password.excessive": "Please enter a valid password. Passwords must not be longer than 1000 characters.",
 	"error.user.password.invalid": "Моля въведете валидна парола. Тя трабва да съдържа поне 8 символа.",
 	"error.user.password.notSame": "\u041c\u043e\u043b\u044f, \u043f\u043e\u0442\u0432\u044a\u0440\u0434\u0435\u0442\u0435 \u043f\u0430\u0440\u043e\u043b\u0430\u0442\u0430",
 	"error.user.password.undefined": "Потребителят няма парола",
@@ -289,6 +293,7 @@
 	"field.pages.empty": "Все още не са избрани страници",
 
 	"field.structure.delete.confirm": "Сигурни ли сте, че искате да изтриете това вписване?",
+	"field.structure.delete.confirm.all": "Do you really want to delete all entries?",
 	"field.structure.empty": "Все още няма статии",
 
 	"field.users.empty": "Все още не са избрани потребители",
@@ -318,7 +323,7 @@
 	"installation.issues.headline": "Панелът не може да бъде инсталиран",
 	"installation.issues.mbstring": "Изисква се разширението <code>MB String</code>",
 	"installation.issues.media": "Папката <code>/media</code> не съществува или няма права за запис",
-	"installation.issues.php": "Бъдете сигурни, че използвате <code>PHP 7+</code>",
+	"installation.issues.php": "Бъдете сигурни, че използвате <code>PHP 8+</code>",
 	"installation.issues.server": "Kirby изисква <code>Apache</code>, <code>Nginx</code> или <code>Caddy</code>",
 	"installation.issues.sessions": "The <code>/site/sessions</code> folder does not exist or is not writable",
 
@@ -349,6 +354,8 @@
 	"license.manage": "Manage your licenses",
 	"license.register.help": "You received your license code after the purchase via email. Please copy and paste it to register.",
 	"license.register.label": "Please enter your license code",
+	"license.register.domain": "Your license will be registered to <strong>{host}</strong>.",
+	"license.register.local": "You are about to register your license for your local domain <strong>{host}</strong>. If this site will be deployed to a public domain, please register it there instead. If {host} is the domain you want to license Kirby to, please continue.",
 	"license.register.success": "Thank you for supporting Kirby",
 	"license.unregistered": "Това е нерегистрирана демо версия на Kirby",
 	"license.unregistered.label": "Unregistered",

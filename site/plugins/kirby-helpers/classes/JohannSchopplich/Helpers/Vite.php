@@ -2,13 +2,17 @@
 
 namespace JohannSchopplich\Helpers;
 
+use Kirby\Cms\App;
 use Kirby\Data\Data;
 use Kirby\Http\Uri;
 
 class Vite
 {
-    public array|null $manifest = null;
     protected static Vite|null $instance = null;
+    protected App $kirby;
+
+    public const MANIFEST_FILE_NAME = 'manifest.json';
+    public array|null $manifest = null;
 
     public static function instance(): Vite
     {
@@ -17,10 +21,12 @@ class Vite
 
     public function __construct()
     {
+        $this->kirby = App::instance();
+
         $path = implode(DIRECTORY_SEPARATOR, array_filter([
-            kirby()->root(),
-            option('johannschopplich.helpers.vite.build.outDir', 'dist'),
-            'manifest.json'
+            $this->kirby->root(),
+            $this->kirby->option('johannschopplich.helpers.vite.build.outDir', 'dist'),
+            self::MANIFEST_FILE_NAME
         ], 'strlen'));
 
         try {
@@ -38,9 +44,9 @@ class Vite
     public function devUrl(string $path): string
     {
         $uri = new Uri([
-            'scheme' => option('johannschopplich.helpers.vite.server.https', false) ? 'https' : 'http',
-            'host'   => option('johannschopplich.helpers.vite.server.host', 'localhost'),
-            'port'   => option('johannschopplich.helpers.vite.server.port', 5173),
+            'scheme' => $this->kirby->option('johannschopplich.helpers.vite.server.https', false) ? 'https' : 'http',
+            'host'   => $this->kirby->option('johannschopplich.helpers.vite.server.host', 'localhost'),
+            'port'   => $this->kirby->option('johannschopplich.helpers.vite.server.port', 5173),
             'path'   => $path
         ]);
 
@@ -50,16 +56,14 @@ class Vite
     public function prodUrl(string $path): string
     {
         return implode('/', array_filter([
-            kirby()->url(),
-            option('johannschopplich.helpers.vite.build.outDir', 'dist'),
+            $this->kirby->url(),
+            $this->kirby->option('johannschopplich.helpers.vite.build.outDir', 'dist'),
             $path
         ], 'strlen'));
     }
 
     /**
-     * Outputs `<link>` tags for each CSS file of an entry point
-     *
-     * @param string $entry The JavaScript entry point that includes your CSS
+     * Returns `<link>` tags for each CSS file of an entry point
      */
     public function css(string $entry)
     {
@@ -71,9 +75,7 @@ class Vite
     }
 
     /**
-     * Output a `<script>` tag for an entry point
-     *
-     * @param string $entry e.g. `src/main.js`
+     * Returns a `<script>` tag for an entry point
      */
     public function js(string $entry): string
     {
@@ -84,5 +86,15 @@ class Vite
         }
 
         return js($url, ['type' => 'module']);
+    }
+
+    /**
+     * Returns the processed asset URL for an entry point
+     */
+    public function file(string $entry): string|null
+    {
+        if (is_array($this->manifest)) {
+            return $this->prodUrl($this->manifest[$entry]['file']);
+        }
     }
 }

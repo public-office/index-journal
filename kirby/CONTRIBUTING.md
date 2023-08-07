@@ -20,7 +20,7 @@ We will review all pull requests (PRs) to `develop` and merge them if accepted, 
 
 ### Report a bug
 
-When you find a bug, the first step to fixing it is to help us understand and reproduce the bug as best as possible. When you create a bug report, please include as many details as possible. Fill out [the template](ISSUE_TEMPLATE/bug_report.md) because the requested information helps us resolve issues so much faster.
+When you find a bug, the first step to fixing it is to help us understand and reproduce the bug as best as possible. When you create a bug report, please include as many details as possible. Fill out [the template](https://github.com/getkirby/kirby/issues/new?template=bug_report.md) because the requested information helps us resolve issues so much faster.
 
 ### Bug fixes
 
@@ -89,8 +89,6 @@ We use [PHPUnit](https://phpunit.de) for unit test for our PHP code. You can fin
 The Panel doesn't have extensive test coverage yet. That's an area we are still trying to improve.
 
 We use [vitest](https://vitest.dev) for unit tests for JavaScript and Vue components - `.test.js` files next to the actual JavaScript/Vue file.
-
-For integration tests, we use [cypress](https://www.cypress.io) - `.e2e.js` files.
 
 ## And last…
 

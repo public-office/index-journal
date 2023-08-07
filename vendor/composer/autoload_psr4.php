@@ -13,6 +13,7 @@ return array(
     'Symfony\\Polyfill\\Intl\\Normalizer\\' => array($vendorDir . '/symfony/polyfill-intl-normalizer'),
     'Symfony\\Polyfill\\Intl\\Idn\\' => array($vendorDir . '/symfony/polyfill-intl-idn'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
+    'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
     'Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),
     'Seld\\CliPrompt\\' => array($vendorDir . '/seld/cli-prompt/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
@@ -20,6 +21,7 @@ return array(
     'Psr\\Http\\Client\\' => array($vendorDir . '/psr/http-client/src'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
+    'League\\ColorExtractor\\' => array($vendorDir . '/league/color-extractor/src'),
     'League\\CLImate\\' => array($vendorDir . '/league/climate/src'),
     'Laminas\\Escaper\\' => array($vendorDir . '/laminas/laminas-escaper/src'),
     'Kirby\\' => array($vendorDir . '/getkirby/cli/src', $vendorDir . '/getkirby/cli/tests', $baseDir . '/kirby/src', $vendorDir . '/getkirby/composer-installer/src'),
@@ -32,5 +34,4 @@ return array(
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
     'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
     'Bnomei\\' => array($baseDir . '/site/plugins/kirby3-janitor/classes'),
-    '' => array($vendorDir . '/league/color-extractor/src'),
 );
