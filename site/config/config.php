@@ -25,13 +25,13 @@ return [
     // 'domain' => 'test.com' // not required if not set it will be taken from $site->url
   ],
 
-  'debug' => true,
-  // 'debug' => false,
+  // 'debug' => true,
+  'debug' => false,
 
   # https://getkirby.com/docs/reference/system/options/panel
-  'panel' => [
-    'install' => true
-  ],
+  // 'panel' => [
+  //   'install' => true
+  // ],
 
   'markdown' => [
     'extra' => true
