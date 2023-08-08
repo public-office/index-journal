@@ -56,9 +56,12 @@
       </section>
 
       <div class="meta-container">
+
         <div class="issue-doi">
           <h2 style="margin:0;max-width:unset"> <?= $page->issue_doi() ?></h2>
+
         </div>
+
         <div class="issue-issue">
           <h2 style="margin:0;max-width:unset"><?= $page->issue_date()->toDate('d F Y') ?></h2>
         </div>
@@ -74,6 +77,20 @@
     <?php foreach ($sections as $section) : ?><?= $section->wipe_img_caption() ?> <?php endforeach ?>
   </figcaption>
 </div>
+<h2 style="position:fixed; bottom:1rem;left:1rem;margin:0;width: 100%;">
+  <?php if ($kirby->user()) : ?>
+    <a href="#" id="downloadXML" class="custom-download-btn" style="background: black;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 127px;">Download CrossRef XML</a>
+  <?php endif; ?>
+</h2>
+<script>
+  document.getElementById('downloadXML').addEventListener('click', function(e) {
+    e.preventDefault(); // prevent the default action
+    window.location.href = '/generate-xml/<?= $page->id() ?>';
+  });
+</script>
 </body>
 
 </html>

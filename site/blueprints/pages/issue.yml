@@ -1,15 +1,15 @@
 title: Issue
 sections:
-  registration:
-    type: fields
-    fields:
-      crossrefButton:
-        type: button
-        label: CrossRef XML
-        text: Downlaod CrossRef XML File
-        url: /generate-xml/{{ page.id }}
-        theme: positive
-        # reload: true # trigger a page refresh on success to display updated data
+  # registration:
+  #   type: fields
+  #   fields:
+  #     crossrefButton:
+  #       type: button
+  #       label: CrossRef XML
+  #       text: Downlaod CrossRef XML File
+  #       url: /generate-xml/{{ page.id }}
+  #       theme: positive
+  #       # reload: true # trigger a page refresh on success to display updated data
   builder:
     headline: Builder
     type: fields

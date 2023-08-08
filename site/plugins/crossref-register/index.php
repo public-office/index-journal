@@ -1,100 +1,48 @@
+
 <?php
 
-function generateXML($issueData, $essaysData)
-{
-    $baseXml = <<<XML
-    <xsd:schema xmlns="http://www.crossref.org/schema/5.3.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fr="http://www.crossref.org/fundref.xsd" xmlns:ct="http://www.crossref.org/clinicaltrials.xsd" xmlns:ai="http://www.crossref.org/AccessIndicators.xsd" xmlns:rel="http://www.crossref.org/relations.xsd" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:jats="http://www.ncbi.nlm.nih.gov/JATS1" targetNamespace="http://www.crossref.org/schema/5.3.1"></xsd:schema>
-    XML;
+use Kirby\Toolkit\Collection;
+use Kirby\Cms\Response;
 
-    $xml = new SimpleXMLElement($baseXml);
-
-
-
-    // Journal Volume (Issue)
-    $journalVolume = $xml->addChild('journal_volume');
-    $journalVolume->addChild('volume', htmlspecialchars($issueData['number']));
-
-    // Optional: Add doi_data if you have a DOI for the entire volume
-    // $doiData = $journalVolume->addChild('doi_data');
-    // $doiData->addChild('doi', htmlspecialchars($issueData['issue_doi']));
-    // $doiData->addChild('resource', 'YOUR_RESOURCE_URL');
-
-    // Essays (Journal Articles)
-    foreach ($essaysData as $essay) {
-        $journalArticle = $xml->addChild('journal_article');
-
-        // Titles
-        $titles = $journalArticle->addChild('titles');
-        $titles->addChild('title', htmlspecialchars($essay['title']));
-        if (!empty($essay['subtitle'])) {
-            $titles->addChild('subtitle', htmlspecialchars($essay['subtitle']));
-        }
-
-        // Contributors (Authors)
-        if (!empty($essay['authors'])) {
-            $contributors = $journalArticle->addChild('contributors');
-            foreach ($essay['authors'] as $author) {
-                $personName = $contributors->addChild('person_name');
-                $personName->addAttribute('contributor_role', 'author'); // Assuming all are authors
-                $personName->addAttribute('sequence', 'first'); // Change as per requirement
-                $personName->addChild('given_name', htmlspecialchars($author['first_name']));
-                $personName->addChild('surname', htmlspecialchars($author['last_name']));
-            }
-        }
-
-        // Abstract
-        if (!empty($essay['abstract'])) {
-            $journalArticle->addChild('jats:abstract', htmlspecialchars($essay['abstract']));
-        }
-
-        // Publication date (Assuming it's the issue date for now)
-        $publicationDate = $journalArticle->addChild('publication_date');
-        $publicationDate->addAttribute('media_type', 'print'); // Change as per requirement
-        $publicationDate->addChild('month', htmlspecialchars(date('m', strtotime($issueData['issue_date']))));
-        $publicationDate->addChild('day', htmlspecialchars(date('d', strtotime($issueData['issue_date']))));
-        $publicationDate->addChild('year', htmlspecialchars(date('Y', strtotime($issueData['issue_date']))));
-
-        // DOI Data
-        $doiData = $journalArticle->addChild('doi_data');
-        $doiData->addChild('doi', htmlspecialchars($essay['doi']));
-        $doiData->addChild('resource', 'YOUR_RESOURCE_URL_FOR_ESSAY'); // Provide the appropriate resource URL for the essay.
-    }
-
-    return $xml->asXML();
-}
-
-
-Kirby::plugin('paris-lettau/crossref-register', [
+Kirby::plugin('custom/crossref', [
     'routes' => [
         [
             'pattern' => 'generate-xml/(:all)',
-            'action'  => function ($issueId) {
-                $issue = page($issueId);
+            'action'  => function ($id) {
+                $issue = page($id);
+
                 if (!$issue) {
-                    return new Response('Issue not found', 'html', 404);
+                    return new Response('Issue not found', 'text/plain', 404);
                 }
 
-                // Extract issue data
                 $issueData = [
-                    // 'cover_image' => $issue->issue_cover()->toFile()->url(),
-                    // 'color'       => $issue->issue_color()->value(),
+                    'issue_title' => $issue->title()->value(),
                     'doi'         => $issue->issue_doi()->value(),
-                    'date'        => $issue->issue_date()->toDate('Y-m-d'),
-                    'number'      => $issue->issue_num()->value(),
+                    'issue_date'  => $issue->issue_date()->toDate('Y-m-d'),
+                    'issue_num'   => $issue->issue_num()->value(),
                     'editors'     => $issue->editors()->toStructure()->toArray(),
+                    'url'         => $issue->url(),
+                    'year'        => $issue->issue_date()->toDate('Y'),
+
+                    // ... Add more fields as needed
                 ];
 
-                // Iterate through the issue's essays
+                // Fetch descendants that are essays of the issue page
+                $essays = kirby()->site()->index()->filterBy('template', 'essay')->filter(function ($child) use ($issue) {
+                    return $child->isDescendantOf($issue);
+                });
+
                 $essaysData = [];
-                foreach ($issue->descendants()->listed()->filterBy('template', 'essay') as $essay) {
-                    $essayData = [
+                foreach ($essays as $essay) {
+                    $essaysData[] = [
                         'title'    => $essay->title()->value(),
                         'subtitle' => $essay->subtitle()->value(),
                         'authors'  => $essay->authors()->toStructure()->toArray(),
                         'doi'      => $essay->doi()->value(),
                         'abstract' => $essay->abstract()->value(),
+                        'url'      => $essay->url(),
+                        'year'     => $issue->issue_date()->toDate('Y'),
                     ];
-                    $essaysData[] = $essayData;
                 }
 
                 // Generate XML
@@ -102,11 +50,76 @@ Kirby::plugin('paris-lettau/crossref-register', [
 
                 // Return XML as downloadable response
                 return new Response($xml, 'application/xml', 200, [
-                    'Content-Disposition' => 'attachment; filename="crossref.xml"'
+                    'Content-Disposition' => 'attachment; filename="' . 'Issue No. ' . $issueData['issue_num'] . ', ' .  $issueData['issue_title'] . ' - ' . generateBatchId() . '.xml"'
                 ]);
             }
         ]
     ]
-
-
 ]);
+
+function generateXML($issueData, $essaysData)
+{
+    // Initialize XML string
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= '<doi_batch xmlns="http://www.crossref.org/schema/5.3.1">';  // Update to the newer schema version
+
+    // Head section
+    $xml .= '<head>';
+    $xml .= '<doi_batch_id>' . generateBatchId() . '</doi_batch_id>';  // Assuming a function to generate a unique batch ID
+    $xml .= '<timestamp>' . time() . '</timestamp>';
+    $xml .= '<depositor><depositor_name>indj</depositor_name><email_address>editors@index-journal.org</email_address></depositor>';
+    $xml .= '<registrant>WEB-FORM</registrant>';
+    $xml .= '</head>';
+
+    // Journal section
+    $xml .= '<journal>';
+    $xml .= '<journal_metadata>';
+    $xml .= '<full_title>Index Journal</full_title>';
+    $xml .= '<abbrev_title>Index</abbrev_title>';
+    // ... More static values here
+    $xml .= '</journal_metadata>';
+
+    // ... Populate issue details using $issueData
+    $xml .= '<journal_issue>';
+    $xml .= '<publication_date media_type="online"><year>' . $issueData['issue_date'] . '</year></publication_date>';
+    $xml .= '<issue>' . $issueData['issue_num'] . '</issue>';
+    $xml .= '<doi_data>';
+    $xml .= '<doi>' . $issueData['doi'] . '</doi>';
+    $xml .= '<resource>' . $issueData['url'] . '</resource>';  // Replace with the appropriate URL pattern
+    $xml .= '</doi_data>';
+    $xml .= '</journal_issue>';
+
+    // Journal articles (essays) section
+    foreach ($essaysData as $essay) {
+        $xml .= '<journal_article>';
+        $xml .= '<titles><title>' . $essay['title'] . '</title></titles>';
+        $xml .= '<contributors>';
+        foreach ($essay['authors'] as $author) {
+            $xml .= '<person_name contributor_role="author" sequence="first">';
+            $xml .= '<given_name>' . $author['first_name'] . '</given_name>';
+            $xml .= '<surname>' . $author['last_name'] . '</surname>';
+            $xml .= '</person_name>';
+        }
+        $xml .= '</contributors>';
+        $xml .= '<publication_date media_type="online"><year>' . $essay['year'] . '</year></publication_date>';  // Replace with the appropriate year
+        $xml .= '<doi_data>';
+        $xml .= '<doi>' . $essay['doi'] . '</doi>';
+        $xml .= '<resource>' . $essay['url'] . '</resource>';  // Replace with the appropriate URL pattern for essays
+        $xml .= '</doi_data>';
+        $xml .= '</journal_article>';
+    }
+
+    $xml .= '</journal>';
+
+    $xml .= '</doi_batch>';
+
+    return $xml;
+}
+
+function generateBatchId()
+{
+    // Sample function to generate a unique batch ID; can be modified as needed
+    return 'batch_' . time();
+}
+
+?>
