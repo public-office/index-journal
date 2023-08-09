@@ -17,9 +17,8 @@
                             <figure class="figuregrid product ">
                                 <span class="img " style="--w:4;--h:3;--background:black;background:black" data-contain="false">
                                     <picture>
-                                        <source srcset="<?= $image->srcset('avif') ?>" type="image/avif">
                                         <source srcset="<?= $image->srcset('webp') ?>" type="image/webp">
-                                        <img alt="<?= $image->alt() ?>" src="<?= $image->url() ?>" srcset="<?= $image->srcset() ?>" style="  height: 80%; margin: auto;">
+                                        <img alt="<?= $image->alt() ?>" src="<?= $image->url() ?>" srcset="<?= $image->srcset('default') ?>" style="  height: 80%; margin: auto;">
                                     </picture>
                                 </span>
                             </figure>
@@ -38,7 +37,6 @@
                                                     <li class="author sub-title-books"><span><?= $author ?></span></li>
                                                 <?php endforeach ?>
                                             <?php endif ?>
-
 
                                         </ul>
                                     <?php endif ?>
