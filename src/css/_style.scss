@@ -1594,6 +1594,13 @@ figure > img {
 
 figure.video {
   opacity: 1;
+  margin: 0;
+  max-width: 100% !important;
+  width: 100% !important;
+
+  video {
+    width: 100% !important;
+  }
 
   span.figure-num {
     display: none;
@@ -1651,6 +1658,6 @@ figure.video {
   }
 }
 
-video {
-  max-width: 100%;
-}
+// video {
+//   max-width: 100%;
+// }
