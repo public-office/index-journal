@@ -14,14 +14,7 @@
 
         <?php endforeach ?>
     </ul>
-    <h1><a href="/books">Books</a></h1>
 
-    <ul style="margin-top:0">
-        <?php foreach ($site->find('books')->children()->listed() as $subPage) : ?>
-            <h1><a href="<?= $subPage->url() ?>"><span style=""><?= $subPage->title() ?></span></a></h1>
-
-        <?php endforeach ?>
-    </ul>
     <h1><a href="/about">About</a></h1>
     <h1><a href="<?= $site->url() ?>/emaj">EMAJ</a></h1>
 </section>

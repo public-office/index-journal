@@ -26,7 +26,7 @@ return [
   ],
 
   // 'debug' => true,
-  'debug' => false,
+  'debug' => true,
 
   # https://getkirby.com/docs/reference/system/options/panel
   // 'panel' => [
@@ -74,6 +74,16 @@ return [
         '1800w' => ['width' => 1800, 'format' => 'webp']
       ],
     ]
+  ],
+
+  'routes' => [
+    [
+      'pattern' => '/books/(:any)',
+      'action'  => function ($uid) {
+        return go("https://index-press.com/", 301);
+      }
+    ],
+
   ]
 
 ];
