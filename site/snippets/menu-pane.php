@@ -7,7 +7,7 @@
             <a href="<?= $issue->url() ?>" class="current-issue"><span>, Issue </span><span>No. </span><?= $issue->num() ?><span style="text-transform: uppercase;"> <?= $issue->title() ?></span></a>
         <?php endforeach ?>
     </h1>
-    <h1 style="">Issues</h1>
+    <h1>Issues</h1>
     <ul style="margin-top:0">
         <?php foreach ($site->find('issues')->children()->listed() as $subPage) : ?>
             <h1><a href="<?= $subPage->url() ?>">Issue No. <?= $subPage->num() ?> <span style="text-transform:uppercase"><?= $subPage->title() ?></span></a></h1>
@@ -15,6 +15,7 @@
         <?php endforeach ?>
     </ul>
 
+    <h1><a href="https://index-press.com/" target="_blank">Index Press</a></h1>
     <h1><a href="/about">About</a></h1>
     <h1><a href="<?= $site->url() ?>/emaj">EMAJ</a></h1>
 </section>
