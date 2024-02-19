@@ -1,41 +1,72 @@
 title: Essay
-preset: page
-pages: false
-fields:
-  subtitle:
-    label: Subtitle
-    type: text
-  author:
-    label: Author
-    type: text
-    width: 1/2
-  authors:
-    label: Authors
-    type: structure
-    fields:
-      first_name:
-        label: First Name
-        type: text
-      last_name:
-        label: Last Name/s
-        type: text
-      orcid:
-        label: ORCID
-        type: url
-  doi:
-    label: DOI
-    type: text
-    width: 1/2
-  abstract:
-    label: Abstract
-    type: textarea
-  text:
-    label: Text
-    type: textarea
-    size: large
-  bibilography:
-    label: Bibliography
-    type: textarea
-  bios:
-    label: Bio/s
-    type: textarea
+
+tabs:
+  content:
+    icon: settings
+    columns:
+      # main content
+      main:
+        width: 2/3
+        sections:
+          content:
+            type: fields
+            fields:
+            
+              subtitle:
+                label: Subtitle
+                type: text
+              author:
+                label: Author
+                type: text
+                width: 1/2
+              authors:
+                label: Authors
+                type: structure
+                fields:
+                  first_name:
+                    label: First Name
+                    type: text
+                  last_name:
+                    label: Last Name/s
+                    type: text
+                  orcid:
+                    label: ORCID
+                    type: url
+              doi:
+                label: DOI
+                type: text
+                width: 1/2
+              abstract:
+                label: Abstract
+                type: textarea
+              text:
+                label: Text
+                type: textarea
+                size: large
+              bibilography:
+                label: Bibliography
+                type: textarea
+              bios:
+                label: Bio/s
+                type: textarea
+
+              
+
+      sidebar:
+        width: 1/3
+        sections:
+          
+          files:
+            type: files
+            # layout: cards
+            size: tiny
+            help: Click image to add caption and alt text.
+            image:
+              back: black
+            # template: image
+          # chapters:
+          #   label: Chapters
+          #   type: pages
+      
+
+  seo: seo

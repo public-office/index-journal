@@ -71,6 +71,8 @@ function generateXML($issueData, $essaysData)
     $xml .= '<registrant>WEB-FORM</registrant>';
     $xml .= '</head>';
 
+    // Body
+    $xml .= '<body>';
     // Journal section
     $xml .= '<journal>';
     $xml .= '<journal_metadata>';
@@ -81,7 +83,7 @@ function generateXML($issueData, $essaysData)
 
     // ... Populate issue details using $issueData
     $xml .= '<journal_issue>';
-    $xml .= '<publication_date media_type="online"><year>' . $issueData['issue_date'] . '</year></publication_date>';
+    $xml .= '<publication_date media_type="online"><year>' . $issueData['year'] . '</year></publication_date>';
     $xml .= '<issue>' . $issueData['issue_num'] . '</issue>';
     $xml .= '<doi_data>';
     $xml .= '<doi>' . $issueData['doi'] . '</doi>';
@@ -110,6 +112,7 @@ function generateXML($issueData, $essaysData)
     }
 
     $xml .= '</journal>';
+    $xml .= '</body>';
 
     $xml .= '</doi_batch>';
 
