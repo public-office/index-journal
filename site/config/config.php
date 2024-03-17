@@ -84,6 +84,20 @@ return [
       }
     ],
 
-  ]
+  ],
+  # https://getkirby.com/docs/reference/system/options/email
+  'email' => [
+    'transport' => [
+      'type' => 'smtp',
+      'host' => 'smtp.sendgrid.net',
+      'port' => 465,
+      'security' => true,
+      'auth' => true,
+      'username' => 'apikey',
+      'password' => env('SENDGRID_PASSWORD'),
+
+    ]
+  ],
+
 
 ];

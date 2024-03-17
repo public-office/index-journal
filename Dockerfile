@@ -48,12 +48,15 @@ RUN mkdir /var/www/html/content
 
 # create env
 # Set the environmental variables from EasyPanel during the build
-ARG PLAUSIBLE_SHARED_LINK
+# Set the environmental variables
+ARG SENDGRID_PASSWORD
 ARG URL
+ARG DEBUG
 
 # Create a .env file and set its contents to the environmental variables
-RUN echo "PLAUSIBLE_SHARED_LINK=$PLAUSIBLE_SHARED_LINK" >> .env
-RUN echo "URL=$URL" >> .env
+RUN echo "SENDGRID_PASSWORD=$SENDGRID_PASSWORD" > .env && \
+    echo "URL=$URL" >> .env && \
+    echo "DEBUG=$DEBUG" >> .env
 
 # Fix files and directories ownership
 RUN chown -R www-data:www-data /var/www/html/

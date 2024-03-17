@@ -1,5 +1,6 @@
 # System files
 # ------------
+/.env.local
 
 Icon
 .DS_Store
