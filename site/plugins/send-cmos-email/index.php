@@ -46,7 +46,7 @@ Kirby::plugin('lettau/send-cmos-email', [
                             kirby()->email([
                                 'to' => kirby()->user()->email(),
                                 'bcc' => 'paris.lettau@gmail.com',
-                                'from' => ['stylebot@memoreview.net' => 'Chicago StyleBot'], // Replace with your info email
+                                'from' => ['stylebot@index-journal.org' => 'Chicago StyleBot'], // Replace with your info email
 
                                 'subject' => 'Chicago Manual of Style check for ' . $page->title(),
                                 'template' => 'style-violation',
