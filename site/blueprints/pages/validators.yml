@@ -1,0 +1,26 @@
+title: Validators
+preset: pages
+options:
+  access:
+    *: false
+    admin: true
+  list:
+    *: false
+    admin: true
+
+icon: checklist
+image:
+  query: false
+  back: blue-200
+
+drafts:
+  extends: sections/validators
+  label: Unpublished validators
+
+unlisted:
+  extends: sections/validators
+  label: Unlisted validators
+
+listed:
+  extends: sections/validators
+  label: Published validators

@@ -1,0 +1,16 @@
+title: Validator
+preset: page
+pages: false
+icon: ✏️
+
+fields:
+  active:
+    type: toggle
+  explanation:
+    type: writer
+    # size: small
+  function_code:
+    label: Function Code
+    type: textarea
+    font: monospace
+          
