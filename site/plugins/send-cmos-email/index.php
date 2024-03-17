@@ -23,7 +23,7 @@ Kirby::plugin('lettau/send-cmos-email', [
                 if (kirby()->user()) {
                     $page = page($page);
 
-                    if ($page->template() == 'review') {
+                    if ($page->template() == 'essay') {
                         $text = $page->text()->value();
                         // Remove image tags
                         $text = removeImageTags($text);
