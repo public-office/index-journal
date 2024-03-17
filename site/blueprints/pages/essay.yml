@@ -11,7 +11,13 @@ tabs:
           content:
             type: fields
             fields:
-            
+              checkStyleButton:
+                type: button
+                label: 
+                text: Check Chicago Manual of Style
+                url: /check-style/{{ page.id }}
+                theme: positive
+
               subtitle:
                 label: Subtitle
                 type: text
@@ -35,7 +41,7 @@ tabs:
               doi:
                 label: DOI
                 type: text
-                width: 1/2
+                # width: 1/2
               abstract:
                 label: Abstract
                 type: textarea
