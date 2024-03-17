@@ -59,7 +59,7 @@ Kirby::plugin('lettau/send-cmos-email', [
                             throw new Exception('The email could not be sent: ' . $error->getMessage());
                         }
                     }
-                    return ['status' => 'success: '];
+                    return ['status' => 'success: Email sent'];
                 } else {
                     // return an error message if no user is logged in
                     return ['status' => 'error', 'message' => 'Unauthorized'];
