@@ -49,6 +49,8 @@ tabs:
                 label: Text
                 type: textarea
                 size: large
+                help: https://apps-pandoc-app.9jgqd6.easypanel.host/
+                
               bibilography:
                 label: Bibliography
                 type: textarea
