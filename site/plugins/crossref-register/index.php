@@ -61,7 +61,7 @@ function generateXML($issueData, $essaysData)
 {
     // Initialize XML string
     $xml = '<?xml version="1.0" encoding="UTF-8"?>';
-    $xml .= '<doi_batch xmlns="http://www.crossref.org/schema/5.3.1">';  // Update to the newer schema version
+    $xml .= '<doi_batch version="5.3.1" xmlns="http://www.crossref.org/schema/5.3.1">';  // Update to the newer schema version
 
     // Head section
     $xml .= '<head>';
@@ -78,6 +78,10 @@ function generateXML($issueData, $essaysData)
     $xml .= '<journal_metadata>';
     $xml .= '<full_title>Index Journal</full_title>';
     $xml .= '<abbrev_title>Index</abbrev_title>';
+    $xml .= '<doi_data>';
+    $xml .= '<doi>10.38030/index-journal</doi>';
+    $xml .= '<resource>https://index-journal.org</resource>';
+    $xml .= '</doi_data>';
     // ... More static values here
     $xml .= '</journal_metadata>';
 
