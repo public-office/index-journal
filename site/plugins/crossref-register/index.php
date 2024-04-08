@@ -59,7 +59,6 @@ Kirby::plugin('custom/crossref', [
 
 function generateXML($issueData, $essaysData)
 {
-    // Initialize XML string
     $xml = '<?xml version="1.0" encoding="UTF-8"?>';
     $xml .= '<doi_batch version="5.3.1" xmlns="http://www.crossref.org/schema/5.3.1">';  // Update to the newer schema version
 
