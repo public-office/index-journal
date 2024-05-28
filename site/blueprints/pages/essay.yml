@@ -64,17 +64,51 @@ tabs:
         width: 1/3
         sections:
           
-          files:
+          images:
             type: files
             # layout: cards
             size: tiny
-            help: Click image to add caption and alt text.
+            help: Upload here. From May 2024, images are processed using a new template. Previously uploaded images are in the field below.
             image:
               back: black
-            # template: image
+            template: image
+          # chapters:
+          #   label: Chapters
+          #   type: pages
+          
+          legacy_images:
+            type: files
+            label: Legacy Images
+            size: tiny
+            help: Upload new images above
+            image:
+              back: black
+            upload: false
           # chapters:
           #   label: Chapters
           #   type: pages
       
 
   seo: seo
+  # files:
+  #   icon: image
+  #   label: Legacy Files
+  #   columns:
+  #     sidebar:
+  #       width: 1/1
+  #       sections:
+          
+  #         legacy_files:
+  #           type: files
+  #           layout: cards
+  #           # size: tiny
+  #           help: Legacy images can still be used in the article.
+
+  #           image:
+  #             back: black
+  #           # template: image
+  #         # chapters:
+  #         #   label: Chapters
+  #         #   type: pages
+      
+

@@ -20,10 +20,10 @@ $base = dirname(__DIR__, 2);
 return [
   'url' => env('URL'),
 
-  'floriankarsten.plausible' => [
-    'sharedLink' => env('PLAUSIBLE_SHARED_LINK'),
-    // 'domain' => 'test.com' // not required if not set it will be taken from $site->url
-  ],
+  // 'floriankarsten.plausible' => [
+  //   'sharedLink' => env('PLAUSIBLE_SHARED_LINK'),
+  //   // 'domain' => 'test.com' // not required if not set it will be taken from $site->url
+  // ],
 
   // 'debug' => true,
   'debug' => true,
@@ -36,18 +36,20 @@ return [
   'markdown' => [
     'extra' => true
   ],
+
   'panel.install' => true,
+
   'diesdasdigital.meta-knight' => [
     'siteTitleAfterPageTitle' => false,
   ],
   'hooks' => [
     'page.update:after' => function ($newPage, $oldPage) {
-      output_pdf($newPage);
+      // output_pdf($newPage);
     }
   ],
 
   // https://github.com/medienbaecker/kirby-autoresize
-  'medienbaecker.autoresize.maxWidth' => 3000,
+  // 'medienbaecker.autoresize.maxWidth' => 3000,
 
   # https://getkirby.com/docs/cookbook/performance/responsive-images
   'thumbs' => [
@@ -55,22 +57,16 @@ return [
       'default' => [
         '300w'  => ['width' => 300],
         '600w'  => ['width' => 600],
-        '900w'  => ['width' => 900],
-        '1200w' => ['width' => 1200],
         '1800w' => ['width' => 1800]
       ],
       'avif' => [
         '300w'  => ['width' => 300, 'format' => 'avif'],
         '600w'  => ['width' => 600, 'format' => 'avif'],
-        '900w'  => ['width' => 900, 'format' => 'avif'],
-        '1200w' => ['width' => 1200, 'format' => 'avif'],
         '1800w' => ['width' => 1800, 'format' => 'avif']
       ],
       'webp' => [
         '300w'  => ['width' => 300, 'format' => 'webp'],
         '600w'  => ['width' => 600, 'format' => 'webp'],
-        '900w'  => ['width' => 900, 'format' => 'webp'],
-        '1200w' => ['width' => 1200, 'format' => 'webp'],
         '1800w' => ['width' => 1800, 'format' => 'webp']
       ],
     ]

@@ -1,3 +1,11 @@
+title: Image
+
+# Optimize on upload
+create:
+  width: 2500
+  # height: 2500
+  format: jpg
+
 fields:
   caption:
     label: Caption
