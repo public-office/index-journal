@@ -12,6 +12,11 @@ function bootstrap(): string|null
 		// avoid any output in the CLI
 		$_ENV['KIRBY_RENDER'] = false;
 
+		if (empty($_ENV['KIRBY_HOST']) === false) {
+			$_SERVER['SERVER_NAME'] = $_ENV['KIRBY_HOST'];
+			$_SERVER['HTTP_HOST']   = $_ENV['KIRBY_HOST'];
+		}
+
 		ob_start();
 		require $index;
 		ob_end_clean();
@@ -41,7 +46,16 @@ function index(): string|null
 	];
 
 	foreach ($locations as $location) {
+		// try to find the index.php in current working directory
 		$index = realpath(getcwd() . '/' . $location . '/index.php');
+
+		if ($index !== false) {
+			return $index;
+		}
+
+		// try to find the index.php from the (possible) root of the project
+		// in the __ROOT__ <- /vendor/getkirby/cli directory
+		$index = realpath(dirname(__DIR__, 3) . '/' . $location . '/index.php');
 
 		if ($index !== false) {
 			return $index;

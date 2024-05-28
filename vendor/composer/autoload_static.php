@@ -134,8 +134,8 @@ class ComposerStaticInitec0a6952b29456578f9d47535aa1f598
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -163,10 +163,10 @@ class ComposerStaticInitec0a6952b29456578f9d47535aa1f598
         ),
         'Kirby\\' => 
         array (
-            0 => __DIR__ . '/..' . '/getkirby/cli/src',
-            1 => __DIR__ . '/..' . '/getkirby/cli/tests',
-            2 => __DIR__ . '/../..' . '/kirby/src',
-            3 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
+            0 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
+            1 => __DIR__ . '/..' . '/getkirby/cli/src',
+            2 => __DIR__ . '/..' . '/getkirby/cli/tests',
+            3 => __DIR__ . '/../..' . '/kirby/src',
         ),
         'JohannSchopplich\\' => 
         array (
@@ -662,6 +662,7 @@ class ComposerStaticInitec0a6952b29456578f9d47535aa1f598
         'Kirby\\Toolkit\\Query' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Query.php',
         'Kirby\\Toolkit\\Silo' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Silo.php',
         'Kirby\\Toolkit\\Str' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Str.php',
+        'Kirby\\Toolkit\\SymmetricCrypto' => __DIR__ . '/../..' . '/kirby/src/Toolkit/SymmetricCrypto.php',
         'Kirby\\Toolkit\\Tpl' => __DIR__ . '/../..' . '/kirby/src/Toolkit/Tpl.php',
         'Kirby\\Toolkit\\V' => __DIR__ . '/../..' . '/kirby/src/Toolkit/V.php',
         'Kirby\\Toolkit\\View' => __DIR__ . '/../..' . '/kirby/src/Toolkit/View.php',

@@ -10,6 +10,8 @@ use Kirby\Toolkit\I18n;
 
 @include_once __DIR__ . '/vendor/autoload.php';
 
+if(!defined('STDOUT')) define('STDOUT', fopen('php://stdout', 'wb'));
+
 /*
 janitor [noun]
 one who keeps the premises of a building (such as an apartment or
@@ -44,12 +46,12 @@ Kirby::plugin('bnomei/janitor', [
 					return Janitor::isTrue($doAutosave);
 				},
 				'backgroundColor' => function ($style = 'var(--color-text)') {
-					return $style;
+					return Janitor::query($style, $this->model());
 				},
 				'clipboard' => function ($clipboard = null) {
 					return Janitor::isTrue($clipboard);
 				},
-				'command' => function ($command = null) {
+				'command' => function ($command = '') {
 					// make lazy by default
 					$command = str_replace(['{{', '}}'], ['{(', ')}'], $command);
 
@@ -84,10 +86,13 @@ Kirby::plugin('bnomei/janitor', [
 					return $command;
 				},
 				'confirm' => function ($confirm = '') {
-					return $confirm;
+					if (kirby()->multilang()) {
+						$confirm = I18n::translate($confirm, $confirm, kirby()->language()->code());
+					}
+					return Janitor::query($confirm, $this->model());
 				},
 				'color' => function ($style = 'white') {
-					return $style;
+					return Janitor::query($style, $this->model());
 				},
 				'cooldown' => function ($cooldownMilliseconds = null) {
 					return (int)($cooldownMilliseconds ?? option('bnomei.janitor.label.cooldown'));
