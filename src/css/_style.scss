@@ -488,6 +488,7 @@ main h1 {
   p + p {
     text-indent: 3em;
     margin: 0;
+    max-width: 100%;
   }
 
   figure {
@@ -624,8 +625,11 @@ main h1 {
     max-width: 45%;
 
     @media (max-width: 670px) {
-      margin-left: 4em;
-      max-width: 100%;
+      p,
+      p + p {
+        margin-left: 4em;
+        max-width: 100%;
+      }
     }
 
     em {
