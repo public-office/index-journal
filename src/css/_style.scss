@@ -459,7 +459,7 @@ main h1 {
 }
 
 .text-block {
-  padding: 6.6em 4em;
+  padding: 6.6em 4em 0 4em;
   position: relative;
 
   .title {
@@ -488,7 +488,7 @@ main h1 {
   p + p {
     text-indent: 3em;
     margin: 0;
-    max-width: 100%;
+    // max-width: 100%;
   }
 
   figure {
@@ -623,6 +623,7 @@ main h1 {
   .text-bios {
     margin-left: 12em;
     max-width: 45%;
+    padding: 0 4em;
 
     @media (max-width: 670px) {
       p,
@@ -1132,6 +1133,8 @@ figure {
   column-gap: 40px;
   overflow-wrap: break-word;
   word-wrap: break-word;
+
+  padding: 0 4em 6.6em 4em;
 
   ul {
     margin-left: 1.5em;
