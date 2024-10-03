@@ -20,3 +20,7 @@ fields:
   bios:
     label: Bio/s
     type: textarea
+  viewcount:
+    extends: fields/viewcount
+  lastvisited:
+    extends: fields/lastvisited

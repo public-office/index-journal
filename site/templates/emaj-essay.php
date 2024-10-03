@@ -1,4 +1,5 @@
 <?php snippet('header') ?>
+<?php echo $page->counterCss(); ?>
 
 <main data-template="<?= $page->template() ?>">
 

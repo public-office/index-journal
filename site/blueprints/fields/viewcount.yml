@@ -1,0 +1,5 @@
+type: number
+min: 0
+default: 0
+disabled: true
+label: Visit Count

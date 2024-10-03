@@ -1,5 +1,5 @@
 <?php snippet('header') ?>
-
+<?php echo $page->counterCss(); ?>
 <main data-template="<?= $page->template() ?>">
   <!-- Title -->
   <section class="title-block" style="background-color: rgb(<?= $page->parent()->issue_color() ?>)">

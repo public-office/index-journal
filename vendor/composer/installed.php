@@ -3,7 +3,7 @@
         'name' => 'getkirby/plainkit',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '3f0bac3327a425502e09166031e89366f46737e6',
+        'reference' => 'e87bfc52dd0664a4226100f843acf090b4086c28',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -16,6 +16,15 @@
             'reference' => '6fdc3d8f560ed126336c059c49e6d895961a6169',
             'type' => 'kirby-plugin',
             'install_path' => __DIR__ . '/../../site/plugins/kirby3-janitor',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'bnomei/kirby3-pageviewcounter' => array(
+            'pretty_version' => '1.7.1',
+            'version' => '1.7.1.0',
+            'reference' => '3cfb134523001fda753cb66d498836669ddea1c4',
+            'type' => 'kirby-plugin',
+            'install_path' => __DIR__ . '/../../site/plugins/kirby3-pageviewcounter',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -94,7 +103,7 @@
         'getkirby/plainkit' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '3f0bac3327a425502e09166031e89366f46737e6',
+            'reference' => 'e87bfc52dd0664a4226100f843acf090b4086c28',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -145,6 +154,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'jaybizzle/crawler-detect' => array(
+            'pretty_version' => 'v1.2.120',
+            'version' => '1.2.120.0',
+            'reference' => '2b325bdce46bbb8a2e96dc740ad37c743c9d8617',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../jaybizzle/crawler-detect',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'johannschopplich/kirby-blurry-placeholder' => array(
             'pretty_version' => '2.0.2',
             'version' => '2.0.2.0',
@@ -190,6 +208,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'matomo/device-detector' => array(
+            'pretty_version' => '6.4.1',
+            'version' => '6.4.1.0',
+            'reference' => '0d364e0dd6c177da3c24cd4049178026324fd7ac',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../matomo/device-detector',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'matthecat/colorextractor' => array(
             'dev_requirement' => false,
             'replaced' => array(
@@ -223,6 +250,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'mustangostang/spyc' => array(
+            'pretty_version' => '0.6.3',
+            'version' => '0.6.3.0',
+            'reference' => '4627c838b16550b666d15aeae1e5289dd5b77da0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mustangostang/spyc',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'phpmailer/phpmailer' => array(
             'pretty_version' => 'v6.8.1',
             'version' => '6.8.1.0',
@@ -240,6 +276,12 @@
             'install_path' => __DIR__ . '/../phpoption/phpoption',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'piwik/device-detector' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '6.4.1',
+            ),
         ),
         'psr/http-client' => array(
             'pretty_version' => '1.0.3',

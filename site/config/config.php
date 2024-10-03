@@ -25,6 +25,14 @@ return [
   //   // 'domain' => 'test.com' // not required if not set it will be taken from $site->url
   // ],
 
+  # https://github.com/bnomei/kirby3-pageviewcounter#readme
+  'bnomei.pageviewcounter.field.count' => 'viewcount',
+  'bnomei.pageviewcounter.field.timestamp' => 'lastvisited',
+  'bnomei.pageviewcounter.counter' => function () {
+    return new \Bnomei\PageViewCounterField();
+  },
+
+
   // 'debug' => true,
   'debug' => true,
 

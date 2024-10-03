@@ -90,6 +90,16 @@ tabs:
       
 
   seo: seo
+
+  analytics:
+    sections:
+      analytics:
+        type: fields
+        fields:
+          viewcount:
+            extends: fields/viewcount
+          lastvisited:
+            extends: fields/lastvisited
   # files:
   #   icon: image
   #   label: Legacy Files
