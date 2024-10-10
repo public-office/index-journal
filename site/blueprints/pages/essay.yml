@@ -2,7 +2,6 @@ title: Essay
 
 tabs:
   content:
-    icon: settings
     columns:
       # main content
       main:
@@ -11,37 +10,11 @@ tabs:
           content:
             type: fields
             fields:
-              checkStyleButton:
-                type: button
-                label: 
-                text: Check Chicago Manual of Style
-                url: /check-style/{{ page.id }}
-                theme: positive
 
               subtitle:
                 label: Subtitle
                 type: text
-              author:
-                label: Author
-                type: text
-                width: 1/2
-              authors:
-                label: Authors
-                type: structure
-                fields:
-                  first_name:
-                    label: First Name
-                    type: text
-                  last_name:
-                    label: Last Name/s
-                    type: text
-                  orcid:
-                    label: ORCID
-                    type: url
-              doi:
-                label: DOI
-                type: text
-                # width: 1/2
+             
               abstract:
                 label: Abstract
                 type: textarea
@@ -49,17 +22,8 @@ tabs:
                 label: Text
                 type: textarea
                 size: large
-                help: https://apps-pandoc-app.9jgqd6.easypanel.host/
-                
-              bibilography:
-                label: Bibliography
-                type: textarea
-              bios:
-                label: Bio/s
-                type: textarea
-
+                help: https://pandoc.memoreivew.net/
               
-
       sidebar:
         width: 1/3
         sections:
@@ -87,9 +51,82 @@ tabs:
           # chapters:
           #   label: Chapters
           #   type: pages
-      
+  Meta:
+    sections:
+      meta:
+        type: fields
+        fields:
+          author:
+            label: Author
+            type: text
+            width: 1/2
+          authors:
+            label: Authors
+            type: structure
+            fields:
+              first_name:
+                label: First Name
+                type: text
+              last_name:
+                label: Last Name/s
+                type: text
+              orcid:
+                label: ORCID
+                type: url
+          doi:
+            label: DOI
+            type: text
+          keywords:
+            type: tags
+          bios:
+            label: Bio/s
+            type: textarea
+            # width: 1/2
+          
 
-  seo: seo
+  bibliography:
+    sections:
+      bibliography:
+        type: fields
+        fields:
+          bibilography:
+            label: Bibliography
+            type: textarea
+          headline:
+            type: headline
+            label: Selected Bibliography
+          info:
+            label: 
+            type: info
+            text: |
+              ** CMOS 14.63 Dividing a bibliography into sections**. A bibliography may occasionally be divided into sections—but only if doing so would make the reader's job significantly easier. It may be appropriate to subdivide a bibliography (1) when it includes manuscript sources, archival collections, or other materials that do not fit into a straight alphabetical list; (2) when readers need to see at a glance the distinction between different kinds of works— for example, in a study of one writer, between works by the writer and those about him or her; or (3) when the bibliography is intended primarily as a guide to further reading (as in this manual). When divisions are necessary, a headnote should appear at the beginning of the bibliogra-phy, and each section should be introduced by an explanatory subhead (see fig. 14.9). No source should be listed in more than one section.
+          headnote:
+            type: textarea  
+          selected_bibilography:
+            label: Sections
+            type: structure
+            fields:
+              heading:
+                label: Section Heading
+                type: text
+              bibliography:
+                type: textarea
+                label: Section Bibliography
+  tools:
+    sections:
+      tools:
+        type: fields
+        fields:
+          checkStyleButton:
+            type: button
+            label: 
+            text: Check Chicago Manual of Style
+            url: /check-style/{{ page.id }}
+            theme: positive
+          
+
+  
+
 
   analytics:
     sections:
@@ -100,6 +137,7 @@ tabs:
             extends: fields/viewcount
           lastvisited:
             extends: fields/lastvisited
+  seo: seo
   # files:
   #   icon: image
   #   label: Legacy Files

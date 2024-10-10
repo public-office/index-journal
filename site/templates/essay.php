@@ -14,6 +14,7 @@
     </h1>
   </section>
 
+
   <!-- Text -->
   <div class="text-block">
     <?php if ($page->slug() != 'introduction') : ?>
@@ -34,22 +35,44 @@
 
   <!-- bibliographies -->
   <?php if ($page->bibilography()->isNotEmpty()) : ?>
-    <p style="font-size: var(--font-small); text-indent: 0; text-transform: uppercase; margin-bottom: 1em; padding: 0 4em;
-">Bibliography</p>
+    <p style="font-size: 1.4rem; text-indent: 0; text-transform: uppercase; margin-bottom: 1em; padding: 0 4em;">Bibliography</p>
     <div class="text-bibliography">
       <?= smartypants($page->bibilography()->kirbytext()) ?>
     </div>
   <?php endif ?>
 
-  <?php if ($page->slug() != 'introduction') : ?>
-    <span class="essay-extra">
-      <?php if ($page->doi()->isNotEmpty()) : ?>
-        <span class="doi">
-          <a href="http://doi.org/<?= $page->doi() ?>"><?= $page->doi() ?></a>
-        </span>
-      <?php endif ?>
-    </span>
-  <?php endif ?>
+
+  <!-- bibliographies -->
+  <?php if ($page->selected_bibilography()->isNotEmpty()) : ?>
+    <div class="wrapper-bib">
+      <p style="font-size: 1.4rem; text-indent: 0; text-transform: uppercase; margin-bottom: 1em; padding: 0 4em; margin-top:4rem">
+        Selected Bibliography
+      </p>
+      <div class=" selected-bibliography">
+        <?= $page->headnote()->kirbytext() ?>
+      </div>
+      <?php foreach ($page->selected_bibilography()->toStructure() as $section) : ?>
+        <div class="selected-bibliography">
+          <h2> <?= $section->heading() ?></h2>
+
+        </div>
+        <div class="text-bibliography">
+          <?= $section->bibliography()->kirbytext() ?>
+        </div>
+      <?php endforeach ?>
+
+    <?php endif ?>
+    </div>
+
+    <?php if ($page->slug() != 'introduction') : ?>
+      <span class="essay-extra">
+        <?php if ($page->doi()->isNotEmpty()) : ?>
+          <span class="doi">
+            <a href="http://doi.org/<?= $page->doi() ?>"><?= $page->doi() ?></a>
+          </span>
+        <?php endif ?>
+      </span>
+    <?php endif ?>
 </main>
 </body>
 
