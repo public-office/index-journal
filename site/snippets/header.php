@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="<?= $site->lang() ?>" dir="ltr">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <?php snippet('meta_information'); ?>
-  <?php snippet('robots'); ?>
+  <?php snippet('seo/head'); ?>
 
   <!-- Google Scholar -->
   <?php if ($page->template() == "essay") : ?>

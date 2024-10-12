@@ -22,7 +22,7 @@ tabs:
                 label: Text
                 type: textarea
                 size: large
-                help: https://pandoc.memoreivew.net/
+                help: https://pandoc.memoreview.net/
               
       sidebar:
         width: 1/3
@@ -137,7 +137,8 @@ tabs:
             extends: fields/viewcount
           lastvisited:
             extends: fields/lastvisited
-  seo: seo
+  # seo: seo
+  seo: seo/page
   # files:
   #   icon: image
   #   label: Legacy Files

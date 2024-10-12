@@ -92,4 +92,5 @@ tabs:
             command: 'janitor:thumbs --site'
             label:  Thumbs
             icon: images
- seotab: seo
+#  seotab: seo
+  seo: seo/site

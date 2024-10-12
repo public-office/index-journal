@@ -24,6 +24,9 @@ return [
   //   'sharedLink' => env('PLAUSIBLE_SHARED_LINK'),
   //   // 'domain' => 'test.com' // not required if not set it will be taken from $site->url
   // ],
+  # https://plugins.andkindness.com/seo/docs/get-started/installation-setup
+  'tobimori.seo.canonicalBase' => env('URL'),
+  'tobimori.seo.lang' => 'en-AU',
 
   # https://github.com/bnomei/kirby3-pageviewcounter#readme
   'bnomei.pageviewcounter.field.count' => 'viewcount',

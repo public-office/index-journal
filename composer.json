@@ -24,7 +24,6 @@
   "require": {
     "php": ">= 8.2.0",
     "getkirby/cms": "^3.6",
-    "diesdasdigital/kirby-meta-knight": "^1.2",
     "johannschopplich/kirby-blurry-placeholder": "^2.0",
     "rasteiner/k3-pagesdisplay-section": "^0.2.3",
     "medienbaecker/autoresize": "^2.1",
@@ -35,7 +34,8 @@
     "floriankarsten/kirby-plausible": "^0.1.8",
     "johannschopplich/kirby-helpers": "^4.0",
     "moritzebeling/kirby-panel-button": "^1.0",
-    "bnomei/kirby3-pageviewcounter": "^1.7"
+    "bnomei/kirby3-pageviewcounter": "^1.7",
+    "tobimori/kirby-seo": "^1.1"
   },
   "scripts": {
     "start": [

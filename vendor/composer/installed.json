@@ -317,51 +317,6 @@
             "install-path": "./semver"
         },
         {
-            "name": "diesdasdigital/kirby-meta-knight",
-            "version": "1.2.2",
-            "version_normalized": "1.2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/diesdasdigital/kirby-meta-knight.git",
-                "reference": "9c3da53a3abee5ffdd95c1363d679e9395794715"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/diesdasdigital/kirby-meta-knight/zipball/9c3da53a3abee5ffdd95c1363d679e9395794715",
-                "reference": "9c3da53a3abee5ffdd95c1363d679e9395794715",
-                "shasum": ""
-            },
-            "require": {
-                "getkirby/composer-installer": "^1.1"
-            },
-            "time": "2021-11-16T12:41:33+00:00",
-            "type": "kirby-plugin",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "diesdasdigital\\kirby-meta-knight\\": "src/models/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Jonathan Muth",
-                    "email": "jonathan@diesdas.digital",
-                    "homepage": "https://diesdas.digital",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Meta Knight – SEO for Kirby",
-            "support": {
-                "issues": "https://github.com/diesdasdigital/kirby-meta-knight/issues",
-                "source": "https://github.com/diesdasdigital/kirby-meta-knight/tree/1.2.2"
-            },
-            "install-path": "../../site/plugins/kirby-meta-knight"
-        },
-        {
             "name": "filp/whoops",
             "version": "2.15.4",
             "version_normalized": "2.15.4.0",
@@ -2330,6 +2285,82 @@
             "install-path": "../seld/cli-prompt"
         },
         {
+            "name": "spatie/schema-org",
+            "version": "3.23.0",
+            "version_normalized": "3.23.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/schema-org.git",
+                "reference": "c95abf7da59f16570aec18ca11d861255e645c39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/schema-org/zipball/c95abf7da59f16570aec18ca11d861255e645c39",
+                "reference": "c95abf7da59f16570aec18ca11d861255e645c39",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.6",
+                "graham-campbell/analyzer": "^3.0.5",
+                "illuminate/collections": "^8.62.0",
+                "league/flysystem": "^2.3.0 || ^3.0",
+                "pestphp/pest": "^1.21",
+                "symfony/console": "^5.3.7 || 6.0",
+                "twig/twig": "^3.3.3"
+            },
+            "time": "2024-01-11T14:58:44+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\SchemaOrg\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian De Deyne",
+                    "email": "sebastian@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Tom Witkowski",
+                    "email": "dev.gummibeer@gmail.com",
+                    "homepage": "https://gummibeer.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A fluent builder Schema.org types and ld+json generator",
+            "homepage": "https://github.com/spatie/schema-org",
+            "keywords": [
+                "schema-org",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/schema-org/issues",
+                "source": "https://github.com/spatie/schema-org/tree/3.23.0"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "install-path": "../spatie/schema-org"
+        },
+        {
             "name": "sylvainjule/color-palette",
             "version": "1.0.4",
             "version_normalized": "1.0.4.0",
@@ -3009,6 +3040,66 @@
                 }
             ],
             "install-path": "../symfony/yaml"
+        },
+        {
+            "name": "tobimori/kirby-seo",
+            "version": "1.1.2",
+            "version_normalized": "1.1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tobimori/kirby-seo.git",
+                "reference": "a06eb676f699797fdd04a515149559ffd4746be7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tobimori/kirby-seo/zipball/a06eb676f699797fdd04a515149559ffd4746be7",
+                "reference": "a06eb676f699797fdd04a515149559ffd4746be7",
+                "shasum": ""
+            },
+            "require": {
+                "getkirby/composer-installer": "^1.2.1",
+                "php": ">=8.1.0",
+                "spatie/schema-org": "^3.14"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.48",
+                "getkirby/cli": "^1.2",
+                "getkirby/cms": "^4.0"
+            },
+            "time": "2024-04-10T09:49:19+00:00",
+            "type": "kirby-plugin",
+            "extra": {
+                "kirby-cms-path": false
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "tobimori\\Seo\\": "classes"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tobias Möritz",
+                    "email": "tobias@moeritz.io"
+                }
+            ],
+            "description": "The ultimate Kirby SEO toolkit",
+            "homepage": "https://github.com/tobimori/kirby-seo#readme",
+            "support": {
+                "issues": "https://github.com/tobimori/kirby-seo/issues",
+                "source": "https://github.com/tobimori/kirby-seo/tree/1.1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/tobimori",
+                    "type": "github"
+                }
+            ],
+            "install-path": "../../site/plugins/kirby-seo"
         },
         {
             "name": "vlucas/phpdotenv",

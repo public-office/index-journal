@@ -6,7 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'diesdasdigital\\kirby-meta-knight\\' => array($baseDir . '/site/plugins/kirby-meta-knight/src/models'),
+    'tobimori\\Seo\\' => array($baseDir . '/site/plugins/kirby-seo/classes'),
     'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
@@ -15,6 +15,7 @@ return array(
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
     'Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),
+    'Spatie\\SchemaOrg\\' => array($vendorDir . '/spatie/schema-org/src'),
     'Seld\\CliPrompt\\' => array($vendorDir . '/seld/cli-prompt/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),
