@@ -34,9 +34,9 @@ tabs:
  
           
     
-  Meta:
+  details:
     sections:
-      meta:
+      details:
         type: fields
         fields:
 

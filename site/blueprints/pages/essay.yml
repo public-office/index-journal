@@ -45,9 +45,9 @@ tabs:
           #   type: pages
           
     
-  Meta:
+  details:
     sections:
-      meta:
+      details:
         type: fields
         fields:
           author:

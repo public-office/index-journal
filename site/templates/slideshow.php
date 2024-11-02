@@ -36,7 +36,7 @@
   </div>
 
   <!-- Credit -->
-  <div class="snap-start text-xs p-10 leading-tight">
+  <div class="snap-start text-xs p-10 leading-tight h-full pt-24">
     <?= smartypants($page->credit()->kirbytext()) ?>
   </div>
 
