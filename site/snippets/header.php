@@ -4,6 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- https://plugins.andkindness.com/seo/docs/get-started/installation-setup -->
   <?php snippet('seo/head'); ?>
 
   <!-- Google Scholar -->
