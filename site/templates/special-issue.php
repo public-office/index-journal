@@ -37,7 +37,7 @@
   </section>
 
   <!-- Text -->
-  <div class="text-block snap-start">
+  <div class="text-block snap-start h-full pt-24">
     <div class="content-block">
       <?= smartypants($page->text()->kirbytext()) ?>
     </div>
