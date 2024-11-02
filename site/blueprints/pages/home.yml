@@ -1,5 +1,11 @@
 title: Home
-preset: page
+
+icon: home
+image:
+  query: false
+  back: blue-200
+
+
 pages: false
 fields:
   cfp_builder:

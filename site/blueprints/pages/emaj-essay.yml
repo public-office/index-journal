@@ -1,26 +1,38 @@
 title: EMAJ Essay
-preset: page
+
+
+icon: page
+image:
+  query: false
+  back: blue-200
+
 pages: false
 files: true
-fields:
-  subtitle:
-    label: Subtitle
-    type: text
-  author:
-    label: Author
-    type: text
-    width: 1/2
-  doi:
-    label: DOI
-    type: text
-    width: 1/2
-  abstract:
-    label: Abstract
-    type: textarea
-  bios:
-    label: Bio/s
-    type: textarea
-  viewcount:
-    extends: fields/viewcount
-  lastvisited:
-    extends: fields/lastvisited
+tabs:
+  content:
+    sections:
+      content:
+        type: fields 
+        fields:
+          subtitle:
+            label: Subtitle
+            type: text
+          author:
+            label: Author
+            type: text
+            width: 1/2
+          doi:
+            label: DOI
+            type: text
+            width: 1/2
+          abstract:
+            label: Abstract
+            type: textarea
+          bios:
+            label: Bio/s
+            type: textarea
+          viewcount:
+            extends: fields/viewcount
+          lastvisited:
+            extends: fields/lastvisited
+  seo: seo/site

@@ -1,0 +1,10 @@
+{
+  "name": "index_journal",
+  "scripts": {
+    "watch": "npx tailwindcss -i ./src/css/tailwind.css -o ./assets/css/tailwind.css --content './site/**/*.php' -w",
+    "build": "npx tailwindcss -i ./src/css/tailwind.css -o ./assets/css/tailwind.css --content './site/**/*.php' -m"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.4.14"
+  }
+}

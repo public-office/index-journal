@@ -1,4 +1,4 @@
-title: Issues
+title: Special Issues
 sort: num
 
 icon: page
@@ -11,4 +11,4 @@ sections:
     headline: Published Issues
     type: pages
     status: all
-    templates: issue
+    templates: special-issue

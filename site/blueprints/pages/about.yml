@@ -1,5 +1,11 @@
 title: About
-preset: page
+
+
+icon: info
+image:
+  query: false
+  back: blue-200
+
 fields:
   text:
     label: Text

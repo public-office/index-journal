@@ -80,6 +80,7 @@ tabs:
       pages:
         label: Main Pages
         status: all
+        sort: num
   
   admin:
     icon: settings

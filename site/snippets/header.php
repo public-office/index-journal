@@ -35,6 +35,7 @@
   <!-- css -->
   <?= css('assets/css/style.css?v=' . sha1_file('assets/css/style.css')) ?>
   <?= css('assets/css/print.css?v=' . sha1_file('assets/css/print.css')) ?>
+  <?= css('assets/css/tailwind.css?v=' . sha1_file('assets/css/tailwind.css')) ?>
 
   <!-- js -->
   <?= js('assets/js/jquery.min.js') ?>
@@ -87,14 +88,8 @@
       <?php endforeach ?>
 
 
-
-
-      <nav class=" issues"><?php foreach (page('issues')->children()->listed()->flip() as $issue) : ?><span class="issue"><span><a href="<?= $issue->url() ?>"><span class="hide-mobile"> Issue</span><span> No. </span><?= $issue->num() ?> <span class="title"><?= $issue->title() ?></span></a></span><?php endforeach ?></span></nav>
     </h1>
-    <nav class="pages">
-      <?php foreach ($site->children()->listed()->flip() as $subPage) : ?>
-        <a href="<?= $subPage->url() ?>"><?= $subPage->title() ?></a><span>, </span><?php endforeach ?><a href="<?= $site->url() ?>/emaj">EMAJ</a>
-    </nav>
+
     <nav class="menu" style="cursor:pointer">
       <span>Menu</span>
     </nav>

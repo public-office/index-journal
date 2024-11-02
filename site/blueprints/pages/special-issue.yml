@@ -1,0 +1,67 @@
+title: Special Issue
+
+
+tabs:
+  content:
+    sections:
+      content:
+        type: fields
+        fields:
+          text:
+            type: textarea
+
+      published:
+        headline: Contents
+        type: pages
+        status: all
+        layout: table
+        help: Essays can be manually sorted if they are published
+        columns:
+          author: true
+          doi: true
+        templates:
+          - essay
+          - slideshow
+  details:
+    sections:
+      details:
+        headline: Issue cover image
+        type: fields
+        fields:
+          issue_doi:
+            label: Issue DOI
+            type: text
+          issue_date:
+            label: Issue Date
+            type: date
+          editors:
+            label: Editors
+            type: structure
+            fields:
+              first_name:
+                label: First Name
+                type: text
+              last_name:
+                label: Last Name/s
+                type: text
+              orcid:
+                label: ORCID
+                type: text
+
+  files:
+    sections:
+      files:
+        layout: cardlets
+
+  analytics:
+    sections:
+      analytics:
+        type: fields
+        fields:
+          viewcount:
+            extends: fields/viewcount
+          lastvisited:
+            extends: fields/lastvisited
+  
+  # seo: seo
+  seo: seo/page

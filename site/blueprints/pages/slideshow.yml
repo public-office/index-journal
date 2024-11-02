@@ -1,0 +1,138 @@
+title: Slideshow
+
+# icon: page
+# image:
+#   # query: false
+#   back: blue-200
+
+tabs:
+  content:
+    columns:
+      # main content
+      main:
+        sections:
+          content:
+            type: fields
+            fields:
+
+
+              slideshow:
+                type: files
+                template: image
+                layout: cardlets
+             
+              # abstract:
+              #   label: Abstract
+              #   type: textarea
+
+              # text:
+              #   label: Text
+              #   type: textarea
+              #   size: large
+              #   help: https://pandoc.memoreview.net/
+              
+ 
+          
+    
+  Meta:
+    sections:
+      meta:
+        type: fields
+        fields:
+
+          subtitle:
+            label: Subtitle
+            type: text
+          author:
+            label: Author
+            type: text
+
+          authors:
+            label: Authors
+            type: structure
+            fields:
+              first_name:
+                label: First Name
+                type: text
+              last_name:
+                label: Last Name/s
+                type: text
+              orcid:
+                label: ORCID
+                type: url
+          doi:
+            label: DOI
+            type: text
+          keywords:
+            type: tags
+          credit:
+            type: textarea
+            # width: 1/2
+          
+
+  files:
+    sections:
+    
+      files:
+        type: files
+        # size: tiny
+        layout: cards
+        image:
+          back: black
+        upload: false
+
+    analytics:
+      sections:
+        analytics:
+          type: fields
+          fields:
+            viewcount:
+              extends: fields/viewcount
+            lastvisited:
+              extends: fields/lastvisited
+  tools:
+    sections:
+      tools:
+        type: fields
+        fields:
+          checkStyleButton:
+            type: button
+            label: 
+            text: Check Chicago Manual of Style
+            url: /check-style/{{ page.id }}
+            theme: positive
+          
+  analytics:
+    sections:
+      analytics:
+        type: fields
+        fields:
+          viewcount:
+            extends: fields/viewcount
+          lastvisited:
+            extends: fields/lastvisited
+  
+  # seo: seo
+  seo: seo/page
+  # files:
+  #   icon: image
+  #   label: Legacy Files
+  #   columns:
+  #     sidebar:
+  #       width: 1/1
+  #       sections:
+          
+  #         legacy_files:
+  #           type: files
+  #           layout: cards
+  #           # size: tiny
+  #           help: Legacy images can still be used in the article.
+
+  #           image:
+  #             back: black
+  #           # template: image
+  #         # chapters:
+  #         #   label: Chapters
+  #         #   type: pages
+      
+

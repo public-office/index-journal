@@ -1,14 +1,23 @@
 title: EMAJ Issue
-sections:
-  details:
-    headline: Details
-    type: fields
-    fields:
-      editors:
-        label: Editors
-        type: text
-  published:
-    headline: Essays
-    type: pages
-    status: all
-    templates: emaj-essay
+
+icon: pages
+image:
+  # query: false
+  back: blue-200
+tabs:
+  content:
+    sections:
+      details:
+        headline: Details
+        type: fields
+        fields:
+          editors:
+            label: Editors
+            type: text
+      published:
+        headline: Essays
+        type: pages
+        status: all
+        templates: emaj-essay
+  #  seotab: seo
+  seo: seo/site

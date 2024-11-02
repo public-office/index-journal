@@ -1,5 +1,5 @@
 title: Validators
-preset: pages
+
 options:
   access:
     *: false

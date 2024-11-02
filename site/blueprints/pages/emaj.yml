@@ -1,4 +1,10 @@
 title: Issues
+
+icon: pages
+image:
+  query: false
+  back: blue-200
+
 sections:
   details:
     headline: Introduction

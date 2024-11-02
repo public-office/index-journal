@@ -14,6 +14,13 @@
 
         <?php endforeach ?>
     </ul>
+    <h1>Special Issues</h1>
+    <ul style="margin-top:0">
+        <?php foreach ($site->find('special-issues')->children()->listed() as $subPage) : ?>
+            <h1><a href="<?= $subPage->url() ?>"> <span style="text-transform:uppercase"><?= $subPage->title() ?></span></a></h1>
+
+        <?php endforeach ?>
+    </ul>
 
     <h1><a href="https://index-press.com/" target="_blank">Index Press</a></h1>
     <h1><a href="/about">About</a></h1>

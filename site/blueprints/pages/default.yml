@@ -1,5 +1,13 @@
 title: Default Page
-preset: page
+
+sort: num
+
+icon: page
+image:
+  query: false
+  back: blue-200
+image: icon
+
 fields:
   text:
     label: Text

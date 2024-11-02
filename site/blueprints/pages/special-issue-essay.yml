@@ -1,4 +1,4 @@
-title: Essay
+title: Special Issue Essay
 
 # icon: page
 # image:
@@ -106,6 +106,26 @@ tabs:
               bibliography:
                 type: textarea
                 label: Section Bibliography
+  files:
+    sections:
+    
+      files:
+        type: files
+        # size: tiny
+        layout: cards
+        image:
+          back: black
+        upload: false
+
+    analytics:
+      sections:
+        analytics:
+          type: fields
+          fields:
+            viewcount:
+              extends: fields/viewcount
+            lastvisited:
+              extends: fields/lastvisited
   tools:
     sections:
       tools:
@@ -118,17 +138,6 @@ tabs:
             url: /check-style/{{ page.id }}
             theme: positive
           
-  files:
-    sections:
-    
-      files:
-        type: files
-        # size: tiny
-        layout: cards
-        image:
-          back: black
-        upload: false
-
   analytics:
     sections:
       analytics:
